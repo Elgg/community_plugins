@@ -93,7 +93,7 @@ if (isloggedin()) {
 if ($vars['area2']) {
 	$back_color = 'odd';
 	foreach ($vars['area2'] as $plug) {
-		$dls = get_annotations_sum($plug->getGUID(),'','','download');
+		$dls = (int)get_annotations_sum($plug->getGUID(),'','','download');
 		$icon = elgg_view(	"profile/icon",
 							array(	'entity' => get_user($plug->owner_guid),
 									'size' => 'tiny',
@@ -122,7 +122,7 @@ if ($vars['area2']) {
 if ($vars['area3']) {
 	$back_color = 'odd';
 	foreach($vars['area3'] as $plug) {
-		$dls = get_annotations_sum($plug->getGUID(),'','','download');
+		$dls = (int)get_annotations_sum($plug->getGUID(),'','','download');
 		$icon = elgg_view(	"profile/icon",
 							array(	'entity' => get_user($plug->owner_guid),
 									'size' => 'tiny',
@@ -151,7 +151,7 @@ if ($vars['area3']) {
 if ($vars['area4']) {
 	$back_color = 'odd';
 	foreach ($vars['area4'] as $plug) {
-		$dls = get_annotations_sum($plug->getGUID(),'','','download');
+		$dls = (int)get_annotations_sum($plug->getGUID(),'','','download');
 		$icon = elgg_view(	"profile/icon",
 							array(	'entity' => get_user($plug->owner_guid),
 									'size' => 'tiny',
@@ -179,7 +179,7 @@ if ($vars['area4']) {
 if ($vars['area5']) {
 	$back_color = 'odd';
 	foreach($vars['area5'] as $plug) {
-		$dls = get_annotations_sum($plug->getGUID(),'','','download');
+		$dls = (int)get_annotations_sum($plug->getGUID(),'','','download');
 		$icon = elgg_view(	"profile/icon",
 							array(	'entity' => get_user($plug->owner_guid),
 									'size' => 'tiny',
