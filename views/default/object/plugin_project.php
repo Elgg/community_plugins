@@ -47,7 +47,7 @@ if ($project){
 
 	// Start search listing version
 	if (get_context() == "search") {
-		echo "<div style=\"border:2px solid #efefef;margin-top:4px;\">";
+		echo "<div>";
 		$info = "<span class='downloadsnumber'>{$dls}</span><p class='pluginName'> <a href=\"{$project->getURL()}\">{$title} </a></p>";
 		if($summary)
 			$info .= "<p class='description'>" . $summary . "</p>";
