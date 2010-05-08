@@ -25,7 +25,7 @@ if ($query != '') {
 	<div class="clearfloat"></div>
 	<div id="rhs_column">
 		<div class="categories_box">
-		<b><a href="<?php echo $vars['url']; ?>/pg/plugins/all/all/">Plugins home</a></b>
+		<b><a href="<?php echo $vars['url']; ?>/pg/plugins/all/">Plugins home</a></b>
 		</div>
 		<div class="categories_box">
 			<h2>Categories</h2>

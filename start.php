@@ -22,7 +22,7 @@ function plugins_init() {
 
 	// Set up menu for logged in users
 	if (isloggedin()) {
-		add_menu(elgg_echo('plugins'), $CONFIG->wwwroot . "pg/plugins/all/all/");
+		add_menu(elgg_echo('plugins'), $CONFIG->wwwroot . "pg/plugins/all/");
 	}
 
 	// Extend CSS
@@ -144,14 +144,14 @@ function plugins_submenus() {
 	// General submenu options
 	if (get_context() == "plugins") {
 		if ((page_owner() == $_SESSION['guid'] || !page_owner()) && isloggedin()) {
-			add_submenu_item(sprintf(elgg_echo("plugins:yours"),page_owner_entity()->name), $CONFIG->wwwroot . "pg/plugins/" . page_owner_entity()->username);
+			add_submenu_item(sprintf(elgg_echo("plugins:yours"),elgg_echo('plugins:types:')), $CONFIG->wwwroot . "pg/plugins/" . page_owner_entity()->username);
 			//add_submenu_item(sprintf(elgg_echo('plugins:yours:friends'),page_owner_entity()->name), $CONFIG->wwwroot . "pg/plugins/". page_owner_entity()->username . "/friends/");
 		} else if (page_owner()) {
-			add_submenu_item(sprintf(elgg_echo("plugins:user"),$page_owner->name), $CONFIG->wwwroot . "pg/plugins/" . $page_owner->username);
+			add_submenu_item(sprintf(elgg_echo("plugins:user"),$page_owner->name,elgg_echo('plugins:types:')), $CONFIG->wwwroot . "pg/plugins/" . $page_owner->username);
 			//if ($page_owner instanceof ElggUser) // This one's for users, not groups
 				//add_submenu_item(sprintf(elgg_echo('plugins:friends'),$page_owner->name), $CONFIG->wwwroot . "pg/plugins/". $page_owner->username . "/friends/");
 		}
-		add_submenu_item(elgg_echo('plugins:all'), $CONFIG->wwwroot . "pg/plugins/all/all/");
+		add_submenu_item(elgg_echo('plugins:all'), $CONFIG->wwwroot . "pg/plugins/all/");
 		if (can_write_to_container($_SESSION['guid'], page_owner()))
 			add_submenu_item(elgg_echo('plugins:upload'), $CONFIG->wwwroot . "pg/plugins/". page_owner_entity()->username . "/new/");
 	}
@@ -166,28 +166,43 @@ function plugins_page_handler($page) {
 
 	global $CONFIG;
 
-	// The username should be the file we're getting
 	if (isset($page[0])) {
-		set_input('username',$page[0]);
-	}
-
-	if (isset($page[1])) {
-		switch($page[1]) {
-			case "read":
-				set_input('guid',$page[2]);
-				include($CONFIG->pluginspath . "community_plugins/read.php");
-			break;
-			case "all":
-				include($CONFIG->pluginspath . "community_plugins/all.php");
-			break;
-			case "new":
-				include($CONFIG->pluginspath . "community_plugins/upload.php");
-			break;
+		// backward compatibility - life would be easier if urls were pg/<type/<username>
+		if ($page[0] == 'all') {
+			$page[1] = 'all';
+		} else {
+			set_input('username', $page[0]);
 		}
 	} else {
-		// Include the standard profile index
-		include($CONFIG->pluginspath . "community_plugins/index.php");
+		// bad url - we'll send to main plugin page
+		$page[1] = 'all';
 	}
+
+	// for backward compatibility
+	if (!isset($page[1])) {
+		$page[1] = 'index';
+	}
+
+	switch($page[1]) {
+		case "all":
+			include($CONFIG->pluginspath . "community_plugins/all.php");
+			break;
+		case "read":
+			set_input('guid',$page[2]);
+			include($CONFIG->pluginspath . "community_plugins/read.php");
+			break;
+		case "new":
+			include($CONFIG->pluginspath . "community_plugins/upload.php");
+			break;
+		case "index":
+			if (isset($page[2])) {
+				set_input($page[2], $page[3]);
+			}
+			include($CONFIG->pluginspath . "community_plugins/index.php");
+			break;
+	}
+
+	return TRUE;
 }
 /**
  * Serve up image.
@@ -289,28 +304,29 @@ function plugins_get_general_file_type($mimetype) {
 }
 
 /**
- * Returns a list of filetypes to search specifically on
+ * Add a sidebar menu of plugin types for this developer
  *
- * @param int|array $owner_guid The GUID(s) of the owner(s) of the files
- * @param true|false $friends Whether we're looking at the owner or the owner's friends
- * @return string The typecloud
+ * @param int $owner_guid The GUID of the owner of the plugins
  */
-function plugins_get_filetype_cloud($owner_guid = "", $friends = false) {
+function plugins_add_type_menu($owner_guid) {
+	global $CONFIG;
 
-	if ($friends) {
-		if ($friendslist = get_user_friends($user_guid, $subtype, 999999, 0)) {
-			$friendguids = array();
-			foreach($friendslist as $friend) {
-				$friendguids[] = $friend->getGUID();
-			}
-		}
-		$friendofguid = $owner_guid;
-		$owner_guid = $friendguids;
-	} else {
-		$friendofguid = false;
+	$owner = get_entity($owner_guid);
+	if (!$owner) {
+		return;
 	}
-	return elgg_view('plugins/typecloud',array('owner_guid' => $owner_guid, 'friend_guid' => $friendofguid, 'types' => get_tags(0,10,'plugin_type','object','plugins',$owner_guid)));
 
+	$plugin_types = get_tags(0, 10, 'plugin_type', 'object', 'plugin_project');
+
+	foreach ($plugin_types as $type) {
+
+		$tag = $type->tag;
+		$label = elgg_echo("plugins:type:" . $tag);
+
+		$url = "{$CONFIG->url}pg/plugins/$owner->username/index/type/$tag/";
+
+		add_submenu_item($label, $url, 'pluginstypes');
+	}
 }
 
 /* This is a function to make urls clickable on the wire

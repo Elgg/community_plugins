@@ -203,6 +203,7 @@ p.pluginsrepo_owner {
 	border-bottom:1px solid #efefef;
 	border-top:1px solid #efefef;
 	padding:10px;
+	clear:both;
 }
 
 #warning {
