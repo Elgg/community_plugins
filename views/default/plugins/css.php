@@ -149,13 +149,6 @@ p.pluginsrepo_owner {
 	background:white;
 	margin:10px 10px 10px 10px;
 }
-.pluginsrepo_file .pluginsrepo_title_owner_wrapper {
-	min-height:60px;
-}
-.pluginsrepo_title_owner_wrapper .pluginsrepo_title,
-.pluginsrepo_title_owner_wrapper .pluginsrepo_owner {
-	margin-left: 60px !important;
-}
 .pluginsrepo_file .pluginsrepo_maincontent {
 	padding:0 0 0 0;
 }

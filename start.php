@@ -361,7 +361,6 @@ register_action("plugins/digg", false, $CONFIG->pluginspath . "community_plugins
 register_action("plugins/update", false, $CONFIG->pluginspath . "community_plugins/actions/update.php");
 register_action("plugins/save_project", false, $CONFIG->pluginspath . "community_plugins/actions/save_project.php");
 register_action("plugins/save_release", false, $CONFIG->pluginspath . "community_plugins/actions/save_release.php");
-register_action("plugins/icon", true, $CONFIG->pluginspath. "community_plugins/actions/icon.php");
 register_action("plugins/delete_project", false, $CONFIG->pluginspath. "community_plugins/actions/delete_project.php");
 register_action("plugins/delete_release", false, $CONFIG->pluginspath. "community_plugins/actions/delete_release.php");
 register_action("plugins/delete_project_image", false, $CONFIG->pluginspath. "community_plugins/actions/delete_project_image.php");

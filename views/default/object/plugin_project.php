@@ -53,7 +53,7 @@ if ($project){
 			$info .= "<p class='description'>" . $summary . "</p>";
 		$info .= "<p class=\"owner_timestamp\"><a href=\"{$vars['url']}pg/plugins/{$owner->username}\">{$owner->name}</a> {$friendlytime}";
 		$info .= "</p>";
-		$icon = $usericon; //"<a href=\"{$file->getURL()}\">" . elgg_view("plugins/icon", array("mimetype" => $mime, 'thumbnail' => $file->thumbnail, 'plugins_guid' => $file_guid, 'size' => 'small')) . "</a>";
+		$icon = $usericon;
 		echo elgg_view_listing($icon, $info);
 
 		//echo "<div class=\"small_plugin_view {$back_color}\">";
@@ -81,11 +81,6 @@ if ($project){
 		</script>
 
 		<div class="pluginsrepo_file">
-			<div class="pluginsrepo_icon">
-				<a href="<?php echo $vars['url']; ?>mod/community_plugins/download.php?plugins_guid=<?php echo $project_guid; ?>"><?php
-					echo elgg_view("plugins/icon", array("mimetype" => $mime, 'thumbnail' => $project->thumbnail, 'plugins_guid' => $project_guid));
-				?></a>
-			</div>
 			<div class="pluginsrepo_title_owner_wrapper">
 			<div class="pluginsrepo_user_gallery_link"><a href="<?php echo $vars['url']; ?>mod/community_plugins/all.php">back to plugins</a></div>
 			<div class="pluginsrepo_title"><h2><a href="<?php echo $project->getURL(); ?>"><?php echo $title; ?></a></h2></div>

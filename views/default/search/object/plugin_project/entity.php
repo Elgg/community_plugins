@@ -34,7 +34,7 @@ if($summary) {
 }
 $info .= "<p class=\"owner_timestamp\"><a href=\"{$vars['url']}pg/plugins/{$owner->username}\">{$owner->name}</a> {$friendlytime}";
 $info .= "</p>";
-$icon = $usericon; //"<a href=\"{$file->getURL()}\">" . elgg_view("plugins/icon", array("mimetype" => $mime, 'thumbnail' => $file->thumbnail, 'plugins_guid' => $file_guid, 'size' => 'small')) . "</a>";
+$icon = $usericon;
 echo elgg_view_listing($icon, $info);
 
 echo "</div>";
