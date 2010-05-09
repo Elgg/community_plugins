@@ -192,7 +192,7 @@ function plugins_page_handler($page) {
 			include($CONFIG->pluginspath . "community_plugins/read.php");
 			break;
 		case "new":
-			include($CONFIG->pluginspath . "community_plugins/upload.php");
+			include($CONFIG->pluginspath . "community_plugins/create_project.php");
 			break;
 		case "index":
 			if (isset($page[2])) {

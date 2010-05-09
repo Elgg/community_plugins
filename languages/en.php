@@ -37,7 +37,14 @@ $english = array(
 		'plugins:yes' => 'Yes',
 		'plugins:no' => 'No',
 		'plugins:num_plugins and themes' => "Number of plugins, themes and language packs to display",
+
+		'plugins:new:project' => "Upload a new plugin",
+		'plugins:new:release' => "Upload new release",
+
 		'plugins:edit' => "Edit",
+		'plugins:edit:project' => "Edit project details",
+		'plugins:edit:release' => "Edit plugin release",
+
 		'plugins:elggversion' => "Latest version of Elgg this plugin has been tested on",
 		'plugins:elgg_version' => "Elgg version",
 		'plugins:version' => "Plugin version",
@@ -55,7 +62,7 @@ $english = array(
 		'plugins:file:uploadagain' => 'Upload a new version',
 		'plugins:version' => 'Version',
 		'plugins:downloads' => "Num of downloads",
-		'plugins:upload' => "Upload a plugin, theme or language pack",
+		'plugins:upload' => "Upload a new plugin, theme or language pack",
 		'plugins:changelog' => "Changelog",
 		'plugins:noproject' => "I am afraid the system was not able to find the plugin project you tried to update",
 		'plugins:plugin or theme' => "File",

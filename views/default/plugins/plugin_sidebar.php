@@ -30,8 +30,8 @@ if ($project->canEdit()){
 	));
 
 	?>
-	<a href="<?php echo $vars['url']; ?>mod/community_plugins/update.php?project_guid=<?php echo $project->guid; ?>">Upload New Release</a><br />
-	<a href="<?php echo $vars['url']; ?>mod/community_plugins/edit.php?project_guid=<?php echo $project->guid; ?>">Edit Project Details</a><br />
+	<a href="<?php echo $vars['url']; ?>mod/community_plugins/create_release.php?project_guid=<?php echo $project->guid; ?>">Upload New Release</a><br />
+	<a href="<?php echo $vars['url']; ?>mod/community_plugins/edit_project.php?project_guid=<?php echo $project->guid; ?>">Edit Project Details</a><br />
 	<?php echo $delete; ?>
 	</div>
 	</div>

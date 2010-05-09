@@ -21,7 +21,7 @@ if (array_key_exists('project', $vars)
 	$repo = $project->repo;
 
 	$msg = "You are editing the project information for {$project->title}.  To upload a new release,
-	visit the <a href=\"{$vars['url']}mod/community_plugins/update.php?project_guid={$project->getGUID()}\">Upload New Version</a>
+	visit the <a href=\"{$vars['url']}mod/community_plugins/create_release.php?project_guid={$project->getGUID()}\">Upload New Version</a>
 	section for this project.";
 } else {
 	$project = NULL;
