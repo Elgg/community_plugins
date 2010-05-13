@@ -1,13 +1,12 @@
 <?php
 /**
- * Elgg plugin project creator
+ * Elgg plugin project creation action
  */
 
-global $CONFIG;
-action_gatekeeper();
 
 // Get variables
 $title = strip_tags(get_input("title"));
+// no href or img tags in description
 $description = strip_tags(get_input("description"), '<p><strong><em><span><ul><li><ol><blockquote>');
 $tags = get_input("tags");
 $plugin_type = get_input('plugin_type');

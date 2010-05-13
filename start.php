@@ -371,12 +371,11 @@ register_elgg_event_handler('init','system','plugins_init');
 register_elgg_event_handler('pagesetup','system','plugins_submenus');
 
 // Register actions
-global $CONFIG;
-register_action("plugins/upload", false, $CONFIG->pluginspath . "community_plugins/actions/upload.php");
-register_action("plugins/digg", false, $CONFIG->pluginspath . "community_plugins/actions/digg.php");
-register_action("plugins/update", false, $CONFIG->pluginspath . "community_plugins/actions/update.php");
+register_action("plugins/create_project", false, $CONFIG->pluginspath . "community_plugins/actions/create_project.php");
+register_action("plugins/create_release", false, $CONFIG->pluginspath . "community_plugins/actions/create_release.php");
 register_action("plugins/save_project", false, $CONFIG->pluginspath . "community_plugins/actions/save_project.php");
 register_action("plugins/save_release", false, $CONFIG->pluginspath . "community_plugins/actions/save_release.php");
 register_action("plugins/delete_project", false, $CONFIG->pluginspath. "community_plugins/actions/delete_project.php");
 register_action("plugins/delete_release", false, $CONFIG->pluginspath. "community_plugins/actions/delete_release.php");
 register_action("plugins/delete_project_image", false, $CONFIG->pluginspath. "community_plugins/actions/delete_project_image.php");
+register_action("plugins/digg", false, $CONFIG->pluginspath . "community_plugins/actions/digg.php");

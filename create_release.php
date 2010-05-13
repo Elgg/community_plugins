@@ -19,7 +19,7 @@ $area1 = elgg_view('plugins/plugin_sidebar', array('entity' => $project));
 $title = elgg_echo('plugins:new:release');
 
 $area2 = elgg_view_title($title);
-$area2 .= elgg_view("plugins/forms/update",array('project' => $project));
+$area2 .= elgg_view("plugins/forms/create_release", array('project' => $project));
 
 $body = elgg_view_layout('sidebar_boxes', $area1, $area2);
 page_draw($title, $body);
