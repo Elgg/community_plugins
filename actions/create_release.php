@@ -71,7 +71,7 @@ if ($plugin_project && $plugin_project->canEdit()) {
 	}
 
 	if ($add_relationship) {
-		add_to_river('river/object/plugins/update','update',get_loggedin_userid(),$plugin_project->guid);
+		add_to_river('river/object/plugin_release/create', 'create', get_loggedin_userid(), $plugin_project->guid);
 		system_message(elgg_echo("plugins:updated"));
 	} else {
 		register_error(elgg_echo("plugins:uploadfailed"));

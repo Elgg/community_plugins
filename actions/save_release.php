@@ -1,10 +1,7 @@
 <?php
 /**
- * Elgg file browser save action
+ * update plugin relaase
  */
-
-global $CONFIG;
-action_gatekeeper();
 
 // Get variables
 $access_id = (int) get_input('release_access_id');

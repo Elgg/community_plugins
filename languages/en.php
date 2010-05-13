@@ -107,7 +107,9 @@ $english = array(
 
 			To get started you could either browse the available plugins, or search for a specific one, upload one of your own, or rate & comment on others.",
 
-		'plugins:river:created' => "%s uploaded",
+	'plugins:river:project:created' => "%s uploaded a new",
+	'plugins:river:release:created' => "%s released a new version of",
+	'plugins:river:created' => "%s uploaded",
 		'plugins:river:updated' => "%s updated",
 		'plugins:river:item' => "a plugin",
 		'plugins:river:annotate' => "a comment on this plugin or file",

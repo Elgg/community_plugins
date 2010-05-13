@@ -169,7 +169,7 @@ if ($add_relationship) {
 		}
 	}
 
-	add_to_river('river/object/plugins/create', 'create', $user->getGUID(), $plugin_project->getGUID());
+	add_to_river('river/object/plugin_project/create', 'create', $user->getGUID(), $plugin_project->getGUID());
 	system_message(elgg_echo("plugins:saved"));
 } else {
 	register_error(elgg_echo("plugins:uploadfailed"));
