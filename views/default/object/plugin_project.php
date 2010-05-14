@@ -32,7 +32,6 @@ $summary = $project->summary;
 $license = $project->license;
 $friendlytime = friendly_time($project->time_created);
 $downloads = (int)get_annotations_sum($project_guid, '', '', 'download');
-$diggs = count_annotations($project_guid, "object", "plugin_project", "plugin_digg");
 $usericon = elgg_view("profile/icon", array('entity' => $project_owner,
 											'size' => 'small',
 											)
@@ -108,24 +107,7 @@ switch(get_context()) {
 		</div>
 	</div>
 	<div class="pluginsrepo_maincontent pluginsrepo_description">
-		<div id="recommend">
-			<div id="num_recommend">
-				<p><?php echo elgg_echo($diggs); ?></p>
-			</div>
-<?php
-				if (!already_dugg($project) && isloggedin()) {
-					$url = "{$vars['url']}action/plugins/digg?guid={$project_guid}";
-					$url = elgg_add_action_tokens_to_url($url);
-					echo "<div id=\"recommend_action\">";
-					echo "<a href=\"{$url}\">Recommend</a>";
-					echo "</div>";
-				} else {
-					echo "<div id=\"recommend_action\">";
-					echo "<p>Recommendations</p>";
-					echo "</div>";
-				}
-?>
-		</div>
+		<?php echo elgg_view('plugins/digg', array('project' => $project)); ?>
 		<div class="pluginsrepo_summary">
 			<p><b>Summary:</b> <?php echo autop($summary); ?>
 		</div>
