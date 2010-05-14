@@ -3,6 +3,8 @@
  * View for displaying plugin files
  */
 
+echo "<div class='contentWrapper'>";
+
 $release = $vars['entity'];
 $project = get_entity($release->container_guid);
 $notes = $release->release_notes;
@@ -39,5 +41,11 @@ if($notes){
 	echo "<h3>Release notes:</h3>";
 	echo autop($notes);
 	echo "</div>";
+}
+
+echo "</div>";
+
+if ($release->comments == 'yes') {
+	echo elgg_view_comments($release);
 }
 ?>
