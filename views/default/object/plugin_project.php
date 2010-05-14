@@ -4,7 +4,7 @@
  * Four views:
  * full
  * search listing
- * front page listing
+ * front page listing (plugin_project context)
  * widget listing
  */
 
@@ -49,6 +49,40 @@ switch(get_context()) {
 		$user_url = "{$vars['url']}pg/plugins/{$project_owner->username}";
 		$info .= "<p class=\"owner_timestamp\"><a href=\"$user_url\">{$project_owner->name}</a> {$friendlytime}</p>";
 		echo elgg_view_listing($usericon, $info);
+		break;
+
+	case 'plugin_project':
+		echo elgg_view(	"profile/icon",
+						array(	'entity' => $project_owner,
+								'size' => 'tiny',
+								'override' => true,
+							)
+						);
+		echo "<p><a href=\"{$project->getURL()}\">{$title}</a><br />";
+		echo "Uploaded $friendlytime ($downloads)</p>";
+		break;
+
+	case 'widget':
+?>
+		<div class="pluginsrepo_widget_singleitem">
+			<div class="pluginsrepo_listview_icon">
+				<a href="<?php echo $project->getURL(); ?>">
+					<img src="<?php echo $vars['url']; ?>mod/community_plugins/graphics/icons/archive.gif" />
+				</a>
+			</div>
+			<div class="pluginsrepo_widget_content">
+				<div class="pluginsrepo_listview_title">
+					<p class="filerepo_title"><?php echo $title; ?></p>
+				</div>
+				<div class="pluginsrepo_listview_date">
+					<p class="filerepo_timestamp">
+						<small><?php echo $friendlytime; ?></small>
+					</p>
+				</div>
+			</div>
+			<div class="clearfloat"></div>
+		</div>
+<?php
 		break;
 		
 	case 'plugins':

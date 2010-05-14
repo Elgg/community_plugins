@@ -93,19 +93,8 @@ if (isloggedin()) {
 if ($vars['area2']) {
 	$back_color = 'odd';
 	foreach ($vars['area2'] as $plug) {
-		$dls = (int)get_annotations_sum($plug->getGUID(),'','','download');
-		$icon = elgg_view(	"profile/icon",
-							array(	'entity' => get_user($plug->owner_guid),
-									'size' => 'tiny',
-									'override' => true,
-								)
-						);
 		echo "<div class=\"small_plugin_view {$back_color}\">";
-		//if($plug->plugin_type == 'theme')
-		//	echo $icon; //"<img src=\"{$vars['url']}mod/community_plugins/graphics/sample.png\">";
-		//else
-		echo $icon; //"<img src=\"{$vars['url']}mod/community_plugins/graphics/river_icon_plugin.gif\">";
-		echo "<p><a href=\"{$vars['url']}mod/community_plugins/read.php?guid={$plug->guid}\">{$plug->title}</a><br />Uploaded " . friendly_time($plug->time_created) . " (" . $dls . ")</p>";
+		echo elgg_view_entity($plug);
 		echo "</div>";
 		if ($back_color == 'odd') {
 			$back_color = 'even';
@@ -122,19 +111,8 @@ if ($vars['area2']) {
 if ($vars['area3']) {
 	$back_color = 'odd';
 	foreach($vars['area3'] as $plug) {
-		$dls = (int)get_annotations_sum($plug->getGUID(),'','','download');
-		$icon = elgg_view(	"profile/icon",
-							array(	'entity' => get_user($plug->owner_guid),
-									'size' => 'tiny',
-									'override' => true,
-								)
-						);
 		echo "<div class=\"small_plugin_view {$back_color}\">";
-		//if($plug->plugin_type == 'theme')
-		//	echo $icon; //"<img src=\"{$vars['url']}mod/community_plugins/graphics/sample.png\">";
-		//else
-		echo $icon; //"<img src=\"{$vars['url']}mod/community_plugins/graphics/river_icon_plugin.gif\">";
-		echo "<p><a href=\"{$vars['url']}mod/community_plugins/read.php?guid={$plug->guid}\">{$plug->title}</a><br />Uploaded " . friendly_time($plug->time_created) . " (" . $dls . ")</p>";
+		echo elgg_view_entity($plug);
 		echo "</div>";
 		if ($back_color == 'odd') {
 			$back_color = 'even';
@@ -151,19 +129,8 @@ if ($vars['area3']) {
 if ($vars['area4']) {
 	$back_color = 'odd';
 	foreach ($vars['area4'] as $plug) {
-		$dls = (int)get_annotations_sum($plug->getGUID(),'','','download');
-		$icon = elgg_view(	"profile/icon",
-							array(	'entity' => get_user($plug->owner_guid),
-									'size' => 'tiny',
-									'override' => true,
-								)
-						);
 		echo "<div class=\"small_plugin_view {$back_color}\">";
-		//if($plug->plugin_type == 'theme')
-		//	echo $icon; //"<img src=\"{$vars['url']}mod/community_plugins/graphics/sample.png\">";
-		//else
-		echo $icon; //"<img src=\"{$vars['url']}mod/community_plugins/graphics/river_icon_plugin.gif\">";
-		echo "<p><a href=\"{$vars['url']}mod/community_plugins/read.php?guid={$plug->guid}\">{$plug->title}</a><br />Uploaded " . friendly_time($plug->time_created) . " (" . $dls . ")</p>";
+		echo elgg_view_entity($plug);
 		echo "</div>";
 		if ($back_color == 'odd') {
 			$back_color = 'even';
@@ -179,19 +146,8 @@ if ($vars['area4']) {
 if ($vars['area5']) {
 	$back_color = 'odd';
 	foreach($vars['area5'] as $plug) {
-		$dls = (int)get_annotations_sum($plug->getGUID(),'','','download');
-		$icon = elgg_view(	"profile/icon",
-							array(	'entity' => get_user($plug->owner_guid),
-									'size' => 'tiny',
-									'override' => true,
-								)
-						);
 		echo "<div class=\"small_plugin_view {$back_color}\">";
-		//if($plug->plugin_type == 'theme')
-		//	echo $icon; //"<img src=\"{$vars['url']}mod/community_plugins/graphics/sample.png\">";
-		//else
-		echo $icon; //"<img src=\"{$vars['url']}mod/community_plugins/graphics/river_icon_plugin.gif\">";
-		echo "<p><a href=\"{$vars['url']}mod/community_plugins/read.php?guid={$plug->guid}\">{$plug->title}</a><br />Uploaded " . friendly_time($plug->time_created) . " (" . $dls . ")</p>";
+		echo elgg_view_entity($plug);
 		echo "</div>";
 		if ($back_color == 'odd') {
 			$back_color = 'even';

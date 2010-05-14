@@ -16,13 +16,7 @@ if ($plugins) {
 	echo "<div id=\"pluginsrepo_widget_layout\">";
 	//display in list mode
 	foreach($plugins as $plugin) {
-		echo "<div class=\"pluginsrepo_widget_singleitem\">";
-		echo "<div class=\"pluginsrepo_listview_icon\"><a href=\"{$plugin->getURL()}\"><img src=\"http://community.elgg.org/mod/community_plugins/graphics/icons/archive.gif\"></a></div>";
-		echo "<div class=\"pluginsrepo_widget_content\">";
-		echo "<div class=\"pluginsrepo_listview_title\"><p class=\"filerepo_title\">" . $plugin->title . "</p></div>";
-		echo "<div class=\"pluginsrepo_listview_date\"><p class=\"filerepo_timestamp\"><small>" . friendly_time($plugin->time_created) . "</small></p></div>";
-		echo "</div><div class=\"clearfloat\"></div></div>";
-
+		echo elgg_view_entity($plugin);
 	}
 
 	//get a link to the user's plugins
