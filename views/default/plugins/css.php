@@ -85,6 +85,7 @@
 
 #plugins_front_sidebar ul li {
 	padding: 1px 0;
+	list-style: none;
 }
 
 .plugins_highlight {
