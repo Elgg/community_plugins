@@ -5,7 +5,7 @@
 <?php
 // your plugins
 if (isloggedin()) {
-	$count_user_plugins = get_entities("object", "plugin_project", get_loggedin_userid(), "", 10, 0, true);
+	$count_user_plugins = (int)get_entities("object", "plugin_project", get_loggedin_userid(), "", 10, 0, true);
 ?>
 	<li>
 		<a class="plugins_highlight" href="<?php echo $vars['url']; ?>pg/plugins/<?php echo $vars['user']->username; ?>"><?php echo elgg_echo('plugins:myplugins'); ?></a>
@@ -15,7 +15,7 @@ if (isloggedin()) {
 }
 
 // all plugins
-$all_plugins_count = get_entities("object", "plugin_project", 0, "", 0, 0, true);
+$all_plugins_count = (int)get_entities("object", "plugin_project", 0, "", 0, 0, true);
 $url = $vars['url'] . "mod/community_plugins/search.php?category=all";
 ?>
 	<li>
