@@ -96,7 +96,8 @@ switch(get_context()) {
 		</div>
 		<div class="pluginsrepo_owner">
 			<?php echo elgg_view("profile/icon", array('entity' => $project_owner, 'size' => 'tiny')); ?>
-			<p class="pluginsrepo_owner_details"><b>by <a href="<?php echo $vars['url']; ?>pg/plugins/<?php echo $project_owner->username; ?>"><?php echo $project_owner->name; ?></a></b><br />
+			<p class="pluginsrepo_owner_details">
+				<b>by <a href="<?php echo $vars['url']; ?>pg/plugins/<?php echo $project_owner->username; ?>"><?php echo $project_owner->name; ?></a></b><br />
 				<small><b>First uploaded</b> <?php echo $friendlytime; ?></small>
 			</p>
 			<div class="pluginsrepo_tags">

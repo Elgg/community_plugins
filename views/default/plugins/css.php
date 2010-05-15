@@ -1,12 +1,210 @@
 <?php
-	/**
-	 * File CSS extender
-	 *
-	 * @package Elgg File Repository
-	 * @copyright Curverider Ltd 2008-2009
-	 * @link http://elgg.com/
-	 */
+/**
+ * Community plugin CSS
+ *
+ * @package Elgg Plugin Repository
+ * @copyright Curverider Ltd 2008-2010
+ * @link http://elgg.com/
+ */
 ?>
+
+#plugins_front_sidebar {
+	float: right;
+	width: 250px;
+	padding: 10px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background: #eaf4fe;
+}
+
+#plugins_front_main {
+	float: left;
+	width: 670px;
+}
+
+#plugins_front_bottom {
+	float: left;
+	width: 100%;
+	margin-top: 20px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background: #dedede;
+}
+
+
+
+#plugins_front_welcome {
+	padding: 10px;
+	margin: 0 0 15px 0;
+	border: 1px solid silver;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background: url(<?php echo $vars['url']; ?>mod/community_plugins/graphics/plugins_back.gif) no-repeat right top;
+}
+
+#plugins_welcome_text {
+	width: 340px;
+	line-height: 1.6em;
+}
+
+#plugins_front_main h2 {
+	color: #666666;
+	font-size: 1.8em;
+	margin-bottom: 20px;
+}
+
+#plugins_front_main h3 {
+	color: #666666;
+	font-size: 1.6em;
+}
+
+.upload_plugin {
+	font-weight: bold;
+	color: #ffffff;
+	background:#4690D6;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	padding: 3px 7px 3px 7px;
+	cursor: pointer;
+}
+.upload_plugin:hover {
+	text-decoration: none;
+	color: #ffffff;
+	background: #0054A7;
+}
+
+
+#plugins_front_sidebar h2 {
+	color: #0054a7;
+}
+
+#plugins_front_sidebar ul {
+	margin: 0;
+	padding: 0;
+}
+
+#plugins_front_sidebar ul li {
+	padding: 1px 0;
+}
+
+.plugins_highlight {
+	font-weight: bold;
+}
+
+#plugin_three_column {
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	padding:0;
+	background:#dedede;
+}
+
+.plugins_front_listing {
+	float: left;
+	width: 283px;
+	padding: 8px;
+	margin: 8px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	background: white;
+}
+
+.plugins_front_listing h2 {
+	color: #0054A7;
+}
+
+.small_plugin_view {
+	margin-top:5px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+}
+.small_plugin_view p {
+	margin:0;
+}
+.small_plugin_view img {
+	float:left;
+	margin:4px;
+}
+.odd{
+	background:#efefef;
+}
+.even{
+	background:white;
+}
+
+.small_plugin_view:hover {
+	/* border:1px solid #ddd; */
+	background: #cccccc;
+}
+#two_column_left_sidebar_maincontent .small_plugin_view {
+	margin:5px 10px 5px 10px;
+	background: white;
+}
+
+.plugins_search_box {
+	padding: 10px;
+	margin: 0 0 15px 0;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background: #4690D6;
+	color: white;
+}
+
+#plugins_search_form .plugins_search_submit {
+	margin: 0 0 0 15px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-color: #0054A7;
+	background-color: #0054A7;
+	font-size: 1.2em;
+}
+
+#plugins_search_form .plugins_search_submit:hover {
+	border-color: white;
+	background-color: white;
+	color: #4690D6;
+}
+
+#plugins_search_form label {
+	color: white;
+	font-weight: normal;
+	font-size: 100%;
+	margin-left: 10px;
+}
+
+/*
+.search_box input {
+	margin:0 15px 0 0;
+}
+.search_box input.search_plugins {
+	margin-left:15px;
+	background-color:#0054A7;
+	border-color:#0054A7;
+	color:white;
+	font-size: 1.2em;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+.search_box input.search_plugins:hover {
+	background-color: white;
+	border-color: white;
+	color:#4690D6;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #two_column_left_sidebar_boxes .sidebarBox .contentWrapper {
 	margin:0 0 0 0;
 }
@@ -759,14 +957,6 @@ New edits
 	font-weight: bold;
 }
 
-#plugin_three_column {
-	width:948px;
-	/* border:2px solid #c8e4ff; */
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	padding:0;
-	background:#dedede;
-}
 
 .plugin_three_column_actual {
 	width:283px;
@@ -782,33 +972,6 @@ New edits
 
 .plugin_three_column_actual h2 {
 	color:#0054A7;
-}
-.small_plugin_view {
-	margin-top:5px;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-}
-.small_plugin_view p {
-	margin:0;
-}
-.small_plugin_view img {
-	float:left;
-	margin:4px;
-}
-.odd{
-	background:#efefef;
-}
-.even{
-	background:white;
-}
-
-.small_plugin_view:hover {
-	/* border:1px solid #ddd; */
-	background: #cccccc;
-}
-#two_column_left_sidebar_maincontent .small_plugin_view {
-	margin:5px 10px 5px 10px;
-	background: white;
 }
 
 

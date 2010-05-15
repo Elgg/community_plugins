@@ -28,6 +28,30 @@ $english = array(
 	'plugins:category:title' => "Plugins for category: %s",
 	'plugins:search:title' => "Plugin search for \"%s\" in category: %s",
 
+
+	'plugins:cat:all' => 'All',
+
+	'plugins:listing:newest' => 'Newest',
+	'plugins:listing:popular' => 'Most downloads',
+	'plugins:listing:dugg' => 'Most recommended',
+	
+	
+	'plugins:upload:new' => "Upload a new plugin",
+
+
+	'plugins:search:instruct' => 'search for plugins',
+	'plugins:search:choose' => 'choose a category',
+
+
+	'plugins:front:welcome' => "Welcome to Elgg's plugin directory",
+	'plugins:front:intro:title' => "What are plugins?",
+	'plugins:front:intro:text' => "Plugins extend your Elgg site by adding additional functionality, languages and themes. They are contributed by members of the Elgg community.
+
+		To get started you could browse the available plugins, search for a specific one, upload one of your own, or rate & comment on others.",
+
+
+
+
 	'plugins:more' => "more plugins, themes and language packs",
 	'plugins:list' => "list view",
 	'plugins:group' => "Group plugins, themes and language packs",
@@ -101,11 +125,6 @@ $english = array(
 	'plugins:diggit' => "You have recommended this plugin.",
 	'plugins:display:number' => "Number of plugins, themes and language packs to display",
 
-	'plugins:front:welcome' => "Welcome to Elgg's plugin directory",
-	'plugins:front:intro:title' => "What are plugins?",
-	'plugins:front:intro:text' => "Plugins extend your Elgg site by adding additional functionality, languages and themes. They are contributed by members of the Elgg community.
-
-	To get started you could either browse the available plugins, or search for a specific one, upload one of your own, or rate & comment on others.",
 
 	'plugins:river:project:created' => "%s uploaded a new",
 	'plugins:river:release:created' => "%s released a new version of",
