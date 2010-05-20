@@ -8,6 +8,12 @@ require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
 // Get the specified plugin project
 $project_guid = (int) get_input('guid');
+$release_guid = (int) get_input('release');
+
+if ($release_guid) {
+	$release = get_entity($release_guid);
+	$project_guid = $release->container_guid;
+}
 
 // If we can get out the plugin ...
 if ($project = get_entity($project_guid)) {

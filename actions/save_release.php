@@ -37,8 +37,8 @@ if (($release = get_entity($guid))
 	} else {
 		register_error(elgg_echo("plugins:uploadfailed"));
 	}
-	forward($CONFIG->wwwroot . "pg/plugins/$username/read/{$project->getGUID()}?release={$release->getGUID()}");
+	forward($release->getURL());
 } else {
 	register_error('Unknown or insufficient access to release');
-	forward($CONFIG->wwwroot . "pg/plugins/" . $_SESSION['user']->username);
+	forward($CONFIG->wwwroot . "pg/plugins/developer/" . $_SESSION['user']->username);
 }

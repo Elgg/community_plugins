@@ -80,4 +80,4 @@ if ($plugin_project && $plugin_project->canEdit()) {
 	system_message(elgg_echo("plugins:noproject"));
 }
 
-forward($CONFIG->wwwroot . "mod/community_plugins/read.php?guid=" . $project_guid);
+forward($file->getURL());

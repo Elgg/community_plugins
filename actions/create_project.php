@@ -179,4 +179,4 @@ if ($recommended == 'yes') {
 	$plugin_project->recommended_release_guid = $file->getGUID();
 }
 
-forward($CONFIG->wwwroot . "pg/plugins/{$user->username}/read/{$plugin_project->getGUID()}?release={$file->getGUID()}");
+forward($plugin_project->getURL());

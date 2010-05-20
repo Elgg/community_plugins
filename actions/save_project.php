@@ -123,4 +123,4 @@ if ($result) {
 	register_error(elgg_echo("plugins:uploadfailed"));
 }
 
-forward($CONFIG->wwwroot . "mod/community_plugins/read.php?guid=" . $guid);
+forward($plugin_project->getURL());

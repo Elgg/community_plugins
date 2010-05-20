@@ -20,7 +20,7 @@ if ($plugins) {
 	}
 
 	//get a link to the user's plugins
-	$users_file_url = $vars['url'] . "pg/plugins/" . get_user($f->owner_guid)->username;
+	$users_file_url = $vars['url'] . "pg/plugins/developer/" . get_user($f->owner_guid)->username;
 
 	echo "<div class=\"pluginsrepo_widget_singleitem_more\"><a href=\"{$users_file_url}\">" . elgg_echo('plugins:more') . "</a></div>";
 	echo "</div>";

@@ -45,7 +45,7 @@ switch(get_context()) {
 		if ($summary) {
 			$info .= "<p class='description'>" . $summary . "</p>";
 		}
-		$user_url = "{$vars['url']}pg/plugins/{$project_owner->username}";
+		$user_url = "{$vars['url']}pg/plugins/developer/{$project_owner->username}";
 		$info .= "<p class=\"owner_timestamp\"><a href=\"$user_url\">{$project_owner->name}</a> {$friendlytime}</p>";
 		echo elgg_view_listing($usericon, $info);
 		break;
@@ -97,7 +97,7 @@ switch(get_context()) {
 		<div class="pluginsrepo_owner">
 			<?php echo elgg_view("profile/icon", array('entity' => $project_owner, 'size' => 'tiny')); ?>
 			<p class="pluginsrepo_owner_details">
-				<b>by <a href="<?php echo $vars['url']; ?>pg/plugins/<?php echo $project_owner->username; ?>"><?php echo $project_owner->name; ?></a></b><br />
+				<b>by <a href="<?php echo $vars['url']; ?>pg/plugins/developer/<?php echo $project_owner->username; ?>"><?php echo $project_owner->name; ?></a></b><br />
 				<small><b>First uploaded</b> <?php echo $friendlytime; ?></small>
 			</p>
 			<div class="pluginsrepo_tags">

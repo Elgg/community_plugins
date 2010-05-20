@@ -73,8 +73,7 @@ if ($project->canEdit()){
 	if ($recommended = get_entity($project->recommended_release_guid)) {
 		$ignore_guids[] = $project->recommended_release_guid;
 
-		$download_link = "<a href=\"{$vars['url']}pg/plugins/$username/read/{$project->guid}?release={$recommended->guid}\">"
-			. $recommended->version . "</a>";
+		$download_link = "<a href=\"{$recommended->getURL()}\">" . $recommended->version . "</a>";
 
 		if ($recommended->canEdit()) {
 			$ts = time();
@@ -105,8 +104,9 @@ if ($project->canEdit()){
 			unset($plugins[0]);
 			$ignore_guids[] = $latest->getGUID();
 
-			$download_link = "<a href=\"{$vars['url']}pg/plugins/$username/read/{$project->guid}?release={$latest->guid}\">"
-				. $latest->version . "</a>";
+			$time = friendly_time($latest->time_created);
+			$download_link = "<a href=\"{$latest->getURL()}\">"
+				. $latest->version . " ($time)</a>";
 
 			if ($latest->canEdit()) {
 				$ts = time();
@@ -133,7 +133,7 @@ if ($project->canEdit()){
 					continue;
 				}
 				$time = friendly_time($p->time_created);
-				$download_link = "<a href=\"{$vars['url']}pg/plugins/$username/read/{$project->guid}?release={$p->guid}\">"
+				$download_link = "<a href=\"{$p->getURL()}\">"
 					. $p->version . " ($time)</a>";
 
 				if ($p->canEdit()) {
@@ -229,7 +229,7 @@ echo '</div></div>';
 					$selected = "SELECTED";
 				else
 					$selected = '';
-				echo "<option value=\"{$vars['url']}mod/community_plugins/read.php?guid={$up->guid}\" $selected>{$up->title}</option>";
+				echo "<option value=\"{$up->getURL()}\" $selected>{$up->title}</option>";
 			}
 			echo "</select>";
 		}

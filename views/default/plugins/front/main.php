@@ -11,7 +11,7 @@
 	</div>
 <?php
 if (isloggedin()) {
-	$url = $vars['url'] . 'pg/plugins/' . get_loggedin_user()->username . '/new/';
+	$url = $vars['url'] . 'pg/plugins/new/' . get_loggedin_user()->username;
 ?>
 	<a class="upload_plugin" href="<?php echo $url; ?>"><?php echo elgg_echo('plugins:upload:new'); ?></a>
 <?php
