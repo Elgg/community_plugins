@@ -16,7 +16,7 @@ if (isloggedin()) {
 
 // all plugins
 $all_plugins_count = (int)get_entities("object", "plugin_project", 0, "", 0, 0, true);
-$url = $vars['url'] . "mod/community_plugins/search.php?category=all";
+$url = $vars['url'] . "pg/plugins/category/all";
 ?>
 	<li>
 		<a class="plugins_highlight" href="<?php echo $url; ?>"><?php echo elgg_echo('plugins:cat:all'); ?></a>
@@ -27,7 +27,7 @@ $url = $vars['url'] . "mod/community_plugins/search.php?category=all";
 // categories
 foreach ($vars['config']->plugincats as $value => $option) {
 	$counter = (int)get_entities_from_metadata("plugincat", $value, "object", "plugin_project",0,10,0,"",0,true);
-	echo "<li><a href=\"{$vars['url']}mod/community_plugins/search.php?category={$value}\">".$option."</a> ({$counter})</li>";
+	echo "<li><a href=\"{$vars['url']}pg/plugins/category/{$value}\">".$option."</a> ({$counter})</li>";
 }
 ?>
 </ul>

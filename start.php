@@ -158,6 +158,8 @@ function plugins_page_handler($page) {
 
 	global $CONFIG;
 
+	$plugin_dir = $CONFIG->pluginspath . "community_plugins";
+
 	if (!isset($page[0])) {
 		// bad url - we'll send to main plugin page
 		$page[0] = 'all';
@@ -166,7 +168,12 @@ function plugins_page_handler($page) {
 	switch($page[0]) {
 		// plugin repository front page
 		case "all":
-			include($CONFIG->pluginspath . "community_plugins/all.php");
+			include("$plugin_dir/all.php");
+			break;
+		// category listing page
+		case "category":
+			set_input('category', $page[1]);
+			include("$plugin_dir/search.php");
 			break;
 		// list a developer's plugins
 		case "developer":
@@ -174,26 +181,27 @@ function plugins_page_handler($page) {
 			if (isset($page[2])) {
 				set_input($page[2], $page[3]);
 			}
-			include($CONFIG->pluginspath . "community_plugins/index.php");
+			include("$plugin_dir/index.php");
 			break;
 		// plugin project
 		case "project":
 			set_input('guid', $page[1]);
-			include($CONFIG->pluginspath . "community_plugins/read.php");
+			include("$plugin_dir/read.php");
 			break;
 		// specfic release of a project
 		case "release":
 			set_input('release', $page[1]);
-			include($CONFIG->pluginspath . "community_plugins/read.php");
+			include("$plugin_dir/read.php");
 			break;
 		// create new plugin project
 		case "new":
 			set_input('username', $page[1]);
-			include($CONFIG->pluginspath . "community_plugins/create_project.php");
+			include("$plugin_dir/create_project.php");
 			break;
+		// for backwards compatibility this handles /pg/plugins/<username>/read/<guid>/<title>
 		default:
-			//set_input();
-			include($CONFIG->pluginspath . "community_plugins/index.php");
+			set_input('guid', $page[2]);
+			include("$plugin_dir/read.php");
 			break;
 	}
 
