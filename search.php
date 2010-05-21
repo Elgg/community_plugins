@@ -12,7 +12,7 @@ $title = sprintf(elgg_echo('plugins:category:title'), $category);
 
 // Get objects
 set_context('search');
-if ($category){
+if ($category) {
 	if ($category == 'all') {
 		$area2 = list_entities('object', 'plugin_project', 0, 10, true, false, true);
 	} else {
