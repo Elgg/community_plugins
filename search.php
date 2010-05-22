@@ -14,13 +14,17 @@ $title = sprintf(elgg_echo('plugins:category:title'), $category);
 set_context('search');
 if ($category) {
 	if ($category == 'all') {
-		$area2 = list_entities('object', 'plugin_project', 0, 10, true, false, true);
+		$list = list_entities('object', 'plugin_project', 0, 10, true, false, true);
 	} else {
-		$area2 = list_entities_from_metadata("plugincat", $category, "object", "plugin_project", 0, 10, true, false, true);
+		$list = list_entities_from_metadata("plugincat", $category, "object", "plugin_project", 0, 10, true, false, true);
 	}
 }
 set_context('plugins');
 
-$body = elgg_view_layout('plugin_browse', '', $area2);
+$sidebar = elgg_view('plugins/search/sidebar');
+
+$main = elgg_view('plugins/search/main', array('area1' => $list));
+
+$body = elgg_view_layout('plugins_layout', $main, $sidebar);
 
 page_draw($title, $body);

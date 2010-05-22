@@ -1,4 +1,9 @@
 <?php
+$category = 'all';
+if (isset($vars['category'])) {
+	$category = $vars['category'];
+}
+
 $search_text = elgg_echo('plugins:search:instruct');
 ?>
 <div class="plugins_search_box">
@@ -13,7 +18,13 @@ $search_text = elgg_echo('plugins:search:instruct');
 			<option value="all"><?php echo elgg_echo('plugins:cat:all'); ?></option>
 <?php
 foreach($vars['config']->plugincats as $value => $option) {
-	echo "<option value=\"{$value}\">{$option}</option>";
+	if ($value == $category) {
+		$selected = 'selected="selected"';
+	} else {
+		$selected = '';
+	}
+
+	echo "<option value=\"{$value}\" $selected>{$option}</option>";
 }
 ?>
 		</select>

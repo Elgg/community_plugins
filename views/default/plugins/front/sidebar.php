@@ -1,5 +1,6 @@
 <?php
 ?>
+<div class="plugins_sidebar_box">
 <h2><?php echo elgg_echo('plugins:categories'); ?></h2>
 <ul>
 <?php
@@ -31,3 +32,4 @@ foreach ($vars['config']->plugincats as $value => $option) {
 }
 ?>
 </ul>
+</div>

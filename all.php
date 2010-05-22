@@ -26,13 +26,13 @@ $updated = elgg_get_entities(array('object' => 'plugin_project', 'order_by' => '
 set_context('plugin_project');
 
 $welcome = elgg_view('plugins/front/main');
-$sidebar = elgg_view('plugins/front/sidebar');
+$sidebar = elgg_view('plugins/categories');
 $bottom = elgg_view('plugins/front/bottom', array(	'newest' => $newest,
 													'updated' => $updated,
 													'popular' => $popular,
 													'dugg' => $dugg,));
 
 
-$body = elgg_view_layout('plugin_frontpage', $welcome, $sidebar, $bottom);
+$body = elgg_view_layout('plugins_layout', $welcome, $sidebar, $bottom);
 
 page_draw(elgg_echo("plugins:all"), $body);
