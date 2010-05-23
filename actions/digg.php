@@ -14,7 +14,7 @@ $plugin_project = get_entity($project_guid);
 // Let's see if we can get an entity with the specified GUID
 if ($plugin_project) {
 	//double check to see if the user has already dugg the plugin
-	if(already_dugg($plugin_project)){
+	if (plugins_is_dugg($plugin_project)){
 		system_message(elgg_echo("plugins:alreadydugg"));
 	} else {
 		//$digg_num = $plugin_project->digg + 1;

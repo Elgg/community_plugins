@@ -13,7 +13,7 @@ $num_diggs = count_annotations($project->guid, "object", "plugin_project", "plug
 	</div>
 	<div id="recommend_action">
 <?php
-if (!already_dugg($project) && isloggedin()) {
+if (!plugins_is_dugg($project) && isloggedin()) {
 	$url = "{$vars['url']}action/plugins/digg?guid={$project->guid}";
 	$url = elgg_add_action_tokens_to_url($url);
 	echo "<a href=\"{$url}\">Recommend</a>";

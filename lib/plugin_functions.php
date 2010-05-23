@@ -1,18 +1,26 @@
 <?php
 /**
- * Function to determine if the current user has already dugg the plugin
- * @param $plugin
- * @return true | false
- **/
-
-function already_dugg($plugin){
-	if(check_entity_relationship($_SESSION['user']->guid, "has_dugg", $plugin->guid)){
-		return true;
-	} else{
-		return false;
+ * Has the current user has dugg the plugin project
+ * @param $project
+ * @return bool
+ */
+function plugins_is_dugg($project) {
+	if (check_entity_relationship(get_loggedin_userid(), "has_dugg", $project->guid)) {
+		return TRUE;
+	} else {
+		return FALSE;
 	}
 }
 
+/**
+ * Plugin project search hook
+ * 
+ * @param string $hook
+ * @param string $type
+ * @param <type> $value
+ * @param <type> $params
+ * @return array
+ */
 function plugins_search_hook($hook, $type, $value, $params) {
 	global $CONFIG;
 	$query = sanitise_string($params['query']);
