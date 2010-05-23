@@ -49,6 +49,8 @@ function plugins_init() {
 	// register url handler for projects
 	register_entity_url_handler('plugins_project_url_handler', 'object', 'plugin_project');
 
+	register_elgg_event_handler('pagesetup', 'system', 'plugins_add_submenus');
+
 	// Elgg versions
 	$CONFIG->elgg_versions = array(
 		'1.7',
@@ -117,42 +119,50 @@ function plugins_init() {
 	);
 
 	// Only projects should show up in search
-	//register_entity_type('object','plugins');
 	register_entity_type('object', 'plugin_project');
 
-	// Special hook for searching against metadata (category
+	// Special hook for searching against metadata (category)
 	register_plugin_hook('search', 'object:plugin_project', 'plugins_search_hook');
 }
 
 /**
- * Sets up submenus for the file system.  Triggered on pagesetup.
+ * Sets up submenus. Triggered on pagesetup.
  *
  */
-function plugins_submenus() {
+function plugins_add_submenus() {
 	global $CONFIG;
+
+	if (get_context() != "plugins") {
+		return;
+	}
 
 	$page_owner = page_owner_entity();
 
-	// General submenu options
-	if (get_context() == "plugins") {
-		if ((page_owner() == $_SESSION['guid'] || !page_owner()) && isloggedin()) {
-			add_submenu_item(sprintf(elgg_echo("plugins:yours"),elgg_echo('plugins:types:')), $CONFIG->wwwroot . "pg/plugins/developer/" . page_owner_entity()->username);
-			//add_submenu_item(sprintf(elgg_echo('plugins:yours:friends'),page_owner_entity()->name), $CONFIG->wwwroot . "pg/plugins/". page_owner_entity()->username . "/friends/");
-		} else if (page_owner()) {
-			add_submenu_item(sprintf(elgg_echo("plugins:user"),$page_owner->name,elgg_echo('plugins:types:')), $CONFIG->wwwroot . "pg/plugins/developer/" . $page_owner->username);
-			//if ($page_owner instanceof ElggUser) // This one's for users, not groups
-				//add_submenu_item(sprintf(elgg_echo('plugins:friends'),$page_owner->name), $CONFIG->wwwroot . "pg/plugins/". $page_owner->username . "/friends/");
-		}
-		add_submenu_item(elgg_echo('plugins:all'), $CONFIG->wwwroot . "pg/plugins/all/");
-		if (can_write_to_container($_SESSION['guid'], page_owner()))
-			add_submenu_item(elgg_echo('plugins:upload'), $CONFIG->wwwroot . "pg/plugins/new/". page_owner_entity()->username);
+	$plugins_base = "{$CONFIG->wwwroot}pg/plugins";
+
+	if (isloggedin() && page_owner() == get_loggedin_userid()) {
+		$title = sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:'));
+		add_submenu_item($title, "$plugins_base/developer/$page_owner->username");
+		//add_submenu_item(sprintf(elgg_echo('plugins:yours:friends'),page_owner_entity()->name), $CONFIG->wwwroot . "pg/plugins/". $page_owner->username . "/friends/");
+	} else if (page_owner()) {
+		$title = sprintf(elgg_echo("plugins:user"), $page_owner->name, elgg_echo('plugins:types:'));
+		add_submenu_item($title, "$plugins_base/developer/$page_owner->username");
+		//if ($page_owner instanceof ElggUser) // This one's for users, not groups
+			//add_submenu_item(sprintf(elgg_echo('plugins:friends'),$page_owner->name), $CONFIG->wwwroot . "pg/plugins/". $page_owner->username . "/friends/");
+	}
+
+	add_submenu_item(elgg_echo('plugins:all'), "$plugins_base/all/");
+
+	// add upload link when viewing own plugin page
+	if (get_loggedin_userid() == page_owner()) {
+		add_submenu_item(elgg_echo('plugins:upload'), "$plugins_base/new/$page_owner->username");
 	}
 }
 
 /**
- * File page handler
+ * Plugins page handler
  *
- * @param array $page Array of page elements, forwarded by the page handling mechanism
+ * @param array $page Array of page elements
  */
 function plugins_page_handler($page) {
 
@@ -244,8 +254,8 @@ function plugins_image_page_handler($page) {
 /**
  * Handles plugin project URLs
  *
- * @param $entity
- * @return unknown_type
+ * @param ElggEntity $entity
+ * @return string
  */
 function plugins_project_url_handler($entity) {
 	global $CONFIG;
@@ -256,11 +266,11 @@ function plugins_project_url_handler($entity) {
 }
 
 /**
- * Populates the ->getUrl() method for plugin files
+ * Populates the ->getUrl() method for plugin releases
  * Redirects to the project page.
  *
- * @param ElggEntity $entity File entity
- * @return string File URL
+ * @param ElggEntity $entity 
+ * @return string
  */
 function plugins_file_url_handler($entity) {
 	global $CONFIG;
@@ -268,42 +278,6 @@ function plugins_file_url_handler($entity) {
 	$title = $entity->title;
 	$title = friendly_title($title);
 	return $CONFIG->url . "pg/plugins/release/$entity->guid/developer/{$entity->getOwnerEntity()->username}/$title";
-}
-
-/**
- * Returns an overall file type from the mimetype
- *
- * @param string $mimetype The MIME type
- * @return string The overall type
- */
-function plugins_get_general_file_type($mimetype) {
-
-	switch($mimetype) {
-		case "application/msword":
-			return "document";
-			break;
-		case "application/pdf":
-			return "document";
-			break;
-	}
-
-	if (substr_count($mimetype,'text/'))
-		return "document";
-
-	if (substr_count($mimetype,'audio/'))
-		return "audio";
-
-	if (substr_count($mimetype,'image/'))
-		return "image";
-
-	if (substr_count($mimetype,'video/'))
-		return "video";
-
-	if (substr_count($mimetype,'opendocument'))
-		return "document";
-
-	return "general";
-
 }
 
 /**
@@ -369,11 +343,9 @@ function plugin_urls($text, $maxurl_len = 60, $target = '_blank') {
 } 
 
 
-// Make sure test_init is called on initialisation
-register_elgg_event_handler('init','system','plugins_init');
-register_elgg_event_handler('pagesetup','system','plugins_submenus');
+register_elgg_event_handler('init', 'system', 'plugins_init');
 
-// Register actions
+
 register_action("plugins/create_project", false, $CONFIG->pluginspath . "community_plugins/actions/create_project.php");
 register_action("plugins/create_release", false, $CONFIG->pluginspath . "community_plugins/actions/create_release.php");
 register_action("plugins/save_project", false, $CONFIG->pluginspath . "community_plugins/actions/save_project.php");
