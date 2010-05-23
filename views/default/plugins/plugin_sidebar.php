@@ -43,16 +43,20 @@ if ($project->canEdit()){
 	<h3><?php echo elgg_echo('Info'); ?></h3>
 	<div class="contentWrapper">
 	<?php
+		if ($project->author_homepage) {
+			echo "<a href=\"{$project->homepage}\">" . "Author homepage" . "</a><br />";
+		}
+
 		if ($project->homepage) {
-			echo "<b>URL:</b> <a href=\"{$project->homepage}\">" . plugin_urls($project->homepage) . "</a><br />";
+			echo "<a href=\"{$project->homepage}\">" . "Plugin homepage" . "</a><br />";
 		}
 
 		if ($project->repo) {
-			echo "<b>Code Repo:</b> <a href=\"{$project->repo}\">" . plugin_urls($project->repo) . "</a><br />";
+			echo "<a href=\"{$project->repo}\">" . "Code repository" . "</a><br />";
 		}
 		
 		if ($project->donate) {
-			echo "<b>Donations:</b> <a href=\"{$project->donate}\">" . plugin_urls($project->donate) . "</a><br />";
+			echo "<a href=\"{$project->donate}\">" . "Donations" . "</a><br />";
 		}
 	?>
 	<b><?php echo elgg_echo('plugins:category'); ?>:</b> <a href="<?php echo $vars['url']; ?>mod/community_plugins/search.php?category=<?php echo $project->plugincat; ?>"><?php echo $project->plugincat; ?></a><br />
