@@ -145,7 +145,7 @@ $english = array(
 	/**
 	 * Licenses
 	 */
-	'license' => 'Licence',
+	'license' => 'License',
 	'license:none' => 'No license selected',
 	'license:blurb' => 'Your plugin or theme must be released under a GPL version 2 compatible license. Please select from the list below, or click here for more details.',
 	'license:gpl2' => 'GNU General Public License (GPL) version 2',

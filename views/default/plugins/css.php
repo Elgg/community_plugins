@@ -531,6 +531,14 @@ background-color:#0054a7;
 color:white;
 }
 
+.plugin_details {
+margin:0;
+padding:0;
+}
+
+.plugin_details li {
+ margin: 4px 0;
+}
 
 .pluginsrepo_warning {
 	margin:10px 0 20px 10px;

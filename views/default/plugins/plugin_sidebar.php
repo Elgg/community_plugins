@@ -41,30 +41,45 @@ if ($project->canEdit()){
 }
 ?>
 
-<div class="sidebarBox pluginsrepo_details">
-	<h3><?php echo elgg_echo('Info'); ?></h3>
+<?php
+if ($project->author_homepage || $project->homepage || $project->repo || $project->donate) {
+?>
+<div class="sidebarBox">
+	<h3><?php echo elgg_echo('Project Info'); ?></h3>
 	<div class="contentWrapper">
+	<ul class="plugins_menu">
 	<?php
 		if ($project->author_homepage) {
-			echo "<a href=\"{$project->homepage}\">" . "Author homepage" . "</a><br />";
+			echo "<li><a href=\"{$project->homepage}\">" . "Author homepage" . "</a></li>";
 		}
 
 		if ($project->homepage) {
-			echo "<a href=\"{$project->homepage}\">" . "Plugin homepage" . "</a><br />";
+			echo "<li><a href=\"{$project->homepage}\">" . "Plugin homepage" . "</a></li>";
 		}
 
 		if ($project->repo) {
-			echo "<a href=\"{$project->repo}\">" . "Code repository" . "</a><br />";
+			echo "<li><a href=\"{$project->repo}\">" . "Code repository" . "</a></li>";
 		}
-		
+
 		if ($project->donate) {
-			echo "<a href=\"{$project->donate}\">" . "Donations" . "</a><br />";
+			echo "<li><a href=\"{$project->donate}\">" . "Donations" . "</a></li>";
 		}
 	?>
-	<b><?php echo elgg_echo('plugins:category'); ?>:</b> <a href="<?php echo $vars['url']; ?>mod/community_plugins/search.php?category=<?php echo $project->plugincat; ?>"><?php echo $project->plugincat; ?></a><br />
-	<b><?php echo elgg_echo('license'); ?>:</b> <?php echo elgg_echo('license:' . $project->license); ?><br />
-	<b><?php echo elgg_echo('plugins:updated'); ?>:</b> <?php echo friendly_time($project->time_updated); ?><br />
-	<b>Downloaded: </b> <?php echo $dls; ?><br /><br />
+	</ul>
+	</div>
+</div>
+<?php
+}
+?>
+<div class="sidebarBox pluginsrepo_details">
+	<h3><?php echo elgg_echo('Stats'); ?></h3>
+	<div class="contentWrapper">
+		<ul class="plugin_details">
+			<li><b><?php echo elgg_echo('plugins:category'); ?>:</b> <a href="<?php echo $vars['url']; ?>pg/plugins/category/<?php echo $project->plugincat; ?>"><?php echo $project->plugincat; ?></a></li>
+			<li><b><?php echo elgg_echo('license'); ?>:</b> <?php echo elgg_echo('license:' . $project->license); ?></li>
+			<li><b><?php echo elgg_echo('plugins:updated'); ?>:</b> <?php echo date("Y-n-j", $project->time_updated); ?></li>
+			<li><b>Downloads: </b> <?php echo $dls; ?></li>
+		</ul>
 	</div>
 </div>
 <div class="sidebarBox">
@@ -225,8 +240,13 @@ echo '</div></div>';
 }
 ?>
 
+<?php
+if (count($all_user_plugins) > 1) {
+?>
 <div class="sidebarBox">
-	More projects by <?php echo get_user($project->owner_guid)->name; ?>: <br />
+	<h3>Other Projects</h3>
+	<div class="contentWrapper">
+		<p><?php echo page_owner_entity()->name; ?>'s plugins:</p>
 	<?php
 		if($all_user_plugins){
 			echo "<select class='choose_plugin' onchange=\"window.open(this.options[this.selectedIndex].value,'_top')\">";
@@ -240,4 +260,8 @@ echo '</div></div>';
 			echo "</select>";
 		}
 	?>
+	</div>
 </div>
+<?php
+}
+?>
