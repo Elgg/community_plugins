@@ -293,7 +293,7 @@ function plugins_add_type_menu($owner_guid) {
 		return;
 	}
 
-	$plugin_types = get_tags(0, 10, 'plugin_type', 'object', 'plugin_project');
+	$plugin_types = get_tags(0, 10, 'plugin_type', 'object', 'plugin_project', $owner_guid);
 
 	foreach ($plugin_types as $type) {
 
