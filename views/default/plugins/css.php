@@ -509,6 +509,29 @@ p.pluginsrepo_owner {
 	min-height: 80px;
 }
 
+.plugins_menu {
+	margin: 0;
+	padding: 0;
+}
+
+.plugins_menu li a {
+-moz-border-radius:10px;
+-webkit-border-radius:10px;
+color:#4690D6;
+display:block;
+font-weight:bold;
+line-height:1.1em;
+margin:2px 0 0;
+padding:4px 6px 4px 10px;
+text-decoration:none;
+}
+
+.plugins_menu li a:hover {
+background-color:#0054a7;
+color:white;
+}
+
+
 .pluginsrepo_warning {
 	margin:10px 0 20px 10px;
 	border:1px solid #D3322A;
