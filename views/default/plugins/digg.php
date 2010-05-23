@@ -7,10 +7,11 @@ $project = $vars['project'];
 $num_diggs = count_annotations($project->guid, "object", "plugin_project", "plugin_digg");
 ?>
 
-<div id="recommend">
+<div id="plugins_recommend">
 	<div id="num_recommend">
 		<p><?php echo $num_diggs; ?></p>
 	</div>
+	<div class="clearfloat"></div>
 	<div id="recommend_action">
 <?php
 if (!plugins_is_dugg($project) && isloggedin()) {

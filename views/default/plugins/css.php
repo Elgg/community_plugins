@@ -358,12 +358,14 @@ p.pluginsrepo_owner {
 	margin:0;
 }
 
-/* SINGLE ITEM VIEW */
-.pluginsrepo_file {
+
+
+.plugins_wrapper {
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
-	background:white;
-	margin:10px 10px 10px 10px;
+	background: white;
+	margin: 10px;
+	padding: 10px;
 }
 .pluginsrepo_file .pluginsrepo_maincontent {
 	padding:0 0 0 0;
@@ -381,7 +383,7 @@ p.pluginsrepo_owner {
 	padding:4px;
 	background:#efefef;
 }
-#recommend {
+#plugins_recommend {
 	float:right;
 	width:auto;
 	-webkit-border-radius: 6px;
@@ -390,27 +392,28 @@ p.pluginsrepo_owner {
 	text-align: right;
 }
 
-#recommend #num_recommend {
+#plugins_recommend #num_recommend {
 	background: url(<?php echo $vars['url']; ?>mod/community_plugins/graphics/recommend.png) no-repeat;
 	width:50px;
 	height:50px;
 	margin:0 0 5px 0;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
+	float:right;
 }
 
-#recommend #num_recommend p {
+#plugins_recommend #num_recommend p {
 	font-size:1.4em;
 	padding:2px;
 }
 
-#recommend #recommend_action {
+#plugins_recommend #recommend_action {
 	border:1px solid #efefef;
 	padding:2px;
 	font-size:80%;
 }
 
-#recommend #recommend_action p {
+#plugins_recommend #recommend_action p {
 	padding:0;
 	margin:0;
 }
@@ -490,17 +493,20 @@ p.pluginsrepo_owner {
 	font-size:90%;
 }
 
-.pluginsrepo_user_gallery_link {
-	float:right;
-	margin:5px 5px 5px 50px;
-}
-.pluginsrepo_user_gallery_link a {
+.plugins_back_link {
 	padding:2px 25px 5px 0;
 	background: transparent url(<?php echo $vars['url']; ?>_graphics/icon_gallery.gif) no-repeat right top;
 	display:block;
+	float:right;
 }
-.pluginsrepo_user_gallery_link a:hover {
+
+.plugins_back_link:hover {
 	background-position: right -40px;
+}
+
+.plugins_maincontent {
+	margin-top: 10px;
+	min-height: 80px;
 }
 
 .pluginsrepo_warning {
