@@ -44,7 +44,7 @@ if ($project->getSubtype() == 'plugin_file') {
 set_page_owner($project->getOwner());
 
 // grab the entity and sidebar views
-$area1 = elgg_view('plugins/plugin_sidebar', array('entity' => $project));
+$area1 = elgg_view('plugins/project_sidebar', array('entity' => $project));
 $area2 = elgg_view_entity($project, TRUE);
 
 $body = elgg_view_layout("sidebar_boxes", $area1, $area2);
