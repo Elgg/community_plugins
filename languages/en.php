@@ -145,6 +145,10 @@ $english = array(
 	'plugins:files:acceptable' => 'Distribution packages must be .zip or .tar.zip only.',
 	'item:object:plugin_project' => 'Plugins',
 
+	'plugins:tabs:stats' => 'Statistics',
+	'plugins:tabs:upgrade' => 'Upgrades',
+	'plugins:tabs:utilities' => 'Utilities',
+
 	/**
 	 * Licenses
 	 */
