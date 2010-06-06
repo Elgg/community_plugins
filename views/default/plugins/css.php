@@ -531,12 +531,12 @@ background-color:#0054a7;
 color:white;
 }
 
-.plugin_details {
+.plugin_stats {
 margin:0;
 padding:0;
 }
 
-.plugin_details li {
+.plugin_stats li {
  margin: 4px 0;
 }
 
@@ -929,14 +929,6 @@ span.downloadsnumber {
 /*****************
 New edits
 *****************/
-
-#plugin_stats {
-/*
-	float:right;
-	width:250px;
-	margin:0;
-*/
-}
 
 #plugins_welcome {
 /*
