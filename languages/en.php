@@ -22,6 +22,8 @@ $english = array(
 	'plugins:yours' => "Your %s",
 	'plugins:user' => "%s's %s",
 
+	'plugins:admin' => "Plugin repository administration",
+
 	'plugins:yours:friends' => "Your friends' plugins, themes and language packs",
 	'plugins:friends' => "%s's friends' plugins, themes and language packs",
 	'plugins:all' => "All site plugins, themes and language packs",

@@ -204,6 +204,11 @@ function plugins_page_handler($page) {
 			set_input('username', $page[1]);
 			include("$plugin_dir/create_project.php");
 			break;
+		// admin page
+		case "admin":
+			set_input('tab', $page[1]);
+			include("$plugin_dir/admin.php");
+			break;
 		// for backwards compatibility this handles /pg/plugins/<username>/read/<guid>/<title>
 		default:
 			set_input('guid', $page[2]);
