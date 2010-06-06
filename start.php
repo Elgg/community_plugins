@@ -128,13 +128,19 @@ function plugins_init() {
 function plugins_add_submenus() {
 	global $CONFIG;
 
+	$plugins_base = "{$CONFIG->wwwroot}pg/plugins";
+
+	if (get_context() == 'admin') {
+		$title = elgg_echo("plugins:admin:menu");
+		add_submenu_item($title, "$plugins_base/admin/");
+		return;
+	}
+
 	if (get_context() != "plugins") {
 		return;
 	}
 
 	$page_owner = page_owner_entity();
-
-	$plugins_base = "{$CONFIG->wwwroot}pg/plugins";
 
 	if (isloggedin() && page_owner() == get_loggedin_userid()) {
 		$title = sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:'));

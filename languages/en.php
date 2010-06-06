@@ -23,6 +23,7 @@ $english = array(
 	'plugins:user' => "%s's %s",
 
 	'plugins:admin' => "Plugin repository administration",
+	'plugins:admin:menu' => "Plugin Repo Admin",
 
 	'plugins:yours:friends' => "Your friends' plugins, themes and language packs",
 	'plugins:friends' => "%s's friends' plugins, themes and language packs",
