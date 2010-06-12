@@ -83,18 +83,3 @@ function plugins_search_hook($hook, $type, $value, $params) {
 		'count' => $count,
 	);
 }
-
-/**
- * Override the ElggFile class so that we can define a new subtype attribute
- */
-class FilePluginFile extends ElggFile {
-	protected function initialise_attributes() {
-		parent::initialise_attributes();
-
-		$this->attributes['subtype'] = "plugin_file";
-	}
-
-	public function __construct($guid = null) {
-		parent::__construct($guid);
-	}
-}

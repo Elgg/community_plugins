@@ -45,7 +45,7 @@ if ($plugin_project && $plugin_project->canEdit()) {
 	$file->setFilename($prefix.$filestorename);
 	$file->setMimetype($mimetype);
 	$file->originalfilename = $_FILES['upload']['name'];
-	$file->subtype="plugin_file";
+	$file->subtype="plugin_release";
 	$file->access_id = $access_id;
 	$file->elgg_version = $elgg_version;
 

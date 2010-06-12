@@ -5,10 +5,11 @@
  */
 
 require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
+require_once(dirname(__FILE__) . '/lib/PluginRelease.php');
 
 // Register a class
 function plugins_run_once(){
-	add_subtype("object", "plugin_file", "FilePluginFile");
+	add_subtype("object", "plugin_release", "PluginRelease");
 }
 
 /**
@@ -42,7 +43,7 @@ function plugins_init() {
 
 
 	// register url handlers for the 2 object subtypes
-	register_entity_url_handler('plugins_release_url_handler', 'object', 'plugin_file');
+	register_entity_url_handler('plugins_release_url_handler', 'object', 'plugin_release');
 	register_entity_url_handler('plugins_project_url_handler', 'object', 'plugin_project');
 
 	register_elgg_event_handler('pagesetup', 'system', 'plugins_add_submenus');
@@ -325,3 +326,4 @@ register_action("plugins/delete_project", FALSE, "$action_base/delete_project.ph
 register_action("plugins/delete_release", FALSE, "$action_base/delete_release.php");
 register_action("plugins/delete_project_image", FALSE, "$action_base/delete_project_image.php");
 register_action("plugins/digg", FALSE, "$action_base/digg.php");
+register_action("plugins/upgrade", FALSE, "$action_base/upgrade.php", TRUE);

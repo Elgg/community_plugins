@@ -79,7 +79,7 @@ $file->title = $plugin_project->title;
 $file->setFilename($prefix . $filestorename);
 $file->setMimetype($mimetype);
 $file->originalfilename = $_FILES['upload']['name'];
-$file->subtype="plugin_file";
+$file->subtype="plugin_release";
 $file->access_id = $release_access_id;
 $uf = get_uploaded_file('upload');
 if (!$uf) {

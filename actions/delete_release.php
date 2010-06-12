@@ -9,7 +9,7 @@ $guid = (int) get_input('release_guid');
 if (($release = get_entity($guid))
 && ($project = get_entity($release->container_guid))
 && $release instanceof FilePluginFile
-&& $release->getSubtype() == 'plugin_file' && $release->canEdit()
+&& $release->getSubtype() == 'plugin_release' && $release->canEdit()
 && $release->delete()) {
 	if ($project->recommended_release_guid == $guid) {
 		unset($project->recommended_release_guid);

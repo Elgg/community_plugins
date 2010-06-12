@@ -30,7 +30,7 @@ if (!$project) {
 $title = $project->title;
 
 // this is probably here for backward compatibility - guid was a release
-if ($project->getSubtype() == 'plugin_file') {
+if ($project->getSubtype() == 'plugin_release') {
 	if ($real_project = get_entity($project->container_guid)) {
 		$url = $project->getURL();
 		forward($url);
