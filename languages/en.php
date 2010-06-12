@@ -138,7 +138,7 @@ $english = array(
 	'plugin_file:river:created' => "%s uploaded",
 	'plugin_file:river:updated' => "%s updated",
 	'plugin_file:river:item' => "a plugin",
-	'plugin_file:river:annotate' => "a comment on this plugin",
+	'plugin_release:river:annotate' => "a comment on the plugin",
 
 	'item:object:plugin or theme' => 'Plugins and themes',
 
