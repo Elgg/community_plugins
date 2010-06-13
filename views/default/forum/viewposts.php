@@ -5,6 +5,11 @@
 	</div>
 
 <?php
+
+if (isadminloggedin()) {
+	echo elgg_view('community_groups/forum_post_controls', array('post' => $vars['entity']));
+}
+
 $comment_limit = 50;
 
 //display follow up comments

@@ -9,6 +9,10 @@ register_elgg_event_handler('init', 'system', 'community_groups_init');
 function community_groups_init() {
 	global $CONFIG;
 
+	elgg_extend_view('css', 'community_groups/css');
+
+	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
+	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
 }
 
 /**
