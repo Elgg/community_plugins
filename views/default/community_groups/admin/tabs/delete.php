@@ -7,6 +7,8 @@ foreach ($groups as $group) {
 	$options[$group->guid] = $group->name;
 }
 
+asort($options);
+
 $form_body = '<label>';
 $form_body .= elgg_echo('cg:admin:delete:instruct');
 $form_body .= ':</label> ';

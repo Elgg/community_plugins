@@ -11,6 +11,8 @@ foreach ($groups as $group) {
 	}
 }
 
+asort($options);
+
 $form_body = '<label>';
 $form_body .= elgg_echo('cg:forum:move:instruct');
 $form_body .= ':</label> ';
