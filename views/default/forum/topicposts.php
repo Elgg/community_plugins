@@ -33,18 +33,8 @@ echo "<small>" . friendly_time($vars['entity']->time_created) . "</small></p>";
 	</table>
 <?php
 
-// who can edit and when - admins or poster for 30 minutes
-$can_viewer_edit = FALSE;
-if (isadminloggedin()) {
-	$can_viewer_edit = TRUE;
-}
-if (get_loggedin_userid() == $vars['entity']->owner_guid) {
-	if ((time() - $vars['entity']->time_created) < 30 * 60) {
-		$can_viewer_edit = TRUE;
-	}
-}
-
-if ($can_viewer_edit) {
+// limit who can edit and when
+if (community_groups_can_edit($vars['entity']->owner_guid, $vars['entity']->time_created)) {
 ?>
 	<p class="topic-post-menu">
 <?php

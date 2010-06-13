@@ -42,7 +42,7 @@ if (get_context() == "search") {
 		$info.= "<br /><span class='timestamp'>" . elgg_echo('groups:updated') . " " . friendly_time($last_time) . " by <a href=\"" . $u->getURL() . "\">" . $u->name . "</a></span>";
 	}
 
-	if (groups_can_edit_discussion($vars['entity'], page_owner_entity()->owner_guid)) {
+	if (community_groups_can_edit($topic_owner, $forum_created)) {
 
 		// display the delete link to those allowed to delete
 		$info .= "<br /><span class=\"delete_discussion\">" . elgg_view("output/confirmlink", array(
