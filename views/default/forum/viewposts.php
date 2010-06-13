@@ -5,26 +5,32 @@
 	</div>
 
 <?php
+$comment_limit = 50;
+
 //display follow up comments
 $count = $vars['entity']->countAnnotations('group_topic_post');
 $offset = (int) get_input('offset', 0);
 
 $baseurl = $vars['url'] . "mod/groups/topicposts.php?topic={$vars['entity']->guid}&group_guid={$vars['entity']->container_guid}";
-echo elgg_view('navigation/pagination', array(
-	'limit' => 50,
-	'offset' => $offset,
-	'baseurl' => $baseurl,
-	'count' => $count,
-	));
+$pagination = elgg_view('navigation/pagination', array(
+				'limit' => $comment_limit,
+				'offset' => $offset,
+				'baseurl' => $baseurl,
+				'count' => $count,
+				));
+
+echo $pagination;
 
 ?>
     <!-- grab the topic title -->
 	<div id="content_area_group_title"><h2><?php echo $vars['entity']->title; ?></h2></div>
 <?php
 
-foreach ($vars['entity']->getAnnotations('group_topic_post', 50, $offset, "asc") as $post) {
+foreach ($vars['entity']->getAnnotations('group_topic_post', $comment_limit, $offset, "asc") as $post) {
 	echo elgg_view("forum/topicposts", array('entity' => $post));
 }
+
+echo $pagination;
 
 // check to find out the status of the topic and act
 if ($vars['entity']->status != "closed" && page_owner_entity()->isMember($vars['user'])) {
