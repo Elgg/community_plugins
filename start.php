@@ -11,8 +11,46 @@ function community_groups_init() {
 
 	elgg_extend_view('css', 'community_groups/css');
 
+	register_elgg_event_handler('pagesetup', 'system', 'community_groups_adminmenu');
+	register_page_handler('groupsadmin', 'community_groups_admin_page');
+
 	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
+}
+
+/**
+ * Add a menu item for groups admin pages
+ */
+function community_groups_adminmenu() {
+	global $CONFIG;
+	if (get_context() == 'admin') {
+		add_submenu_item(elgg_echo('cp:groups:admin'), "{$CONFIG->url}pg/groupsadmin/");
+	}
+}
+
+/**
+ * Group admin pages
+ * 
+ * @param array $page
+ */
+function community_groups_admin_page($page) {
+
+	set_context('admin');
+
+	$tab = 'combine';
+	if (isset($page[0])) {
+		$tab = $page[0];
+	}
+
+	$title = elgg_echo('cp:groups:admin');
+
+	$content = elgg_view_title($title);
+	$content .= elgg_view('community_groups/admin/main', array('tab' => $tab));
+
+	$body = elgg_view_layout('two_column_left_sidebar', '', $content);
+	
+	page_draw($title, $body);
+	return TRUE;
 }
 
 /**
