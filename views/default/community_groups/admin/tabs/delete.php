@@ -20,5 +20,3 @@ $form_body .= elgg_view('input/submit', array('value' => elgg_echo('submit')));
 echo elgg_view('input/form', array('action' => $CONFIG->url . 'action/groups/delete',
 									'body' => $form_body,
 								));
-
-?>

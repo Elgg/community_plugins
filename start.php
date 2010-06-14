@@ -16,6 +16,7 @@ function community_groups_init() {
 
 	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
+	register_action('groups/combine', FALSE, "$action_path/groups/combine.php", TRUE);
 }
 
 /**

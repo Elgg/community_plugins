@@ -11,9 +11,16 @@ $english = array(
 	'cg:tabs:delete' => 'Delete group',
 
 	'cg:admin:delete:instruct' => 'Delete the group',
+	'cg:admin:combine:instruct' => 'Move all content and members from one group
+									into another. The first group is also deleted.',
+	'cg:admin:combine:from' => 'From this group',
+	'cg:admin:combine:to' => 'To this group',
 
 	'cg:forum:move:success' => "Successfully moved the forum post",
 	'cg:forum:move:error' => "Unable to move the forum post",
+	'cg:groups:combine:success' => "Successfully combined the groups %s and %s",
+	'cg:groups:combine:same' => "The groups are the same",
+	'cg:groups:combine:nogroup' => "Unable to load one of the groups",
 
 );
 
