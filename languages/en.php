@@ -17,6 +17,11 @@ $english = array(
 	'cg:admin:combine:from' => 'From this group',
 	'cg:admin:combine:to' => 'To this group',
 
+	'groups:support' => 'Support',
+	'groups:language' => 'Language',
+	'groups:developers' => 'Developers',
+	'groups:plugins' => 'Plugins',
+
 	'cg:forum:move:success' => "Successfully moved the forum post",
 	'cg:forum:move:error' => "Unable to move the forum post",
 	'cg:groups:combine:success' => "Successfully combined the groups %s and %s",

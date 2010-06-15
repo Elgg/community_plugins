@@ -66,6 +66,7 @@ function community_groups_page_handler($page) {
 	global $CONFIG;
 
 	$groups_base = "{$CONFIG->pluginspath}groups";
+	$community_base = "{$CONFIG->pluginspath}community_groups/pages";
 
 	if (!isset($page[0])) {
 		// default to group listing page
@@ -80,7 +81,7 @@ function community_groups_page_handler($page) {
 			include("$groups_base/new.php");
 			break;
 		case "world":
-			include("$groups_base/all.php");
+			include("$community_base/all.php");
 			break;
 		case "forum":
 			set_input('group_guid', $page[1]);
@@ -133,5 +134,5 @@ function community_groups_can_edit($owner_guid, $time_created) {
  * @return array
  */
 function community_groups_get_categories() {
-	return array('featured', 'plugins', 'language', 'developers');
+	return array('support', 'plugins', 'language', 'developers');
 }
