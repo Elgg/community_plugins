@@ -5,7 +5,7 @@
 
 $selected_tab = $vars['tab'];
 
-$tabs = array('combine', 'delete');
+$tabs = array('categorize', 'combine', 'delete');
 
 echo '<ul>';
 foreach ($tabs as $tab) {

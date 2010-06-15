@@ -17,6 +17,7 @@ function community_groups_init() {
 	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
 	register_action('groups/combine', FALSE, "$action_path/groups/combine.php", TRUE);
+	register_action('groups/categorize', FALSE, "$action_path/groups/categorize.php", TRUE);
 }
 
 /**
@@ -75,3 +76,11 @@ function community_groups_can_edit($owner_guid, $time_created) {
 	return FALSE;
 }
 
+/**
+ * Get a list of group categories
+ * 
+ * @return array
+ */
+function community_groups_get_categories() {
+	return array('featured', 'plugins', 'language', 'developers');
+}

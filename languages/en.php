@@ -7,6 +7,7 @@ $english = array(
 	'cg:forum:controls' => "Admin controls",
 	'cg:forum:move:instruct' => "Move post to the group",
 
+	'cg:tabs:categorize' => 'Categorize',
 	'cg:tabs:combine' => 'Combine groups',
 	'cg:tabs:delete' => 'Delete group',
 
@@ -21,6 +22,7 @@ $english = array(
 	'cg:groups:combine:success' => "Successfully combined the groups %s and %s",
 	'cg:groups:combine:same' => "The groups are the same",
 	'cg:groups:combine:nogroup' => "Unable to load one of the groups",
+	'cg:groups:categorize:success' => "Group categories have been added",
 
 );
 
