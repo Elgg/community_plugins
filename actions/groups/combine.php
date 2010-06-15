@@ -17,7 +17,7 @@ if (!$from_group || !$to_group) {
 
 // combine membership
 $where = "guid_two='$from_guid' AND relationship='member'";
-$query = "SELECT * from {$CONFIG->dbprefix}entity_relationships WHERE {$where}";
+$query = "SELECT * from {$CONFIG->dbprefix}entity_relationships WHERE $where";
 $members = get_data($query, "row_to_elggrelationship");
 $from_members = array();
 foreach ($members as $member) {
@@ -25,7 +25,7 @@ foreach ($members as $member) {
 }
 
 $where = "guid_two='$to_guid' AND relationship='member'";
-$query = "SELECT * from {$CONFIG->dbprefix}entity_relationships WHERE {$where}";
+$query = "SELECT * from {$CONFIG->dbprefix}entity_relationships WHERE $where";
 $members = get_data($query, "row_to_elggrelationship");
 $to_members = array();
 foreach ($members as $member) {
@@ -44,13 +44,27 @@ foreach ($move_members as $member) {
 			add_entity_relationship($member, "notify{$method}", $to_guid);
 		}
 	}
+
+	// add to access list
+	add_user_to_access_collection($member, $to_group->group_acl);
 }
 
 
-// combine content
+// update river
+$where = "type='group' AND object_guid=$from_guid";
+$query = "UPDATE {$CONFIG->dbprefix}river SET object_guid=$to_guid WHERE $where";
+$result = update_data($query);
 
+
+// combine content
+$where = "container_guid=$from_guid";
+$query = "UPDATE {$CONFIG->dbprefix}entities SET container_guid=$to_guid WHERE $where";
+$result = update_data($query);
+
+system_message(sprintf(elgg_echo('cg:groups:combine:success'), $from_group->name, $to_group->name));
 
 // delete from group
+$from_group->delete();
 
-system_message(sprintf(elgg_echo('cg:groups:combine:success')));
+
 forward(REFERER);
