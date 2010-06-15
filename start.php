@@ -14,6 +14,8 @@ function community_groups_init() {
 	register_elgg_event_handler('pagesetup', 'system', 'community_groups_adminmenu');
 	register_page_handler('groupsadmin', 'community_groups_admin_page');
 
+	register_page_handler('groups', 'community_groups_page_handler');
+
 	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
 	register_action('groups/combine', FALSE, "$action_path/groups/combine.php", TRUE);
@@ -52,6 +54,55 @@ function community_groups_admin_page($page) {
 	$body = elgg_view_layout('two_column_left_sidebar', '', $content);
 	
 	page_draw($title, $body);
+	return TRUE;
+}
+
+/**
+ * Replaces page handler of groups plugin
+ *
+ * @param array $page
+ */
+function community_groups_page_handler($page) {
+	global $CONFIG;
+
+	$groups_base = "{$CONFIG->pluginspath}groups";
+
+	if (!isset($page[0])) {
+		// default to group listing page
+		$page[0] = 'world';
+	}
+
+	switch ($page[0]) {
+		case "invitations":
+			include("$groups_base/invitations.php");
+			break;
+		case "new":
+			include("$groups_base/new.php");
+			break;
+		case "world":
+			include("$groups_base/all.php");
+			break;
+		case "forum":
+			set_input('group_guid', $page[1]);
+			include("$groups_base/forum.php");
+			break;
+		case "owned":
+			// groups owned by user
+			set_input('username', $page[1]);
+			include("$groups_base/index.php");
+			break;
+		case "member":
+			// groups user is a member of
+			set_input('username', $page[1]);
+			include("$groups_base/membership.php");
+			break;
+		default:
+			// group profile
+			set_input('group_guid', $page[0]);
+			include("$groups_base/groupprofile.php");
+			break;
+	}
+
 	return TRUE;
 }
 
