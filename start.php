@@ -20,6 +20,7 @@ function community_groups_init() {
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
 	register_action('groups/combine', FALSE, "$action_path/groups/combine.php", TRUE);
 	register_action('groups/categorize', FALSE, "$action_path/groups/categorize.php", TRUE);
+	register_action("groups/delete", FALSE, $CONFIG->pluginspath . "groups/actions/delete.php", TRUE);
 }
 
 /**
