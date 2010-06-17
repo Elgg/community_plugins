@@ -15,6 +15,7 @@ function community_groups_init() {
 	register_page_handler('groupsadmin', 'community_groups_admin_page');
 
 	register_page_handler('groups', 'community_groups_page_handler');
+	register_elgg_event_handler('pagesetup', 'system', 'community_groups_sidebar_menu');
 
 	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
@@ -106,6 +107,19 @@ function community_groups_page_handler($page) {
 	}
 
 	return TRUE;
+}
+
+function community_groups_sidebar_menu() {
+	global $CONFIG;
+	
+	if (get_context() != 'groups') {
+		return;
+	}
+
+	$group = page_owner_entity();
+	if ($group->isMember(get_loggedin_user())) {
+		add_submenu_item(elgg_echo('groups:addtopic'), $CONFIG->wwwroot . "mod/groups/addtopic.php?group_guid={$group->getGUID()}", '1groupslinks');
+	}
 }
 
 /**
