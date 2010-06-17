@@ -6,6 +6,8 @@ $english = array(
 	
 	'cg:forum:controls' => "Admin controls",
 	'cg:forum:move:instruct' => "Move post to the group",
+	'cg:forum:removead' => "Remove ad",
+	'cg:form:ad:warning' => "This comment was removed by an administrator because it contained advertising.",
 
 	'cg:tabs:categorize' => 'Categorize',
 	'cg:tabs:combine' => 'Combine groups',
@@ -24,6 +26,7 @@ $english = array(
 
 	'cg:forum:move:success' => "Successfully moved the forum post",
 	'cg:forum:move:error' => "Unable to move the forum post",
+	'cg:forum:removead:success' => "Issued advertising warning",
 	'cg:groups:combine:success' => "Successfully combined the groups %s and %s",
 	'cg:groups:combine:same' => "The groups are the same",
 	'cg:groups:combine:nogroup' => "Unable to load one of the groups",

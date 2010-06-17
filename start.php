@@ -19,6 +19,7 @@ function community_groups_init() {
 
 	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
+	register_action('forum/remove_ad', FALSE, "$action_path/forum/remove_ad.php", TRUE);
 	register_action('groups/combine', FALSE, "$action_path/groups/combine.php", TRUE);
 	register_action('groups/categorize', FALSE, "$action_path/groups/categorize.php", TRUE);
 	register_action("groups/delete", FALSE, $CONFIG->pluginspath . "groups/actions/delete.php", TRUE);
@@ -109,6 +110,9 @@ function community_groups_page_handler($page) {
 	return TRUE;
 }
 
+/**
+ * Add sidebar memu items for groups
+ */
 function community_groups_sidebar_menu() {
 	global $CONFIG;
 	

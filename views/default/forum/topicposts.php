@@ -46,8 +46,19 @@ if (community_groups_can_edit($vars['entity']->owner_guid, $vars['entity']->time
 			));
 
 	//display an edit link that will open up an edit area
-	echo " <a class=\"collapsibleboxlink\">".elgg_echo('edit')."</a>";
+	echo " <a class=\"collapsibleboxlink\">".elgg_echo('edit')."</a> ";
+
+	if (isadminloggedin()) {
+		// display remove advertising link
+		echo elgg_view("output/url", array(
+					'text' => elgg_echo('cg:forum:removead'),
+					'href' => "{$vars['url']}action/forum/remove_ad?post={$vars['entity']->id}",
+					'is_action' => TRUE,
+					'class' => 'removeaddlink'));
+	}
+
 	echo "<div class=\"collapsible_box\">";
+
 	//get the edit form and details
 	$submit_input = elgg_view('input/submit', array('internalname' => 'submit', 'value' => elgg_echo('save')));
 	$text_textarea = elgg_view('input/longtext', array('internalname' => 'postComment'.$vars['entity']->id, 'value' => $vars['entity']->value));

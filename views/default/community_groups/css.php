@@ -17,6 +17,10 @@
 	font-weight: normal;
 }
 
+.removeaddlink {
+	padding-left: 10px;
+}
+
 #groupsadmin_category_table {
 	border-collapse: collapse;
 }
