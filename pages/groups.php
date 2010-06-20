@@ -46,16 +46,8 @@ if ($tag != "") {
 $options = array('type' => 'group', 'limit' => 0, 'count' => TRUE);
 $group_count = elgg_get_entities($options);
 
-//find groups
-$area1 = elgg_view("groups/find");
 
-//menu options
-$area1 .= elgg_view("groups/side_menu");
-
-//featured groups
-$featured_groups = elgg_get_entities_from_metadata(array('metadata_name' => 'featured_group', 'metadata_value' => 'yes', 'types' => 'group', 'limit' => 10));
-$area1 .= elgg_view("groups/featured", array("featured" => $featured_groups));
-
+$area1 = elgg_view('community_groups/groups_sidebar');
 
 set_context($context);
 

@@ -84,7 +84,7 @@ function community_groups_page_handler($page) {
 			include("$groups_base/new.php");
 			break;
 		case "world":
-			include("$community_base/all.php");
+			include("$community_base/groups.php");
 			break;
 		case "forum":
 			set_input('group_guid', $page[1]);

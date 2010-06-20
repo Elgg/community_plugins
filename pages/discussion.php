@@ -55,7 +55,7 @@ $content .= $listing;
 
 $area2 .= elgg_view('groups/contentwrapper', array('body' => $content));
 
-$area1 = '';
+$area1 = elgg_view('community_groups/discussion_sidebar');
 
 $body = elgg_view_layout('sidebar_boxes', $area1, $area2);
 
