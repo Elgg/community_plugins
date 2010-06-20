@@ -17,6 +17,9 @@ function community_groups_init() {
 	register_page_handler('groups', 'community_groups_page_handler');
 	register_elgg_event_handler('pagesetup', 'system', 'community_groups_sidebar_menu');
 
+	register_plugin_hook('search_types', 'get_types', 'community_groups_add_search_type');
+	register_plugin_hook('search', 'discussion', 'search_discussion_hook');
+
 	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
 	register_action('forum/remove_ad', FALSE, "$action_path/forum/remove_ad.php", TRUE);
@@ -162,4 +165,112 @@ function community_groups_can_edit($owner_guid, $time_created) {
  */
 function community_groups_get_categories() {
 	return array('support', 'plugins', 'language', 'developers');
+}
+
+
+function community_groups_add_search_type($hook, $type, $value, $params) {
+	$value[] = 'discussion';
+	return $value;
+}
+
+/**
+ * Return search results on discussion comments.
+ *
+ * @param string $hook
+ * @param string $type
+ * @param mixed $value
+ * @param array $params
+ * @return array
+ */
+function search_discussion_hook($hook, $type, $value, $params) {
+	global $CONFIG;
+
+	$query = sanitise_string($params['query']);
+	$params['annotation_names'] = array('group_topic_post');
+
+	$params['joins'] = array(
+		"JOIN {$CONFIG->dbprefix}annotations a on e.guid = a.entity_guid",
+		"JOIN {$CONFIG->dbprefix}metastrings msn on a.name_id = msn.id",
+		"JOIN {$CONFIG->dbprefix}metastrings msv on a.value_id = msv.id"
+	);
+
+	$fields = array('string');
+
+	// force IN BOOLEAN MODE since fulltext isn't
+	// available on metastrings (and boolean mode doesn't need it)
+	$search_where = search_get_where_sql('msv', $fields, $params, FALSE);
+
+	$container_and = '';
+	if ($params['container_guid'] && $params['container_guid'] !== ELGG_ENTITIES_ANY_VALUE) {
+		$container_and = 'AND e.container_guid = ' . sanitise_string($params['container_guid']);
+	}
+
+	$e_access = get_access_sql_suffix('e');
+	$a_access = get_access_sql_suffix('a');
+	// @todo this can probably be done through the api..
+	$q = "SELECT DISTINCT a.*, msv.string as comment FROM {$CONFIG->dbprefix}annotations a
+		JOIN {$CONFIG->dbprefix}metastrings msn ON a.name_id = msn.id
+		JOIN {$CONFIG->dbprefix}metastrings msv ON a.value_id = msv.id
+		JOIN {$CONFIG->dbprefix}entities e ON a.entity_guid = e.guid
+		WHERE msn.string = 'group_topic_post'
+			AND ($search_where)
+			AND $e_access
+			AND $a_access
+			$container_and
+
+		LIMIT {$params['offset']}, {$params['limit']}
+		";
+
+	$comments = get_data($q);
+
+	$q = "SELECT count(DISTINCT a.id) as total FROM {$CONFIG->dbprefix}annotations a
+		JOIN {$CONFIG->dbprefix}metastrings msn ON a.name_id = msn.id
+		JOIN {$CONFIG->dbprefix}metastrings msv ON a.value_id = msv.id
+		JOIN {$CONFIG->dbprefix}entities e ON a.entity_guid = e.guid
+		WHERE msn.string = 'group_topic_post'
+			AND ($search_where)
+			AND $e_access
+			AND $a_access
+			$container_and
+		";
+
+	$result = get_data($q);
+	$count = $result[0]->total;
+
+	if (!is_array($comments)) {
+		return FALSE;
+	}
+
+	// @todo if plugins are disabled causing subtypes
+	// to be invalid and there are comments on entities of those subtypes,
+	// the counts will be wrong here and results might not show up correctly,
+	// especially on the search landing page, which only pulls out two results.
+
+	// probably better to check against valid subtypes than to do what I'm doing.
+
+	// need to return actual entities
+	// add the volatile data for why these entities have been returned.
+	$entities = array();
+	foreach ($comments as $comment) {
+		$entity = get_entity($comment->entity_guid);
+
+		// hic sunt dracones
+		if (!$entity) {
+			//continue;
+			$entity = new ElggObject();
+			$entity->setVolatileData('search_unavailable_entity', TRUE);
+		}
+
+		$comment_str = search_get_highlighted_relevant_substrings($comment->comment, $query);
+		$entity->setVolatileData('search_match_annotation_id', $comment->id);
+		$entity->setVolatileData('search_matched_comment', $comment_str);
+		$entity->setVolatileData('search_matched_comment_owner_guid', $comment->owner_guid);
+		$entity->setVolatileData('search_matched_comment_time_created', $comment->time_created);
+		$entities[] = $entity;
+	}
+
+	return array(
+		'entities' => $entities,
+		'count' => $count,
+	);
 }
