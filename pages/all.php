@@ -8,8 +8,7 @@ $offset = get_input("offset", 0);
 $tag = get_input("tag");
 $filter = get_input("filter");
 if (!$filter) {
-	// active discussions is the default
-	$filter = "active";
+	$filter = "featured";
 }
 
 
@@ -24,9 +23,6 @@ if ($tag != "") {
 		case "pop":
 			$objects = list_entities_by_relationship_count('member', true, "", "", 0, $limit, false);
 			break;
-		case "featured":
-			$objects = list_entities_from_metadata('featured_group','yes','group',"","", $limit, false, false, true, false);
-			break;
 		case "language":
 			$objects = list_entities_from_metadata('group_category','language','group',"","", $limit, false, false, true, false);
 			break;
@@ -39,9 +35,9 @@ if ($tag != "") {
 		case "support":
 			$objects = list_entities_from_metadata('group_category','support','group',"","", $limit, false, false, true, false);
 			break;
-		case "active":
-		case 'default':
-			$objects = list_entities_from_annotations("object", "groupforumtopic", "group_topic_post", "", 40, 0, 0, false, true);
+		case "featured":
+		default:
+			$objects = list_entities_from_metadata('featured_group','yes','group',"","", $limit, false, false, true, false);
 			break;
 	}
 }

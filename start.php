@@ -100,6 +100,10 @@ function community_groups_page_handler($page) {
 			set_input('username', $page[1]);
 			include("$groups_base/membership.php");
 			break;
+		case "discussion":
+			set_input('filter', $page[1]);
+			include("$community_base/discussion.php");
+			break;
 		default:
 			// group profile
 			set_input('group_guid', $page[0]);
@@ -121,6 +125,10 @@ function community_groups_sidebar_menu() {
 	}
 
 	$group = page_owner_entity();
+	if (!($group instanceof ElggGroup)) {
+		return;
+	}
+
 	if ($group->isMember(get_loggedin_user())) {
 		add_submenu_item(elgg_echo('groups:addtopic'), $CONFIG->wwwroot . "mod/groups/addtopic.php?group_guid={$group->getGUID()}", '1groupslinks');
 	}
