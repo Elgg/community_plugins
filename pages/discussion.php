@@ -8,6 +8,9 @@ global $CONFIG;
 $limit = get_input("limit", 10);
 $offset = get_input("offset", 0);
 $filter = get_input("filter", "latest");
+if (!$filter) {
+	$filter = 'latest';
+}
 
 
 $context = get_context();
