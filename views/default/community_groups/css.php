@@ -21,6 +21,11 @@
 	padding-left: 10px;
 }
 
+#documentation_links {
+	margin: 0;
+	padding: 0;
+}
+
 #groupsadmin_category_table {
 	border-collapse: collapse;
 }
