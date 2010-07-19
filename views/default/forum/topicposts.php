@@ -20,7 +20,7 @@ if ($post_owner = get_user($vars['entity']->owner_guid)) {
 }
 
 //display the date of the comment
-echo "<small>" . friendly_time($vars['entity']->time_created) . "</small></p>";
+echo "<small>" . elgg_view_friendly_time($vars['entity']->time_created) . "</small></p>";
 ?>
 			</td>
 			<td width="70%">
