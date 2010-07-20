@@ -89,11 +89,7 @@ if ($more) {
 	$more_link = '';
 }
 
-//$body = elgg_view_title($type_str);
-
-$category = get_input('category', 'all');
-
-$body = elgg_view('plugins/search_box', array('category' => $category));
+$body = elgg_view_title($type_str);
 
 foreach ($entities as $entity) {
 	$body .= elgg_view_entity($entity);
