@@ -81,6 +81,7 @@ $file->setMimetype($mimetype);
 $file->originalfilename = $_FILES['upload']['name'];
 $file->subtype="plugin_release";
 $file->access_id = $release_access_id;
+$file->comments = $comments;
 $uf = get_uploaded_file('upload');
 if (!$uf) {
 	register_error(elgg_echo("plugins:uploadfailed"));
