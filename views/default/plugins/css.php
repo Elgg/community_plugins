@@ -217,7 +217,13 @@ margin: 20px;
 }
 
 
-
+.plugins_save_wrapper {
+	background:white;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	padding:0 10px;
+	margin:0 10px 10px 10px;
+}
 
 
 

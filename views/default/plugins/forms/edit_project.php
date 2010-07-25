@@ -23,11 +23,11 @@ $project_url = "{$vars['url']}pg/plugins/" . get_loggedin_user()->username . "/r
 
 <?php echo elgg_view('plugins/forms/project_details_segment', array('project' => $vars['project']))?>
 
-<div class="contentWrapper">
+<div class="plugins_save_wrapper">
 	<?php echo $project_input; ?>
 	<input type="hidden"  name="__elgg_token"  value="<?php echo $token; ?>" />
 	<input type="hidden"  name="__elgg_ts"  value="<?php echo $ts; ?>" />
-	<input type="submit" style="margin:0;" value="<?php echo elgg_echo("save"); ?>" />
+	<input type="submit" value="<?php echo elgg_echo("save"); ?>" />
 </div>
 
 </form>

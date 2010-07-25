@@ -18,7 +18,9 @@ if (isset($vars['entity'])) {
 }
 
 echo elgg_view('input/securitytoken');
+echo '<div class="plugins_save_wrapper">';
 echo elgg_view('input/submit', array('value' => elgg_echo("save")));
+echo '</div>';
 ?>
 
 </form>
