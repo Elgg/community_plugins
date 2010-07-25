@@ -185,8 +185,10 @@ $english = array(
 	 * Status messages
 	 */
 
-	'plugins:saved' => "Your plugin was successfully saved.",
-	'plugins:deleted' => "Your plugin was successfully deleted.",
+	'plugins:project:saved' => "The plugin was successfully saved.",
+	'plugins:release:saved' => "The plugin release was successfully saved.",
+	'plugins:project:deleted' => "The plugin was deleted.",
+	'plugins:release:deleted' => "The plugin release was deleted.",
 
 	/**
 	 * New frontpage

@@ -8,13 +8,13 @@ $guid = (int) get_input('release_guid');
 
 if (($release = get_entity($guid))
 && ($project = get_entity($release->container_guid))
-&& $release instanceof FilePluginFile
-&& $release->getSubtype() == 'plugin_release' && $release->canEdit()
+&& $release instanceof PluginRelease
+&& $release->canEdit()
 && $release->delete()) {
 	if ($project->recommended_release_guid == $guid) {
 		unset($project->recommended_release_guid);
 	}
-	system_message(elgg_echo("plugins:deleted"));
+	system_message(elgg_echo("plugins:release:deleted"));
 } else {
 	register_error(elgg_echo("plugins:deletefailed"));
 }

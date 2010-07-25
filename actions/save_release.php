@@ -1,6 +1,6 @@
 <?php
 /**
- * update plugin relaase
+ * update plugin release
  */
 
 // Get variables
@@ -15,7 +15,7 @@ $guid = (int) get_input('release_guid');
 
 if (($release = get_entity($guid))
 && ($project = get_entity($release->container_guid))
-&& $release instanceof FilePluginFile
+&& $release instanceof PluginRelease
 && $release->canEdit()) {
 
 	// save release entity info
@@ -32,7 +32,7 @@ if (($release = get_entity($guid))
 	$username = get_entity($release->owner_guid)->username;
 
 	if ($release->save()) {
-		system_message(elgg_echo("plugins:saved"));
+		system_message(elgg_echo("plugins:release:saved"));
 		//add_to_river('river/object/plugins/update', 'update', get_loggedin_user()->getGUID(), $release->getGUID());
 	} else {
 		register_error(elgg_echo("plugins:uploadfailed"));

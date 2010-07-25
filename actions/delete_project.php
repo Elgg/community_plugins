@@ -27,7 +27,7 @@ if (($project = get_entity($guid))
 		}
 	}
 
-	system_message(elgg_echo("plugins:deleted"));
+	system_message(elgg_echo("plugins:project:deleted"));
 } else {
 	register_error(elgg_echo("plugins:deletefailed"));
 }
