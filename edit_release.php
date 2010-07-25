@@ -15,7 +15,10 @@ if (!$release || !$release->canEdit()) {
 }
 
 $project = get_entity($release->container_guid);
-$area1 = elgg_view('plugins/plugin_sidebar', array('entity' => $project));
+
+set_page_owner($project->owner_guid);
+
+$area1 = elgg_view('plugins/project_sidebar', array('entity' => $project));
 
 $title = elgg_echo('plugins:edit:release');
 
