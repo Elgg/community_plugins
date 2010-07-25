@@ -1,11 +1,7 @@
 <?php
 /**
- * Elgg file browser uploader
+ * Edit release view
  */
-
-global $CONFIG;
-$ts = time();
-$token = generate_action_token($ts);
 
 if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRelease) {
 	$release = $vars['release'];
@@ -22,8 +18,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 
 <div class="plugins_save_wrapper">
 	<?php echo $release_input; ?>
-	<input type="hidden"  name="__elgg_token"  value="<?php echo $token; ?>" />
-	<input type="hidden"  name="__elgg_ts"  value="<?php echo $ts; ?>" />
+	<?php echo elgg_view('input/securitytoken'); ?>
 	<input type="submit" value="<?php echo elgg_echo("save"); ?>" />
 </div>
 

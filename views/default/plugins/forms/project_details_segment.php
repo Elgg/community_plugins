@@ -20,9 +20,8 @@ if (array_key_exists('project', $vars)
 	$access_id = $project->access_id;
 	$repo = $project->repo;
 
-	$msg = "You are editing the project information for {$project->title}.  To upload a new release,
-	visit the <a href=\"{$vars['url']}pg/plugins/new/release/{$project->getGUID()}\">Upload New Version</a>
-	section for this project.";
+	$msg = "You are editing the plugin project information for {$project->title}.  To upload a new release,
+	click <a href=\"{$vars['url']}pg/plugins/new/release/{$project->getGUID()}\">here</a>.";
 } else {
 	$project = NULL;
 	$title = $description = $homepage = $plugin_type = '';

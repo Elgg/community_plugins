@@ -1,11 +1,7 @@
 <?php
 /**
- * Elgg file browser uploader
+ * Edit project view
  */
-
-global $CONFIG;
-$ts = time();
-$token = generate_action_token($ts);
 
 if (array_key_exists('project', $vars)
 && $vars['project'] instanceof ElggObject
@@ -16,17 +12,14 @@ if (array_key_exists('project', $vars)
 	$project_input = $project = NULL;
 }
 
-$project_url = "{$vars['url']}pg/plugins/" . get_loggedin_user()->username . "/read/{$vars['entity']->guid}";
-
 ?>
 <form action="<?php echo $vars['url']; ?>action/plugins/save_project" enctype="multipart/form-data" method="post">
 
-<?php echo elgg_view('plugins/forms/project_details_segment', array('project' => $vars['project']))?>
+<?php echo elgg_view('plugins/forms/project_details_segment', array('project' => $project)); ?>
 
 <div class="plugins_save_wrapper">
 	<?php echo $project_input; ?>
-	<input type="hidden"  name="__elgg_token"  value="<?php echo $token; ?>" />
-	<input type="hidden"  name="__elgg_ts"  value="<?php echo $ts; ?>" />
+	<?php echo elgg_view('input/securitytoken'); ?>
 	<input type="submit" value="<?php echo elgg_echo("save"); ?>" />
 </div>
 

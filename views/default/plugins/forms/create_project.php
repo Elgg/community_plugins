@@ -1,6 +1,6 @@
 <?php
 /**
- * Create new plugin project
+ * Create new plugin project view
  */
 ?>
 <form action="<?php echo $vars['url']; ?>action/plugins/create_project" enctype="multipart/form-data" method="post">
