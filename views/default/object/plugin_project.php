@@ -15,7 +15,7 @@ if (!$project) {
 
 // get the recommend release or latest
 $release = get_entity(get_input('release', $project->recommended_release_guid));
-if (!$release || !($release instanceof FilePluginFile)) {
+if (!$release || !($release instanceof PluginRelease)) {
 	$releases = elgg_get_entities(array('container_guid' => $project->getGUID()));
 	if ($releases) {
 		$release = $releases[0];

@@ -73,7 +73,7 @@ $result = $plugin_project->save();
 
 // Extract file and save to default filestore (for now)
 $prefix = "plugins/";
-$file = new FilePluginFile();
+$file = new PluginRelease();
 $filestorename = strtolower(time() . $_FILES['upload']['name']);
 $file->title = $plugin_project->title;
 $file->setFilename($prefix . $filestorename);

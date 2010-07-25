@@ -13,8 +13,7 @@ if (array_key_exists('project', $vars)
 }
 
 // default vars to use if editing or new
-if (array_key_exists('release', $vars)
-&& $vars['release'] instanceof FilePluginFile) {
+if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRelease) {
 	$release = $vars['release'];
 	$elgg_version = $release->elgg_version;
 	$version = $release->version;

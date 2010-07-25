@@ -7,8 +7,7 @@ global $CONFIG;
 $ts = time();
 $token = generate_action_token($ts);
 
-if (array_key_exists('release', $vars)
-&& $vars['release'] instanceof FilePluginFile) {
+if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRelease) {
 	$release = $vars['release'];
 	$project = get_entity($release->container_guid);
 	$release_input = "<input type=\"hidden\" name=\"release_guid\" value=\"{$release->getGUID()}\" />";
