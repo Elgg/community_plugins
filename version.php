@@ -1,3 +1,8 @@
 <?php
 
-$version = 2010061201;
+/**
+ * Version of this plugin.
+ * Used for the upgrade system.
+ */
+
+$version = 2010072501;
