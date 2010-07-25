@@ -52,8 +52,7 @@ if ($license == 'none' || !array_key_exists($license, $CONFIG->gpllicenses)) {
 }
 
 // Create the plugin project
-$plugin_project = new ElggObject();
-$plugin_project->subtype = "plugin_project";
+$plugin_project = new PluginProject();
 $plugin_project->owner_guid = $user->getGUID();
 $plugin_project->container_guid = $user->getGUID();
 $plugin_project->access_id = $project_access_id;

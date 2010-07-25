@@ -6,10 +6,12 @@
 
 require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
 require_once(dirname(__FILE__) . '/lib/PluginRelease.php');
+require_once(dirname(__FILE__) . '/lib/PluginProject.php');
 
-// Register a class
+// Register classes
 function plugins_run_once(){
 	add_subtype("object", "plugin_release", "PluginRelease");
+	add_subtype("object", "plugin_project", "PluginProject");
 }
 
 /**
@@ -345,4 +347,6 @@ register_action("plugins/delete_project", FALSE, "$action_base/delete_project.ph
 register_action("plugins/delete_release", FALSE, "$action_base/delete_release.php");
 register_action("plugins/delete_project_image", FALSE, "$action_base/delete_project_image.php");
 register_action("plugins/digg", FALSE, "$action_base/digg.php");
+
 register_action("plugins/upgrade", FALSE, "$action_base/upgrade.php", TRUE);
+register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
