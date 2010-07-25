@@ -33,7 +33,7 @@ if (($release = get_entity($guid))
 
 	if ($release->save()) {
 		system_message(elgg_echo("plugins:saved"));
-		add_to_river('river/object/plugins/update', 'update', get_loggedin_user()->getGUID(), $release->getGUID());
+		//add_to_river('river/object/plugins/update', 'update', get_loggedin_user()->getGUID(), $release->getGUID());
 	} else {
 		register_error(elgg_echo("plugins:uploadfailed"));
 	}

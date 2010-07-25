@@ -118,7 +118,7 @@ if ($result) {
 		}
 	}
 	system_message(elgg_echo("plugins:saved"));
-	add_to_river('river/object/plugins/update','update',$_SESSION['user']->guid,$plugin_project->guid);
+	//add_to_river('river/object/plugins/update','update',$_SESSION['user']->guid,$plugin_project->guid);
 } else {
 	register_error(elgg_echo("plugins:uploadfailed"));
 }

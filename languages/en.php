@@ -129,16 +129,11 @@ $english = array(
 	'plugins:display:number' => "Number of plugins, themes and language packs to display",
 
 
-	'plugins:river:project:created' => "%s uploaded a new",
-	'plugins:river:release:created' => "%s released a new version of",
-	'plugins:river:created' => "%s uploaded",
-	'plugins:river:updated' => "%s updated",
-	'plugins:river:item' => "a plugin",
-	'plugins:river:annotate' => "a comment on this plugin or file",
-	'plugin_file:river:created' => "%s uploaded",
-	'plugin_file:river:updated' => "%s updated",
-	'plugin_file:river:item' => "a plugin",
-	'plugin_release:river:annotate' => "a comment on the plugin",
+	'plugins:river:project:created' => "%s uploaded a new plugin",
+	'plugins:river:release:created' => "%s released a new version of the plugin",
+	'plugins:river:annotate' => "a comment on this plugin",
+	'plugin_file:river:annotate' => "a comment on this plugin",
+	'plugin_release:river:annotate' => "a comment on this plugin",
 
 	'item:object:plugin or theme' => 'Plugins and themes',
 
