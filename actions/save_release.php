@@ -39,5 +39,5 @@ if (($release = get_entity($guid))
 	forward($release->getURL());
 } else {
 	register_error('Unknown or insufficient access to release');
-	forward($CONFIG->wwwroot . "pg/plugins/developer/" . $_SESSION['user']->username);
+	forward($CONFIG->wwwroot . "pg/plugins/developer/" . get_loggedin_user()->username);
 }

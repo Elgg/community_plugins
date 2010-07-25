@@ -32,4 +32,4 @@ if (($project = get_entity($guid))
 	register_error(elgg_echo("plugins:deletefailed"));
 }
 
-forward("pg/plugins/" . $_SESSION['user']->username);
+forward("pg/plugins/" . get_loggedin_user()->username);

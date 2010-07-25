@@ -19,9 +19,9 @@ if ($plugin_project) {
 	} else {
 		//$digg_num = $plugin_project->digg + 1;
 		//$plugin_project->digg = (int) $digg_num;
-		if ($plugin_project->annotate('plugin_digg', 1, $plugin_project->access_id, $_SESSION['guid'])){
+		if ($plugin_project->annotate('plugin_digg', 1, $plugin_project->access_id, get_loggedin_userid())){
 			//create a relationship between user and plugin project so they can only digg once
-			add_entity_relationship($_SESSION['user']->guid, 'has_dugg', $plugin_project->guid);
+			add_entity_relationship(get_loggedin_userid(), 'has_dugg', $plugin_project->guid);
 			system_message(elgg_echo("plugins:diggit"));
 		}
 	}

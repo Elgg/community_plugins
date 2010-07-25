@@ -23,7 +23,7 @@ $guid = (int) get_input('plugins_guid');
 
 if (!$plugin_project = get_entity($guid)) {
 	register_error(elgg_echo("plugins:uploadfailed"));
-	forward($CONFIG->wwwroot . "pg/plugins/" . $_SESSION['user']->username);
+	forward($CONFIG->wwwroot . "pg/plugins/" . get_loggedin_user()->username);
 	exit;
 }
 
