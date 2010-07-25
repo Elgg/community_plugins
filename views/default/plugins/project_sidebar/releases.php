@@ -30,7 +30,7 @@ $project = $vars['entity'];
 			$edit_link = $delete_link = '';
 		}
 
-		echo "<div class=\"filerepo_download\">Author Recommended: $download_link $delete_link $edit_link</div>";
+		echo "<div class=\"plugins_release_links\">Author Recommended: $download_link $delete_link $edit_link</div>";
 	}
 
 	//get all plugins associated with the project
@@ -63,7 +63,7 @@ $project = $vars['entity'];
 				$edit_link = $delete_link = '';
 			}
 
-			echo "<div class=\"filerepo_download\">Latest: $download_link $delete_link $edit_link</div>";
+			echo "<div class=\"plugins_release_links\">Latest: $download_link $delete_link $edit_link</div>";
 		}
 
 		echo '<hr style="margin: 0.5em 0;"/>Previous releases:';
@@ -92,10 +92,10 @@ $project = $vars['entity'];
 					$edit_link = $delete_link = '';
 				}
 
-				echo "<div class=\"filerepo_download\">$download_link $delete_link $edit_link</div>";
+				echo "<div class=\"plugins_release_links\">$download_link $delete_link $edit_link</div>";
 			}
 		} else {
-			echo '<div class="filerepo_download">None</div>';
+			echo '<div class="plugins_release_links">None</div>';
 		}
 	}
 	echo "</div>";
