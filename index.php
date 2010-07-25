@@ -25,10 +25,19 @@ $area2 = elgg_view_title($title);
 
 // list plugins
 set_context('search');
+$params = array(
+	'types' => 'object',
+	'subtypes' => 'plugin_project',
+	'owner_guid' => page_owner(),
+	'limit' => 10,
+	'full_view' => FALSE,
+);
 if ($type) {
-	$area2 .= list_entities_from_metadata('plugin_type', $type, 'object', 'plugin_project', page_owner(), 10, FALSE, FALSE);
+	$params['metadata_name'] = 'plugin_type';
+	$params['metadata_value'] = $type;
+	$area2 .= elgg_list_entities_from_metadata($params);
 } else {
-	$area2 .= list_entities("object", "plugin_project", page_owner(), 10, FALSE);
+	$area2 .= elgg_list_entities($params);
 }
 
 $body = elgg_view_layout('two_column_left_sidebar', '', $area2);
