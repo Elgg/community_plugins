@@ -3,16 +3,11 @@
  * Front page for plugin repository
  */
 
+// leave direct call to engine because previous very skipped page handler
 require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
-//download stats - We had 1,400,000 before the plugin upgrade
-//$number_downloaded = (int)$CONFIG->site->plugins_download_count;
-//$num_plugins = get_entities("object", "plugin_project", 0, "", 0, 0, true);
-//$area1 = elgg_view('plugins/download_count', array(	'plugin_count' => $num_plugins,
-//													'download_count' => $number_downloaded));
-
-//list newest
-$newest = get_entities('object',"plugin_project");
+//Newest
+$newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_project'));
 
 //Most downloaded
 set_context('search');
@@ -21,7 +16,7 @@ $popular = get_entities_from_annotation_count("object", "plugin_project", "downl
 //Most dugg
 $dugg = get_entities_from_annotation_count("object", "plugin_project", "plugin_digg");
 
-//last updated
+//Last updated
 $updated = elgg_get_entities(array('object' => 'plugin_project', 'order_by' => 'e.time_updated desc'));
 set_context('plugin_project');
 

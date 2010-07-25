@@ -25,7 +25,7 @@ $project = $vars['entity'];
 				'confirm' => elgg_echo("plugins:delete_release:confirm"),
 			));
 			$delete_link = "[$delete]";
-			$edit_link = "[<a href=\"{$vars['url']}mod/community_plugins/edit_release.php?project_guid={$project->getGUID()}&release_guid={$recommended->getGUID()}\">edit</a>]";
+			$edit_link = "[<a href=\"{$vars['url']}pg/plugins/edit/release/{$recommended->getGUID()}\">edit</a>]";
 		} else {
 			$edit_link = $delete_link = '';
 		}
@@ -58,7 +58,7 @@ $project = $vars['entity'];
 					'confirm' => elgg_echo("plugins:delete_release:confirm"),
 				));
 				$delete_link = "[$delete]";
-				$edit_link = "[<a href=\"{$vars['url']}mod/community_plugins/edit_release.php?project_guid={$project->getGUID()}&release_guid={$latest->getGUID()}\">edit</a>]";
+				$edit_link = "[<a href=\"{$vars['url']}pg/plugins/edit/release/{$latest->getGUID()}\">edit</a>]";
 			} else {
 				$edit_link = $delete_link = '';
 			}
@@ -87,7 +87,7 @@ $project = $vars['entity'];
 					));
 					$delete_link = "[$delete]";
 
-					$edit_link = "[<a href=\"{$vars['url']}mod/community_plugins/edit_release.php?project_guid={$project->getGUID()}&release_guid={$p->getGUID()}\">edit</a>]";
+					$edit_link = "[<a href=\"{$vars['url']}pg/plugins/edit/release/{$p->getGUID()}\">edit</a>]";
 				} else {
 					$edit_link = $delete_link = '';
 				}

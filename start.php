@@ -158,7 +158,7 @@ function plugins_add_submenus() {
 
 	// add upload link when viewing own plugin page
 	if (get_loggedin_userid() == page_owner()) {
-		add_submenu_item(elgg_echo('plugins:upload'), "$plugins_base/new/$page_owner->username");
+		add_submenu_item(elgg_echo('plugins:upload'), "$plugins_base/new/project/$page_owner->username");
 	}
 }
 
@@ -194,22 +194,41 @@ function plugins_page_handler($page) {
 			if (isset($page[2])) {
 				set_input($page[2], $page[3]);
 			}
-			include("$plugin_dir/index.php");
+			include("$plugin_dir/developer.php");
 			break;
-		// plugin project
+		// view plugin project
 		case "project":
 			set_input('guid', $page[1]);
 			include("$plugin_dir/read.php");
 			break;
-		// specfic release of a project
+		// view specfic release of a project
 		case "release":
 			set_input('release', $page[1]);
 			include("$plugin_dir/read.php");
 			break;
-		// create new plugin project
+		// create new plugin project or release
 		case "new":
-			set_input('username', $page[1]);
-			include("$plugin_dir/create_project.php");
+			if ($page[1] == 'release') {
+				// new/release/<project guid>/
+				set_input('project_guid', $page[2]);
+				include("$plugin_dir/create_release.php");
+			} else {
+				// new/project/<username>/
+				set_input('username', $page[2]);
+				include("$plugin_dir/create_project.php");
+			}
+			break;
+		// edit plugin project or release
+		case 'edit':
+			if ($page[1] == 'release') {
+				// edit/release/<release guid>/
+				set_input('release_guid', $page[2]);
+				include("$plugin_dir/edit_release.php");
+			} else {
+				// edit/project/<project guid>/
+				set_input('project_guid', $page[2]);
+				include("$plugin_dir/edit_project.php");
+			}
 			break;
 		// admin page
 		case "admin":

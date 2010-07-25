@@ -3,8 +3,6 @@
  * Edit plugin project
  */
 
-require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
-
 gatekeeper();
 
 $project_guid = (int) get_input('project_guid');
@@ -17,12 +15,12 @@ if (!$project || !$project->canEdit()) {
 
 set_page_owner($project->owner_guid);
 
-$area1 = elgg_view('plugins/project_sidebar', array('entity' => $project));
+$sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 
 $title = elgg_echo('plugins:edit:project');
 
-$area2 = elgg_view_title($title);
-$area2 .= elgg_view("plugins/forms/edit_project", array('project' => $project));
+$content = elgg_view_title($title);
+$content .= elgg_view("plugins/forms/edit_project", array('project' => $project));
 
-$body = elgg_view_layout('sidebar_boxes', $area1, $area2);
+$body = elgg_view_layout('sidebar_boxes', $sidebar, $content);
 page_draw($title, $body);

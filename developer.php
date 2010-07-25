@@ -3,8 +3,6 @@
  * List a developer's plugins
  */
 
-require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
-
 $type = get_input('type', '');
 //$tag = get_input('tag', '');
 
@@ -18,7 +16,7 @@ if (page_owner() == get_loggedin_userid()){
 	$title = sprintf(elgg_echo("plugins:user"), page_owner_entity()->name, $types_string);
 }
 
-$area2 = elgg_view_title($title);
+$content = elgg_view_title($title);
 
 //$pop = get_input('pop');
 //$area2 = list_entities_from_annotation_count("object", "plugin_project", "download", 10, 0, 0, false, true, false);
@@ -35,11 +33,11 @@ $params = array(
 if ($type) {
 	$params['metadata_name'] = 'plugin_type';
 	$params['metadata_value'] = $type;
-	$area2 .= elgg_list_entities_from_metadata($params);
+	$content .= elgg_list_entities_from_metadata($params);
 } else {
-	$area2 .= elgg_list_entities($params);
+	$content .= elgg_list_entities($params);
 }
 
-$body = elgg_view_layout('two_column_left_sidebar', '', $area2);
+$body = elgg_view_layout('two_column_left_sidebar', '', $content);
 
 page_draw($title, $body);

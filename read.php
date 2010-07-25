@@ -3,6 +3,7 @@
  * View a plugin project or release
  */
 
+// leave in in case it is called directly
 require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
 // for backward compatibility if called directly
@@ -44,9 +45,9 @@ if ($project->getSubtype() == 'plugin_release') {
 set_page_owner($project->getOwner());
 
 // grab the entity and sidebar views
-$area1 = elgg_view('plugins/project_sidebar', array('entity' => $project));
-$area2 = elgg_view_entity($project, TRUE);
+$sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
+$content = elgg_view_entity($project, TRUE);
 
-$body = elgg_view_layout("sidebar_boxes", $area1, $area2);
+$body = elgg_view_layout("sidebar_boxes", $sidebar, $content);
 
 page_draw($title, $body);
