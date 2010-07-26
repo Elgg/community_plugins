@@ -191,6 +191,19 @@ $english = array(
 	'plugins:release:deleted' => "The plugin release was deleted.",
 
 	/**
+	 * Error messages
+	 */
+
+	'plugins:none' => "We couldn't find any plugins, themes or language packs at the moment.",
+	'plugins:error:deletefailed' => "Your plugin or theme could not be deleted.",
+	'plugins:error:permissions' => 'There was a permissions error.',
+	'plugins:error:downloadfailed' => "Download failed.",
+	'plugins:error:uploadfailed' => "Sorry; we could not save your plugins, theme or language pack.",
+	'plugins:error:badformat' => 'We only support .zip and .tar.gz distribution packages.',
+	'plugins:error:badlicense' => 'You must select a GPL-compatible license.',
+	'plugins:error:notitle' => 'A title is required.',
+
+	/**
 	 * New frontpage
 	 **/
 
@@ -199,18 +212,6 @@ $english = array(
 	'plugins:popular' => "Most popular",
 	'plugins:popular:more' => "See more popular plugins ...",
 	'plugins:counter' => "%s plugins with %s total downloads",
-
-	/**
-	 * Error messages
-	 */
-
-	'plugins:none' => "We couldn't find any plugins, themes or language packs at the moment.",
-	'plugins:uploadfailed' => "Sorry; we could not save your plugins, theme or language pack.",
-	'plugins:downloadfailed' => "Sorry; this plugin, theme or language pack is not available at this time.",
-	'plugins:deletefailed' => "Your plugin or theme could not be deleted at this time.",
-
-	'plugins:files:badformat' => 'We currently only support .zip and .tar.gz distribution packages.',
-	'plugins:files:badlicense' => 'You must select a GPL-compatible license.',
 
 
 	'replace' => 'Replace',

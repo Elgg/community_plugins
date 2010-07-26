@@ -5,13 +5,12 @@
 
 require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
-// Get the guid
 $release = get_entity(get_input("release_guid"));
 $project = get_entity($release->container_guid);
 
 if (!$release || !$project) {
-	register_error(elgg_echo("plugins:downloadfailed"));
-	forward($_SERVER['HTTP_REFERER']);
+	register_error(elgg_echo("plugins:error:downloadfailed"));
+	forward(REFERER);
 }
 
 $mime = "application/octet-stream";
@@ -29,8 +28,8 @@ header("Content-Transfer-Encoding: binary");
 header("Content-Length: ".$release->size());
 
 //download counter on individual plugin and the plugin project
-create_annotation($release->getGUID(), 'download', 1, 'integer', 0, $release->access_id);
-create_annotation($project->getGUID(), 'download', 1, 'integer', 0, $project->access_id);
+$release->incrementDownloadCount();
+$project->incrementDownloadCount();
 
 // add to site downloads so they won't disappear when a plugin is deleted.
 $ia = elgg_set_ignore_access(TRUE);

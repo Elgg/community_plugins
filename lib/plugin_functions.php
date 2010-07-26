@@ -13,6 +13,40 @@ function plugins_is_dugg($project) {
 }
 
 /**
+ * Get the mimetype of the plugin archive
+ * 
+ * @param string $name
+ * @return string/bool
+ */
+function plugins_get_mimetype($name) {
+	// We're only allowing archives.
+	if (!substr_count($_FILES[$name]['name'],'.tar.gz') &&
+		!substr_count($_FILES[$name]['name'],'.tgz') &&
+		!substr_count($_FILES[$name]['name'],'.zip')) {
+
+		return FALSE;
+	}
+
+	if (substr_count($_FILES[$name]['name'],'.tar.gz') ||
+		substr_count($_FILES[$name]['name'],'.tgz')) {
+
+		return 'application/x-gzip';
+	} else {
+		return 'application/zip';
+	}
+}
+
+/**
+ * Strip img and link tags
+ *
+ * @param string $string
+ * @return string
+ */
+function plugins_strip_tags($string) {
+	return strip_tags($string, '<p><strong><em><span><ul><li><ol><blockquote>');
+}
+
+/**
  * Plugin project search hook
  * 
  * @param string $hook

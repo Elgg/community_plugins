@@ -2,7 +2,6 @@
 /**
  * Elgg plugin project delete
  */
-action_gatekeeper();
 
 $guid = (int) get_input('project_guid');
 
@@ -29,7 +28,7 @@ if (($project = get_entity($guid))
 
 	system_message(elgg_echo("plugins:project:deleted"));
 } else {
-	register_error(elgg_echo("plugins:deletefailed"));
+	register_error(elgg_echo("plugins:error:deletefailed"));
 }
 
 forward("pg/plugins/" . get_loggedin_user()->username);

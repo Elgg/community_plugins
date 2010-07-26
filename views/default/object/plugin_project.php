@@ -31,7 +31,7 @@ $desc = $project->description;
 $summary = $project->summary;
 $license = $project->license;
 $friendlytime = friendly_time($project->time_created);
-$downloads = (int)get_annotations_sum($project_guid, '', '', 'download');
+$downloads = $project->getDownloadCount();
 $usericon = elgg_view("profile/icon", array('entity' => $project_owner,
 											'size' => 'small',
 											)

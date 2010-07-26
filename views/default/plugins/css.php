@@ -187,7 +187,16 @@
 	margin-right: 0;
 }
 
+.project_image img {
+	padding: 1px;
+}
 
+.project_image_wrapper {
+	float: left;
+	width: 60px;
+	text-align: center;
+	margin: 5px;
+}
 
 /*
 .search_box input {
@@ -844,38 +853,17 @@ span.downloadsnumber {
 	padding-left:0;
 }
 
-.river_object_plugins_create {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
-}
-.river_object_plugins_update {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
-}
-.river_object_plugins_comment {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_comment.gif) no-repeat left -1px;
-}
 .river_object_plugin_project_create {
 	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
 }
-.river_object_plugin_project_update {
+.river_object_plugin_release_create {
 	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
 }
-.river_object_plugin_project_comment {
+.river_object_plugin_release_comment {
 	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_comment.gif) no-repeat left -1px;
 }
-.river_object_plugin_file_create {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
-}
-.river_object_plugin_file_update {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
-}
-.river_object_plugin_file_comment {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_comment.gif) no-repeat left -1px;
-}
-
-.river_object_poll_create {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
-}
-.river_object_poll_comment {
+/* for backward compatibility */
+.river_object_plugins_comment {
 	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_comment.gif) no-repeat left -1px;
 }
 

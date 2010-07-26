@@ -45,7 +45,7 @@ if (array_key_exists('project', $vars)
 	</p>
 
 	<p>
-		<label>Project Name<br />
+		<label>Project Name*<br />
 		<?php
 			echo elgg_view("input/text",array(
 				"internalname" => "title",
@@ -79,23 +79,19 @@ if (array_key_exists('project', $vars)
 		?>
 		</label>
 	</p>
-
 	<p>
-		<label>Project Homepage<br />
+		<label for="license"><?php echo elgg_echo("license"); ?>*</label><br />
+		<em>
+			<a href="http://www.gnu.org/philosophy/license-list.html#GPLCompatibleLicenses" target="_blank"><?php echo elgg_echo('license:blurb'); ?></a>
+		</em><br />
 		<?php
-			echo elgg_view("input/text",array(
-				"internalname" => "homepage",
-				"value" => $homepage,
+			echo elgg_view("input/pulldown",array(
+				"internalname" => "license",
+				"value" => $license,
+				'options_values' => $vars['config']->gpllicenses,
 			));
 		?>
-		</label>
 	</p>
-	<p>
-		<label><?php echo elgg_echo("plugins:repo"); ?><br />
-		<?php echo elgg_view("input/text",array("internalname" => "repo","value" => $repo,)); ?>
-		</label>
-	</p>
-
 	<p>
 		<label>Type of Project<br />
 		<?php
@@ -123,18 +119,21 @@ if (array_key_exists('project', $vars)
 		?>
 	</p>
 	<p>
-		<label for="license"><?php echo elgg_echo("license"); ?></label><br />
-		<em>
-			<a href="http://www.gnu.org/philosophy/license-list.html#GPLCompatibleLicenses" target="_blank"><?php echo elgg_echo('license:blurb'); ?></a>
-		</em><br />
+		<label>Project Homepage<br />
 		<?php
-			echo elgg_view("input/pulldown",array(
-				"internalname" => "license",
-				"value" => $license,
-				'options_values' => $vars['config']->gpllicenses,
+			echo elgg_view("input/text",array(
+				"internalname" => "homepage",
+				"value" => $homepage,
 			));
 		?>
+		</label>
 	</p>
+	<p>
+		<label><?php echo elgg_echo("plugins:repo"); ?><br />
+		<?php echo elgg_view("input/text",array("internalname" => "repo","value" => $repo,)); ?>
+		</label>
+	</p>
+
 	<p>
 		<label>Donations URL (Optional)<br />
 		<span class="pluginHint">If you accept donations, enter the URL to the donations section of your website.</span>
@@ -178,21 +177,6 @@ if (array_key_exists('project', $vars)
 				$releases[$entity->guid] = "{$entity->version} ($time)";
 			}
 
-			?>
-			<p>
-				<label>
-					Recommended release<br />
-					<span class="pluginHint">The best release for the majority of users.</span><br />
-					<?php
-					echo elgg_view('input/pulldown', array(
-						'internalname' => 'recommended_release_guid',
-						'options_values' => $releases,
-						'value' => $recommended
-					));
-					?>
-				</label>
-			</p>
-			<?php
 		}
 	?>
 	<p>

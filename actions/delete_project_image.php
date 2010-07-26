@@ -2,14 +2,13 @@
 /**
  * Elgg plugin delete project image
  */
-action_gatekeeper();
 
 $project= get_entity(get_input('project_guid', 0));
 $image = get_entity(get_input('image_guid', 0));
 
 if (!$project->canEdit()) {
-	register_error(elgg_echo("plugins:deletefailed"));
-	forward($_SERVER['HTTP_REFERER']);
+	register_error(elgg_echo("plugins:error:deletefailed"));
+	forward(REFERER);
 }
 
 if ($project && $image && $project instanceof ElggObject
@@ -23,11 +22,11 @@ if ($project && $image && $project instanceof ElggObject
 		if ($test) {
 			system_message(elgg_echo('Image deleted.'));
 		} else {
-			register_error(elgg_echo("plugins:deletefailed"));
+			register_error(elgg_echo("plugins:error:deletefailed"));
 		}
 	}
 } else {
-	register_error(elgg_echo("plugins:deletefailed"));
+	register_error(elgg_echo("plugins:error:deletefailed"));
 }
 
-forward($_SERVER['HTTP_REFERER']);
+forward(REFERER);
