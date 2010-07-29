@@ -59,6 +59,6 @@ if ($recommended == 'yes') {
 }
 
 add_to_river('river/object/plugin_release/create', 'create', get_loggedin_userid(), $release->guid);
-system_message(elgg_echo("plugins:updated"));
+system_message(elgg_echo("plugins:release:saved"));
 
 forward($release->getURL());
