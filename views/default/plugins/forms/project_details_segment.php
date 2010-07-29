@@ -31,9 +31,10 @@ if (array_key_exists('project', $vars)
 	$access_id = ACCESS_PUBLIC;
 	$username = get_loggedin_user()->username;
 
-	$msg = "You are creating a new plugin project and will upload your plugin in the second part of this page.  If you want to release a new version or
-	update of an existing plugin, go to the edit section of the plugin's project page from
-	<a href=\"{$vars['url']}pg/plugins/$username\">your projects</a>.";
+	$msg = "You are creating a new plugin project. If you want to release a new
+	version of an existing plugin, go to the edit section of that plugin's project page.
+	You can view all of your plugins
+	<a href=\"{$vars['url']}pg/plugins/developer/$username\">here</a>.";
 }
 
 ?>
