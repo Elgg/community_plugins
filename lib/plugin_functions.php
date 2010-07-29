@@ -47,6 +47,39 @@ function plugins_strip_tags($string) {
 }
 
 /**
+ * Get the download trends
+ *
+ * @param int $guid Plugin project guid or 0 for all plugins
+ * @param int $days Number of days starting from today or 0 for dawn of time
+ * @return array
+ */
+function plugins_get_downloads_histogram($guid = 0, $days = 30) {
+	$start_date = time() - $days * 3600 * 24;
+	if ($days == 0) {
+		$start_date = 0;
+	}
+
+	$downloads = get_annotations($guid, 'object', 'plugin_project', 'download', '', 0, 9999999, 0, 'asc', $start_date);
+
+	// if queried for all downloads, need to set epoch based on first download
+	$first_time = $downloads[0]->time_created;
+	$num_actual_days = (int)(time() - $first_time) / (3600 * 24) + 1;
+	if ($start_date == 0) {
+		$start_date = $first_time;
+		$days = max($days, $num_actual_days);
+	}
+
+	// compute histogram of downloads
+	$histogram = array_fill(0, $days, 0);
+	foreach ($downloads as $download) {
+		$day = (int)floor(($download->time_created - $start_date) / (3600 * 24));
+		$histogram[$day]++;
+	}
+
+	return $histogram;
+}
+
+/**
  * Plugin project search hook
  * 
  * @param string $hook
