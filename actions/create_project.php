@@ -61,7 +61,7 @@ $plugin_project->repo = $repo;
 $plugin_project->donate = $donate;
 $plugin_project->digg = 0;
 $plugin_project->plugin_type = $plugin_type;
-$result = $plugin_project->save();
+$plugin_project->save();
 
 // Extract file and save to default filestore (for now)
 $prefix = "plugins/";
@@ -77,7 +77,6 @@ $release->version = $version;
 $release->release_notes = $release_notes;
 $release->elgg_version = $elgg_version;
 $release->comments = $comments;
-
 $release->save();
 
 if ($release->savePluginFile('upload') != TRUE) {
@@ -85,12 +84,7 @@ if ($release->savePluginFile('upload') != TRUE) {
 	forward(REFERER);
 }
 
-//now create a relationship between the plugin project and plugin release
-if ($result && $release){
-	$add_relationship = add_entity_relationship($plugin_project->guid, 'is_plugin', $release->guid);
-}
-
-if (!$add_relationship) {
+if (!$plugin_project->getGUID() || !$release->getGUID()) {
 	register_error(elgg_echo("plugins:error:uploadfailed"));
 	forward(REFERER);
 }
@@ -110,7 +104,6 @@ for ($i=1; $i<=$max_num_images; $i++) {
 
 	$plugin_project->saveImage("image_$i", $desc);
 }
-
 
 
 add_to_river('river/object/plugin_project/create', 'create', $user->getGUID(), $plugin_project->getGUID());

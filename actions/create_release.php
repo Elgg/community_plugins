@@ -49,19 +49,16 @@ if ($release->savePluginFile('upload') != TRUE) {
 	forward(REFERER);
 }
 
-//now create a relationship between the plugin project and the uploaded plugin release
-if ($release->save()) {
-	$add_relationship = add_entity_relationship($plugin_project->guid, 'is_plugin', $release->guid);
-	if ($recommended == 'yes') {
-		$plugin_project->recommended_release_guid = $release->getGUID();
-	}
+if (!$release->save()) {
+	register_error(elgg_echo("plugins:error:uploadfailed"));
+	forward($plugin_project->getURL());
 }
 
-if ($add_relationship) {
-	add_to_river('river/object/plugin_release/create', 'create', get_loggedin_userid(), $release->guid);
-	system_message(elgg_echo("plugins:updated"));
-} else {
-	register_error(elgg_echo("plugins:error:uploadfailed"));
+if ($recommended == 'yes') {
+	$plugin_project->recommended_release_guid = $release->getGUID();
 }
+
+add_to_river('river/object/plugin_release/create', 'create', get_loggedin_userid(), $release->guid);
+system_message(elgg_echo("plugins:updated"));
 
 forward($release->getURL());
