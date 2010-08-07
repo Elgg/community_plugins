@@ -10,7 +10,7 @@ if (!isloggedin()) {
 ?>
 <div class="sidebarBox">
 	<h3><?php echo elgg_echo("cg:$type:howto"); ?></h3>
-	<div class="contentWrapper">
+	<div class="sidebarWrapper">
 	<?php echo autop(elgg_echo("cg:howto:$type:$subtype:$id")); ?>
 	</div>
 </div>

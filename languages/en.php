@@ -48,6 +48,7 @@ $english = array(
 	'cg:howto:discussion:loggedin:2' => "Looking for help with a problem? Try the Technical Support group.",
 	'cg:howto:discussion:loggedin:3' => "Advertising is not allowed in the group forums.",
 	'cg:howto:discussion:loggedin:4' => "Want email notifications when there are new forum posts?
+		
 		Select Settings on the topbar menu.",
 
 	'cg:howto:groups:loggedout:' => "The forums of Elgg are divided into groups.
