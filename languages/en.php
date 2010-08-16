@@ -19,6 +19,7 @@ $english = array(
 	'cg:admin:combine:from' => 'From this group',
 	'cg:admin:combine:to' => 'To this group',
 
+	'groups:all' => 'All groups',
 	'groups:support' => 'Support',
 	'groups:language' => 'Language',
 	'groups:developers' => 'Developers',

@@ -51,7 +51,7 @@ $area1 = elgg_view('community_groups/groups_sidebar');
 
 set_context($context);
 
-$title = elgg_echo("groups:all");
+$title = elgg_echo("groups");
 $area2 = elgg_view_title($title);
 $area2 .= elgg_view('groups/contentwrapper', array('body' => elgg_view("groups/group_sort_menu", array("count" => $group_count, "filter" => $filter)) . $objects));
 $body = elgg_view_layout('sidebar_boxes', $area1, $area2);
