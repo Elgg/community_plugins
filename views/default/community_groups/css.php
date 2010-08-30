@@ -56,3 +56,7 @@
 .sidebarWrapper ul {
 	list-style: none;
 }
+
+.search_listing_info p.discussion_topic {
+	margin-bottom: 0.5em;
+}
