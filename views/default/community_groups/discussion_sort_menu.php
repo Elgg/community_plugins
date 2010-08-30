@@ -9,7 +9,11 @@ $url = $vars['url'] . "pg/groups/discussion/";
 if (isloggedin()) {
 ?>
 	<li <?php if($filter == "mygroups") echo "class='selected'"; ?>><a href="<?php echo $url; ?>mygroups/"><?php echo elgg_echo('groups:discussion:mygroups'); ?></a></li>
-	<li <?php if($filter == "mine") echo "class='selected'"; ?>><a href="<?php echo $url; ?>mine/"><?php echo elgg_echo('groups:discussion:mine'); ?></a></li>
+<?php
+/*
+<li <?php if($filter == "mine") echo "class='selected'"; ?>><a href="<?php echo $url; ?>mine/"><?php echo elgg_echo('groups:discussion:mine'); ?></a></li>
+*/
+?>
 <?php
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
 /**
  * Overrides for the groups plugin on Elgg community site
- * 
+ *
  */
 
 register_elgg_event_handler('init', 'system', 'community_groups_init');
@@ -40,7 +40,7 @@ function community_groups_adminmenu() {
 
 /**
  * Group admin pages
- * 
+ *
  * @param array $page
  */
 function community_groups_admin_page($page) {
@@ -58,7 +58,7 @@ function community_groups_admin_page($page) {
 	$content .= elgg_view('community_groups/admin/main', array('tab' => $tab));
 
 	$body = elgg_view_layout('two_column_left_sidebar', '', $content);
-	
+
 	page_draw($title, $body);
 	return TRUE;
 }
@@ -122,7 +122,7 @@ function community_groups_page_handler($page) {
  */
 function community_groups_sidebar_menu() {
 	global $CONFIG;
-	
+
 	if (get_context() != 'groups') {
 		return;
 	}
@@ -160,7 +160,7 @@ function community_groups_can_edit($owner_guid, $time_created) {
 
 /**
  * Get a list of group categories
- * 
+ *
  * @return array
  */
 function community_groups_get_categories() {
