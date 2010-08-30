@@ -27,7 +27,7 @@ $pagination = elgg_view('navigation/pagination', array(
 echo $pagination;
 
 ?>
-    <!-- grab the topic title -->
+	<!-- grab the topic title -->
 	<div id="content_area_group_title"><h2><?php echo $vars['entity']->title; ?></h2></div>
 <?php
 
@@ -46,11 +46,11 @@ if ($vars['entity']->status != "closed" && page_owner_entity()->isMember($vars['
 } elseif ($vars['entity']->status == "closed") {
 
 	//this topic has been closed by the owner
-	echo "<h2>" . elgg_echo("groups:topicisclosed") . "</h2>";
-	echo "<p>" . elgg_echo("groups:topiccloseddesc") . "</p>";
-
-} else {
-
+	echo '<div class="topic_post">';
+	//echo "<h2>" . elgg_echo("groups:topicisclosed") . "</h2>";
+	//echo "<p>" . elgg_echo("groups:topiccloseddesc") . "</p>";
+	echo "<p>This topic is closed.  You cannot post new replies.</p>";
+	echo '</div>';
 }
 
 ?>

@@ -52,3 +52,7 @@
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 }
+
+.sidebarWrapper ul {
+	list-style: none;
+}
