@@ -1158,3 +1158,7 @@ select.choose_plugin {
 	margin:0;
 	padding:0;
 }
+
+.sidebarBox ul {
+	list-style: none;
+}
