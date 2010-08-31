@@ -9,7 +9,7 @@ $img_files = elgg_get_entities_from_relationship(array(
 	'order_by' => 'guid'
 ));
 
-if (count($img_files) == 0) {
+if ($img_files === FALSE || count($img_files) == 0) {
 	return TRUE;
 }
 ?>
