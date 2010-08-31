@@ -127,6 +127,11 @@ function community_groups_sidebar_menu() {
 		return;
 	}
 
+	// remove create group link for non-admins
+	if (!isadminloggedin()) {
+		community_groups_remove_submenu_item(elgg_echo('groups:new'));
+	}
+
 	$group = page_owner_entity();
 	if (!($group instanceof ElggGroup)) {
 		return;
@@ -135,6 +140,8 @@ function community_groups_sidebar_menu() {
 	if ($group->isMember(get_loggedin_user())) {
 		add_submenu_item(elgg_echo('groups:addtopic'), $CONFIG->wwwroot . "mod/groups/addtopic.php?group_guid={$group->getGUID()}", '1groupslinks');
 	}
+
+
 }
 
 /**
@@ -273,4 +280,21 @@ function search_discussion_hook($hook, $type, $value, $params) {
 		'entities' => $entities,
 		'count' => $count,
 	);
+}
+
+function community_groups_remove_submenu_item($label) {
+	global $CONFIG;
+
+	if (!isset($CONFIG->submenu)) {
+		return;
+	}
+
+	foreach ($CONFIG->submenu as $group_index => $group) {
+		foreach ($group as $item_index => $item) {
+			if ($item->name == $label) {
+				unset($CONFIG->submenu[$group_index][$item_index]);
+				return;
+			}
+		}
+	}
 }
