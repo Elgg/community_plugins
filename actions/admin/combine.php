@@ -35,10 +35,14 @@ foreach ($releases as $release) {
 
 // move download count to new project
 $annotation_name = get_metastring_id('download', TRUE);
-$query = "UPDATE {$CONFIG->dbprefix}annotations
-	SET entity_guid=$new_project->guid
-	WHERE entity_guid=$old_project->guid AND name_id=$annotation_name";
-update_data($query);
+if ($annotation_name) {
+	$query = "UPDATE {$CONFIG->dbprefix}annotations
+		SET entity_guid=$new_project->guid
+		WHERE entity_guid=$old_project->guid AND name_id=$annotation_name";
+	update_data($query);
+}
+
+$old_project->delete();
 
 system_message("$old_name has been combined into the project $new_project->title");
 forward(REFERER);
