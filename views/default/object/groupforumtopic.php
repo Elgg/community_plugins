@@ -28,7 +28,7 @@ if (get_context() == "search") {
 	}
 	$info .= '</span></p>';
 	//get the group avatar
-	$icon = elgg_view("profile/icon", array('entity' => $u, 'size' => 'tiny'));
+	$icon = elgg_view("profile/icon", array('entity' => $u, 'size' => 'small'));
 	//get the group and topic title
 	$info .= "<p class=\"discussion_topic\">" . elgg_echo('groups:topic') . ": <a href=\"{$vars['url']}mod/groups/topicposts.php?topic={$vars['entity']->guid}&group_guid={$group->guid}\">{$title}</a></p>";
 
