@@ -1,14 +1,15 @@
 <?php
 
 $category = get_input('category', 'all');
+$category_label = $CONFIG->plugincats[$category];
 
 $query = stripslashes(get_input('q', ''));
 
 
 if ($query != '') {
-	$title = sprintf(elgg_echo('plugins:search:title'), $query, $category);
+	$title = sprintf(elgg_echo('plugins:search:title'), $query, $category_label);
 } else {
-	$title = sprintf(elgg_echo('plugins:category:title'), $category);
+	$title = sprintf(elgg_echo('plugins:category:title'), $category_label);
 }
 
 ?>

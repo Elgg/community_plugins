@@ -7,10 +7,13 @@
 
 require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
+global $CONFIG;
+
 // get filter
 $category = get_input('category');
+$category_label = $CONFIG->plugincats[$category];
 
-$title = sprintf(elgg_echo('plugins:category:title'), $category);
+$title = sprintf(elgg_echo('plugins:category:title'), $category_label);
 
 // Get objects
 set_context('search');
