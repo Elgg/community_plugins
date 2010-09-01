@@ -321,6 +321,8 @@ function community_groups_post_blog($username, $title, $body, $token) {
 		throw new InvalidParameterException('Bad token');
 	}
 
+	$title = "Elgg Blog: $title";
+
 	// blog.elgg.org to community.elgg.org
 	$username_mapping = array(
 		'brett' => 'brett.profitt',
