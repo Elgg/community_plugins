@@ -119,6 +119,10 @@ function community_groups_page_handler($page) {
 			set_input('username', $page[1]);
 			include("$groups_base/membership.php");
 			break;
+		case "memberlist":
+			set_input('group_guid', $page[1]);
+			include($CONFIG->pluginspath . "groups/memberlist.php");
+			break;
 		case "discussion":
 			set_input('filter', $page[1]);
 			include("$community_base/discussion.php");
