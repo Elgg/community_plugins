@@ -26,6 +26,22 @@ function community_groups_init() {
 	register_action('groups/combine', FALSE, "$action_path/groups/combine.php", TRUE);
 	register_action('groups/categorize', FALSE, "$action_path/groups/categorize.php", TRUE);
 	register_action("groups/delete", FALSE, $CONFIG->pluginspath . "groups/actions/delete.php", TRUE);
+	register_action("groups/saveblogsettings", FALSE, "$action_path/groups/saveblogsettings.php", TRUE);
+
+	expose_function(
+		'blog.post',
+		'community_groups_post_blog',
+		array(
+			'username' => array('type' => 'string'),
+			'title' => array('type' => 'string'),
+			'body' => array('type' => 'string'),
+			'token' => array('type' => 'string'),
+		),
+		'Post a blog.elgg.org blog post to the group forums',
+		'POST',
+		FALSE,
+		FALSE
+	);
 }
 
 /**
@@ -297,4 +313,53 @@ function community_groups_remove_submenu_item($label) {
 			}
 		}
 	}
+}
+
+function community_groups_post_blog($username, $title, $body, $token) {
+	$stored_token = get_plugin_setting('blog_token', 'community_groups');
+	if ($stored_token !== $token) {
+		throw new InvalidParameterException('Bad token');
+	}
+
+	// blog.elgg.org to community.elgg.org
+	$username_mapping = array(
+		'brett' => 'brett.profitt',
+		'cash' => 'costelloc',
+		'evan' => 'evan',
+		'nick' => 'nickw',
+	);
+
+	if (!array_key_exists($username, $username_mapping)) {
+		throw new InvalidParameterException('Unknown user');
+	}
+
+	$username = $username_mapping[$username];
+	$user = get_user_by_username($username);
+	if (!$user) {
+		throw new InvalidParameterException('Unable to get user');
+	}
+
+	$group_guid = get_plugin_setting('blog_group_guid', 'community_groups');
+	if (!$group_guid) {
+		throw new InvalidParameterException('Group GUID is not set');
+	}
+
+	$grouptopic = new ElggObject();
+	$grouptopic->subtype = "groupforumtopic";
+	$grouptopic->owner_guid = $user->getGUID();
+	$grouptopic->container_guid = $group_guid;
+	$grouptopic->access_id = ACCESS_PUBLIC;
+	$grouptopic->title = $title;
+	$grouptopic->status = 'open';
+
+	if (!$grouptopic->save()) {
+		throw new InvalidParameterException('Unable to save post');
+	}
+
+	// now add the topic message as an annotation
+	$grouptopic->annotate('group_topic_post', $body, ACCESS_PUBLIC, $user->getGUID());
+
+	add_to_river('river/forum/topic/create', 'create', $user->getGUID(), $grouptopic->guid);
+
+	return TRUE;
 }

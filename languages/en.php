@@ -12,12 +12,16 @@ $english = array(
 	'cg:tabs:categorize' => 'Categorize',
 	'cg:tabs:combine' => 'Combine groups',
 	'cg:tabs:delete' => 'Delete group',
-
+	'cg:tabs:blog' => 'Blog integration',
+	
 	'cg:admin:delete:instruct' => 'Delete the group',
 	'cg:admin:combine:instruct' => 'Move all content and members from one group
 									into another. The first group is also deleted.',
 	'cg:admin:combine:from' => 'From this group',
 	'cg:admin:combine:to' => 'To this group',
+	'cg:admin:blog:instruct' => 'Blog posts from blog.elgg.org can be posted to the group forums',
+	'cg:admin:blogurl' => 'URL of the web services end point',
+	'cg:admin:bloggroup' => 'Group to post the blog entries',
 
 	'groups:all' => 'All groups',
 	'groups:support' => 'Support',
@@ -41,6 +45,7 @@ $english = array(
 	'search_types:discussion' => 'Discussion',
 	'cg:search:post_on' => "Comment on the discussion \"%s\" in the group %s",
 	'cg:search:discussions' => 'Search discussions',
+
 
 	'cg:discussion:howto' => 'Using discussions',
 	'cg:groups:howto' => 'Using groups',
