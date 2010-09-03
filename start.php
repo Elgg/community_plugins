@@ -320,6 +320,7 @@ function community_groups_remove_submenu_item($label) {
 }
 
 function community_groups_post_blog($username, $title, $body, $token) {
+
 	$stored_token = get_plugin_setting('blog_token', 'community_groups');
 	if ($stored_token !== $token) {
 		throw new InvalidParameterException('Bad token');
@@ -344,6 +345,7 @@ function community_groups_post_blog($username, $title, $body, $token) {
 	if (!$user) {
 		throw new InvalidParameterException('Unable to get user');
 	}
+	login($user);
 
 	$group_guid = get_plugin_setting('blog_group_guid', 'community_groups');
 	if (!$group_guid) {

@@ -68,4 +68,4 @@ $english = array(
 
 );
 
-add_translation("en",$english);
+add_translation("en", $english);
