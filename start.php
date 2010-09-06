@@ -100,6 +100,7 @@ function community_groups_page_handler($page) {
 			include("$groups_base/invitations.php");
 			break;
 		case "new":
+			admin_gatekeeper();
 			include("$groups_base/new.php");
 			break;
 		case "world":
