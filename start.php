@@ -20,6 +20,8 @@ function community_groups_init() {
 	register_plugin_hook('search_types', 'get_types', 'community_groups_add_search_type');
 	register_plugin_hook('search', 'discussion', 'search_discussion_hook');
 
+	register_plugin_hook('action', 'groups/edit', 'community_groups_group_creation_lockdown');
+
 	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
 	register_action('forum/remove_ad', FALSE, "$action_path/forum/remove_ad.php", TRUE);
@@ -163,6 +165,22 @@ function community_groups_sidebar_menu() {
 	}
 
 
+}
+
+/**
+ * Plugin hook handler that only allows admins to create groups.
+ * Catches the edit action and if this is a new group, checks that
+ * an admin is logged in.
+ */
+function community_groups_group_creation_lockdown() {
+	$guid = get_input('group_guid', 0);
+	if ($guid) {
+		// group edit action
+		return TRUE;
+	}
+
+	// group create
+	return isadminloggedin();
 }
 
 /**
