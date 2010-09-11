@@ -3,7 +3,7 @@
 $english = array(
 
 	'cp:groups:admin' => "Groups Administration",
-	
+
 	'cg:forum:controls' => "Admin controls",
 	'cg:forum:move:instruct' => "Move post to the group",
 	'cg:forum:removead' => "Remove ad",
@@ -11,9 +11,10 @@ $english = array(
 
 	'cg:tabs:categorize' => 'Categorize',
 	'cg:tabs:combine' => 'Combine groups',
+	'cg:tabs:change_owner' => 'Change owner',
 	'cg:tabs:delete' => 'Delete group',
 	'cg:tabs:blog' => 'Blog integration',
-	
+
 	'cg:admin:delete:instruct' => 'Delete the group',
 	'cg:admin:combine:instruct' => 'Move all content and members from one group
 									into another. The first group is also deleted.',
@@ -22,6 +23,13 @@ $english = array(
 	'cg:admin:blog:instruct' => 'Blog posts from blog.elgg.org can be posted to the group forums',
 	'cg:admin:blogurl' => 'URL of the web services end point',
 	'cg:admin:bloggroup' => 'Group to post the blog entries',
+
+	'cg:admin:change_owner:instruct' => 'Change the owner of a group.',
+	'cg:admin:change_owner:user' => 'New owner',
+	'cg:admin:change_owner:nogroup' => 'Unable to load the group.',
+	'cg:admin:change_owner:nouser' => 'Unable to load the user.',
+	'cg:admin:change_owner:success' => 'User %s is now the owner of group %s.',
+	'cg:admin:change_owner:icon_error' => 'User %s is now the owner of group %s but there was a problem transferring the group icons',
 
 	'groups:all' => 'All groups',
 	'groups:support' => 'Support',
@@ -54,7 +62,7 @@ $english = array(
 	'cg:howto:discussion:loggedin:2' => "Looking for help with a problem? Try the Technical Support group.",
 	'cg:howto:discussion:loggedin:3' => "Advertising is not allowed in the group forums.",
 	'cg:howto:discussion:loggedin:4' => "Want email notifications when there are new forum posts?
-		
+
 		Select Settings on the topbar menu.",
 
 	'cg:howto:groups:loggedout:' => "The forums of Elgg are divided into groups.
@@ -65,6 +73,8 @@ $english = array(
 		Check out Elgg's roadmap group.",
 	'cg:howto:groups:loggedin:4' => "Want email notifications when there is new group activity?
 		Select Settings on the topbar menu.",
+
+
 
 );
 

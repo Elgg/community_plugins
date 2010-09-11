@@ -29,6 +29,7 @@ function community_groups_init() {
 	register_action('groups/categorize', FALSE, "$action_path/groups/categorize.php", TRUE);
 	register_action("groups/delete", FALSE, $CONFIG->pluginspath . "groups/actions/delete.php", TRUE);
 	register_action("groups/saveblogsettings", FALSE, "$action_path/groups/saveblogsettings.php", TRUE);
+	register_action("groups/change_owner", FALSE, "$action_path/groups/change_owner.php", TRUE);
 
 	expose_function(
 		'blog.post',
