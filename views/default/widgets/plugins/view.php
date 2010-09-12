@@ -15,10 +15,14 @@ $plugins = get_user_objects($vars['entity']->owner_guid, "plugin_project", $numb
 
 if ($plugins) {
 	echo "<div id=\"pluginsrepo_widget_layout\">";
+	
 	//display in list mode
-	foreach($plugins as $plugin) {
+	$context = get_context();
+	set_context('widget');
+	foreach ($plugins as $plugin) {
 		echo elgg_view_entity($plugin);
 	}
+	set_context($context);
 
 	//get a link to the user's plugins
 	$users_file_url = $vars['url'] . "pg/plugins/developer/" . $owner_entity->username;
