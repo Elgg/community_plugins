@@ -13,14 +13,14 @@ $project = $vars['entity'];
 	if ($recommended = get_entity($project->recommended_release_guid)) {
 		$ignore_guids[] = $project->recommended_release_guid;
 
-		$download_link = "<a href=\"{$recommended->getURL()}\">" . $recommended->version . "</a>";
+		$time = friendly_time($recommended->time_created);
+		$download_link = "<a href=\"{$recommended->getURL()}\">" . 
+			$recommended->version . " ($time)</a>";
 
 		if ($recommended->canEdit()) {
-			$ts = time();
-			$token = generate_action_token($ts);
 
-			$delete = elgg_view('output/confirmlink',array(
-				'href' => $vars['url'] . "/action/plugins/delete_release?release_guid={$recommended->getGUID()}&__elgg_ts=$ts&__elgg_token=$token",
+			$delete = elgg_view('output/confirmlink', array(
+				'href' => $vars['url'] . "/action/plugins/delete_release?release_guid={$recommended->getGUID()}",
 				'text' => 'delete',
 				'confirm' => elgg_echo("plugins:delete_release:confirm"),
 			));
@@ -49,11 +49,9 @@ $project = $vars['entity'];
 				. $latest->version . " ($time)</a>";
 
 			if ($latest->canEdit()) {
-				$ts = time();
-				$token = generate_action_token($ts);
 
 				$delete = elgg_view('output/confirmlink',array(
-					'href' => $vars['url'] . "/action/plugins/delete_release?release_guid={$latest->getGUID()}&__elgg_ts=$ts&__elgg_token=$token",
+					'href' => $vars['url'] . "/action/plugins/delete_release?release_guid={$latest->getGUID()}",
 					'text' => 'delete',
 					'confirm' => elgg_echo("plugins:delete_release:confirm"),
 				));
@@ -67,7 +65,7 @@ $project = $vars['entity'];
 		}
 
 		echo '<hr style="margin: 0.5em 0;"/>Previous releases:';
-		if($plugins){
+		if ($plugins) {
 			foreach ($plugins as $p) {
 				if (in_array($p->getGUID(), $ignore_guids)) {
 					continue;
@@ -77,11 +75,9 @@ $project = $vars['entity'];
 					. $p->version . " ($time)</a>";
 
 				if ($p->canEdit()) {
-					$ts = time();
-					$token = generate_action_token($ts);
 
 					$delete = elgg_view('output/confirmlink',array(
-						'href' => $vars['url'] . "/action/plugins/delete_release?release_guid={$p->getGUID()}&__elgg_ts=$ts&__elgg_token=$token",
+						'href' => $vars['url'] . "/action/plugins/delete_release?release_guid={$p->getGUID()}",
 						'text' => 'delete',
 						'confirm' => elgg_echo("plugins:delete_release:confirm"),
 					));
