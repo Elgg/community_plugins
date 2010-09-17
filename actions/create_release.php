@@ -35,23 +35,21 @@ $release->title = $plugin_project->title;
 $release->setFilename($filestorename);
 $release->setMimetype($mimetype);
 $release->originalfilename = $_FILES['upload']['name'];
-$release->access_id = $release_access_id;
+$release->access_id = $access_id;
 $release->container_guid = $plugin_project->getGUID();
 $release->version = $version;
 $release->release_notes = $release_notes;
 $release->elgg_version = $elgg_version;
 $release->comments = $comments;
 
-$release->save();
+if (!$release->save()) {
+	register_error(elgg_echo("plugins:error:uploadfailed"));
+	forward($plugin_project->getURL());
+}
 
 if ($release->savePluginFile('upload') != TRUE) {
 	register_error(elgg_echo("plugins:error:uploadfailed"));
 	forward(REFERER);
-}
-
-if (!$release->save()) {
-	register_error(elgg_echo("plugins:error:uploadfailed"));
-	forward($plugin_project->getURL());
 }
 
 if ($recommended == 'yes') {
