@@ -68,7 +68,7 @@ if ($result) {
 
 		$desc = get_input("image_{$i}_desc");
 
-		$plugin_project->saveImage("image_$i", $desc);
+		$plugin_project->saveImage("image_$i", $desc, $i);
 	}
 
 	system_message(elgg_echo("plugins:project:saved"));

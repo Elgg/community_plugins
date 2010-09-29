@@ -102,7 +102,7 @@ for ($i=1; $i<=$max_num_images; $i++) {
 
 	$desc = get_input("image_{$i}_desc");
 
-	$plugin_project->saveImage("image_$i", $desc);
+	$plugin_project->saveImage("image_$i", $desc, $i);
 }
 
 
