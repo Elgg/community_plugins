@@ -17,6 +17,8 @@ if ($release_guid) {
 	$release = get_entity($release_guid);
 	if ($release) {
 		$project_guid = $release->container_guid;
+		// this is needed for the other plugin list in sidebar
+		set_input('guid', $project_guid);
 	}
 }
 
