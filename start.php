@@ -29,7 +29,7 @@ function plugins_init() {
 	extend_view('css', 'plugins/css');
 
 	// Extend hover-over and profile menu
-	extend_view('profile/menu/links', 'plugins/menu');
+	extend_view('profile/menu/links', 'plugins/profile_menu');
 	extend_view('groups/left_column', 'plugins/groupprofile_files');
 
 	// Register a page handler, so we can have nice URLs
