@@ -62,6 +62,15 @@
 	font-size: 1.6em;
 }
 
+.plugins_download_total {
+	color:#666666;
+	font-size: 1.2em;
+}
+
+.plugins_download_total p span {
+	font-weight: bold;
+}
+
 .upload_plugin {
 	font-weight: bold;
 	color: #ffffff;
