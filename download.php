@@ -32,6 +32,7 @@ $release->incrementDownloadCount();
 $project->incrementDownloadCount();
 
 // add to site downloads so they won't disappear when a plugin is deleted.
+global $CONFIG;
 $ia = elgg_set_ignore_access(TRUE);
 $CONFIG->site->plugins_download_count = $CONFIG->site->plugins_download_count + 1;
 elgg_set_ignore_access($ia);
