@@ -145,6 +145,14 @@ $english = array(
 	'plugins:tabs:utilities' => 'Utilities',
 
 	/**
+	 * Notifications
+	 */
+	'plugins:plugin_project:notify:subject' => '%s has uploaded a new plugin called %s',
+	'plugins:plugin_release:notify:subject' => '%s has released a new version of the plugin %s',
+	'plugins:plugin_project:notify:body' => "%s has uploaded a new plugin called %s \n\n %s \n\n %s",
+	'plugins:plugin_release:notify:body' => "%s has released a new version of the plugin %s \n\n %s \n\n %s",
+
+	/**
 	 * Licenses
 	 */
 	'license' => 'License',

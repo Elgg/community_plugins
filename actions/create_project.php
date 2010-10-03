@@ -107,6 +107,7 @@ for ($i=1; $i<=$max_num_images; $i++) {
 
 
 add_to_river('river/object/plugin_project/create', 'create', $user->getGUID(), $plugin_project->getGUID());
+plugins_send_notifications($plugin_project);
 system_message(elgg_echo("plugins:project:saved"));
 
 forward($plugin_project->getURL());
