@@ -4,7 +4,7 @@
  */
 
 $site = $CONFIG->site;
-$num_downloads = $site->plugins_download_count;
+$num_downloads = plugins_get_all_download_count();
 
 $num_plugins = number_format((int)get_entities("object", "plugin_project", 0, "", 0, 0, true));
 $num_downloads = number_format($num_downloads);

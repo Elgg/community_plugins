@@ -196,3 +196,15 @@ function plugins_send_notifications($entity) {
 		}
 	}
 }
+
+
+/**
+ * Return the count of all downloads
+ * Adds 1.2M to the figure to account for downloads before this system as implemented.
+ * 
+ * @return int
+ */
+function plugins_get_all_download_count() {
+	$c = count_annotations(0, 'object', 'plugin_project', 'download', '', NULL);
+	return $c + 1200000;
+}
