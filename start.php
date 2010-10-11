@@ -188,7 +188,7 @@ function plugins_page_handler($page) {
 		// category listing page
 		case "category":
 			set_input('category', $page[1]);
-			include("$plugin_dir/search.php");
+			include("$plugin_dir/category_list.php");
 			break;
 		// list a developer's plugins
 		case "developer":
