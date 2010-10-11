@@ -350,5 +350,4 @@ register_action("plugins/digg", FALSE, "$action_base/digg.php");
 
 register_action("plugins/upgrade", FALSE, "$action_base/upgrade.php", TRUE);
 register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
-register_action("plugins/init_counter", FALSE, "$action_base/admin/init_counter.php", TRUE);
 register_action("plugins/normalize", FALSE, "$action_base/admin/normalize.php", TRUE);

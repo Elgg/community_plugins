@@ -205,6 +205,7 @@ function plugins_send_notifications($entity) {
  * @return int
  */
 function plugins_get_all_download_count() {
+	// see revision [7001] if interested in cached calculations on downloads
 	$c = count_annotations(0, 'object', 'plugin_project', 'download', '', NULL);
 	return $c + 1200000;
 }
