@@ -19,6 +19,7 @@ $title = sprintf(elgg_echo('plugins:category:title'), $category_label);
 set_context('search');
 if ($category) {
 	if ($category == 'all') {
+		$title = sprintf(elgg_echo('plugins:category:title'), elgg_echo('plugins:cat:all'));
 		$list = list_entities('object', 'plugin_project', 0, 10, true, false, true);
 	} else {
 		$list = list_entities_from_metadata("plugincat", $category, "object", "plugin_project", 0, 10, true, false, true);
