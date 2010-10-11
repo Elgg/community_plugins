@@ -75,8 +75,6 @@ $english = array(
 	'plugins:elggversion' => "Latest version of Elgg this plugin has been tested on",
 	'plugins:elgg_version' => "Elgg version",
 	'plugins:version' => "Plugin version",
-	'item:object:plugins' => 'Plugins and themes',
-	'item:object:plugin_release' => 'Plugin',
 	'plugins:updated' => "Updated",
 	'plugins:repo' => "Code repository",
 	'plugins:homepage' => "Plugin/project homepage",
@@ -135,10 +133,10 @@ $english = array(
 	'plugin_file:river:annotate' => "a comment on this plugin",
 	'plugin_release:river:annotate' => "a comment on this plugin",
 
-	'item:object:plugin or theme' => 'Plugins and themes',
-
 	'plugins:files:acceptable' => 'Distribution packages must be .zip or .tar.zip only.',
-	'item:object:plugin_project' => 'Plugins',
+
+	'item:object:plugin_project' => 'Plugin Projects',
+	'item:object:plugin_release' => 'Plugin Releases',
 
 	'plugins:tabs:stats' => 'Statistics',
 	'plugins:tabs:upgrade' => 'Upgrades',
