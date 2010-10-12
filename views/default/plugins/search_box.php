@@ -5,6 +5,9 @@ if (isset($vars['category'])) {
 }
 
 $search_text = elgg_echo('plugins:search:instruct');
+if (get_input('q')) {
+	$search_text = get_input('q');
+}
 ?>
 <div class="plugins_search_box">
 	<?php $search_url = "{$vars['url']}pg/search"; ?>
