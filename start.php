@@ -354,6 +354,7 @@ function community_groups_post_blog($username, $title, $body, $token) {
 		'cash' => 'costelloc',
 		'evan' => 'evan',
 		'nick' => 'nickw',
+		'dave' => 'davetosh'
 	);
 
 	if (!array_key_exists($username, $username_mapping)) {
