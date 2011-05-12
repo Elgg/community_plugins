@@ -352,7 +352,7 @@ function community_groups_post_blog($username, $title, $body, $token) {
 	$username_mapping = array(
 		'brett' => 'brett.profitt',
 		'cash' => 'costelloc',
-		'evan' => 'evan',
+		'evan' => 'ewinslow',
 		'nick' => 'nickw',
 		'dave' => 'davetosh'
 	);
