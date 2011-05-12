@@ -95,7 +95,7 @@ function community_groups_page_handler($page) {
 
 	if (!isset($page[0])) {
 		// default to group listing page
-		$page[0] = 'world';
+		$page[0] = 'all';
 	}
 
 	switch ($page[0]) {
@@ -106,6 +106,7 @@ function community_groups_page_handler($page) {
 			admin_gatekeeper();
 			include("$groups_base/new.php");
 			break;
+		case "all":
 		case "world":
 			include("$community_base/groups.php");
 			break;
