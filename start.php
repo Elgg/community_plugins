@@ -358,7 +358,7 @@ function community_groups_post_blog($username, $title, $body, $token) {
 
 		// gsoc11
 		'saket' => 'tachyon',
-		'francisco' => '',
+		'francisco' => 'paco',
 		'ravindra' => 'blacktooth',
 	);
 
