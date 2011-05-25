@@ -355,7 +355,11 @@ function community_groups_post_blog($username, $title, $body, $token) {
 		'cash' => 'costelloc',
 		'evan' => 'ewinslow',
 		'nick' => 'nickw',
-		'dave' => 'davetosh'
+
+		// gsoc11
+		'saket' => 'tachyon',
+		'francisco' => '',
+		'ravindra' => 'blacktooth',
 	);
 
 	if (!array_key_exists($username, $username_mapping)) {
