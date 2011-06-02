@@ -11,10 +11,10 @@ $newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_proje
 
 //Most downloaded
 set_context('search');
-$popular = get_entities_from_annotation_count("object", "plugin_project", "download");
+$popular = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_project', 'download');
 
 //Most dugg
-$dugg = get_entities_from_annotation_count("object", "plugin_project", "plugin_digg");
+$dugg = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_project', 'plugin_digg');
 
 //Last updated
 $updated = elgg_get_entities(array('object' => 'plugin_project', 'order_by' => 'e.time_updated desc'));
