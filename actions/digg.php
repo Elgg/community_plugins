@@ -30,5 +30,5 @@ if ($plugin_project) {
 }
 
 // Forward to the plugin
-$url = $vars['url'] . "mod/community_plugins/read.php?guid=" . $project_guid;
+$url = $plugin_project->getURL();
 forward($url);
