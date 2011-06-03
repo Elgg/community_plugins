@@ -1,10 +1,7 @@
 <?php
 /**
- * Elgg Ratings: add rating action
+ * Add recommendation action
  */
-
-// Make sure we're logged in; forward to the front page if not
-if (!isloggedin()) forward();
 
 // Get input
 $project_guid = (int) get_input('guid');
