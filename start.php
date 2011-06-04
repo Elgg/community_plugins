@@ -106,6 +106,14 @@ function community_groups_page_handler($page) {
 			admin_gatekeeper();
 			include("$groups_base/new.php");
 			break;
+		case "edit":
+			set_input('group_guid', $page[1]);
+			include($CONFIG->pluginspath . "groups/edit.php");
+			break;
+		case "invite":
+			set_input('group_guid', $page[1]);
+			include($CONFIG->pluginspath . "groups/invite.php");
+			break;
 		case "all":
 		case "world":
 			include("$community_base/groups.php");
