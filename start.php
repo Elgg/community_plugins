@@ -54,9 +54,8 @@ function plugins_init() {
 
 	// Elgg versions
 	$CONFIG->elgg_versions = array(
+		'1.8',
 		'1.7',
-		'1.7a',
-		'1.6.1',
 		'1.6',
 		'1.5',
 		'1.2',

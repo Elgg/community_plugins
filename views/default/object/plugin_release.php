@@ -36,16 +36,17 @@ ___END;
 echo "<div class=\"clearfloat\"></div>";
 echo "</div>";
 
-if($notes){
+if ($notes) {
 	echo "<div class=\"pluginsrepo_description\">";
 	echo "<h3>Release notes:</h3>";
 	echo autop($notes);
 	echo "</div>";
 }
 
+echo "<b>Compatible Elgg Version:</b> $release->elgg_version";
+
 echo "</div>";
 
 if ($release->comments == 'yes') {
 	echo elgg_view_comments($release);
 }
-?>

@@ -34,13 +34,13 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 ?>
 
 <div class="contentWrapper releaseDetails">
-	<h2>Plugin Details</h2>
+	<h2>Plugin Release Details</h2>
 	<p>This information is specific to the release you are uploading right now.  To edit the
 	general project details, visit the edit section of the project page.</p>
 
 <?php if (!$release) { ?>
 	<p>
-		<label><?php echo elgg_echo("plugins:file"); ?><br />
+		<label><?php echo elgg_echo("plugins:file"); ?>*<br />
 		<span class="pluginHint">Uploaded files must contain a working plugin or theme.  Any plugin containing ads will be deleted and the user banned.  Distribution packages must be .zip, .tar.gz, or .tgz files.</span><br />
 		<?php
 			echo elgg_view("input/file",array('internalname' => 'upload'));
