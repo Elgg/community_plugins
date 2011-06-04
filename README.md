@@ -32,4 +32,4 @@ experience with the search plugin (or maybe it is just always hard to follow).
 Contributions
 -------------
 What to contribute to the plugin repository? The first step is getting a Github
-account and forking this git repository.
+account and forking [the git repository](https://github.com/Elgg/community_plugins).
