@@ -5,8 +5,8 @@
  */
 
 require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
-require_once(dirname(__FILE__) . '/lib/PluginRelease.php');
-require_once(dirname(__FILE__) . '/lib/PluginProject.php');
+require_once(dirname(__FILE__) . '/classes/PluginRelease.php');
+require_once(dirname(__FILE__) . '/classes/PluginProject.php');
 
 // Register classes
 function plugins_run_once(){
