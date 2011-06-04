@@ -3,11 +3,15 @@
  * Total plugin stats
  */
 
-$site = $CONFIG->site;
 $num_downloads = plugins_get_all_download_count();
-
-$num_plugins = number_format((int)get_entities("object", "plugin_project", 0, "", 0, 0, true));
 $num_downloads = number_format($num_downloads);
+
+$num_plugins = elgg_get_entities(array(
+	'type' => 'object',
+	'subtype' => 'plugin_project',
+	'count' => true,
+));
+$num_plugins = number_format($num_plugins);
 
 $num_plugins = "<span>$num_plugins</span>";
 $num_downloads = "<span>$num_downloads</span>";
