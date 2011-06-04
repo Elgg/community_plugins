@@ -173,7 +173,7 @@ function plugins_page_handler($page) {
 
 	global $CONFIG;
 
-	$plugin_dir = $CONFIG->pluginspath . "community_plugins";
+	$plugin_dir = $CONFIG->pluginspath . "community_plugins/pages/community_plugins";
 
 	if (!isset($page[0])) {
 		// bad url - we'll send to main plugin page
@@ -197,6 +197,11 @@ function plugins_page_handler($page) {
 				set_input($page[2], $page[3]);
 			}
 			include("$plugin_dir/developer.php");
+			break;
+		case "download":
+			// download/<release_guid>/
+			set_input('release_guid', $page[1]);
+			include("$plugin_dir/download.php");
 			break;
 		// view plugin project
 		case "project":

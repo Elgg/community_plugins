@@ -8,7 +8,7 @@ echo "<div class='contentWrapper'>";
 $release = $vars['entity'];
 $project = get_entity($release->container_guid);
 $notes = $release->release_notes;
-$dl_link = "{$vars['url']}mod/community_plugins/download.php?release_guid={$release->getGUID()}";
+$dl_link = "{$vars['url']}pg/plugins/download/{$release->getGUID()}";
 echo "<div id=\"download_action\">";
 if ($project->recommended_release_guid && $project->recommended_release_guid != $release->getGUID()) {
 	$author = get_entity($project->owner_guid);

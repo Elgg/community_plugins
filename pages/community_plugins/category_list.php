@@ -1,11 +1,5 @@
 <?php
-/**
- * Category listing (not search - search goes against the search mod)
- * Must keep the confusing name because previous version bypassed the
- * page handler and hit this script directly.
- */
 
-require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
 global $CONFIG;
 

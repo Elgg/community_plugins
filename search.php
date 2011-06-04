@@ -6,4 +6,6 @@
  * is set up for it.
  */
 
-include dirname(__FILE__) . "/category_list.php";
+require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
+
+include dirname(__FILE__) . "/pages/community_plugins/category_list.php";

@@ -3,8 +3,6 @@
  * Download handler
  */
 
-require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
-
 $release = get_entity(get_input("release_guid"));
 $project = get_entity($release->container_guid);
 
