@@ -119,7 +119,7 @@ function plugins_init() {
 		'uncategorized' => 'Uncategorized',
 	);
 
-	$action_base = "{$CONFIG->pluginspath}community_plugins/actions";
+	$action_base = "{$CONFIG->pluginspath}community_plugins/actions/community_plugins";
 	register_action("plugins/create_project", FALSE, "$action_base/create_project.php");
 	register_action("plugins/create_release", FALSE, "$action_base/create_release.php");
 	register_action("plugins/save_project", FALSE, "$action_base/save_project.php");
@@ -129,7 +129,7 @@ function plugins_init() {
 	register_action("plugins/delete_project_image", FALSE, "$action_base/delete_project_image.php");
 	register_action("plugins/digg", FALSE, "$action_base/digg.php");
 
-	register_action("plugins/upgrade", FALSE, "$action_base/upgrade.php", TRUE);
+	register_action("plugins/upgrade", FALSE, "$action_base/admin/upgrade.php", TRUE);
 	register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
 	register_action("plugins/normalize", FALSE, "$action_base/admin/normalize.php", TRUE);
 }

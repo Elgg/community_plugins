@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Action for combining two plugin projects
  */
