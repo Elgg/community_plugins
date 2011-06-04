@@ -4,18 +4,14 @@
  * 
  */
 
+register_elgg_event_handler('init', 'system', 'plugins_init');
+
 require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
 require_once(dirname(__FILE__) . '/classes/PluginRelease.php');
 require_once(dirname(__FILE__) . '/classes/PluginProject.php');
 
-// Register classes
-function plugins_run_once(){
-	add_subtype("object", "plugin_release", "PluginRelease");
-	add_subtype("object", "plugin_project", "PluginProject");
-}
-
 /**
- * plugin initialisation
+ * Initialize the community plugin repository plugin
  */
 function plugins_init() {
 	global $CONFIG;
@@ -41,7 +37,7 @@ function plugins_init() {
 	register_notification_object('object', 'plugins', elgg_echo('plugins:new'));
 
 	//register a widget
-	add_widget_type('plugins',elgg_echo('plugins'), elgg_echo('plugins'), 'profile');
+	add_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), 'profile');
 
 
 	// register url handlers for the 2 object subtypes
@@ -49,6 +45,12 @@ function plugins_init() {
 	register_entity_url_handler('plugins_project_url_handler', 'object', 'plugin_project');
 
 	register_elgg_event_handler('pagesetup', 'system', 'plugins_add_submenus');
+
+	// Only projects should show up in search
+	register_entity_type('object', 'plugin_project');
+
+	// Special hook for searching against metadata (category)
+	register_plugin_hook('search', 'object:plugin_project', 'plugins_search_hook');
 
 	// Elgg versions
 	$CONFIG->elgg_versions = array(
@@ -117,11 +119,27 @@ function plugins_init() {
 		'uncategorized' => 'Uncategorized',
 	);
 
-	// Only projects should show up in search
-	register_entity_type('object', 'plugin_project');
+	$action_base = "{$CONFIG->pluginspath}community_plugins/actions";
+	register_action("plugins/create_project", FALSE, "$action_base/create_project.php");
+	register_action("plugins/create_release", FALSE, "$action_base/create_release.php");
+	register_action("plugins/save_project", FALSE, "$action_base/save_project.php");
+	register_action("plugins/save_release", FALSE, "$action_base/save_release.php");
+	register_action("plugins/delete_project", FALSE, "$action_base/delete_project.php");
+	register_action("plugins/delete_release", FALSE, "$action_base/delete_release.php");
+	register_action("plugins/delete_project_image", FALSE, "$action_base/delete_project_image.php");
+	register_action("plugins/digg", FALSE, "$action_base/digg.php");
 
-	// Special hook for searching against metadata (category)
-	register_plugin_hook('search', 'object:plugin_project', 'plugins_search_hook');
+	register_action("plugins/upgrade", FALSE, "$action_base/upgrade.php", TRUE);
+	register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
+	register_action("plugins/normalize", FALSE, "$action_base/admin/normalize.php", TRUE);
+}
+
+/**
+ * Register classes for loading by Elgg when loading an entity
+ */
+function plugins_run_once() {
+	add_subtype("object", "plugin_release", "PluginRelease");
+	add_subtype("object", "plugin_project", "PluginProject");
 }
 
 /**
@@ -251,6 +269,7 @@ function plugins_page_handler($page) {
 
 	return TRUE;
 }
+
 /**
  * Serve up image.
  *
@@ -339,20 +358,3 @@ function plugins_add_type_menu($owner_guid) {
 		add_submenu_item($label, $url, 'pluginstypes');
 	}
 }
-
-
-register_elgg_event_handler('init', 'system', 'plugins_init');
-
-$action_base = "{$CONFIG->pluginspath}community_plugins/actions";
-register_action("plugins/create_project", FALSE, "$action_base/create_project.php");
-register_action("plugins/create_release", FALSE, "$action_base/create_release.php");
-register_action("plugins/save_project", FALSE, "$action_base/save_project.php");
-register_action("plugins/save_release", FALSE, "$action_base/save_release.php");
-register_action("plugins/delete_project", FALSE, "$action_base/delete_project.php");
-register_action("plugins/delete_release", FALSE, "$action_base/delete_release.php");
-register_action("plugins/delete_project_image", FALSE, "$action_base/delete_project_image.php");
-register_action("plugins/digg", FALSE, "$action_base/digg.php");
-
-register_action("plugins/upgrade", FALSE, "$action_base/upgrade.php", TRUE);
-register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
-register_action("plugins/normalize", FALSE, "$action_base/admin/normalize.php", TRUE);
