@@ -8,4 +8,4 @@
 
 require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
-include dirname(__FILE__) . "/pages/community_plugins/category_list.php";
+include dirname(__FILE__) . "/pages/plugins/category_list.php";
