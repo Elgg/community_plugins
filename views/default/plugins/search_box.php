@@ -1,4 +1,8 @@
 <?php
+/**
+ * Search box used throughout plugin repository
+ */
+
 $category = 'all';
 if (isset($vars['category'])) {
 	$category = $vars['category'];

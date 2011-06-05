@@ -1,6 +1,10 @@
 <?php
 /**
  * Elgg plugins layout
+ *
+ * @uses $vars['area1'] Main content area
+ * @uses $vars['area2'] Sidebar
+ * @uses $vars['area3'] Optional footer
  */
 
 ?>

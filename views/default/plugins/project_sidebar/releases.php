@@ -1,4 +1,8 @@
 <?php
+/**
+ * Sidebar box for list of releases
+ */
+
 $project = $vars['entity'];
 ?>
 <div class="sidebarBox">
@@ -97,4 +101,3 @@ $project = $vars['entity'];
 	echo "</div>";
 ?>
 </div>
-

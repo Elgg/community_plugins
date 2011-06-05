@@ -1,4 +1,7 @@
 <?php
+/**
+ * Sidebar box for other plugins by developer
+ */
 
 $project = $vars['entity'];
 

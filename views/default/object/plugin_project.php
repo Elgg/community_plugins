@@ -32,13 +32,13 @@ $summary = $project->summary;
 $license = $project->license;
 $friendlytime = friendly_time($project->time_created);
 $downloads = $project->getDownloadCount();
-$usericon = elgg_view("profile/icon", array('entity' => $project_owner,
-											'size' => 'small',
-											)
-						);
+$usericon = elgg_view("profile/icon", array(
+	'entity' => $project_owner,
+	'size' => 'small',
+));
 
 
-switch(get_context()) {
+switch (get_context()) {
 	case 'search':
 		$info = "<span class='downloadsnumber'>{$downloads}</span>";
 		$info .= "<p class='pluginName'> <a href=\"{$project->getURL()}\">{$title} </a></p>";
@@ -51,12 +51,11 @@ switch(get_context()) {
 		break;
 
 	case 'plugin_project':
-		echo elgg_view(	"profile/icon",
-						array(	'entity' => $project_owner,
-								'size' => 'tiny',
-								'override' => true,
-							)
-						);
+		echo elgg_view("profile/icon", array(
+			'entity' => $project_owner,
+			'size' => 'tiny',
+			'override' => true,
+		));
 		echo "<p><a href=\"{$project->getURL()}\">{$title}</a><br />";
 		echo "Uploaded $friendlytime ($downloads)</p>";
 		break;

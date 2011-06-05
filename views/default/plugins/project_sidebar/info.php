@@ -1,4 +1,7 @@
 <?php
+/**
+ * Sidebar box for plugin project information: homepage, repository, donations
+ */
 
 $project = $vars['entity'];
 

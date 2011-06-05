@@ -1,4 +1,7 @@
 <?php
+/**
+ * List the top plugins
+ */
 
 $title = elgg_echo("plugins:listing:{$vars['type']}");
 ?>

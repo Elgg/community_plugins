@@ -1,4 +1,7 @@
 <?php
+/**
+ * Sidebar box for project images
+ */
 
 $project = $vars['entity'];
 
