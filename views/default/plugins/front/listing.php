@@ -1,5 +1,5 @@
 <?php
-
+global $CONFIG;
 $title = elgg_echo("plugins:listing:{$vars['type']}");
 ?>
 <div class="plugins_front_listing">
@@ -19,4 +19,9 @@ foreach ($vars['plugins'] as $plugin) {
 	}
 }
 ?>
+	<div class="browse_more">
+		<a class="upload_plugin" href="<?php echo $CONFIG->wwwroot?>pg/plugins/all?sort=<?php echo $vars['type']; ?>">
+			<?php echo elgg_echo("plugins:browse_more:{$vars['type']}"); ?>
+		</a>
+	</div>
 </div>

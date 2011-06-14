@@ -3,6 +3,8 @@
  * Front page for plugin repository
  */
 
+global $CONFIG; 
+
 //Newest
 $newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_project'));
 
@@ -16,7 +18,11 @@ $dugg = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_p
 set_context('plugin_project');
 
 $welcome = elgg_view('plugins/front/main');
-$sidebar = elgg_view('plugins/categories');
+$sidebar = elgg_view('plugins/filters', array(
+	'categories' => $CONFIG->plugincats,
+	'versions' => $CONFIG->elgg_versions,
+	'licences' => $CONFIG->gpllicenses
+));
 $bottom = elgg_view('plugins/front/bottom', array(	'newest' => $newest,
 													'popular' => $popular,
 													'dugg' => $dugg,));

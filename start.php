@@ -200,10 +200,13 @@ function plugins_page_handler($page) {
 	switch($page[0]) {
 		// plugin repository front page
 		case "all":
+			elgg_extend_view('metatags', 'plugins/metatags');
 			include("$plugin_dir/all.php");
 			break;
 		// category listing page
 		case "category":
+			elgg_extend_view('metatags', 'plugins/metatags');
+			set_view_location('entities/entity_list', $CONFIG->pluginspath . "community_plugins/views/override/");
 			set_input('category', $page[1]);
 			include("$plugin_dir/category_list.php");
 			break;

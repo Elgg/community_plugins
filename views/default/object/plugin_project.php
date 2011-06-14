@@ -31,22 +31,29 @@ $desc = $project->description;
 $summary = $project->summary;
 $license = $project->license;
 $friendlytime = friendly_time($project->time_created);
+$created = date('d M, Y', $project->time_created);
+$updated = friendly_time($project->time_updated);
 $downloads = $project->getDownloadCount();
+$diggs = $project->countAnnotations('plugin_digg');
 $usericon = elgg_view("profile/icon", array('entity' => $project_owner,
 											'size' => 'small',
 											)
 						);
+$iconpath = $CONFIG->wwwroot . 'mod/community_plugins/_graphics';
 
 
 switch(get_context()) {
 	case 'search':
-		$info = "<span class='downloadsnumber'>{$downloads}</span>";
-		$info .= "<p class='pluginName'> <a href=\"{$project->getURL()}\">{$title} </a></p>";
+		$info = "<div class='pluginName'> <a href=\"{$project->getURL()}\">{$title} </a>";
+		$info .= "<span class=\"info_item\"><img src=\"$iconpath/updated.png\" alt=\"Updated\" title=\"Updated\">$updated</span>";
+		$info .= "<span class=\"info_item\"><img src=\"$iconpath/recommended.png\" alt=\"Recommendations\" title=\"Recommendations\">$diggs</span>";
+		$info .= "<span class=\"info_item\"><img src=\"$iconpath/downloaded.png\" alt=\"Downloads\" title=\"Downloads\">$downloads</span>";
+		$info .= '</div>';
 		if ($summary) {
 			$info .= "<p class='description'>" . $summary . "</p>";
 		}
 		$user_url = "{$vars['url']}pg/plugins/developer/{$project_owner->username}";
-		$info .= "<p class=\"owner_timestamp\"><a href=\"$user_url\">{$project_owner->name}</a> {$friendlytime}</p>";
+		$info .= "<p class=\"owner_timestamp\"><a href=\"$user_url\">{$project_owner->name}</a> {$created} ({$friendlytime})</p>";
 		echo elgg_view_listing($usericon, $info);
 		break;
 

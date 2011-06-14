@@ -225,6 +225,36 @@ $english = array(
 
 	'plugins:prevversions' => "Previous version",
 	'plugins:nextversions' => "Warning! There is a newer version available",
+
+	'plugins:browse_more:newest' => "Browse most recent plugins",
+	'plugins:browse_more:popular' => "Browse most downloaded plugins",
+	'plugins:browse_more:dugg' => "Browse most recommended plugins",
+
+
+	/**
+	 * Sort field labels
+	 */
+
+	'plugins:sort:info' => 'Sort by:',
+	'plugins:sort:title' => 'Title',
+	'plugins:sort:author' => 'Author',
+	'plugins:sort:downloads' => 'Downloads',
+	'plugins:sort:recommendations' => 'Recommendations',
+	'plugins:sort:created' => 'Created',
+	'plugins:sort:updated' => 'Updated',
+
+
+	/**
+	 * Filters
+	 */
+
+	'plugins:filters:title' => 'Search plugins based on...',
+	'plugins:filters:category' => 'Category',
+	'plugins:filters:version' => 'Elgg version',
+	'plugins:filters:licence' => 'Licence type',
+	'plugins:filters:text' => 'Any text',
+	'plugins:filters:screenshot' => 'Only with screenshot',
+
 );
 
 add_translation("en", $english);
