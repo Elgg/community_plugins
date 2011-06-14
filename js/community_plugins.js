@@ -6,7 +6,7 @@ jQuery(document).ready(function () {
 
 	$('form#plugin_search_form select.multiselect').dropdownchecklist({ 
 		emptyText: "Any", 
-		width: 200 
+		width: 220 
 	}); 
 	
 /*	
