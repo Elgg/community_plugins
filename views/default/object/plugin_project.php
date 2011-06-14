@@ -39,7 +39,7 @@ $usericon = elgg_view("profile/icon", array('entity' => $project_owner,
 											'size' => 'small',
 											)
 						);
-$iconpath = $CONFIG->wwwroot . 'mod/community_plugins/_graphics';
+$iconpath = $CONFIG->wwwroot . 'mod/community_plugins/graphics/icons';
 
 
 switch(get_context()) {
