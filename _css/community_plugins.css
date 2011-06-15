@@ -20,13 +20,24 @@ span.sort-item img {
 	vertical-align: middle;
 }
 
+span.sort-item a {
+    border: 1px solid #fffffff;
+    border-radius: 4px 4px 4px 4px;
+}
+
 span.sort-item :hover {
     text-decoration: none;
-    color: #d69046;
+    background: none repeat scroll 0 0 #4690D6;
+    border: 1px solid #4690D6;
+    border-radius: 4px 4px 4px 4px;
+    color: white;
 }
 
 span.sort-item a.sort-active {
-    color: #d69046;
+    background: none repeat scroll 0 0 #4690D6;
+    border: 1px solid #4690D6;
+    border-radius: 4px 4px 4px 4px;
+    color: white;
 }
 
 /***************** Main page ********************/

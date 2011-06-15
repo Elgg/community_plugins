@@ -8,7 +8,11 @@
     
     $offset = get_input('offset', 0);
     $limit = get_input('limit', 10);
-    $filters = get_input('filters');
+
+    // Filters are passed as an associative, multidimensional array with shortened keys (to fit into IE's max URI length)
+    $filters = get_input('f');
+
+    // Default sort is time_createad, descending
     $sort = get_input('sort', 'created');
     $direction = get_input('direction', 'desc');
 
@@ -19,73 +23,87 @@
         'limit'                     => $limit,
         'metadata_name_value_pairs'	=> array(),
         'metadata_case_sensitive'   => false,
+    	'joins'						=> array(),
     );
-    $joins = array();
+    $wheres = array();
 
-        // Handle entity filtering
+    // Handle entity filtering
     if (is_array($filters) && !empty($filters)) {
         foreach ($filters as $key => $value) {
             $key = mysql_real_escape_string($key);
             switch ($key) {
-                case 'text' :
-                	/*
+                case 't' :
+                	// Any text value, will be matched against plugin title, description, summary, author name and username
                 	if (strlen($value) > 0) {
 	                	$value = mysql_real_escape_string($value);
-                        if (empty($joins['users'])) {
-                            $joins['users'] = array();
-                        }
-                        $joins['users'][] = "join {$CONFIG->dbprefix}users_entity u on (e.guid = u.guid)";
-                        if (empty($options['wheres'])) {
-                            $options['wheres'] = array();
-                        }
-                        $options['wheres'][] = "(u.{$key} LIKE '%{$value}%')";
+                        $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}objects_entity o ON (e.guid = o.guid)";
+						$fields = array('title', 'description');
+						$wheres[] = search_get_where_sql('o', $fields, array('query' => $value, 'joins' => $options['joins']));
+                        $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}users_entity u ON (e.owner_guid = u.guid)";
+						$fields = array('username', 'name');
+						$wheres[] = search_get_where_sql('u', $fields, array('query' => $value, 'joins' => $options['joins']));
                     }
-                    */
                     break;
-                case 'categories' :
+                case 'c' :
+                	// Categories
                 	if (is_array($value) && !empty($value)) {
                 		$options['metadata_name_value_pairs'][] = array("name" => 'plugincat', "value" => $value, "operand" => "IN");
                 	}
                     break;
-                case 'licences' :
+                case 'l' :
+                	// Licences
                 	if (is_array($value) && !empty($value)) {
                 		$options['metadata_name_value_pairs'][] = array("name" => 'license', "value" => $value, "operand" => "IN");
                 	}
                     break;
-                case 'versions' :
+                case 'v' :
+                	// Elgg versions
                 	if (is_array($value) && !empty($value)) {
                 		$versions = '("' . implode('","', $value) . '")';
                 		$plugin_release_subtype = get_subtype_id('object', 'plugin_release');
-                		$joins[] = "INNER JOIN {$CONFIG->dbprefix}entities pre ON (e.guid = pre.container_guid AND pre.subtype = $plugin_release_subtype)";
-	                    $joins[] = "INNER JOIN {$CONFIG->dbprefix}metadata prm ON (pre.guid = prm.entity_guid)";
-	                    $joins[] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_name ON (prm.name_id = prm_name.id AND prm_name.string = 'elgg_version')";
-	                    $joins[] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_value ON (prm.value_id = prm_value.id AND prm_value.string IN $versions)";
+                		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}entities pre ON (e.guid = pre.container_guid AND pre.subtype = $plugin_release_subtype)";
+	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata prm ON (pre.guid = prm.entity_guid)";
+	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_name ON (prm.name_id = prm_name.id AND prm_name.string = 'elgg_version')";
+	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_value ON (prm.value_id = prm_value.id AND prm_value.string IN $versions)";
                 	}
+                	break;
+                case 's' :
+                	// Only with screenshot
+                	/*
+                	if (is_array($value) && !empty($value)) {
+                		$versions = '("' . implode('","', $value) . '")';
+                		$plugin_release_subtype = get_subtype_id('object', 'plugin_release');
+                		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}entities pre ON (e.guid = pre.container_guid AND pre.subtype = $plugin_release_subtype)";
+	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata prm ON (pre.guid = prm.entity_guid)";
+	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_name ON (prm.name_id = prm_name.id AND prm_name.string = 'elgg_version')";
+	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_value ON (prm.value_id = prm_value.id AND prm_value.string IN $versions)";
+                	}
+                	*/
                 	break;
             }
         }
     }    
 
-    if (!empty($joins)) {
-        $options['joins'] = $joins;
+    // WHERE clauses will only be added for full text search - so all wheres can be safely joined by 'OR'
+    if (!empty($wheres)) {
+    	$options['wheres'] = array();
+    	$options['wheres'][] = '(' . implode(' OR ', $wheres) . ')';
     }
-    
-	$title = sprintf(elgg_echo('plugins:category:title'), $category_label);
 	
 	// Get objects
 	set_context('search');
-	
     $count = elgg_get_entities_from_metadata(array_merge($options, array('count' => true)));
     $entities = elgg_get_entities_from_metadata($options);
     $list = elgg_view_entity_list($entities, $count, $offset, $limit, false, false, true);
+    set_context('plugins');
+
+	$title = sprintf(elgg_echo('plugins:category:title'), $category_label);
     
-		
-	set_context('plugins');
-	
 	$sidebar = elgg_view('plugins/filters', array(
 		'categories' => $CONFIG->plugincats,
 		'versions' => $CONFIG->elgg_versions,
-		'licences' => $CONFIG->gpllicenses
+		'licences' => $CONFIG->gpllicenses,
+		'current_values' => $filters
 	));
 	
 	$main = elgg_view('plugins/search/main', array('area1' => $list));

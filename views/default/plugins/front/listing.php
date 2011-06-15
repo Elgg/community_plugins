@@ -1,6 +1,7 @@
 <?php
 global $CONFIG;
 $title = elgg_echo("plugins:listing:{$vars['type']}");
+$sort_conversions = array('newest' => 'created', 'popular' => 'downloads', 'dugg' => 'recommendations');
 ?>
 <div class="plugins_front_listing">
 	<h2><?php echo $title; ?></h2>
@@ -20,7 +21,7 @@ foreach ($vars['plugins'] as $plugin) {
 }
 ?>
 	<div class="browse_more">
-		<a class="upload_plugin" href="<?php echo $CONFIG->wwwroot?>pg/plugins/all?sort=<?php echo $vars['type']; ?>">
+		<a class="upload_plugin" href="<?php echo $CONFIG->wwwroot?>pg/plugins/search?sort=<?php echo $sort_conversions[$vars['type']]; ?>">
 			<?php echo elgg_echo("plugins:browse_more:{$vars['type']}"); ?>
 		</a>
 	</div>

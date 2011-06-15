@@ -203,14 +203,20 @@ function plugins_page_handler($page) {
 			elgg_extend_view('metatags', 'plugins/metatags');
 			include("$plugin_dir/all.php");
 			break;
-		// category listing page
+		// category listing page (deprecated, just preserved for compatibility and old bookmarks' sake)
 		case "category":
 			elgg_extend_view('metatags', 'plugins/metatags');
 			set_view_location('entities/entity_list', $CONFIG->pluginspath . "community_plugins/views/override/");
 			set_input('category', $page[1]);
 			include("$plugin_dir/category_list.php");
 			break;
-		// list a developer's plugins
+		// New advanced search page (with filtering and sorting)
+		case "search":
+			elgg_extend_view('metatags', 'plugins/metatags');
+			set_view_location('entities/entity_list', $CONFIG->pluginspath . "community_plugins/views/override/");
+			include("$plugin_dir/search.php");
+			break;
+			// list a developer's plugins
 		case "developer":
 			set_input('username', $page[1]);
 			if (isset($page[2])) {
