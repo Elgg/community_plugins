@@ -50,11 +50,14 @@ if ($pagination) {
 
 $html .= $nav;
 
-$html .= elgg_view('navigation/sort',array(
-            'sort_fields' => $sort_fields,
-            'sort' => $sort,
-            'direction' => $direction,
-        ));
+if ($count) {
+	$html .= elgg_view('navigation/sort',array(
+	        	'baseurl' => $baseurl,
+				'sort_fields' => $sort_fields,
+	            'sort' => $sort,
+	            'direction' => $direction,
+	        ));
+}
 
 if ($viewtype == 'list') {
     if (is_array($entities) && sizeof($entities) > 0) {

@@ -20,7 +20,7 @@
                 <div>
                     <select name="f[c][]" class="input-select multiselect" multiple="multiple">
                     <?php foreach ($vars['categories'] as $key => $category) :?>
-                        <option value="<?php echo $key; ?>"><?php echo $category; ?></option>
+                        <option value="<?php echo $key; ?>" <?php echo (is_array($vars['current_values']['c']) && in_array($key, $vars['current_values']['c'])) ? 'selected="selected"' : ''; ?>><?php echo $category; ?></option>
                     <?php endforeach; ?>
                     </select>
                 </div>
@@ -33,7 +33,7 @@
                 <div>
                     <select name="f[v][]" class="input-select multiselect" multiple="multiple">
                     <?php foreach ($vars['versions'] as $version) :?>
-                        <option value="<?php echo $version; ?>"><?php echo $version; ?></option>
+                        <option value="<?php echo $version; ?>" <?php echo (is_array($vars['current_values']['v']) && in_array($version, $vars['current_values']['v'])) ? 'selected="selected"' : ''; ?>><?php echo $version; ?></option>
                     <?php endforeach; ?>
                     </select>
                 </div>
@@ -46,7 +46,7 @@
                 <div>
                     <select name="f[l][]" class="input-select multiselect" multiple="multiple">
                     <?php foreach ($vars['licences'] as $key => $licence) :?>
-                        <option value="<?php echo $key; ?>"><?php echo $licence; ?></option>
+                        <option value="<?php echo $key; ?>" <?php echo (is_array($vars['current_values']['l']) && in_array($key, $vars['current_values']['l'])) ? 'selected="selected"' : ''; ?>><?php echo $licence; ?></option>
                     <?php endforeach; ?>
                     </select>
                 </div>
@@ -56,19 +56,19 @@
             <div class="filter_fields">
                 <div class="filter_label"><?php echo elgg_echo('plugins:filters:text'); ?></div>
                 <div>
-                    <input type="text" name="f[t]" value="<?php echo $vars['filters']['text']; ?>" class="input-text"/>
+                    <input type="text" name="f[t]" value="<?php echo $vars['current_values']['t']; ?>" class="input-text"/>
                 </div>
             </div>
 
             <div class="filter_fields">
                 <div class="filter_label">
-                	<input type="checkbox" name="f[s]" />
+                	<input type="checkbox" name="f[s]" <?php echo (isset($vars['current_values']['s'])) ? 'checked="checked"' : ''; ?>/>
                 	<?php echo elgg_echo('plugins:filters:screenshot'); ?>
                 </div>
             </div>
 
             <div class="search_fields">
-                <input type="submit" class='search_plugins' name="submit_button" value="Search" />
+                <input type="submit" class='search_plugins' name="sb" value="Search" />
                 <button type="button" id="clear_search" class='clear_search' name="clear">Clear values</button>
             </div>
         </form>

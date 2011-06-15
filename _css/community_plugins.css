@@ -21,11 +21,10 @@ span.sort-item img {
 }
 
 span.sort-item a {
-    border: 1px solid #fffffff;
-    border-radius: 4px 4px 4px 4px;
+    border: 1px solid white;
 }
 
-span.sort-item :hover {
+span.sort-item a:hover {
     text-decoration: none;
     background: none repeat scroll 0 0 #4690D6;
     border: 1px solid #4690D6;
@@ -96,6 +95,12 @@ div#plugin_filters button.clear_search {
 }
 
 div#plugin_filters button.clear_search:hover {
-    background: none repeat scroll 0 0 black;
+    background: none repeat scroll 0 0 #0054a7;
     color: white;
+}
+
+/***************** Main page ********************/
+
+div#plugins_whatsnew {
+	margin-top: 15px;
 }

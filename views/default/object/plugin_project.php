@@ -13,13 +13,16 @@ if (!$project) {
 	return ' ';
 }
 
-// get the recommend release or latest
+// get latest release (for displaying "last updated" value)
+$latest_releases = elgg_get_entities(array('container_guid' => $project->guid, 'limit' => 1));
+if ($latest_releases) {
+	$latest_release = $latest_releases[0];
+}
+
+// get the recommend release (or use latest, if not available)
 $release = get_entity(get_input('release', $project->recommended_release_guid));
 if (!$release || !($release instanceof PluginRelease)) {
-	$releases = elgg_get_entities(array('container_guid' => $project->getGUID()));
-	if ($releases) {
-		$release = $releases[0];
-	}
+	$release = $latest_release;
 }
 
 // get required variables
@@ -32,7 +35,7 @@ $summary = $project->summary;
 $license = $project->license;
 $friendlytime = friendly_time($project->time_created);
 $created = date('d M, Y', $project->time_created);
-$updated = friendly_time($project->time_updated);
+$updated = friendly_time($latest_release->time_created);
 $downloads = $project->getDownloadCount();
 $diggs = $project->countAnnotations('plugin_digg');
 $usericon = elgg_view("profile/icon", array('entity' => $project_owner,

@@ -29,7 +29,7 @@
         } else {
             $sort_dir = 'desc';
         }
-        $sort_link_URL = $CONFIG->wwwroot. 'pg/plugins/category/all?sort=' . $sort_field .'&direction=' . $sort_dir;
+        $sort_link_URL = elgg_http_add_url_query_elements($vars['baseurl'], array('sort' => $sort_field, 'direction' => $sort_dir));
         if ($sort_field == $sort) {
             $class = "sort sort-active";
         } else {

@@ -255,6 +255,22 @@ $english = array(
 	'plugins:filters:text' => 'Any text',
 	'plugins:filters:screenshot' => 'Only with screenshot',
 
+	/**
+	 * Search labels
+	 */
+
+	'plugins:search:title' => 'Search plugins',
+	'plugins:search:results' => 'Found %d plugins, displaying %d to %d',
+	'plugins:search:noresults' => 'No plugins found',
+	'plugins:search:noresults:info' => 'Your search did not match any plugins in our repository. Please try again with less specific search terms.',
+
+	/**
+	 * What's new
+	 */
+
+	'plugins:front:intro:whatsnew' => 'What\'s new?',
+	'plugins:front:intro:whatsnew:text' => 'You can now search and browse plugins more effectively than ever before. Use the right column block to filter plugins based on categories, Elgg version compatibility and more. Sort results by download counts, recommendations, authors and other properties.',
+
 );
 
 add_translation("en", $english);
