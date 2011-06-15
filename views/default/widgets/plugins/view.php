@@ -1,4 +1,7 @@
 <?php
+/**
+ * Widget content
+ */
 
 //the page owner
 $owner = $vars['entity']->owner_guid;

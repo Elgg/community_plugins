@@ -1,4 +1,8 @@
 <?php
+/**
+ * List the top plugins
+ */
+
 global $CONFIG;
 $title = elgg_echo("plugins:listing:{$vars['type']}");
 $sort_conversions = array('newest' => 'created', 'popular' => 'downloads', 'dugg' => 'recommendations');

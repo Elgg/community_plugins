@@ -1,5 +1,4 @@
 <?php
-
 /**
  * New plugin project river item
  */

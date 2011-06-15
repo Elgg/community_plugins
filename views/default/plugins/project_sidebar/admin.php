@@ -1,17 +1,20 @@
 <?php
+/**
+ * Project admin - edit, new release, delete
+ */
 
 $project = $vars['entity'];
 
-	$ts = time();
-	$token = generate_action_token($ts);
+$ts = time();
+$token = generate_action_token($ts);
 
-	$delete = elgg_view('output/confirmlink',array(
-		'href' => $vars['url'] . "action/plugins/delete_project?project_guid={$project->getGUID()}&__elgg_ts=$ts&__elgg_token=$token",
-		'text' => 'Delete Project',
-		'confirm' => elgg_echo("plugins:delete_project:confirm"),
-	));
+$delete = elgg_view('output/confirmlink',array(
+	'href' => $vars['url'] . "action/plugins/delete_project?project_guid={$project->getGUID()}&__elgg_ts=$ts&__elgg_token=$token",
+	'text' => 'Delete Project',
+	'confirm' => elgg_echo("plugins:delete_project:confirm"),
+));
 
-	?>
+?>
 <div class="sidebarBox">
 	<h3><?php echo elgg_echo('Project Admin'); ?></h3>
 	<div class="contentWrapper">

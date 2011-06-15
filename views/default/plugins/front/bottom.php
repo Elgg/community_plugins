@@ -1,4 +1,8 @@
 <?php
+/**
+ * Footer for main page
+ */
+
 ?>
 <div id="plugin_three_column">
 <?php

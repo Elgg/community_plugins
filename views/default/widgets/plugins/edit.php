@@ -1,4 +1,8 @@
 <?php
+/**
+ * Widget settings
+ */
+
 // set default value if not set
 if (!isset($vars['entity']->num_display)) {
 	$vars['entity']->num_display = 4;

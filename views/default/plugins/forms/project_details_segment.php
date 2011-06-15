@@ -136,7 +136,7 @@ if (array_key_exists('project', $vars)
 	</p>
 
 	<p>
-		<label>Donations URL (Optional)<br />
+		<label>Donations URL<br />
 		<span class="pluginHint">If you accept donations, enter the URL to the donations section of your website.</span>
 		<?php
 			echo elgg_view("input/text",array(
@@ -166,9 +166,9 @@ if (array_key_exists('project', $vars)
 	</p>
 	<?php
 		if ($project
-		&& ($entities = elgg_get_entities(array('container_guid' => $project->getGUID())))
-		&& is_array($entities)
-		&& (count($entities) > 0)) {
+			&& ($entities = elgg_get_entities(array('container_guid' => $project->getGUID())))
+			&& is_array($entities)
+			&& (count($entities) > 0)) {
 
 			$releases = array(0 => 'No recommended release');
 
@@ -182,7 +182,7 @@ if (array_key_exists('project', $vars)
 	?>
 	<p>
 	<label>Project Images<br />
-		<span class="pluginHint">Show off your project by uploading images!</span><br /><Br />
+		<span class="pluginHint">Show off your project by uploading images!</span><br /><br />
 	</label>
 	<?php
 		for ($i=1; $i<=4; $i++) {
@@ -195,9 +195,10 @@ if (array_key_exists('project', $vars)
 				);
 
 				if (($image = elgg_get_entities_from_relationship($options))
-				&& ($image[0] instanceof ElggFile)
-				&& ($thumb = get_entity($image[0]->thumbnail_guid))
-				&& ($thumb instanceof ElggFile)) {
+					&& ($image[0] instanceof ElggFile)
+					&& ($thumb = get_entity($image[0]->thumbnail_guid))
+					&& ($thumb instanceof ElggFile)) {
+					
 					$title = $image[0]->title;
 					$src = "{$vars['url']}pg/plugins_image/{$thumb->getGUID()}/{$thumb->time_created}.jpg";
 					$img = "<img style=\"float: left; padding-right: 1em;\" src=\"$src\" />\n";

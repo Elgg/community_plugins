@@ -1,6 +1,6 @@
 <?php
 /**
- * User hover over menu item
+ * User hover menu item
  */
 ?>
 <p class="user_menu_profile">

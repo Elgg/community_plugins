@@ -38,14 +38,14 @@ $created = date('d M, Y', $project->time_created);
 $updated = friendly_time($latest_release->time_created);
 $downloads = $project->getDownloadCount();
 $diggs = $project->countAnnotations('plugin_digg');
-$usericon = elgg_view("profile/icon", array('entity' => $project_owner,
-											'size' => 'small',
-											)
-						);
+$usericon = elgg_view("profile/icon", array(
+	'entity' => $project_owner,
+	'size' => 'small',
+));
 $iconpath = $CONFIG->wwwroot . 'mod/community_plugins/graphics/icons';
 
 
-switch(get_context()) {
+switch (get_context()) {
 	case 'search':
 		$info = "<div class='pluginName'> <a href=\"{$project->getURL()}\">{$title} </a>";
 		$info .= "<span class=\"info_item\"><img src=\"$iconpath/updated.png\" alt=\"Updated\" title=\"Updated\">$updated</span>";
@@ -61,12 +61,11 @@ switch(get_context()) {
 		break;
 
 	case 'plugin_project':
-		echo elgg_view(	"profile/icon",
-						array(	'entity' => $project_owner,
-								'size' => 'tiny',
-								'override' => true,
-							)
-						);
+		echo elgg_view("profile/icon", array(
+			'entity' => $project_owner,
+			'size' => 'tiny',
+			'override' => true,
+		));
 		echo "<p><a href=\"{$project->getURL()}\">{$title}</a><br />";
 		echo "Uploaded $friendlytime ($downloads)</p>";
 		break;

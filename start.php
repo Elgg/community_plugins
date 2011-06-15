@@ -118,7 +118,7 @@ function plugins_init() {
 		'uncategorized' => 'Uncategorized',
 	);
 
-	$action_base = "{$CONFIG->pluginspath}community_plugins/actions/community_plugins";
+	$action_base = "{$CONFIG->pluginspath}community_plugins/actions/plugins";
 	register_action("plugins/create_project", FALSE, "$action_base/create_project.php");
 	register_action("plugins/create_release", FALSE, "$action_base/create_release.php");
 	register_action("plugins/save_project", FALSE, "$action_base/save_project.php");
@@ -190,7 +190,7 @@ function plugins_page_handler($page) {
 
 	global $CONFIG;
 
-	$plugin_dir = $CONFIG->pluginspath . "community_plugins/pages/community_plugins";
+	$plugin_dir = $CONFIG->pluginspath . "community_plugins/pages/plugins";
 
 	if (!isset($page[0])) {
 		// bad url - we'll send to main plugin page

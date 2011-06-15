@@ -1,6 +1,6 @@
 <?php
 /**
- * Total plugin stats
+ * Total plugin stats for main page
  */
 
 $num_downloads = plugins_get_all_download_count();

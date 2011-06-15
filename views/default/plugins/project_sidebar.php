@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin project sidebar
- **/
+ * Wrapper for plugin project sidebar
+ */
 
 //get the plugin project
 $project = $vars['entity'];
@@ -30,4 +30,3 @@ if (isloggedin()) {
 		echo '</div>';
 	}
 }
-
