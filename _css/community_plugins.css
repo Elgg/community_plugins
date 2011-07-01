@@ -77,8 +77,13 @@ div#plugin_filters div.filter_fields {
 div#plugin_filters div.filter_label {
     color: #555;
     margin-bottom: 5px;
+    font-weight: normal;
+}
+
+div#plugin_filters div.filter_label.ui-state-active {
     font-weight: bold;
 }
+
 
 div#plugin_filters button.clear_search {
     background: none repeat scroll 0 0 #4690d6;
@@ -103,4 +108,18 @@ div#plugin_filters button.clear_search:hover {
 
 div#plugins_whatsnew {
 	margin-top: 15px;
+}
+
+
+/***************** Admin page ********************/
+
+form#plugins_search_settings p label {
+	font-size: 1em;
+	font-weight: normal;
+	padding-left: 15px;
+}
+
+form#plugins_search_settings p.sub-option {
+	padding-left: 15px;
+	font-style: italic;
 }

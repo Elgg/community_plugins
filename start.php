@@ -131,6 +131,7 @@ function plugins_init() {
 	register_action("plugins/upgrade", FALSE, "$action_base/admin/upgrade.php", TRUE);
 	register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
 	register_action("plugins/normalize", FALSE, "$action_base/admin/normalize.php", TRUE);
+	register_action("plugins/settings/save", FALSE, "$action_base/admin/save.php", TRUE);
 }
 
 /**
@@ -265,6 +266,7 @@ function plugins_page_handler($page) {
 			break;
 		// admin page
 		case "admin":
+			elgg_extend_view('metatags', 'plugins/metatags');
 			set_input('tab', $page[1]);
 			include("$plugin_dir/admin.php");
 			break;

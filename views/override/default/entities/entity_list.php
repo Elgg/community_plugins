@@ -21,6 +21,14 @@ $sort_fields = array('title', 'author', 'downloads', 'recommendations', 'created
 $sort = get_input('sort', 'created');
 $direction = get_input('direction', 'desc');
 
+
+// Get search-specific settings
+$serialized_settings = get_plugin_setting('search-settings', 'community_plugins');
+$settings = unserialize($serialized_settings);
+if (!is_array($settings)) {
+	$settings = array();
+}
+
 $html = "";
 $nav = "";
 
@@ -50,7 +58,7 @@ if ($pagination) {
 
 $html .= $nav;
 
-if ($count) {
+if ($count && isset($settings['sort']) && $settings['sort'] == 'enabled') {
 	$html .= elgg_view('navigation/sort',array(
 	        	'baseurl' => $baseurl,
 				'sort_fields' => $sort_fields,

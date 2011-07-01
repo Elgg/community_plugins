@@ -5,6 +5,13 @@
 
 global $CONFIG; 
 
+// Get search-specific settings
+$serialized_settings = get_plugin_setting('search-settings', 'community_plugins');
+$settings = unserialize($serialized_settings);
+if (!is_array($settings)) {
+	$settings = array();
+}
+
 //Newest
 $newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_project'));
 
@@ -21,7 +28,9 @@ $welcome = elgg_view('plugins/front/main');
 $sidebar = elgg_view('plugins/filters', array(
 	'categories' => $CONFIG->plugincats,
 	'versions' => $CONFIG->elgg_versions,
-	'licences' => $CONFIG->gpllicenses
+	'licences' => $CONFIG->gpllicenses,
+	'settings' => $settings
+
 ));
 $bottom = elgg_view('plugins/front/bottom', array(	'newest' => $newest,
 													'popular' => $popular,
