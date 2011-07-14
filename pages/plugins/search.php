@@ -33,6 +33,7 @@
     	'joins'						=> array(),
     );
     $wheres = array();
+    $group_bys = array();
 
     // Handle entity filtering
     if (is_array($filters) && !empty($filters)) {
@@ -87,7 +88,10 @@
                 	if (is_array($settings['category']) && in_array('enabled', $settings['category'])) {
 	                	// Categories
 	                	if (is_array($value) && !empty($value)) {
-	                		$options['metadata_name_value_pairs'][] = array("name" => 'plugincat', "value" => $value, "operand" => "IN");
+	                		$categories = '("' . implode('","', $value) . '")';
+	                		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata cm ON (e.guid = cm.entity_guid)";
+		                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings cs_name ON (cm.name_id = cs_name.id AND cs_name.string = 'plugincat')";
+		                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings cs_value ON (cm.value_id = cs_value.id AND cs_value.string IN $categories)";
 	                	}
                 	}
                     break;
@@ -95,7 +99,10 @@
                 	if (is_array($settings['licence']) && in_array('enabled', $settings['licence'])) {
 	                	// Licences
 	                	if (is_array($value) && !empty($value)) {
-	                		$options['metadata_name_value_pairs'][] = array("name" => 'license', "value" => $value, "operand" => "IN");
+	                		$licences = '("' . implode('","', $value) . '")';
+	                		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata lm ON (e.guid = lm.entity_guid)";
+		                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings ls_name ON (lm.name_id = ls_name.id AND ls_name.string = 'license')";
+		                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings ls_value ON (lm.value_id = ls_value.id AND ls_value.string IN $licences)";
 	                	}
                 	}
                     break;
@@ -109,6 +116,7 @@
 		                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata prm ON (pre.guid = prm.entity_guid)";
 		                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_name ON (prm.name_id = prm_name.id AND prm_name.string = 'elgg_version')";
 		                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_value ON (prm.value_id = prm_value.id AND prm_value.string IN $versions)";
+		                    $group_bys[] = 'pre.guid';
 	                	}
                 	}
                 	break;
@@ -144,14 +152,16 @@
 	    		$download_id = get_metastring_id('download', true);
 	    		$options['selects'] = array("count(a.entity_guid) as downloads");
 	    		$options['joins'][] = "LEFT JOIN {$CONFIG->dbprefix}annotations a on (e.guid = a.entity_guid AND a.name_id = $download_id)";
-	    		$options['group_by'] = "e.guid, a.entity_guid";
+				$group_bys = array_merge(array('e.guid', 'a.entity_guid'), $group_bys);
+	    		$options['group_by'] = implode(',', $group_bys);
 	    		$options['order_by'] = "downloads {$direction}";
 	    		break;
 	    	case 'recommendations':
 	    		$digg_id = get_metastring_id('plugin_digg', true);
 	    		$options['selects'] = array("count(a.entity_guid) as recommendations");
 	    		$options['joins'][] = "LEFT JOIN {$CONFIG->dbprefix}annotations a on (e.guid = a.entity_guid AND a.name_id = $digg_id)";
-	    		$options['group_by'] = "e.guid, a.entity_guid";
+				$group_bys = array_merge(array('e.guid', 'a.entity_guid'), $group_bys);
+	    		$options['group_by'] = implode(',', $group_bys);
 	    		$options['order_by'] = "recommendations {$direction}";
 	    		break;
 	    	case 'created':
