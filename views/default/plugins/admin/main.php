@@ -8,7 +8,7 @@ if (!$selected_tab) {
 	$selected_tab = 'stats';
 }
 
-$tabs = array('stats', 'upgrade', 'utilities');
+$tabs = array('stats', 'upgrade', 'utilities', 'search');
 
 echo '<ul>';
 foreach ($tabs as $tab) {

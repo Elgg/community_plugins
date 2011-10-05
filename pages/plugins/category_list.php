@@ -21,7 +21,11 @@ if ($category) {
 }
 set_context('plugins');
 
-$sidebar = elgg_view('plugins/search/sidebar');
+$sidebar = elgg_view('plugins/filters', array(
+	'categories' => $CONFIG->plugincats,
+	'versions' => $CONFIG->elgg_versions,
+	'licences' => $CONFIG->gpllicenses
+));
 
 $main = elgg_view('plugins/search/main', array('area1' => $list));
 
