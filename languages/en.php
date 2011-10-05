@@ -141,6 +141,7 @@ $english = array(
 	'plugins:tabs:stats' => 'Statistics',
 	'plugins:tabs:upgrade' => 'Upgrades',
 	'plugins:tabs:utilities' => 'Utilities',
+	'plugins:tabs:search' => 'Search settings',
 
 	/**
 	 * Notifications
@@ -225,6 +226,78 @@ $english = array(
 
 	'plugins:prevversions' => "Previous version",
 	'plugins:nextversions' => "Warning! There is a newer version available",
+
+	'plugins:browse_more:newest' => "Browse most recent plugins",
+	'plugins:browse_more:popular' => "Browse most downloaded plugins",
+	'plugins:browse_more:dugg' => "Browse most recommended plugins",
+
+
+	/**
+	 * Sort field labels
+	 */
+
+	'plugins:sort:info' => 'Sort by:',
+	'plugins:sort:title' => 'Title',
+	'plugins:sort:author' => 'Author',
+	'plugins:sort:downloads' => 'Downloads',
+	'plugins:sort:recommendations' => 'Recommendations',
+	'plugins:sort:created' => 'Created',
+	'plugins:sort:updated' => 'Updated',
+
+
+	/**
+	 * Filters
+	 */
+
+	'plugins:filters:title' => 'Search plugins based on...',
+	'plugins:filters:category' => 'Category',
+	'plugins:filters:version' => 'Elgg version',
+	'plugins:filters:licence' => 'Licence type',
+	'plugins:filters:text' => 'Any text',
+	'plugins:filters:screenshot:label' => 'Screenshot',
+	'plugins:filters:screenshot' => 'Only with screenshot',
+
+	/**
+	 * Search labels
+	 */
+
+	'plugins:search:title' => 'Search plugins',
+	'plugins:search:results' => 'Found %d plugins, displaying %d to %d',
+	'plugins:search:noresults' => 'No plugins found',
+	'plugins:search:noresults:info' => 'Your search did not match any plugins in our repository. Please try again with less specific search terms.',
+
+	/**
+	 * What's new
+	 */
+
+	'plugins:front:intro:whatsnew' => 'What\'s new?',
+	'plugins:front:intro:whatsnew:text' => 'You can now search and browse plugins more effectively than ever before. Use the right column block to filter plugins based on categories, Elgg version compatibility and more. Sort results by download counts, recommendations, authors and other properties.',
+
+	/**
+	 * Search settings
+	 */
+
+	'plugins:settings:sort:label'	=> "Enable plugin list sorting",
+	'plugins:settings:filter:multiple:label'	=> "Allow using multiple filters in a single search",
+	'plugins:settings:filter:category:label'	=> "Enable filtering based on plugin category",
+	'plugins:settings:filter:category:multiple'	=> "Allow multiple category selection",
+	'plugins:settings:filter:version:label'	=> "Enable filtering based on Elgg version compatibility",
+	'plugins:settings:filter:version:multiple'	=> "Allow multiple version selection",
+	'plugins:settings:filter:licence:label'	=> "Enable filtering based on licence type",
+	'plugins:settings:filter:licence:multiple'	=> "Allow multiple licence type selection",
+	'plugins:settings:filter:text:label'	=> "Enable filtering based on any text (match title and description by default)",
+	'plugins:settings:filter:text:author:name'	=> "Also match author's display name",
+	'plugins:settings:filter:text:author:username'	=> "Also match author's username",
+	'plugins:settings:filter:text:summary'	=> "Also match plugin's summary",
+	'plugins:settings:filter:text:tags'	=> "Also match plugin's tags",
+	'plugins:settings:filter:screenshot:label'	=> "Enable filtering based on screenshot availability",
+
+
+	'plugins:settings:save:success'	=> "Plugin search settings were successfully updated",
+	'plugins:settings:save:failure'	=> "Could not save plugin search settings: unrecognized parameters received.",
+
+	'plugins:filters:or' => '...or '
+
 );
 
 add_translation("en", $english);

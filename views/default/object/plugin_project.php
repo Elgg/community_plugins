@@ -13,13 +13,16 @@ if (!$project) {
 	return ' ';
 }
 
-// get the recommend release or latest
+// get latest release (for displaying "last updated" value)
+$latest_releases = elgg_get_entities(array('container_guid' => $project->guid, 'limit' => 1));
+if ($latest_releases) {
+	$latest_release = $latest_releases[0];
+}
+
+// get the recommend release (or use latest, if not available)
 $release = get_entity(get_input('release', $project->recommended_release_guid));
 if (!$release || !($release instanceof PluginRelease)) {
-	$releases = elgg_get_entities(array('container_guid' => $project->getGUID()));
-	if ($releases) {
-		$release = $releases[0];
-	}
+	$release = $latest_release;
 }
 
 // get required variables
@@ -31,22 +34,29 @@ $desc = $project->description;
 $summary = $project->summary;
 $license = $project->license;
 $friendlytime = friendly_time($project->time_created);
+$created = date('d M, Y', $project->time_created);
+$updated = friendly_time($latest_release->time_created);
 $downloads = $project->getDownloadCount();
+$diggs = $project->countAnnotations('plugin_digg');
 $usericon = elgg_view("profile/icon", array(
 	'entity' => $project_owner,
 	'size' => 'small',
 ));
+$iconpath = $CONFIG->wwwroot . 'mod/community_plugins/graphics/icons';
 
 
 switch (get_context()) {
 	case 'search':
-		$info = "<span class='downloadsnumber'>{$downloads}</span>";
-		$info .= "<p class='pluginName'> <a href=\"{$project->getURL()}\">{$title} </a></p>";
+		$info = "<div class='pluginName'> <a href=\"{$project->getURL()}\">{$title} </a>";
+		$info .= "<span class=\"info_item\"><img src=\"$iconpath/updated.png\" alt=\"Updated\" title=\"Updated\">$updated</span>";
+		$info .= "<span class=\"info_item\"><img src=\"$iconpath/recommended.png\" alt=\"Recommendations\" title=\"Recommendations\">$diggs</span>";
+		$info .= "<span class=\"info_item\"><img src=\"$iconpath/downloaded.png\" alt=\"Downloads\" title=\"Downloads\">$downloads</span>";
+		$info .= '</div>';
 		if ($summary) {
 			$info .= "<p class='description'>" . $summary . "</p>";
 		}
 		$user_url = "{$vars['url']}pg/plugins/developer/{$project_owner->username}";
-		$info .= "<p class=\"owner_timestamp\"><a href=\"$user_url\">{$project_owner->name}</a> {$friendlytime}</p>";
+		$info .= "<p class=\"owner_timestamp\"><a href=\"$user_url\">{$project_owner->name}</a> {$created} ({$friendlytime})</p>";
 		echo elgg_view_listing($usericon, $info);
 		break;
 

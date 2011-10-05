@@ -1,0 +1,49 @@
+/** Minimal stand-alone css for dropdownchecklist support
+    We highly recommend using JQuery ThemeRoller instead  
+*/
+.ui-dropdownchecklist {
+	color: black;
+}
+
+.ui-dropdownchecklist label {
+	font-size : 1em;
+	font-weight: normal;
+}
+	
+.ui-dropdownchecklist-selector {
+	height: 20px;
+	border: 1px solid #ddd;
+	background: #fff;
+}
+.ui-state-hover, .ui-state-active {
+	border-color: #5794bf;
+}
+
+.ui-dropdownchecklist-text {
+	line-height: 20px;
+}
+
+.ui-dropdownchecklist-dropcontainer {
+	background-color: #fff;
+	border: 1px solid #999;
+}
+
+.ui-dropdownchecklist-item {
+}
+
+.ui-state-hover {
+	background-color: #39f;
+}
+
+.ui-state-disabled label {
+	color: #ccc;
+}
+
+.ui-dropdownchecklist-group {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.ui-dropdownchecklist-indent {
+	padding-left: 20px;
+}

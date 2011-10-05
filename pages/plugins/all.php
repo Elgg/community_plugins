@@ -3,6 +3,15 @@
  * Front page for plugin repository
  */
 
+global $CONFIG; 
+
+// Get search-specific settings
+$serialized_settings = get_plugin_setting('search-settings', 'community_plugins');
+$settings = unserialize($serialized_settings);
+if (!is_array($settings)) {
+	$settings = array();
+}
+
 //Newest
 $newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_project'));
 
@@ -13,14 +22,17 @@ $popular = __get_entities_from_annotations_calculate_x('count', 'object', 'plugi
 //Most dugg
 $dugg = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_project', 'plugin_digg');
 
-//Last updated
-$updated = elgg_get_entities(array('object' => 'plugin_project', 'order_by' => 'e.time_updated desc'));
 set_context('plugin_project');
 
 $welcome = elgg_view('plugins/front/main');
-$sidebar = elgg_view('plugins/categories');
+$sidebar = elgg_view('plugins/filters', array(
+	'categories' => $CONFIG->plugincats,
+	'versions' => $CONFIG->elgg_versions,
+	'licences' => $CONFIG->gpllicenses,
+	'settings' => $settings
+
+));
 $bottom = elgg_view('plugins/front/bottom', array(	'newest' => $newest,
-													'updated' => $updated,
 													'popular' => $popular,
 													'dugg' => $dugg,));
 

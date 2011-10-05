@@ -18,7 +18,11 @@ if (isloggedin()) {
 <?php
 }
 ?>
+	<div id="plugins_whatsnew">
+		<h3><?php echo elgg_echo('plugins:front:intro:whatsnew'); ?></h3>
+		<?php echo autop(elgg_echo('plugins:front:intro:whatsnew:text')); ?>
+	</div>
+
 </div>
 <?php
 
-echo elgg_view('plugins/search_box');
