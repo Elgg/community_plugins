@@ -24,20 +24,50 @@ if ($tag != "") {
 			$objects = list_entities_by_relationship_count('member', true, "", "", 0, $limit, false);
 			break;
 		case "language":
-			$objects = list_entities_from_metadata('group_category','language','group',"","", $limit, false, false, true, false);
+			$objects = elgg_list_entities_from_metadata(array(
+				'type' => 'group',
+				'metadata_name' => 'group_category',
+				'metadata_value' => 'language',
+				'limit' => $limit,
+				'full_view' => false,
+			));
 			break;
 		case "plugins":
-			$objects = list_entities_from_metadata('group_category','plugins','group',"","", $limit, false, false, true, false);
+			$objects = elgg_list_entities_from_metadata(array(
+				'type' => 'group',
+				'metadata_name' => 'group_category',
+				'metadata_value' => 'plugins',
+				'limit' => $limit,
+				'full_view' => false,
+			));
 			break;
 		case "developers":
-			$objects = list_entities_from_metadata('group_category','developers','group',"","", $limit, false, false, true, false);
+			$objects = elgg_list_entities_from_metadata(array(
+				'type' => 'group',
+				'metadata_name' => 'group_category',
+				'metadata_value' => 'developers',
+				'limit' => $limit,
+				'full_view' => false,
+			));
 			break;
 		case "support":
-			$objects = list_entities_from_metadata('group_category','support','group',"","", $limit, false, false, true, false);
+			$objects = elgg_list_entities_from_metadata(array(
+				'type' => 'group',
+				'metadata_name' => 'group_category',
+				'metadata_value' => 'support',
+				'limit' => $limit,
+				'full_view' => false,
+			));
 			break;
 		case "featured":
 		default:
-			$objects = list_entities_from_metadata('featured_group','yes','group',"","", $limit, false, false, true, false);
+			$objects = elgg_list_entities_from_metadata(array(
+				'type' => 'group',
+				'metadata_name' => 'featured_group',
+				'metadata_value' => 'yes',
+				'limit' => $limit,
+				'full_view' => false,
+			));
 			break;
 	}
 }
