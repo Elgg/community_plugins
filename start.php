@@ -132,7 +132,7 @@ function plugins_init() {
 	register_action("plugins/upgrade", FALSE, "$action_base/admin/upgrade.php", TRUE);
 	register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
 	register_action("plugins/normalize", FALSE, "$action_base/admin/normalize.php", TRUE);
-	register_action("plugins/settings/save", FALSE, "$action_base/admin/save.php", TRUE);
+	register_action("plugins/admin/search", FALSE, "$action_base/admin/save.php", TRUE);
 }
 
 /**

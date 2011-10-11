@@ -7,7 +7,7 @@
 	}
 ?>
 
-<form id="plugins_search_settings" name="plugins_search_settings" action="<?php echo $CONFIG->wwwroot; ?>action/plugins/settings/save" method="post">
+<form id="plugins_search_settings" name="plugins_search_settings" action="<?php echo $CONFIG->wwwroot; ?>action/plugins/admin/search" method="post">
 	<p>
 		<label>
 			<?php echo elgg_echo ('plugins:settings:sort:label'); ?>
