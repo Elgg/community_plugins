@@ -258,7 +258,7 @@ function search_discussion_hook($hook, $type, $value, $params) {
 
 	$container_and = '';
 	if ($params['container_guid'] && $params['container_guid'] !== ELGG_ENTITIES_ANY_VALUE) {
-		$container_and = 'AND e.container_guid = ' . sanitise_string($params['container_guid']);
+		$container_and = 'AND e.container_guid = ' . sanitise_int($params['container_guid']);
 	}
 
 	$e_access = get_access_sql_suffix('e');
