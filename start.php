@@ -242,6 +242,9 @@ function search_discussion_hook($hook, $type, $value, $params) {
 	global $CONFIG;
 
 	$query = sanitise_string($params['query']);
+	$limit = sanitise_int($params['limit']);
+	$offset = sanitise_int($params['offset']);
+
 	$params['annotation_names'] = array('group_topic_post');
 
 	$params['joins'] = array(
@@ -263,21 +266,6 @@ function search_discussion_hook($hook, $type, $value, $params) {
 
 	$e_access = get_access_sql_suffix('e');
 	$a_access = get_access_sql_suffix('a');
-	// @todo this can probably be done through the api..
-	$q = "SELECT DISTINCT a.*, msv.string as comment FROM {$CONFIG->dbprefix}annotations a
-		JOIN {$CONFIG->dbprefix}metastrings msn ON a.name_id = msn.id
-		JOIN {$CONFIG->dbprefix}metastrings msv ON a.value_id = msv.id
-		JOIN {$CONFIG->dbprefix}entities e ON a.entity_guid = e.guid
-		WHERE msn.string = 'group_topic_post'
-			AND ($search_where)
-			AND $e_access
-			AND $a_access
-			$container_and
-
-		LIMIT {$params['offset']}, {$params['limit']}
-		";
-
-	$comments = get_data($q);
 
 	$q = "SELECT count(DISTINCT a.id) as total FROM {$CONFIG->dbprefix}annotations a
 		JOIN {$CONFIG->dbprefix}metastrings msn ON a.name_id = msn.id
@@ -293,10 +281,32 @@ function search_discussion_hook($hook, $type, $value, $params) {
 	$result = get_data($q);
 	$count = $result[0]->total;
 
+	// don't continue if nothing there...
+	if (!$count) {
+		return array ('entities' => array(), 'count' => 0);
+	}
+
+
+	// @todo this can probably be done through the api..
+	$q = "SELECT DISTINCT a.*, msv.string as comment FROM {$CONFIG->dbprefix}annotations a
+		JOIN {$CONFIG->dbprefix}metastrings msn ON a.name_id = msn.id
+		JOIN {$CONFIG->dbprefix}metastrings msv ON a.value_id = msv.id
+		JOIN {$CONFIG->dbprefix}entities e ON a.entity_guid = e.guid
+		WHERE msn.string = 'group_topic_post'
+			AND ($search_where)
+			AND $e_access
+			AND $a_access
+			$container_and
+
+		LIMIT $offset, $limit
+		";
+
+	$comments = get_data($q);
+
 	if (!is_array($comments)) {
 		return FALSE;
 	}
-
+	
 	// @todo if plugins are disabled causing subtypes
 	// to be invalid and there are comments on entities of those subtypes,
 	// the counts will be wrong here and results might not show up correctly,
