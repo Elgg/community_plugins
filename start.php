@@ -52,6 +52,8 @@ function plugins_init() {
 	// Special hook for searching against metadata (category)
 	register_plugin_hook('search', 'object:plugin_project', 'plugins_search_hook');
 
+	register_plugin_hook('cron', 'daily', 'plugins_update_download_counts');
+
 	// Elgg versions
 	$CONFIG->elgg_versions = array(
 		'1.8',
@@ -368,4 +370,15 @@ function plugins_add_type_menu($owner_guid) {
 
 		add_submenu_item($label, $url, 'pluginstypes');
 	}
+}
+
+/**
+ * Nightly update on download counts
+ *
+ * Adds 1.2M to the figure to account for downloads before this system as implemented.
+ */
+function plugins_update_download_counts() {
+	$count = count_annotations(0, 'object', 'plugin_project', 'download', '', NULL);
+	$count += 1200000;
+	set_plugin_setting('site_plugins_downloads', $count, 'community_plugins');
 }

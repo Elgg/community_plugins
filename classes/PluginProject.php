@@ -12,6 +12,8 @@ class PluginProject extends ElggObject {
 	}
 
 	public function incrementDownloadCount() {
+		$count = (int)get_plugin_setting('site_plugins_downloads', 'community_plugins');
+		set_plugin_setting('site_plugins_downloads', ++$count, 'community_plugins');
 		create_annotation($this->guid, 'download', 1, 'integer', 0, ACCESS_PUBLIC);
 	}
 
