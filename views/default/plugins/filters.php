@@ -27,9 +27,6 @@
 	<?php endif; ?>
 
     <div id="plugin_filters">
-		<div class="plugins_sidebar_box">
-			<a class="plugins_highlight" href="<?php echo $url; ?>">Plugins home</a>
-		</div>
 
 		<div class="plugins_sidebar_box">
         
