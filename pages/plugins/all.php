@@ -17,7 +17,12 @@ $newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_proje
 
 //Most downloaded
 set_context('search');
-$popular = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_project', 'download');
+$popular = elgg_get_entities_from_annotations(array(
+	'type' => 'object',
+	'subtype' => 'plugin_project',
+	'order_by_annotation' => array('name' => 'plugin_downloads', 'direction' => 'desc', 'as' => 'integer'),
+));
+
 
 //Most dugg
 $dugg = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_project', 'plugin_digg');

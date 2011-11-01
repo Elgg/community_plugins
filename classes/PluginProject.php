@@ -12,13 +12,33 @@ class PluginProject extends ElggObject {
 	}
 
 	public function incrementDownloadCount() {
+		// increment total downloads for all plugins
 		$count = (int)get_plugin_setting('site_plugins_downloads', 'community_plugins');
 		set_plugin_setting('site_plugins_downloads', ++$count, 'community_plugins');
+
+		// increment this plugin project's downloads
 		create_annotation($this->guid, 'download', 1, 'integer', 0, ACCESS_PUBLIC);
+		$annotations = get_annotations($this->guid, '', '', 'plugin_downloads');
+		if ($annotations) {
+			$count = $annotations[0]->value;
+			$count++;
+
+			// this is temporary until all the plugins have been updated or we write a script to boot strap
+			$count = $this->countAnnotations('download');
+
+			update_annotation($annotations[0]->id, 'plugin_downloads', $count, 'integer', 0, ACCESS_PUBLIC);
+		} else {
+			create_annotation($this->guid, 'plugin_downloads', 1, 'integer', 0, ACCESS_PUBLIC);
+		}
 	}
 
 	public function getDownloadCount() {
-		return $this->countAnnotations('download');
+		$annotations = get_annotations($this->guid, '', '', 'plugin_downloads');
+		if ($annotations) {
+			return $annotations[0]->value;
+		} else {
+			return 0;
+		}
 	}
 
 	public function saveImage($name, $title, $index) {
