@@ -22,9 +22,9 @@ $popular = elgg_get_entities(array(
 	'type' => 'object',
 	'subtype' => 'plugin_project',
 	'joins' => array(
-		'JOIN elgg_annotations n_table on e.guid = n_table.entity_guid',
-		'JOIN elgg_metastrings msn1 on n_table.name_id = msn1.id',
-		'JOIN elgg_metastrings msv1 on n_table.value_id = msv1.id',
+		"JOIN {$CONFIG->dbprefix}annotations n_table on e.guid = n_table.entity_guid",
+		"JOIN {$CONFIG->dbprefix}metastrings msn1 on n_table.name_id = msn1.id",
+		"JOIN {$CONFIG->dbprefix}metastrings msv1 on n_table.value_id = msv1.id",
 	),
 	'wheres' => array("msn1.string = 'plugin_downloads'"),
 	'order_by' => 'msv1.string desc',
