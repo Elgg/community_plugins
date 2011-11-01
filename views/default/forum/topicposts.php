@@ -51,10 +51,20 @@ if (community_groups_can_edit($vars['entity']->owner_guid, $vars['entity']->time
 	if (isadminloggedin()) {
 		// display remove advertising link
 		echo elgg_view("output/url", array(
-					'text' => elgg_echo('cg:forum:removead'),
-					'href' => "{$vars['url']}action/forum/remove_ad?post={$vars['entity']->id}",
-					'is_action' => TRUE,
-					'class' => 'removeaddlink'));
+			'text' => elgg_echo('cg:forum:removead'),
+			'href' => "{$vars['url']}action/forum/remove_ad?post={$vars['entity']->id}",
+			'is_action' => TRUE,
+			'class' => 'removeaddlink',
+		));
+
+		// display off-topic link
+		$group_guid = get_input('group_guid');
+		$post_id = $vars['entity']->id;
+		echo elgg_view("output/url", array(
+			'text' => elgg_echo('cg:forum:offtopic'),
+			'href' => "{$vars['url']}pg/groups/offtopic?group_guid=$group_guid&post_id=$post_id",
+			'class' => 'removeaddlink',
+		));
 	}
 
 	echo "<div class=\"collapsible_box\">";

@@ -25,6 +25,7 @@ function community_groups_init() {
 	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 	register_action('forum/move', FALSE, "$action_path/forum/move.php", TRUE);
 	register_action('forum/remove_ad', FALSE, "$action_path/forum/remove_ad.php", TRUE);
+	register_action('forum/offtopic', FALSE, "$action_path/forum/offtopic.php", TRUE);
 	register_action('groups/combine', FALSE, "$action_path/groups/combine.php", TRUE);
 	register_action('groups/categorize', FALSE, "$action_path/groups/categorize.php", TRUE);
 	register_action("groups/delete", FALSE, $CONFIG->pluginspath . "groups/actions/delete.php", TRUE);
@@ -139,6 +140,9 @@ function community_groups_page_handler($page) {
 		case "discussion":
 			set_input('filter', $page[1]);
 			include("$community_base/discussion.php");
+			break;
+		case "offtopic":
+			include("$community_base/offtopic.php");
 			break;
 		default:
 			// group profile
@@ -287,13 +291,16 @@ function search_discussion_hook($hook, $type, $value, $params) {
 	}
 
 
+	$score = trim($search_where, '()') . ')';
+
 	// @todo this can probably be done through the api..
-	$q = "SELECT DISTINCT a.*, msv.string as comment FROM {$CONFIG->dbprefix}annotations a
+	$q = "SELECT DISTINCT a.*, msv.string as comment FROM {$CONFIG->dbprefix}annotations a,
+		$score as score
 		JOIN {$CONFIG->dbprefix}metastrings msn ON a.name_id = msn.id
 		JOIN {$CONFIG->dbprefix}metastrings msv ON a.value_id = msv.id
 		JOIN {$CONFIG->dbprefix}entities e ON a.entity_guid = e.guid
 		WHERE msn.string = 'group_topic_post'
-			AND ($search_where)
+			AND $search_where
 			AND $e_access
 			AND $a_access
 			$container_and
@@ -302,6 +309,11 @@ function search_discussion_hook($hook, $type, $value, $params) {
 		";
 
 	$comments = get_data($q);
+
+	var_dump($comments);
+	
+	var_dump($q);
+	exit;
 
 	if (!is_array($comments)) {
 		return FALSE;

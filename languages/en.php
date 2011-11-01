@@ -9,6 +9,12 @@ $english = array(
 	'cg:forum:removead' => "Remove ad",
 	'cg:form:ad:warning' => "This comment was removed by an administrator because it contained advertising.",
 
+	'cg:forum:offtopic' => "Off-topic",
+	'cg:forum:offtopic:title' => "Move off-topic post to new topic",
+	'cg:forum:offtopic:text' => "Post text",
+	'cg:forum:offtopic:success' => "Successfully move to new topic",
+	'cg:form:offtopic:warning' => "Moderator: this comment was off-topic. It was moved to its own topic.",
+
 	'cg:tabs:categorize' => 'Categorize',
 	'cg:tabs:combine' => 'Combine groups',
 	'cg:tabs:change_owner' => 'Change owner',
