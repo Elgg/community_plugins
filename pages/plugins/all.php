@@ -27,7 +27,7 @@ $popular = elgg_get_entities(array(
 		"JOIN {$CONFIG->dbprefix}metastrings msv1 on n_table.value_id = msv1.id",
 	),
 	'wheres' => array("msn1.string = 'plugin_downloads'"),
-	'order_by' => 'msv1.string desc',
+	'order_by' => 'CAST(msv1.string AS UNSIGNED) desc',
 ));
 
 //Most dugg
