@@ -47,7 +47,7 @@ if (!$release->save()) {
 	forward($plugin_project->getURL());
 }
 
-if ($release->savePluginFile('upload') != TRUE) {
+if ($release->saveArchive('upload') != TRUE) {
 	register_error(elgg_echo("plugins:error:uploadfailed"));
 	forward(REFERER);
 }
@@ -55,6 +55,8 @@ if ($release->savePluginFile('upload') != TRUE) {
 if ($recommended == 'yes') {
 	$plugin_project->recommended_release_guid = $release->getGUID();
 }
+
+$release->setHash();
 
 add_to_river('river/object/plugin_release/create', 'create', get_loggedin_userid(), $release->guid);
 plugins_send_notifications($release);

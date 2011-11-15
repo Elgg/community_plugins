@@ -9,6 +9,10 @@ register_elgg_event_handler('init', 'system', 'plugins_init');
 require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
 require_once(dirname(__FILE__) . '/classes/PluginRelease.php');
 require_once(dirname(__FILE__) . '/classes/PluginProject.php');
+require_once(dirname(__FILE__) . '/classes/ElggPluginManifest.php');
+require_once(dirname(__FILE__) . '/classes/ElggPluginManifestParser.php');
+require_once(dirname(__FILE__) . '/classes/ElggPluginManifestParser17.php');
+require_once(dirname(__FILE__) . '/classes/ElggPluginManifestParser18.php');
 
 /**
  * Initialize the community plugin repository plugin

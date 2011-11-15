@@ -15,7 +15,7 @@ class PluginRelease extends ElggFile {
 		create_annotation($this->guid, 'download', 1, 'integer', 0, ACCESS_PUBLIC);
 	}
 
-	public function savePluginFile($name) {
+	public function saveArchive($name) {
 		$uf = get_uploaded_file($name);
 		if (!$uf) {
 			return FALSE;
@@ -24,8 +24,41 @@ class PluginRelease extends ElggFile {
 		$this->write($uf);
 		$this->close();
 
-		return TRUE;
+		return true;
+	}
+
+	/**
+	 * Sets the hash that is used to uniquely identify this plugin
+	 */
+	public function setHash() {
+		$archiveName = $this->getFilenameOnFilestore();
+
+		$zip = new ZipArchive();
+		$result = $zip->open($archiveName);
+		if ($result !== true) {
+			return false;
+		}
+
+		for ($i=0; $i<$zip->numFiles; $i++) {
+			$filename = $zip->getNameIndex($i);
+			if (stripos($filename, 'manifest.xml') !== false) {
+				$manifest = $zip->getFromIndex($i);
+				$id = substr($filename, 0, strpos($filename, '/'));
+				break;
+			}
+		}
+
+		$zip->close();
+
+		if (!isset($manifest)) {
+			return false;
+		}
+
+		$manifest = new ElggPluginManifest($manifest);
+		$author = $manifest->getAuthor();
+		$version = $manifest->getVersion();
+
+		$this->hash = md5($id . $version . $author);
 	}
 
 }
-
