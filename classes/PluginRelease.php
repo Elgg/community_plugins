@@ -11,6 +11,14 @@ class PluginRelease extends ElggFile {
 		parent::__construct($guid);
 	}
 
+	/**
+	 * Get the plugin project for this release
+	 * @return PluginProject
+	 */
+	public function getProject() {
+		return get_entity($this->container_guid);
+	}
+
 	public function updateDownloadCount() {
 		create_annotation($this->guid, 'download', 1, 'integer', 0, ACCESS_PUBLIC);
 	}
