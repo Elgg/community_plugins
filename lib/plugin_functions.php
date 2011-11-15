@@ -204,6 +204,6 @@ function plugins_send_notifications($entity) {
  * @return int
  */
 function plugins_get_all_download_count() {
-	// the cached count is maintained in PluginProject::incrementDownloadCount
+	// the cached count is maintained in PluginProject::updateDownloadCount
 	return (int)get_plugin_setting('site_plugins_downloads', 'community_plugins');
 }

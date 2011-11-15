@@ -1,4 +1,9 @@
 <?php
+/**
+ * Run any upgrades that haven't been run
+ */
+
+set_time_limit(0);
 
 require_once "{$CONFIG->pluginspath}community_plugins/version.php";
 

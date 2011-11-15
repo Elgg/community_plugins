@@ -11,7 +11,7 @@ class PluginRelease extends ElggFile {
 		parent::__construct($guid);
 	}
 
-	public function incrementDownloadCount() {
+	public function updateDownloadCount() {
 		create_annotation($this->guid, 'download', 1, 'integer', 0, ACCESS_PUBLIC);
 	}
 

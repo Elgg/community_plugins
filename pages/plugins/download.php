@@ -23,11 +23,11 @@ header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 header("Cache-Control: public");
 header("Content-Description: File Transfer");
 header("Content-Transfer-Encoding: binary");
-header("Content-Length: ".$release->size());
+header("Content-Length: " . $release->size());
 
 //download counter on individual plugin and the plugin project
-$release->incrementDownloadCount();
-$project->incrementDownloadCount();
+$release->updateDownloadCount();
+$project->updateDownloadCount();
 
 echo $release->grabFile();
 exit;

@@ -16,19 +16,7 @@ if (!is_array($settings)) {
 $newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_project'));
 
 //Most downloaded
-set_context('search');
-//$popular = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_project', 'download');
-$popular = elgg_get_entities(array(
-	'type' => 'object',
-	'subtype' => 'plugin_project',
-	'joins' => array(
-		"JOIN {$CONFIG->dbprefix}annotations n_table on e.guid = n_table.entity_guid",
-		"JOIN {$CONFIG->dbprefix}metastrings msn1 on n_table.name_id = msn1.id",
-		"JOIN {$CONFIG->dbprefix}metastrings msv1 on n_table.value_id = msv1.id",
-	),
-	'wheres' => array("msn1.string = 'plugin_downloads'"),
-	'order_by' => 'CAST(msv1.string AS UNSIGNED) desc',
-));
+$popular = PluginProject::getPluginsByDownloads();
 
 //Most dugg
 $dugg = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_project', 'plugin_digg');

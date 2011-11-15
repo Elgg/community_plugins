@@ -17,6 +17,7 @@ function plugins_init() {
 	global $CONFIG;
 
 	run_function_once('plugins_run_once');
+	run_function_once('plugins_create_download_table');
 
 	// Set up menu for logged in users
 	add_menu(elgg_echo('plugins'), "{$CONFIG->wwwroot}pg/plugins/all/");
@@ -381,4 +382,19 @@ function plugins_update_download_counts() {
 	$count = count_annotations(0, 'object', 'plugin_project', 'download', '', NULL);
 	$count += 1200000;
 	set_plugin_setting('site_plugins_downloads', $count, 'community_plugins');
+}
+
+/**
+ * Creates the table for the plugin download count
+ */
+function plugins_create_download_table() {
+	$db_prefix = get_config('dbprefix');
+	$sql = "CREATE TABLE `{$db_prefix}plugin_downloads` (
+		`guid` BIGINT UNSIGNED NOT NULL,
+		`downloads` INT UNSIGNED NOT NULL DEFAULT 0,
+		PRIMARY KEY (`guid`),
+		KEY `downloads` (`downloads`)
+	) ENGINE=MyISAM";
+
+	get_data($sql);
 }

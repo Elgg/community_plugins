@@ -11,34 +11,24 @@ class PluginProject extends ElggObject {
 		parent::__construct($guid);
 	}
 
-	public function incrementDownloadCount() {
+	/**
+	 * Increment the download count
+	 */
+	public function updateDownloadCount() {
 		// increment total downloads for all plugins
 		$count = (int)get_plugin_setting('site_plugins_downloads', 'community_plugins');
 		set_plugin_setting('site_plugins_downloads', ++$count, 'community_plugins');
 
 		// increment this plugin project's downloads
-		create_annotation($this->guid, 'download', 1, 'integer', 0, ACCESS_PUBLIC);
-		$annotations = get_annotations($this->guid, '', '', 'plugin_downloads');
-		if ($annotations) {
-			$count = $annotations[0]->value;
-			$count++;
-
-			// this is temporary until all the plugins have been updated or we write a script to boot strap
-			$count = $this->countAnnotations('download');
-
-			update_annotation($annotations[0]->id, 'plugin_downloads', $count, 'integer', 0, ACCESS_PUBLIC);
-		} else {
-			create_annotation($this->guid, 'plugin_downloads', 1, 'integer', 0, ACCESS_PUBLIC);
-		}
+		$this->dbUpdateDownloadCount();
 	}
 
+	/**
+	 * Get the download count for this plugin project
+	 * @return int
+	 */
 	public function getDownloadCount() {
-		$annotations = get_annotations($this->guid, '', '', 'plugin_downloads');
-		if ($annotations) {
-			return $annotations[0]->value;
-		} else {
-			return 0;
-		}
+		return $this->dbGetDownloadCount();
 	}
 
 	public function saveImage($name, $title, $index) {
@@ -113,6 +103,55 @@ class PluginProject extends ElggObject {
 		}
 
 		return TRUE;
+	}
+
+	/**
+	 * Update the number of downloads
+	 */
+	protected function dbUpdateDownloadCount() {
+		$guid = $this->getGUID();
+		$db_prefix = get_config('dbprefix');
+		$sql = "INSERT INTO {$db_prefix}plugin_downloads
+			(guid, downloads) VALUES ($guid, 1)
+			ON DUPLICATE KEY UPDATE downloads=downloads+1";
+		insert_data($sql);
+	}
+
+	/**
+	 * Get the number of downloads from the database
+	 * 
+	 * @return int
+	 */
+	protected function dbGetDownloadCount() {
+		$guid = $this->getGUID();
+		$db_prefix = get_config('dbprefix');
+		$sql = "SELECT downloads FROM {$db_prefix}plugin_downloads
+			WHERE guid = $guid";
+		$result = get_data_row($sql);
+		if ($result === false) {
+			return 0;
+		}
+		return (int)$result->downloads;
+	}
+
+	/**
+	 * Get the plugins downloaded the most
+	 *
+	 * @param array $options Options array for elgg_get_entities()
+	 * @return array
+	 */
+	static public function getPluginsByDownloads(array $options = array()) {
+		$db_prefix = get_config('dbprefix');
+		
+		$defaults = array(
+			'type' => 'object',
+			'subtype' => 'plugin_project',
+			'joins' => array("JOIN {$db_prefix}plugin_downloads pd ON e.guid=pd.guid"),
+			'order_by' => 'pd.downloads DESC',
+		);
+		$options = array_merge($defaults, $options);
+
+		return elgg_get_entities($options);
 	}
 
 }
