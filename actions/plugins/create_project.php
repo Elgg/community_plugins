@@ -79,7 +79,7 @@ $release->elgg_version = $elgg_version;
 $release->comments = $comments;
 $release->save();
 
-if ($release->savePluginFile('upload') != TRUE) {
+if ($release->saveArchive('upload') != TRUE) {
 	register_error(elgg_echo("plugins:error:uploadfailed"));
 	forward(REFERER);
 }
