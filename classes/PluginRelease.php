@@ -62,11 +62,15 @@ class PluginRelease extends ElggFile {
 			return false;
 		}
 
-		$manifest = new ElggPluginManifest($manifest);
-		$author = $manifest->getAuthor();
-		$version = $manifest->getVersion();
+		try {
+			$manifest = new ElggPluginManifest($manifest);
+			$author = $manifest->getAuthor();
+			$version = $manifest->getVersion();
 
-		$this->hash = md5($id . $version . $author);
+			$this->hash = md5($id . $version . $author);
+		} catch (Exception $e) {
+			// skip invalid manifests
+		}
 	}
 
 }
