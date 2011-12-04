@@ -30,7 +30,7 @@ if (get_context() == "search") {
 	//get the group avatar
 	$icon = elgg_view("profile/icon", array('entity' => $u, 'size' => 'small'));
 	//get the group and topic title
-	$info .= "<p class=\"discussion_topic\">" . elgg_echo('groups:topic') . ": <a href=\"{$vars['url']}mod/groups/topicposts.php?topic={$vars['entity']->guid}&group_guid={$group->guid}\">{$title}</a></p>";
+	$info .= "<p class=\"discussion_topic\">" . elgg_echo('groups:topic') . ": <a href=\"{$vars['entity']->getURL()}\">{$title}</a></p>";
 
 	if ($group instanceof ElggGroup) {
 		$info .= "<p class=\"discussion_group\">" . elgg_echo('group') . ": <a href=\"{$group->getURL()}\">".htmlentities($group->name, ENT_QUOTES, 'UTF-8') ."</a></p>";
@@ -64,7 +64,7 @@ if (get_context() == "search") {
 
 	//get the user avatar
 	$icon = elgg_view("profile/icon",array('entity' => $topic_owner, 'size' => 'small'));
-	$info .= "<p>" . elgg_echo('groups:started') . " " . $topic_owner->name . ": <a href=\"{$vars['url']}mod/groups/topicposts.php?topic={$vars['entity']->guid}&group_guid={$group->guid}\">{$title}</a></p>";
+	$info .= "<p>" . elgg_echo('groups:started') . " " . $topic_owner->name . ": <a href=\"{$vars['entity']->getURL()}\">{$title}</a></p>";
 	$info .= "<div class='clearfloat'></div>";
 
 }
