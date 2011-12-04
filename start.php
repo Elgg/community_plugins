@@ -18,7 +18,9 @@ function community_groups_init() {
 	register_elgg_event_handler('pagesetup', 'system', 'community_groups_sidebar_menu');
 
 	register_plugin_hook('search_types', 'get_types', 'community_groups_add_search_type');
-	register_plugin_hook('search', 'discussion', 'search_discussion_hook');
+
+	// need to work on sorting by relevance rather than date
+	//register_plugin_hook('search', 'discussion', 'search_discussion_hook');
 
 	register_plugin_hook('action', 'groups/edit', 'community_groups_group_creation_lockdown');
 
