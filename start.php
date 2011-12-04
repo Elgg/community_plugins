@@ -366,14 +366,16 @@ function plugins_add_type_menu($owner_guid) {
 
 	$plugin_types = get_tags(0, 10, 'plugin_type', 'object', 'plugin_project', $owner_guid);
 
-	foreach ($plugin_types as $type) {
+	if ($plugin_types) {
+		foreach ($plugin_types as $type) {
 
-		$tag = $type->tag;
-		$label = elgg_echo("plugins:type:" . $tag);
+			$tag = $type->tag;
+			$label = elgg_echo("plugins:type:" . $tag);
 
-		$url = "{$CONFIG->url}pg/plugins/developer/$owner->username/type/$tag/";
+			$url = "{$CONFIG->url}pg/plugins/developer/$owner->username/type/$tag/";
 
-		add_submenu_item($label, $url, 'pluginstypes');
+			add_submenu_item($label, $url, 'pluginstypes');
+		}
 	}
 }
 
