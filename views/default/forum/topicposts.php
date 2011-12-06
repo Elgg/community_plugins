@@ -40,10 +40,10 @@ if (community_groups_can_edit($vars['entity']->owner_guid, $vars['entity']->time
 <?php
 
 	echo elgg_view("output/confirmlink",array(
-			'href' => $vars['url'] . "action/groups/deletepost?post=" . $vars['entity']->id . "&topic=" . get_input('topic') . "&group=" . get_input('group_guid'),
-			'text' => elgg_echo('delete'),
-			'confirm' => elgg_echo('deleteconfirm'),
-			));
+		'href' => $vars['url'] . "action/groups/deletepost?post=" . $vars['entity']->id . "&topic=" . get_input('topic') . "&group=" . page_owner(),
+		'text' => elgg_echo('delete'),
+		'confirm' => elgg_echo('deleteconfirm'),
+	));
 
 	//display an edit link that will open up an edit area
 	echo " <a class=\"collapsibleboxlink\">".elgg_echo('edit')."</a> ";
@@ -58,7 +58,7 @@ if (community_groups_can_edit($vars['entity']->owner_guid, $vars['entity']->time
 		));
 
 		// display off-topic link
-		$group_guid = get_input('group_guid');
+		$group_guid = page_owner();
 		$post_id = $vars['entity']->id;
 		echo elgg_view("output/url", array(
 			'text' => elgg_echo('cg:forum:offtopic'),
@@ -75,7 +75,7 @@ if (community_groups_can_edit($vars['entity']->owner_guid, $vars['entity']->time
 	$post = elgg_view('input/hidden', array('internalname' => 'post', 'value' => $vars['entity']->id));
 	$field = elgg_view('input/hidden', array('internalname' => 'field_num', 'value' => $vars['entity']->id));
 	$topic = elgg_view('input/hidden', array('internalname' => 'topic', 'value' => get_input('topic')));
-	$group = elgg_view('input/hidden', array('internalname' => 'group', 'value' => get_input('group_guid')));
+	$group = elgg_view('input/hidden', array('internalname' => 'group', 'value' => page_owner()));
 
 	$form_body = <<<EOT
 
