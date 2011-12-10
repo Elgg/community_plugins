@@ -8,7 +8,7 @@
 			<li><a href="http://docs.elgg.org/wiki/Development/IssueTracker">Submiting a bug report</a></li>
 			<li>&nbsp;</li>
 			<li><a href="http://docs.elgg.org/wiki/Category:Development_FAQ">Developers FAQ</a></li>
-			<li><a href="http://docs.elgg.org/wiki/Development/Subversion">Subversion repository</a></li>
+			<li><a href="http://docs.elgg.org/wiki/Development/Contributing/Patches/Git">Submitting a patch</a></li>
 		</ul>
 	</div>
 </div>

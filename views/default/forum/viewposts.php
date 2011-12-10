@@ -16,7 +16,7 @@ $comment_limit = 50;
 $count = $vars['entity']->countAnnotations('group_topic_post');
 $offset = (int) get_input('offset', 0);
 
-$baseurl = $vars['url'] . "mod/groups/topicposts.php?topic={$vars['entity']->guid}&group_guid={$vars['entity']->container_guid}";
+$baseurl = $vars['entity']->getURL();
 $pagination = elgg_view('navigation/pagination', array(
 				'limit' => $comment_limit,
 				'offset' => $offset,
