@@ -1,8 +1,11 @@
 <?php
+/**
+ * Group ownership change action
+ */
 
 $group_guid = get_input('group_guid', 0);
-if ($user_guid_array = get_input('user_guid_array', FALSE)) {
-	$user_guid = array_key_exists(0, $user_guid_array) ? $user_guid_array[0] : FALSE;
+if ($user_guid_array = get_input('user_guid_array', false)) {
+	$user_guid = array_key_exists(0, $user_guid_array) ? $user_guid_array[0] : false;
 }
 
 $group = get_entity($group_guid);
@@ -35,7 +38,7 @@ if (!$group->isMember($user)) {
 
 
 // move the icons to the new owner
-$icon_error = FALSE;
+$icon_error = false;
 
 // there's an icon without a size--just the group guid.
 $sizes = array('', 'large', 'medium', 'small', 'tiny', 'master', 'topbar');
@@ -56,14 +59,14 @@ foreach ($sizes as $size) {
 		if ($new_icon->write($old_icon->grabFile())) {
 			$old_icon->delete();
 		} else {
-			$icon_error = TRUE;
+			$icon_error = true;
 		}
 		$new_icon->close();
 	}
 }
 
 if (!$icon_error) {
-	system_message(sprintf(elgg_echo('cg:admin:change_owner:success'), $user->name, $group->name));
+	system_message(elgg_echo('cg:admin:change_owner:success', array($user->name, $group->name)));
 } else {
 	register_error(elgg_echo('cg:admin:change_owner:icon_error'));
 }

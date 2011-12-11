@@ -2,15 +2,20 @@
 
 $english = array(
 
-	'cp:groups:admin' => "Groups Administration",
+	'admin:groups' => "Groups",
+	'admin:groups:main' => "Administration",
+
+	'cg:menu:move' => "Move",
+	'cg:menu:remove_ad' => "Remove ad",
+	'cg:menu:offtopic' => "Off-topic",
 
 	'cg:forum:controls' => "Admin controls",
 	'cg:forum:move:instruct' => "Move post to the group",
 	'cg:forum:removead' => "Remove ad",
-	'cg:form:ad:warning' => "This comment was removed by an administrator because it contained advertising.",
+	'cg:form:ad:warning' => "This comment was removed by a moderator because it contained advertising.",
 
 	'cg:forum:offtopic' => "Off-topic",
-	'cg:forum:offtopic:title' => "Move off-topic post to new topic",
+	'cg:forum:offtopic:title' => "Move off-topic post to its own topic",
 	'cg:forum:offtopic:text' => "Post text",
 	'cg:forum:offtopic:success' => "Successfully move to new topic",
 	'cg:form:offtopic:warning' => "Moderator: this comment was off-topic. It was moved to its own topic.",
@@ -37,7 +42,7 @@ $english = array(
 	'cg:admin:change_owner:success' => 'User %s is now the owner of group %s.',
 	'cg:admin:change_owner:icon_error' => 'User %s is now the owner of group %s but there was a problem transferring the group icons',
 
-	'groups:all' => 'All groups',
+	'groups:popular' => 'All groups',
 	'groups:support' => 'Support',
 	'groups:language' => 'Language',
 	'groups:developers' => 'Developers',

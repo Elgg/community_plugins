@@ -16,4 +16,4 @@ $post->container_guid = $group_guid;
 $post->save();
 
 system_message(elgg_echo('cg:forum:move:success'));
-forward("{$CONFIG->url}pg/groups/forum/$orig_group_guid/");
+forward(REFERER);

@@ -3,14 +3,12 @@
  * Form for moving an off-topic post to a new topic
  */
 
-$post = get_annotation($vars['post_id']);
-
-echo '<div class="contentWrapper">';
+$post = new ElggAnnotation($vars['id']);
 
 echo '<p>';
 echo '<label>' . elgg_echo('title') . '</label>';
 echo elgg_view('input/text', array(
-	'internalname' => 'title',
+	'name' => 'title',
 ));
 echo '</p>';
 
@@ -22,20 +20,8 @@ echo elgg_view('output/longtext', array(
 echo '</div>';
 
 echo elgg_view('input/hidden', array(
-	'internalname' => 'group_guid',
-	'value' => $vars['group_guid'],
-));
-
-echo elgg_view('input/hidden', array(
-	'internalname' => 'user_guid',
-	'value' => $post->owner_guid,
-));
-
-echo elgg_view('input/hidden', array(
-	'internalname' => 'post_id',
-	'value' => $vars['post_id'],
+	'name' => 'id',
+	'value' => $vars['id'],
 ));
 
 echo elgg_view('input/submit', array('value' => elgg_echo('submit')));
-
-echo '</div>';

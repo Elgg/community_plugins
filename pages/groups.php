@@ -1,89 +1,87 @@
 <?php
 /**
- * Listing page of all groups
+ * List all groups
  */
 
-$limit = get_input("limit", 10);
-$offset = get_input("offset", 0);
-$tag = get_input("tag");
-$filter = get_input("filter");
-if (!$filter) {
-	$filter = "featured";
+// all groups doesn't get link to self
+elgg_pop_breadcrumb();
+elgg_push_breadcrumb(elgg_echo('groups'));
+
+elgg_register_title_button();
+
+$selected_tab = get_input('filter', 'featured');
+
+switch ($selected_tab) {
+	case 'popular':
+		$content = elgg_list_entities_from_relationship_count(array(
+			'type' => 'group',
+			'relationship' => 'member',
+			'inverse_relationship' => false,
+			'full_view' => false,
+		));
+		break;
+	case "language":
+		$content = elgg_list_entities_from_metadata(array(
+			'type' => 'group',
+			'metadata_name' => 'group_category',
+			'metadata_value' => 'language',
+			'limit' => $limit,
+			'full_view' => false,
+		));
+		break;
+	case "plugins":
+		$content = elgg_list_entities_from_metadata(array(
+			'type' => 'group',
+			'metadata_name' => 'group_category',
+			'metadata_value' => 'plugins',
+			'limit' => $limit,
+			'full_view' => false,
+		));
+		break;
+	case "developers":
+		$content = elgg_list_entities_from_metadata(array(
+			'type' => 'group',
+			'metadata_name' => 'group_category',
+			'metadata_value' => 'developers',
+			'limit' => $limit,
+			'full_view' => false,
+		));
+		break;
+	case "support":
+		$content = elgg_list_entities_from_metadata(array(
+			'type' => 'group',
+			'metadata_name' => 'group_category',
+			'metadata_value' => 'support',
+			'limit' => $limit,
+			'full_view' => false,
+		));
+		break;
+	case 'featured':
+	default:
+		$content = elgg_list_entities_from_metadata(array(
+			'type' => 'group',
+			'metadata_name' => 'featured_group',
+			'metadata_value' => 'yes',
+			'limit' => $limit,
+			'full_view' => false,
+		));
+		break;
 }
 
-
-$context = get_context();
-set_context('search');
-if ($tag != "") {
-	$filter = 'search';
-	// groups plugin saves tags as "interests" - see groups_fields_setup() in start.php
-	$objects = list_entities_from_metadata('interests',$tag,'group',"","", $limit, false, false, true, false);
-} else {
-	switch($filter) {
-		case "pop":
-			$objects = list_entities_by_relationship_count('member', true, "", "", 0, $limit, false);
-			break;
-		case "language":
-			$objects = elgg_list_entities_from_metadata(array(
-				'type' => 'group',
-				'metadata_name' => 'group_category',
-				'metadata_value' => 'language',
-				'limit' => $limit,
-				'full_view' => false,
-			));
-			break;
-		case "plugins":
-			$objects = elgg_list_entities_from_metadata(array(
-				'type' => 'group',
-				'metadata_name' => 'group_category',
-				'metadata_value' => 'plugins',
-				'limit' => $limit,
-				'full_view' => false,
-			));
-			break;
-		case "developers":
-			$objects = elgg_list_entities_from_metadata(array(
-				'type' => 'group',
-				'metadata_name' => 'group_category',
-				'metadata_value' => 'developers',
-				'limit' => $limit,
-				'full_view' => false,
-			));
-			break;
-		case "support":
-			$objects = elgg_list_entities_from_metadata(array(
-				'type' => 'group',
-				'metadata_name' => 'group_category',
-				'metadata_value' => 'support',
-				'limit' => $limit,
-				'full_view' => false,
-			));
-			break;
-		case "featured":
-		default:
-			$objects = elgg_list_entities_from_metadata(array(
-				'type' => 'group',
-				'metadata_name' => 'featured_group',
-				'metadata_value' => 'yes',
-				'limit' => $limit,
-				'full_view' => false,
-			));
-			break;
-	}
+if (!$content) {
+	$content = elgg_echo('groups:none');
 }
 
-//get a group count
-$options = array('type' => 'group', 'limit' => 0, 'count' => TRUE);
-$group_count = elgg_get_entities($options);
+$filter = elgg_view('groups/group_sort_menu', array('selected' => $selected_tab));
 
+$sidebar = elgg_view('groups/sidebar/find');
+$sidebar .= elgg_view('groups/sidebar/featured');
 
-$area1 = elgg_view('community_groups/groups_sidebar');
+$params = array(
+	'content' => $content,
+	'sidebar' => $sidebar,
+	'filter' => $filter,
+);
+$body = elgg_view_layout('content', $params);
 
-set_context($context);
-
-$title = elgg_echo("groups");
-$area2 = elgg_view_title($title);
-$area2 .= elgg_view('groups/contentwrapper', array('body' => elgg_view("groups/group_sort_menu", array("count" => $group_count, "filter" => $filter)) . $objects));
-$body = elgg_view_layout('sidebar_boxes', $area1, $area2);
-
-page_draw($title, $body);
+echo elgg_view_page(elgg_echo('groups:all'), $body);
