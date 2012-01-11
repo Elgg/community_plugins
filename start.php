@@ -29,6 +29,7 @@ function plugins_init() {
 	// Extend CSS and JS
 	elgg_extend_view('css', 'plugins/css');
 	elgg_extend_view('js/initialise_elgg', 'plugins/js');
+	elgg_extend_view('metatags', 'plugins/metatags');
 
 	// Extend hover-over and profile menu
 	elgg_extend_view('profile/menu/links', 'plugins/profile_menu');
@@ -135,7 +136,7 @@ function plugins_init() {
 	register_action("plugins/delete_project", FALSE, "$action_base/delete_project.php");
 	register_action("plugins/delete_release", FALSE, "$action_base/delete_release.php");
 	register_action("plugins/delete_project_image", FALSE, "$action_base/delete_project_image.php");
-	register_action("plugins/digg", FALSE, "$action_base/digg.php");
+	register_action("plugins/recommend", FALSE, "$action_base/recommend.php");
 
 	register_action("plugins/upgrade", FALSE, "$action_base/admin/upgrade.php", TRUE);
 	register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
@@ -210,19 +211,16 @@ function plugins_page_handler($page) {
 	switch($page[0]) {
 		// plugin repository front page
 		case "all":
-			elgg_extend_view('metatags', 'plugins/metatags');
 			include("$plugin_dir/all.php");
 			break;
 		// category listing page (deprecated, just preserved for compatibility and old bookmarks' sake)
 		case "category":
-			elgg_extend_view('metatags', 'plugins/metatags');
 			set_view_location('entities/entity_list', $CONFIG->pluginspath . "community_plugins/views/override/");
 			set_input('category', $page[1]);
 			include("$plugin_dir/category_list.php");
 			break;
 		// New advanced search page (with filtering and sorting)
 		case "search":
-			elgg_extend_view('metatags', 'plugins/metatags');
 			set_view_location('entities/entity_list', $CONFIG->pluginspath . "community_plugins/views/override/");
 			include("$plugin_dir/search.php");
 			break;
@@ -275,7 +273,6 @@ function plugins_page_handler($page) {
 			break;
 		// admin page
 		case "admin":
-			elgg_extend_view('metatags', 'plugins/metatags');
 			set_input('tab', $page[1]);
 			include("$plugin_dir/admin.php");
 			break;

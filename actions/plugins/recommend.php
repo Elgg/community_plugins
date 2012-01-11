@@ -14,10 +14,8 @@ if ($plugin_project) {
 	if (plugins_is_dugg($plugin_project)){
 		system_message(elgg_echo("plugins:alreadydugg"));
 	} else {
-		//$digg_num = $plugin_project->digg + 1;
-		//$plugin_project->digg = (int) $digg_num;
 		if ($plugin_project->annotate('plugin_digg', 1, $plugin_project->access_id, get_loggedin_userid())){
-			//create a relationship between user and plugin project so they can only digg once
+			//create a relationship between user and plugin project so they can only recommend once
 			add_entity_relationship(get_loggedin_userid(), 'has_dugg', $plugin_project->guid);
 			system_message(elgg_echo("plugins:diggit"));
 		}
@@ -26,6 +24,5 @@ if ($plugin_project) {
 	system_message(elgg_echo("ratings:notfound"));
 }
 
-// Forward to the plugin
 $url = $plugin_project->getURL();
 forward($url);

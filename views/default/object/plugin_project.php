@@ -38,7 +38,7 @@ $friendlytime = friendly_time($project->time_created);
 $created = date('d M, Y', $project->time_created);
 $updated = friendly_time($latest_release->time_created);
 $downloads = $project->getDownloadCount();
-$diggs = $project->countAnnotations('plugin_digg');
+$recommends = $project->countAnnotations('plugin_digg');
 $usericon = elgg_view("profile/icon", array(
 	'entity' => $project_owner,
 	'size' => 'small',
@@ -50,7 +50,7 @@ switch (get_context()) {
 	case 'search':
 		$info = "<div class='pluginName'> <a href=\"{$project->getURL()}\">{$title} </a>";
 		$info .= "<span class=\"info_item\"><img src=\"$iconpath/updated.png\" alt=\"Updated\" title=\"Updated\">$updated</span>";
-		$info .= "<span class=\"info_item\"><img src=\"$iconpath/recommended.png\" alt=\"Recommendations\" title=\"Recommendations\">$diggs</span>";
+		$info .= "<span class=\"info_item\"><img src=\"$iconpath/recommended.png\" alt=\"Recommendations\" title=\"Recommendations\">$recommends</span>";
 		$info .= "<span class=\"info_item\"><img src=\"$iconpath/downloaded.png\" alt=\"Downloads\" title=\"Downloads\">$downloads</span>";
 		$info .= '</div>';
 		if ($summary) {
@@ -114,7 +114,7 @@ switch (get_context()) {
 		</div>
 	</div>
 	<div class="plugins_maincontent">
-		<?php echo elgg_view('plugins/digg', array('project' => $project)); ?>
+		<?php echo elgg_view('plugins/recommend', array('project' => $project)); ?>
 		<h4>Summary:</h4>
 		<?php echo autop($summary); ?>
 		<h4>Full description:</h4>
