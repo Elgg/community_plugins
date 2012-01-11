@@ -1,6 +1,6 @@
 <?php
 /**
- * Elgg plugins layout
+ * Elgg plugins layout used on repository home page
  *
  * @uses $vars['area1'] Main content area
  * @uses $vars['area2'] Sidebar

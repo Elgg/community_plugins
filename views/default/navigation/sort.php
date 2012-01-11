@@ -1,11 +1,11 @@
 <?php 
-	/**
-	 * View providing a sort toolbar for sorting a list of entities
-	 * 
-	 * @uses $vars['sort_fields'] Current sort property
-	 * @uses $vars['sort'] Current sort property
-	 * @uses $vars['direction'] Current sort direction
-	 */
+/**
+ * View providing a sort toolbar for sorting a list of entities
+ * 
+ * @uses $vars['sort_fields'] Current sort property
+ * @uses $vars['sort'] Current sort property
+ * @uses $vars['direction'] Current sort direction
+ */
 ?>
 <div class="sort-block">
 <span class="sort-info">

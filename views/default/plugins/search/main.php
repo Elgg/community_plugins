@@ -1,4 +1,7 @@
 <?php
+/**
+ * Category list header
+ */
 
 $category = get_input('category', 'all');
 $category_label = $CONFIG->plugincats[$category];

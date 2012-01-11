@@ -1,6 +1,7 @@
 <?php
 /**
- * View for displaying plugin files
+ * Plugin release
+ * 
  */
 
 echo "<div class='contentWrapper'>";

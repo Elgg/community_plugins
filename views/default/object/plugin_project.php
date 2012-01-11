@@ -1,6 +1,7 @@
 <?php
 /**
  * Elgg plugin project object view.
+ *
  * Four views:
  * full
  * search listing

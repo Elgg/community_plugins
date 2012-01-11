@@ -1,6 +1,6 @@
 <?php
 /**
- * Elgg plugin search
+ * Elgg plugin search - override the layout for plugins
  */
 
 set_context('plugins');
