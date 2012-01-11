@@ -26,12 +26,13 @@ function plugins_init() {
 	// Set up menu for logged in users
 	add_menu(elgg_echo('plugins'), "{$CONFIG->wwwroot}pg/plugins/all/");
 
-	// Extend CSS
-	extend_view('css', 'plugins/css');
+	// Extend CSS and JS
+	elgg_extend_view('css', 'plugins/css');
+	elgg_extend_view('js/initialise_elgg', 'plugins/js');
 
 	// Extend hover-over and profile menu
-	extend_view('profile/menu/links', 'plugins/profile_menu');
-	extend_view('groups/left_column', 'plugins/groupprofile_files');
+	elgg_extend_view('profile/menu/links', 'plugins/profile_menu');
+	elgg_extend_view('groups/left_column', 'plugins/groupprofile_files');
 
 	// Register a page handler, so we can have nice URLs
 	register_page_handler('plugins', 'plugins_page_handler');
