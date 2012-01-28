@@ -25,7 +25,7 @@ $guid = (int) get_input('plugins_guid');
 
 if (!$plugin_project = get_entity($guid)) {
 	register_error(elgg_echo("plugins:error:uploadfailed"));
-	forward($CONFIG->wwwroot . "pg/plugins/" . get_loggedin_user()->username);
+	forward($CONFIG->wwwroot . "plugins/" . get_loggedin_user()->username);
 }
 
 // validate data

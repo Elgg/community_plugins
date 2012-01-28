@@ -16,7 +16,7 @@ foreach ($tabs as $tab) {
 	if ($tab == $selected_tab) {
 		$class = 'class="selected"';
 	}
-	$url = "{$CONFIG->wwwroot}pg/plugins/admin/$tab/";
+	$url = "{$CONFIG->wwwroot}plugins/admin/$tab/";
 	$title = elgg_echo("plugins:tabs:$tab");
 	echo "<li $class><a href=\"$url\">$title</a></li>";
 }

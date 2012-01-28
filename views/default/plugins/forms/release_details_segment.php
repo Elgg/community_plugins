@@ -64,7 +64,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 
 	<p>
 		<label>Release Notes:<br />
-		<span class="pluginHint">A list of changes, bugfixes, bugs, todos, and general release notes for this release. (As per <a href="http://community.elgg.org/pg/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span><br />
+		<span class="pluginHint">A list of changes, bugfixes, bugs, todos, and general release notes for this release. (As per <a href="http://community.elgg.org/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span><br />
 
 		<?php
 			echo elgg_view("input/longtext",array(

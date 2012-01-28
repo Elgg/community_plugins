@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
 
 	// "Clear search" button loads search page without parameters
 	$('form#plugin_search_form button#clear_search').click(function() {
-        window.location.href = plugins.wwwroot + "pg/plugins/search";
+        window.location.href = plugins.wwwroot + "plugins/search";
     });
 
 });

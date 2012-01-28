@@ -21,7 +21,7 @@ if (array_key_exists('project', $vars)
 	$repo = $project->repo;
 
 	$msg = "You are editing the plugin project information for {$project->title}.  To upload a new release,
-	click <a href=\"{$vars['url']}pg/plugins/new/release/{$project->getGUID()}\">here</a>.";
+	click <a href=\"{$vars['url']}plugins/new/release/{$project->getGUID()}\">here</a>.";
 } else {
 	$project = NULL;
 	$title = $description = $homepage = $plugin_type = '';
@@ -34,7 +34,7 @@ if (array_key_exists('project', $vars)
 	$msg = "You are creating a new plugin project. If you want to release a new
 	version of an existing plugin, go to the edit section of that plugin's project page.
 	You can view all of your plugins
-	<a href=\"{$vars['url']}pg/plugins/developer/$username\">here</a>.";
+	<a href=\"{$vars['url']}plugins/developer/$username\">here</a>.";
 }
 
 ?>
@@ -71,7 +71,7 @@ if (array_key_exists('project', $vars)
 
 	<p>
 		<label>Project Description<br />
-		<span class="pluginHint">A full description of your project's features. (As per <a href="http://community.elgg.org/pg/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span>
+		<span class="pluginHint">A full description of your project's features. (As per <a href="http://community.elgg.org/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span>
 		<?php
 			echo elgg_view("input/longtext",array(
 				"internalname" => "description",
@@ -200,7 +200,7 @@ if (array_key_exists('project', $vars)
 					&& ($thumb instanceof ElggFile)) {
 					
 					$title = $image[0]->title;
-					$src = "{$vars['url']}pg/plugins_image/{$thumb->getGUID()}/{$thumb->time_created}.jpg";
+					$src = "{$vars['url']}plugins_image/{$thumb->getGUID()}/{$thumb->time_created}.jpg";
 					$img = "<img style=\"float: left; padding-right: 1em;\" src=\"$src\" />\n";
 					echo $img;
 				} else {

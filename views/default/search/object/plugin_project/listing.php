@@ -24,7 +24,7 @@ $query = http_build_query(
 	)
 );
 
-$url = "{$vars['url']}pg/search?$query";
+$url = "{$vars['url']}search?$query";
 
 // get pagination
 if (array_key_exists('pagination', $vars) && $vars['pagination']) {

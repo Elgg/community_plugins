@@ -24,7 +24,7 @@ function plugins_init() {
 	run_function_once('plugins_create_download_table');
 
 	// Set up menu for logged in users
-	add_menu(elgg_echo('plugins'), "{$CONFIG->wwwroot}pg/plugins/all/");
+	add_menu(elgg_echo('plugins'), "{$CONFIG->wwwroot}plugins/all/");
 
 	// Extend CSS and JS
 	elgg_extend_view('css', 'plugins/css');
@@ -159,7 +159,7 @@ function plugins_run_once() {
 function plugins_add_submenus() {
 	global $CONFIG;
 
-	$plugins_base = "{$CONFIG->wwwroot}pg/plugins";
+	$plugins_base = "{$CONFIG->wwwroot}plugins";
 
 	if (elgg_get_context() == 'admin') {
 		$title = elgg_echo("plugins:admin:menu");
@@ -176,12 +176,12 @@ function plugins_add_submenus() {
 	if (isloggedin() && page_owner() == get_loggedin_userid()) {
 		$title = sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:'));
 		add_submenu_item($title, "$plugins_base/developer/$page_owner->username");
-		//add_submenu_item(sprintf(elgg_echo('plugins:yours:friends'),page_owner_entity()->name), $CONFIG->wwwroot . "pg/plugins/". $page_owner->username . "/friends/");
+		//add_submenu_item(sprintf(elgg_echo('plugins:yours:friends'),page_owner_entity()->name), $CONFIG->wwwroot . "plugins/". $page_owner->username . "/friends/");
 	} else if (page_owner()) {
 		$title = sprintf(elgg_echo("plugins:user"), $page_owner->name, elgg_echo('plugins:types:'));
 		add_submenu_item($title, "$plugins_base/developer/$page_owner->username");
 		//if ($page_owner instanceof ElggUser) // This one's for users, not groups
-			//add_submenu_item(sprintf(elgg_echo('plugins:friends'),$page_owner->name), $CONFIG->wwwroot . "pg/plugins/". $page_owner->username . "/friends/");
+			//add_submenu_item(sprintf(elgg_echo('plugins:friends'),$page_owner->name), $CONFIG->wwwroot . "plugins/". $page_owner->username . "/friends/");
 	}
 
 	add_submenu_item(elgg_echo('plugins:all'), "$plugins_base/all/");
@@ -276,7 +276,7 @@ function plugins_page_handler($page) {
 			set_input('tab', $page[1]);
 			include("$plugin_dir/admin.php");
 			break;
-		// for backwards compatibility this handles /pg/plugins/<username>/read/<guid>/<title>
+		// for backwards compatibility this handles /plugins/<username>/read/<guid>/<title>
 		default:
 			set_input('guid', $page[2]);
 			include("$plugin_dir/read.php");
@@ -331,7 +331,7 @@ function plugins_project_url_handler($entity) {
 
 	$title = $entity->title;
 	$title = friendly_title($title);
-	return $CONFIG->url . "pg/plugins/project/{$entity->getGUID()}/developer/{$entity->getOwnerEntity()->username}/$title";
+	return $CONFIG->url . "plugins/project/{$entity->getGUID()}/developer/{$entity->getOwnerEntity()->username}/$title";
 }
 
 /**
@@ -346,7 +346,7 @@ function plugins_release_url_handler($entity) {
 
 	$title = $entity->title;
 	$title = friendly_title($title);
-	return $CONFIG->url . "pg/plugins/release/$entity->guid/developer/{$entity->getOwnerEntity()->username}/$title";
+	return $CONFIG->url . "plugins/release/$entity->guid/developer/{$entity->getOwnerEntity()->username}/$title";
 }
 
 /**
@@ -370,7 +370,7 @@ function plugins_add_type_menu($owner_guid) {
 			$tag = $type->tag;
 			$label = elgg_echo("plugins:type:" . $tag);
 
-			$url = "{$CONFIG->url}pg/plugins/developer/$owner->username/type/$tag/";
+			$url = "{$CONFIG->url}plugins/developer/$owner->username/type/$tag/";
 
 			add_submenu_item($label, $url, 'pluginstypes');
 		}
