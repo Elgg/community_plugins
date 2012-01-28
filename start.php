@@ -29,7 +29,7 @@ function plugins_init() {
 	// Extend CSS and JS
 	elgg_extend_view('css', 'plugins/css');
 	elgg_extend_view('js/initialise_elgg', 'plugins/js');
-	elgg_extend_view('metatags', 'plugins/metatags');
+	elgg_extend_view('page/elements/head', 'plugins/metatags');
 
 	// Extend hover-over and profile menu
 	elgg_extend_view('profile/menu/links', 'plugins/profile_menu');
@@ -161,13 +161,13 @@ function plugins_add_submenus() {
 
 	$plugins_base = "{$CONFIG->wwwroot}pg/plugins";
 
-	if (get_context() == 'admin') {
+	if (elgg_get_context() == 'admin') {
 		$title = elgg_echo("plugins:admin:menu");
 		add_submenu_item($title, "$plugins_base/admin/");
 		return;
 	}
 
-	if (get_context() != "plugins") {
+	if (elgg_get_context() != "plugins") {
 		return;
 	}
 
