@@ -18,7 +18,7 @@ if (count($all_user_plugins) > 1) {
 <div class="sidebarBox">
 	<h3>Other Projects</h3>
 	<div class="contentWrapper">
-		<p><?php echo page_owner_entity()->name; ?>'s plugins:</p>
+		<p><?php echo elgg_get_page_owner_entity()->name; ?>'s plugins:</p>
 <?php
 		if ($all_user_plugins) {
 			echo "<select class='choose_plugin' onchange=\"window.open(this.options[this.selectedIndex].value,'_top')\">";

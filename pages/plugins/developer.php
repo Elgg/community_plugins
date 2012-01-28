@@ -13,7 +13,7 @@ $types_string = elgg_echo("plugins:types:$type");
 if (page_owner() == elgg_get_logged_in_user_guid()){
 	$title = sprintf(elgg_echo('plugins:yours'), $types_string);;
 } else {
-	$title = sprintf(elgg_echo("plugins:user"), page_owner_entity()->name, $types_string);
+	$title = sprintf(elgg_echo("plugins:user"), elgg_get_page_owner_entity()->name, $types_string);
 }
 
 $content = elgg_view_title($title);

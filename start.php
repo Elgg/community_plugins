@@ -171,7 +171,7 @@ function plugins_add_submenus() {
 		return;
 	}
 
-	$page_owner = page_owner_entity();
+	$page_owner = elgg_get_page_owner_entity();
 
 	if (elgg_is_logged_in() && page_owner() == elgg_get_logged_in_user_guid()) {
 		$title = sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:'));
