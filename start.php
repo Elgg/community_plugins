@@ -4,7 +4,7 @@
  * 
  */
 
-register_elgg_event_handler('init', 'system', 'plugins_init');
+elgg_register_event_handler('init', 'system', 'plugins_init');
 
 require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
 
@@ -45,7 +45,7 @@ function plugins_init() {
 	register_entity_url_handler('plugins_release_url_handler', 'object', 'plugin_release');
 	register_entity_url_handler('plugins_project_url_handler', 'object', 'plugin_project');
 
-	register_elgg_event_handler('pagesetup', 'system', 'plugins_add_submenus');
+	elgg_register_event_handler('pagesetup', 'system', 'plugins_add_submenus');
 
 	// Only projects should show up in search
 	register_entity_type('object', 'plugin_project');
