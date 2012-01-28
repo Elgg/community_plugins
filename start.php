@@ -123,19 +123,19 @@ function plugins_init() {
 	);
 
 	$action_base = "{$CONFIG->pluginspath}community_plugins/actions/plugins";
-	register_action("plugins/create_project", FALSE, "$action_base/create_project.php");
-	register_action("plugins/create_release", FALSE, "$action_base/create_release.php");
-	register_action("plugins/save_project", FALSE, "$action_base/save_project.php");
-	register_action("plugins/save_release", FALSE, "$action_base/save_release.php");
-	register_action("plugins/delete_project", FALSE, "$action_base/delete_project.php");
-	register_action("plugins/delete_release", FALSE, "$action_base/delete_release.php");
-	register_action("plugins/delete_project_image", FALSE, "$action_base/delete_project_image.php");
-	register_action("plugins/recommend", FALSE, "$action_base/recommend.php");
+	elgg_register_action("plugins/create_project", "$action_base/create_project.php");
+	elgg_register_action("plugins/create_release", "$action_base/create_release.php");
+	elgg_register_action("plugins/save_project", "$action_base/save_project.php");
+	elgg_register_action("plugins/save_release", "$action_base/save_release.php");
+	elgg_register_action("plugins/delete_project", "$action_base/delete_project.php");
+	elgg_register_action("plugins/delete_release", "$action_base/delete_release.php");
+	elgg_register_action("plugins/delete_project_image", "$action_base/delete_project_image.php");
+	elgg_register_action("plugins/recommend", "$action_base/recommend.php");
 
-	register_action("plugins/upgrade", FALSE, "$action_base/admin/upgrade.php", TRUE);
-	register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
-	register_action("plugins/normalize", FALSE, "$action_base/admin/normalize.php", TRUE);
-	register_action("plugins/admin/search", FALSE, "$action_base/admin/save.php", TRUE);
+	elgg_register_action("plugins/upgrade", "$action_base/admin/upgrade.php", 'admin');
+	elgg_register_action("plugins/combine", "$action_base/admin/combine.php", 'admin');
+	elgg_register_action("plugins/normalize", "$action_base/admin/normalize.php", 'admin');
+	elgg_register_action("plugins/admin/search", "$action_base/admin/save.php", 'admin');
 }
 
 /**
