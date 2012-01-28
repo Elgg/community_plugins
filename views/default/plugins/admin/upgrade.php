@@ -2,7 +2,7 @@
 
 require_once "{$CONFIG->pluginspath}community_plugins/version.php";
 
-$local_version = get_plugin_setting('version', 'community_plugins');
+$local_version = elgg_get_plugin_setting('version', 'community_plugins');
 
 // bootstrap version detection for newly activated or never been upgraded plugin
 if ($local_version === FALSE) {

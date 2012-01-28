@@ -23,7 +23,7 @@ $direction = get_input('direction', 'desc');
 
 
 // Get search-specific settings
-$serialized_settings = get_plugin_setting('search-settings', 'community_plugins');
+$serialized_settings = elgg_get_plugin_setting('search-settings', 'community_plugins');
 $settings = unserialize($serialized_settings);
 if (!is_array($settings)) {
 	$settings = array();

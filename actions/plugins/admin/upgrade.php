@@ -7,7 +7,7 @@ set_time_limit(0);
 
 require_once "{$CONFIG->pluginspath}community_plugins/version.php";
 
-$local_version = get_plugin_setting('version', 'community_plugins');
+$local_version = elgg_get_plugin_setting('version', 'community_plugins');
 
 if ($version <= $local_version) {
 	register_error('No upgrade required');
