@@ -173,7 +173,7 @@ function plugins_add_submenus() {
 
 	$page_owner = page_owner_entity();
 
-	if (elgg_is_logged_in() && page_owner() == get_loggedin_userid()) {
+	if (elgg_is_logged_in() && page_owner() == elgg_get_logged_in_user_guid()) {
 		$title = sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:'));
 		add_submenu_item($title, "$plugins_base/developer/$page_owner->username");
 	} else if (page_owner()) {
@@ -184,7 +184,7 @@ function plugins_add_submenus() {
 	add_submenu_item(elgg_echo('plugins:all'), "$plugins_base/all");
 
 	// add upload link when viewing own plugin page
-	if (get_loggedin_userid() == page_owner()) {
+	if (elgg_get_logged_in_user_guid() == page_owner()) {
 		add_submenu_item(elgg_echo('plugins:upload'), "$plugins_base/new/project/$page_owner->username");
 	}
 }

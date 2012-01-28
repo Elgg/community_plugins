@@ -10,7 +10,7 @@ plugins_add_type_menu(page_owner());
 
 //set the title
 $types_string = elgg_echo("plugins:types:$type");
-if (page_owner() == get_loggedin_userid()){
+if (page_owner() == elgg_get_logged_in_user_guid()){
 	$title = sprintf(elgg_echo('plugins:yours'), $types_string);;
 } else {
 	$title = sprintf(elgg_echo("plugins:user"), page_owner_entity()->name, $types_string);

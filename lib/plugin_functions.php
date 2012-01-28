@@ -5,7 +5,7 @@
  * @return bool
  */
 function plugins_is_dugg($project) {
-	if (check_entity_relationship(get_loggedin_userid(), "has_dugg", $project->guid)) {
+	if (check_entity_relationship(elgg_get_logged_in_user_guid(), "has_dugg", $project->guid)) {
 		return TRUE;
 	} else {
 		return FALSE;
@@ -170,7 +170,7 @@ function plugins_send_notifications($entity) {
 		if ($interested_users && is_array($interested_users)) {
 			foreach ($interested_users as $user) {
 				if ($user instanceof ElggUser && !$user->isBanned()) {
-					if (($user->guid != get_loggedin_userid()) && has_access_to_entity($entity, $user)) {
+					if (($user->guid != elgg_get_logged_in_user_guid()) && has_access_to_entity($entity, $user)) {
 
 						$subtype = $entity->getSubtype();
 						if ($subtype == 'plugin_project') {

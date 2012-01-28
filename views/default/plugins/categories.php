@@ -12,7 +12,7 @@ if (elgg_is_logged_in()) {
 	$params = array(
 		'types' => 'object',
 		'subtypes' => 'plugin_project',
-		'owner_guid' => get_loggedin_userid(),
+		'owner_guid' => elgg_get_logged_in_user_guid(),
 		'count' => TRUE,
 	);
 	$count_user_plugins = (int)elgg_get_entities($params);

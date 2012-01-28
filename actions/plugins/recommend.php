@@ -14,9 +14,9 @@ if ($plugin_project) {
 	if (plugins_is_dugg($plugin_project)){
 		system_message(elgg_echo("plugins:alreadydugg"));
 	} else {
-		if ($plugin_project->annotate('plugin_digg', 1, $plugin_project->access_id, get_loggedin_userid())){
+		if ($plugin_project->annotate('plugin_digg', 1, $plugin_project->access_id, elgg_get_logged_in_user_guid())){
 			//create a relationship between user and plugin project so they can only recommend once
-			add_entity_relationship(get_loggedin_userid(), 'has_dugg', $plugin_project->guid);
+			add_entity_relationship(elgg_get_logged_in_user_guid(), 'has_dugg', $plugin_project->guid);
 			system_message(elgg_echo("plugins:diggit"));
 		}
 	}

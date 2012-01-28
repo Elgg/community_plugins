@@ -58,7 +58,7 @@ if ($recommended == 'yes') {
 
 $release->setHash();
 
-add_to_river('river/object/plugin_release/create', 'create', get_loggedin_userid(), $release->guid);
+add_to_river('river/object/plugin_release/create', 'create', elgg_get_logged_in_user_guid(), $release->guid);
 plugins_send_notifications($release);
 system_message(elgg_echo("plugins:release:saved"));
 
