@@ -38,4 +38,4 @@ $bottom = elgg_view('plugins/front/bottom', array(	'newest' => $newest,
 
 $body = elgg_view_layout('plugins_layout', $welcome, $sidebar, $bottom);
 
-page_draw(elgg_echo("plugins:all"), $body);
+echo elgg_view_page(elgg_echo("plugins:all"), $body);

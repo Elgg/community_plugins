@@ -24,4 +24,4 @@ $content = elgg_view_title($title);
 $content .= elgg_view("plugins/forms/edit_release", array('release' => $release));
 
 $body = elgg_view_layout('sidebar_boxes', $sidebar, $content);
-page_draw($title, $body);
+echo elgg_view_page($title, $body);

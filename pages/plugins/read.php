@@ -23,7 +23,7 @@ $project = get_entity($project_guid);
 if (!$project) {
 	$body = elgg_view("plugins/notfound");
 	$title = elgg_echo("plugins:notfound");
-	page_draw($title, $body);
+	echo elgg_view_page($title, $body);
 	exit;
 }
 
@@ -49,4 +49,4 @@ $content = elgg_view_entity($project, TRUE);
 
 $body = elgg_view_layout("sidebar_boxes", $sidebar, $content);
 
-page_draw($title, $body);
+echo elgg_view_page($title, $body);

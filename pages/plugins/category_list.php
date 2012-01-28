@@ -31,4 +31,4 @@ $main = elgg_view('plugins/search/main', array('area1' => $list));
 
 $body = elgg_view_layout('plugins_layout', $main, $sidebar);
 
-page_draw($title, $body);
+echo elgg_view_page($title, $body);
