@@ -18,7 +18,7 @@ function plugins_init() {
 	run_function_once('plugins_create_download_table');
 
 	// Set up menu for logged in users
-	add_menu(elgg_echo('plugins'), "/plugins/all");
+	add_menu(elgg_echo('plugins'), "/plugins");
 
 	// Extend CSS and JS
 	elgg_extend_view('css', 'plugins/css');
@@ -175,7 +175,7 @@ function plugins_add_submenus() {
 		add_submenu_item($title, "$plugins_base/developer/$page_owner->username");
 	}
 
-	add_submenu_item(elgg_echo('plugins:all'), "$plugins_base/all");
+	add_submenu_item(elgg_echo('plugins:all'), $plugins_base);
 
 	// add upload link when viewing own plugin page
 	if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
@@ -199,6 +199,9 @@ function plugins_page_handler($page) {
 	switch ($page[0]) {
 		// plugin repository front page
 		case "all":
+			system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
+			forward('/plugins', 301);
+			break;
 		case "index":
 			include "$pages_dir/index.php";
 			break;

@@ -4,7 +4,7 @@
  */
 
 global $CONFIG;
-$url = elgg_get_site_url() . 'plugins/all';
+$url = elgg_get_site_url() . 'plugins';
 $settings = $vars['settings'];
 
 if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {

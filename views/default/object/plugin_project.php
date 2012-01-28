@@ -98,7 +98,7 @@ switch (elgg_get_context()) {
 ?>
 <div class="plugins_wrapper">
 	<div class="plugins_owner_wrapper">
-		<a href="<?php echo elgg_get_site_url(); ?>plugins/all" class="plugins_back_link">back to plugins</a>
+		<a href="<?php echo elgg_get_site_url(); ?>plugins" class="plugins_back_link">back to plugins</a>
 		<h2><a href="<?php echo $project->getURL(); ?>"><?php echo $title; ?></a></h2>
 		<div class="pluginsrepo_owner">
 			<?php echo elgg_view("profile/icon", array('entity' => $project_owner, 'size' => 'tiny')); ?>
