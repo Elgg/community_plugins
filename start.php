@@ -30,10 +30,10 @@ function plugins_init() {
 	elgg_extend_view('groups/left_column', 'plugins/groupprofile_files');
 
 	// Register a page handler, so we can have nice URLs
-	register_page_handler('plugins', 'plugins_page_handler');
+	elgg_register_page_handler('plugins', 'plugins_page_handler');
 
 	// Image handler
-	register_page_handler('plugins_image', 'plugins_image_page_handler');
+	elgg_register_page_handler('plugins_image', 'plugins_image_page_handler');
 
 	register_notification_object('object', 'plugins', elgg_echo('plugins:new'));
 
