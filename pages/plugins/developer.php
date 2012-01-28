@@ -22,7 +22,7 @@ $content = elgg_view_title($title);
 //$area2 = list_entities_from_annotation_count("object", "plugin_project", "download", 10, 0, 0, false, true, false);
 
 // list plugins
-set_context('search');
+elgg_set_context('search');
 $params = array(
 	'types' => 'object',
 	'subtypes' => 'plugin_project',

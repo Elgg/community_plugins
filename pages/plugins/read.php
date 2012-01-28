@@ -4,7 +4,7 @@
  */
 
 // for backward compatibility if called directly
-set_context('plugins');
+elgg_set_context('plugins');
 
 // Get the specified plugin project
 $project_guid = (int) get_input('guid');

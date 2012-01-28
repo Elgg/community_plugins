@@ -3,7 +3,7 @@
  * Elgg plugin search - override the layout for plugins
  */
 
-set_context('plugins');
+elgg_set_context('plugins');
 
 $sidebar = elgg_view('plugins/search/sidebar');
 

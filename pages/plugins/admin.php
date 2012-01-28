@@ -4,7 +4,7 @@
  */
 
 admin_gatekeeper();
-set_context('admin');
+elgg_set_context('admin');
 
 $tab = get_input("tab");
 

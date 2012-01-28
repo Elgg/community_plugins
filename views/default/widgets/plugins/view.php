@@ -21,11 +21,11 @@ if ($plugins) {
 	
 	//display in list mode
 	$context = elgg_get_context();
-	set_context('widget');
+	elgg_set_context('widget');
 	foreach ($plugins as $plugin) {
 		echo elgg_view_entity($plugin);
 	}
-	set_context($context);
+	elgg_set_context($context);
 
 	//get a link to the user's plugins
 	$users_file_url = elgg_get_site_url() . "plugins/developer/" . $owner_entity->username;

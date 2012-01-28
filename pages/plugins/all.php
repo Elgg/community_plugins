@@ -21,7 +21,7 @@ $popular = PluginProject::getPluginsByDownloads();
 //Most dugg
 $dugg = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_project', 'plugin_digg');
 
-set_context('plugin_project');
+elgg_set_context('plugin_project');
 
 $welcome = elgg_view('plugins/front/main');
 $sidebar = elgg_view('plugins/filters', array(

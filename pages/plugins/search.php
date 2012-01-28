@@ -177,11 +177,11 @@
     }
     
 	// Get objects
-	set_context('search');
+	elgg_set_context('search');
     $count = elgg_get_entities_from_metadata(array_merge($options, array('count' => true)));
     $entities = elgg_get_entities_from_metadata($options);
     $list = elgg_view_entity_list($entities, $count, $offset, $limit, false, false, true);
-    set_context('plugins');
+    elgg_set_context('plugins');
 
 	$title = elgg_echo('plugins:search:title');
     
