@@ -48,7 +48,7 @@ function plugins_init() {
 	elgg_register_event_handler('pagesetup', 'system', 'plugins_add_submenus');
 
 	// Only projects should show up in search
-	register_entity_type('object', 'plugin_project');
+	elgg_register_entity_type('object', 'plugin_project');
 
 	// Special hook for searching against metadata (category)
 	elgg_register_plugin_hook_handler('search', 'object:plugin_project', 'plugins_search_hook');
