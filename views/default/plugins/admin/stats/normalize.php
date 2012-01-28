@@ -1,5 +1,5 @@
 <?php
-$url = "{$vars['url']}action/plugins/normalize/";
+$url = elgg_get_site_url() . "action/plugins/normalize/";
 
 $guid = $vars['guid'];
 

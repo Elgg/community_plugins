@@ -28,7 +28,7 @@ if ($plugins) {
 	set_context($context);
 
 	//get a link to the user's plugins
-	$users_file_url = $vars['url'] . "plugins/developer/" . $owner_entity->username;
+	$users_file_url = elgg_get_site_url() . "plugins/developer/" . $owner_entity->username;
 
 	echo "<div class=\"pluginsrepo_widget_singleitem_more\"><a href=\"{$users_file_url}\">" . elgg_echo('plugins:more') . "</a></div>";
 	echo "</div>";

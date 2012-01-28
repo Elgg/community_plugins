@@ -3,7 +3,7 @@
  * Create new plugin project view
  */
 ?>
-<form action="<?php echo $vars['url']; ?>action/plugins/create_project" enctype="multipart/form-data" method="post">
+<form action="<?php echo elgg_get_site_url(); ?>action/plugins/create_project" enctype="multipart/form-data" method="post">
 
 <?php
 echo elgg_view('plugins/forms/project_details_segment');

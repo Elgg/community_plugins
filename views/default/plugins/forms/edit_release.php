@@ -12,7 +12,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 }
 
 ?>
-<form action="<?php echo $vars['url']; ?>action/plugins/save_release" enctype="multipart/form-data" method="post">
+<form action="<?php echo elgg_get_site_url(); ?>action/plugins/save_release" enctype="multipart/form-data" method="post">
 
 <?php echo elgg_view('plugins/forms/release_details_segment', array('release' => $release, 'project' => $project))?>
 

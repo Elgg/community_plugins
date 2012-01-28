@@ -12,7 +12,7 @@
 	</div>
 <?php
 if (isloggedin()) {
-	$url = $vars['url'] . 'plugins/new/project/' . get_loggedin_user()->username;
+	$url = elgg_get_site_url() . 'plugins/new/project/' . get_loggedin_user()->username;
 ?>
 	<a class="upload_plugin" href="<?php echo $url; ?>"><?php echo elgg_echo('plugins:upload:new'); ?></a>
 <?php

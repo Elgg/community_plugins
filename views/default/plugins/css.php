@@ -43,7 +43,7 @@
 	border: 1px solid silver;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
-	background: url(<?php echo $vars['url']; ?>mod/community_plugins/graphics/plugins_back.gif) no-repeat right top;
+	background: url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/plugins_back.gif) no-repeat right top;
 }
 
 #plugins_welcome_text {
@@ -421,7 +421,7 @@ p.pluginsrepo_owner {
 }
 
 #plugins_recommend #num_recommend {
-	background: url(<?php echo $vars['url']; ?>mod/community_plugins/graphics/recommend.png) no-repeat;
+	background: url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/recommend.png) no-repeat;
 	width:50px;
 	height:50px;
 	margin:0 0 5px 0;
@@ -454,7 +454,7 @@ p.pluginsrepo_owner {
 }
 
 #warning {
-	background:url(<?php echo $vars['url']; ?>mod/community_plugins/graphics/warning.png)no-repeat;
+	background:url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/warning.png)no-repeat;
 	height:40px;
 	width:40px;
 	float:left;
@@ -523,7 +523,7 @@ p.pluginsrepo_owner {
 
 .plugins_back_link {
 	padding:2px 25px 5px 0;
-	background: transparent url(<?php echo $vars['url']; ?>_graphics/icon_gallery.gif) no-repeat right top;
+	background: transparent url(<?php echo elgg_get_site_url(); ?>_graphics/icon_gallery.gif) no-repeat right top;
 	display:block;
 	float:right;
 }
@@ -653,7 +653,7 @@ padding:0;
 	color: #fff;
 	font: 12px/21px arial,sans-serif;
 	font-weight: bold;
-	background: url(<?php echo $vars['url']; ?>mod/community_plugins/graphics/select.gif) no-repeat;
+	background: url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/select.gif) no-repeat;
 	overflow: hidden;
 	text-align: left;
 }
@@ -863,17 +863,17 @@ span.downloadsnumber {
 }
 
 .river_object_plugin_project_create {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
+	background: url(<?php echo elgg_get_site_url(); ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
 }
 .river_object_plugin_release_create {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
+	background: url(<?php echo elgg_get_site_url(); ?>_graphics/river_icons/river_icon_plugin.gif) no-repeat left -1px;
 }
 .river_object_plugin_release_comment {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_comment.gif) no-repeat left -1px;
+	background: url(<?php echo elgg_get_site_url(); ?>_graphics/river_icons/river_icon_comment.gif) no-repeat left -1px;
 }
 /* for backward compatibility */
 .river_object_plugins_comment {
-	background: url(<?php echo $vars['url']; ?>_graphics/river_icons/river_icon_comment.gif) no-repeat left -1px;
+	background: url(<?php echo elgg_get_site_url(); ?>_graphics/river_icons/river_icon_comment.gif) no-repeat left -1px;
 }
 
 .welcomemessage .sitemessage {
@@ -940,7 +940,7 @@ New edits
 #plugins_welcome {
 /*
 	padding-left:50px;
-	background:url(<?php echo $vars['url']; ?>mod/community_plugins/graphics/plugins.gif) left no-repeat;
+	background:url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/plugins.gif) left no-repeat;
 */
 }
 
@@ -951,7 +951,7 @@ New edits
 	padding:10px;
 	margin:0 0 15px 0;
 	height:240px;
-	background:url(<?php echo $vars['url']; ?>mod/community_plugins/graphics/plugins_back.gif) no-repeat right top;
+	background:url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/plugins_back.gif) no-repeat right top;
 	position:relative;
 }
 

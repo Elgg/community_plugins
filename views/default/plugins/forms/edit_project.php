@@ -13,7 +13,7 @@ if (array_key_exists('project', $vars)
 }
 
 ?>
-<form action="<?php echo $vars['url']; ?>action/plugins/save_project" enctype="multipart/form-data" method="post">
+<form action="<?php echo elgg_get_site_url(); ?>action/plugins/save_project" enctype="multipart/form-data" method="post">
 
 <?php echo elgg_view('plugins/forms/project_details_segment', array('project' => $project)); ?>
 

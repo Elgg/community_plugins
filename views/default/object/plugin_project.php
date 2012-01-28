@@ -43,7 +43,7 @@ $usericon = elgg_view("profile/icon", array(
 	'entity' => $project_owner,
 	'size' => 'small',
 ));
-$iconpath = $CONFIG->wwwroot . 'mod/community_plugins/graphics/icons';
+$iconpath = elgg_get_site_url() . 'mod/community_plugins/graphics/icons';
 
 
 switch (get_context()) {
@@ -56,7 +56,7 @@ switch (get_context()) {
 		if ($summary) {
 			$info .= "<p class='description'>" . $summary . "</p>";
 		}
-		$user_url = "{$vars['url']}plugins/developer/{$project_owner->username}";
+		$user_url = elgg_get_site_url() . "plugins/developer/{$project_owner->username}";
 		$info .= "<p class=\"owner_timestamp\"><a href=\"$user_url\">{$project_owner->name}</a> {$created} ({$friendlytime})</p>";
 		echo elgg_view_listing($usericon, $info);
 		break;
@@ -76,7 +76,7 @@ switch (get_context()) {
 		<div class="pluginsrepo_widget_singleitem">
 			<div class="pluginsrepo_listview_icon">
 				<a href="<?php echo $project->getURL(); ?>">
-					<img src="<?php echo $vars['url']; ?>mod/community_plugins/graphics/icons/archive.gif" />
+					<img src="<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/icons/archive.gif" />
 				</a>
 			</div>
 			<div class="pluginsrepo_widget_content">
@@ -98,12 +98,12 @@ switch (get_context()) {
 ?>
 <div class="plugins_wrapper">
 	<div class="plugins_owner_wrapper">
-		<a href="<?php echo $vars['url']; ?>plugins/all" class="plugins_back_link">back to plugins</a>
+		<a href="<?php echo elgg_get_site_url(); ?>plugins/all" class="plugins_back_link">back to plugins</a>
 		<h2><a href="<?php echo $project->getURL(); ?>"><?php echo $title; ?></a></h2>
 		<div class="pluginsrepo_owner">
 			<?php echo elgg_view("profile/icon", array('entity' => $project_owner, 'size' => 'tiny')); ?>
 			<p class="pluginsrepo_owner_details">
-				<b>by <a href="<?php echo $vars['url']; ?>plugins/developer/<?php echo $project_owner->username; ?>"><?php echo $project_owner->name; ?></a></b><br />
+				<b>by <a href="<?php echo elgg_get_site_url(); ?>plugins/developer/<?php echo $project_owner->username; ?>"><?php echo $project_owner->name; ?></a></b><br />
 				<small><b>First uploaded</b> <?php echo $friendlytime; ?></small>
 			</p>
 			<div class="pluginsrepo_tags">

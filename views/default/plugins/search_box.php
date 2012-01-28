@@ -14,7 +14,7 @@ if (get_input('q')) {
 }
 ?>
 <div class="plugins_search_box">
-	<?php $search_url = "{$vars['url']}search"; ?>
+	<?php $search_url = elgg_get_site_url() . "search"; ?>
 	<form action="<?php echo $search_url; ?>" method="get" id="plugins_search_form">
 		<input type="hidden" name="entity_subtype" value="plugin_project" />
 		<input type="hidden" name="entity_type" value="object" />

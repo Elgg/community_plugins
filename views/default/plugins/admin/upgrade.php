@@ -21,7 +21,7 @@ if ($local_version === FALSE) {
 
 if ($version > $local_version) {
 	echo "<p>An upgrade is required for this plugin.</p>";
-	$url = "{$CONFIG->wwwroot}action/plugins/upgrade";
+	$url = "/action/plugins/upgrade";
 	$link = elgg_view('output/url', array('text' => 'Upgrade',
 										'href' => $url,
 										'is_action' => TRUE));

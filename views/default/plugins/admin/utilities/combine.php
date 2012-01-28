@@ -24,6 +24,6 @@ $form_body .= '</p>';
 
 $form_body .= elgg_view('input/submit', array('value' => elgg_echo('submit')));
 
-$action = "{$vars['url']}action/plugins/combine/";
+$action = elgg_get_site_url() . "action/plugins/combine/";
 
 echo elgg_view('input/form', array('body' => $form_body, 'action' => $action));

@@ -40,9 +40,9 @@
 
         if ($sort_field == $sort) {
             if ($direction == 'asc') {
-                $sort_arrow = '<img src="' . $CONFIG->wwwroot. 'mod/community_plugins/graphics/icons/up_arrow.png" title="Ascending" alt="Ascending"></img>';
+                $sort_arrow = '<img src="' . elgg_get_site_url() . 'mod/community_plugins/graphics/icons/up_arrow.png" title="Ascending" alt="Ascending"></img>';
             } else {
-                $sort_arrow = '<img src="' . $CONFIG->wwwroot. 'mod/community_plugins/graphics/icons/down_arrow.png" title="Descending" alt="Descending"></img>';
+                $sort_arrow = '<img src="' . elgg_get_site_url() . 'mod/community_plugins/graphics/icons/down_arrow.png" title="Descending" alt="Descending"></img>';
             }
         }
 ?>

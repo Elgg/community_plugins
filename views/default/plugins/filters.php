@@ -4,7 +4,7 @@
  */
 
 global $CONFIG;
-$url = $vars['url'] . 'plugins/all';
+$url = elgg_get_site_url() . 'plugins/all';
 $settings = $vars['settings'];
 
 if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {
@@ -33,7 +33,7 @@ if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) : ?>
 
 	<div class="plugins_sidebar_box">
 
-	<form method="get" name="plugin_search_form" id="plugin_search_form" action="<?php echo $CONFIG->wwwroot?>plugins/search">
+	<form method="get" name="plugin_search_form" id="plugin_search_form" action="<?php echo elgg_get_site_url(); ?>plugins/search">
 		<h3 class="filter_title"><?php echo elgg_echo('plugins:filters:title'); ?></h3>
 		<br />
 

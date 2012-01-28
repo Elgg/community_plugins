@@ -25,7 +25,7 @@ foreach ($vars['plugins'] as $plugin) {
 }
 ?>
 	<div class="browse_more">
-		<a class="upload_plugin" href="<?php echo $CONFIG->wwwroot?>plugins/search?sort=<?php echo $sort_conversions[$vars['type']]; ?>">
+		<a class="upload_plugin" href="<?php echo elgg_get_site_url(); ?>plugins/search?sort=<?php echo $sort_conversions[$vars['type']]; ?>">
 			<?php echo elgg_echo("plugins:browse_more:{$vars['type']}"); ?>
 		</a>
 	</div>

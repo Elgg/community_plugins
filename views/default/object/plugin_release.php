@@ -9,11 +9,11 @@ echo "<div class='contentWrapper'>";
 $release = $vars['entity'];
 $project = get_entity($release->container_guid);
 $notes = $release->release_notes;
-$dl_link = "{$vars['url']}plugins/download/{$release->getGUID()}";
+$dl_link = elgg_get_site_url() . "plugins/download/{$release->getGUID()}";
 echo "<div id=\"download_action\">";
 if ($project->recommended_release_guid && $project->recommended_release_guid != $release->getGUID()) {
 	$author = get_entity($project->owner_guid);
-	$recommended_link = "{$vars['url']}plugins/{$author->username}/read/{$project->getGUID()}?release={$project->recommended_release_guid}";
+	$recommended_link = elgg_get_site_url() . "plugins/{$author->username}/read/{$project->getGUID()}?release={$project->recommended_release_guid}";
 	$recommended = get_entity($project->recommended_release_guid);
 	echo <<<___END
 	<div class="pluginsrepo_description pluginsrepo_warning">

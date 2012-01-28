@@ -26,14 +26,14 @@ foreach ($img_files as $file) {
 		continue;
 	}
 
-	$src = "{$vars['url']}mod/community_plugins/image.php?guid={$thumb->getGUID()}";
-	$link = "{$vars['url']}mod/community_plugins/image.php?guid={$file->getGUID()}";
+	$src = elgg_get_site_url() . "mod/community_plugins/image.php?guid={$thumb->getGUID()}";
+	$link = elgg_get_site_url() . "mod/community_plugins/image.php?guid={$file->getGUID()}";
 
 	echo "<div class=\"project_image_wrapper\">";
 	echo "<a class=\"project_image\" title=\"$file->title\" href=\"$link\"><img src=\"$src\" /></a>";
 
 	if ($project->canEdit()) {
-		$url = "{$vars['url']}action/plugins/delete_project_image?project_guid={$project->getGUID()}&image_guid={$file->getGUID()}";
+		$url = "/action/plugins/delete_project_image?project_guid={$project->getGUID()}&image_guid={$file->getGUID()}";
 		$url = elgg_add_action_tokens_to_url($url);
 		echo elgg_view('output/confirmlink',array(
 				'href' => $url,
@@ -48,15 +48,15 @@ foreach ($img_files as $file) {
 	</div>
 </div>
 
-<script src="<?php echo $vars['url']; ?>mod/community_plugins/vendors/jquery.lightbox.js" type="text/javascript"></script>
+<script src="<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/jquery.lightbox.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('a.project_image').lightBox({
-		imageLoading: '<?php echo $vars['url']; ?>mod/community_plugins/vendors/images/lightbox-ico-loading.gif',
-		imageBtnClose: '<?php echo $vars['url']; ?>mod/community_plugins/vendors/images/lightbox-btn-close.gif',
-		imageBtnPrev: '<?php echo $vars['url']; ?>mod/community_plugins/vendors/images/lightbox-btn-prev.gif',
-		imageBtnNext: '<?php echo $vars['url']; ?>mod/community_plugins/vendors/images/lightbox-btn-next.gif',
-		imageBlank: '<?php echo $vars['url']; ?>mod/community_plugins/vendors/images/lightbox-blank.gif',
+		imageLoading: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-ico-loading.gif',
+		imageBtnClose: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-btn-close.gif',
+		imageBtnPrev: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-btn-prev.gif',
+		imageBtnNext: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-btn-next.gif',
+		imageBlank: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-blank.gif',
 		containerResizeSpeed: 300
 	});
 });

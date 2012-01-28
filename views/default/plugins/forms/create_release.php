@@ -8,7 +8,7 @@ if (array_key_exists('project', $vars) && $vars['project'] instanceof ElggObject
 }
 
 ?>
-<form action="<?php echo $vars['url']; ?>action/plugins/create_release" enctype="multipart/form-data" method="post">
+<form action="<?php echo elgg_get_site_url(); ?>action/plugins/create_release" enctype="multipart/form-data" method="post">
 <?php
 echo elgg_view('plugins/forms/release_details_segment', $vars);
 echo elgg_view("input/hidden", array("internalname" => "guid", "value" => $project_guid,));

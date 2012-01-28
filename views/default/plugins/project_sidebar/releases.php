@@ -24,12 +24,12 @@ $project = $vars['entity'];
 		if ($recommended->canEdit()) {
 
 			$delete = elgg_view('output/confirmlink', array(
-				'href' => $vars['url'] . "/action/plugins/delete_release?release_guid={$recommended->getGUID()}",
+				'href' => "/action/plugins/delete_release?release_guid={$recommended->getGUID()}",
 				'text' => 'delete',
 				'confirm' => elgg_echo("plugins:delete_release:confirm"),
 			));
 			$delete_link = "[$delete]";
-			$edit_link = "[<a href=\"{$vars['url']}plugins/edit/release/{$recommended->getGUID()}\">edit</a>]";
+			$edit_link = "[<a href=\"" . elgg_get_site_url() . "plugins/edit/release/{$recommended->getGUID()}\">edit</a>]";
 		} else {
 			$edit_link = $delete_link = '';
 		}
@@ -55,12 +55,12 @@ $project = $vars['entity'];
 			if ($latest->canEdit()) {
 
 				$delete = elgg_view('output/confirmlink',array(
-					'href' => $vars['url'] . "/action/plugins/delete_release?release_guid={$latest->getGUID()}",
+					'href' => "/action/plugins/delete_release?release_guid={$latest->getGUID()}",
 					'text' => 'delete',
 					'confirm' => elgg_echo("plugins:delete_release:confirm"),
 				));
 				$delete_link = "[$delete]";
-				$edit_link = "[<a href=\"{$vars['url']}plugins/edit/release/{$latest->getGUID()}\">edit</a>]";
+				$edit_link = "[<a href=\"" . elgg_get_site_url() . "plugins/edit/release/{$latest->getGUID()}\">edit</a>]";
 			} else {
 				$edit_link = $delete_link = '';
 			}
@@ -81,13 +81,13 @@ $project = $vars['entity'];
 				if ($p->canEdit()) {
 
 					$delete = elgg_view('output/confirmlink',array(
-						'href' => $vars['url'] . "/action/plugins/delete_release?release_guid={$p->getGUID()}",
+						'href' => "/action/plugins/delete_release?release_guid={$p->getGUID()}",
 						'text' => 'delete',
 						'confirm' => elgg_echo("plugins:delete_release:confirm"),
 					));
 					$delete_link = "[$delete]";
 
-					$edit_link = "[<a href=\"{$vars['url']}plugins/edit/release/{$p->getGUID()}\">edit</a>]";
+					$edit_link = "[<a href=\"" . elgg_get_site_url() . "plugins/edit/release/{$p->getGUID()}\">edit</a>]";
 				} else {
 					$edit_link = $delete_link = '';
 				}
