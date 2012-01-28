@@ -189,10 +189,8 @@ function plugins_add_submenus() {
  * @param array $page Array of page elements
  */
 function plugins_page_handler($page) {
-
-	global $CONFIG;
-
-	$plugin_dir = $CONFIG->pluginspath . "community_plugins/pages/plugins";
+	$plugin_dir = dirname(__FILE__);
+	$pages_root = "$plugin_dir/pages/plugins";
 
 	if (!isset($page[0])) {
 		// bad url - we'll send to main plugin page
@@ -202,18 +200,18 @@ function plugins_page_handler($page) {
 	switch($page[0]) {
 		// plugin repository front page
 		case "all":
-			include("$plugin_dir/all.php");
+			include("$pages_dir/all.php");
 			break;
 		// category listing page (deprecated, just preserved for compatibility and old bookmarks' sake)
 		case "category":
-			set_view_location('entities/entity_list', $CONFIG->pluginspath . "community_plugins/views/override/");
+			elgg_set_view_location('entities/entity_list', "$plugin_dir/views/override/");
 			set_input('category', $page[1]);
-			include("$plugin_dir/category_list.php");
+			include("$pages_dir/category_list.php");
 			break;
 		// New advanced search page (with filtering and sorting)
 		case "search":
-			set_view_location('entities/entity_list', $CONFIG->pluginspath . "community_plugins/views/override/");
-			include("$plugin_dir/search.php");
+			elgg_set_view_location('entities/entity_list', "$plugin_dir/views/override/");
+			include("$pages_dir/search.php");
 			break;
 			// list a developer's plugins
 		case "developer":
@@ -221,33 +219,33 @@ function plugins_page_handler($page) {
 			if (isset($page[2])) {
 				set_input($page[2], $page[3]);
 			}
-			include("$plugin_dir/developer.php");
+			include("$pages_dir/developer.php");
 			break;
 		case "download":
 			// download/<release_guid>/
 			set_input('release_guid', $page[1]);
-			include("$plugin_dir/download.php");
+			include("$pages_dir/download.php");
 			break;
 		// view plugin project
 		case "project":
 			set_input('guid', $page[1]);
-			include("$plugin_dir/read.php");
+			include("$pages_dir/read.php");
 			break;
 		// view specfic release of a project
 		case "release":
 			set_input('release', $page[1]);
-			include("$plugin_dir/read.php");
+			include("$pages_dir/read.php");
 			break;
 		// create new plugin project or release
 		case "new":
 			if ($page[1] == 'release') {
 				// new/release/<project guid>/
 				set_input('project_guid', $page[2]);
-				include("$plugin_dir/create_release.php");
+				include("$pages_dir/create_release.php");
 			} else {
 				// new/project/<username>/
 				set_input('username', $page[2]);
-				include("$plugin_dir/create_project.php");
+				include("$pages_dir/create_project.php");
 			}
 			break;
 		// edit plugin project or release
@@ -255,22 +253,22 @@ function plugins_page_handler($page) {
 			if ($page[1] == 'release') {
 				// edit/release/<release guid>/
 				set_input('release_guid', $page[2]);
-				include("$plugin_dir/edit_release.php");
+				include("$pages_dir/edit_release.php");
 			} else {
 				// edit/project/<project guid>/
 				set_input('project_guid', $page[2]);
-				include("$plugin_dir/edit_project.php");
+				include("$pages_dir/edit_project.php");
 			}
 			break;
 		// admin page
 		case "admin":
 			set_input('tab', $page[1]);
-			include("$plugin_dir/admin.php");
+			include("$pages_dir/admin.php");
 			break;
 		// for backwards compatibility this handles /plugins/<username>/read/<guid>/<title>
 		default:
 			set_input('guid', $page[2]);
-			include("$plugin_dir/read.php");
+			include("$pages_dir/read.php");
 			break;
 	}
 
