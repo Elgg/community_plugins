@@ -6,11 +6,11 @@
 $type = get_input('type', '');
 //$tag = get_input('tag', '');
 
-plugins_add_type_menu(page_owner());
+plugins_add_type_menu(elgg_get_page_owner_guid());
 
 //set the title
 $types_string = elgg_echo("plugins:types:$type");
-if (page_owner() == elgg_get_logged_in_user_guid()){
+if (elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()){
 	$title = sprintf(elgg_echo('plugins:yours'), $types_string);;
 } else {
 	$title = sprintf(elgg_echo("plugins:user"), elgg_get_page_owner_entity()->name, $types_string);
@@ -26,7 +26,7 @@ set_context('search');
 $params = array(
 	'types' => 'object',
 	'subtypes' => 'plugin_project',
-	'owner_guid' => page_owner(),
+	'owner_guid' => elgg_get_page_owner_guid(),
 	'limit' => 10,
 	'full_view' => FALSE,
 );
