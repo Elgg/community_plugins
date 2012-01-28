@@ -19,7 +19,12 @@ $newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_proje
 $popular = PluginProject::getPluginsByDownloads();
 
 //Most dugg
-$dugg = __get_entities_from_annotations_calculate_x('count', 'object', 'plugin_project', 'plugin_digg');
+$dugg = elgg_get_entities_from_annotation_calculation(array(
+	'type' => 'object',
+	'subtype' => 'plugin_project',
+	'annotation_calculation' => 'count',
+	'annotation_name' => 'plugin_digg',
+));
 
 elgg_set_context('plugin_project');
 
