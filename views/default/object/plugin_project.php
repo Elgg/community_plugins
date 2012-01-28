@@ -46,7 +46,7 @@ $usericon = elgg_view("profile/icon", array(
 $iconpath = elgg_get_site_url() . 'mod/community_plugins/graphics/icons';
 
 
-switch (get_context()) {
+switch (elgg_get_context()) {
 	case 'search':
 		$info = "<div class='pluginName'> <a href=\"{$project->getURL()}\">{$title} </a>";
 		$info .= "<span class=\"info_item\"><img src=\"$iconpath/updated.png\" alt=\"Updated\" title=\"Updated\">$updated</span>";

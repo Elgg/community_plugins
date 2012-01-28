@@ -20,7 +20,7 @@ if ($plugins) {
 	echo "<div id=\"pluginsrepo_widget_layout\">";
 	
 	//display in list mode
-	$context = get_context();
+	$context = elgg_get_context();
 	set_context('widget');
 	foreach ($plugins as $plugin) {
 		echo elgg_view_entity($plugin);
