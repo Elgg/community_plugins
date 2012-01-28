@@ -8,7 +8,7 @@
 <ul>
 <?php
 // your plugins
-if (isloggedin()) {
+if (elgg_is_logged_in()) {
 	$params = array(
 		'types' => 'object',
 		'subtypes' => 'plugin_project',

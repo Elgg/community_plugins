@@ -173,7 +173,7 @@ function plugins_add_submenus() {
 
 	$page_owner = page_owner_entity();
 
-	if (isloggedin() && page_owner() == get_loggedin_userid()) {
+	if (elgg_is_logged_in() && page_owner() == get_loggedin_userid()) {
 		$title = sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:'));
 		add_submenu_item($title, "$plugins_base/developer/$page_owner->username");
 	} else if (page_owner()) {
