@@ -370,7 +370,7 @@ function plugins_add_type_menu($owner_guid) {
 function plugins_update_download_counts() {
 	$count = count_annotations(0, 'object', 'plugin_project', 'download', '', NULL);
 	$count += 1200000;
-	set_plugin_setting('site_plugins_downloads', $count, 'community_plugins');
+	elgg_set_plugin_setting('site_plugins_downloads', $count, 'community_plugins');
 }
 
 /**
