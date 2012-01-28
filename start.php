@@ -51,9 +51,9 @@ function plugins_init() {
 	register_entity_type('object', 'plugin_project');
 
 	// Special hook for searching against metadata (category)
-	register_plugin_hook('search', 'object:plugin_project', 'plugins_search_hook');
+	elgg_register_plugin_hook_handler('search', 'object:plugin_project', 'plugins_search_hook');
 
-	register_plugin_hook('cron', 'daily', 'plugins_update_download_counts');
+	elgg_register_plugin_hook_handler('cron', 'daily', 'plugins_update_download_counts');
 
 	// Elgg versions
 	$CONFIG->elgg_versions = array(
