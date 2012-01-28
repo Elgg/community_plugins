@@ -2,7 +2,6 @@
 /**
  * Front page for plugin repository
  */
-
 global $CONFIG; 
 
 // Get search-specific settings

@@ -190,17 +190,17 @@ function plugins_add_submenus() {
  */
 function plugins_page_handler($page) {
 	$plugin_dir = dirname(__FILE__);
-	$pages_root = "$plugin_dir/pages/plugins";
-
+	$pages_dir = "$plugin_dir/pages/plugins";
 	if (!isset($page[0])) {
-		// bad url - we'll send to main plugin page
-		$page[0] = 'all';
+		// send to main plugin page
+		$page[0] = 'index';
 	}
 
-	switch($page[0]) {
+	switch ($page[0]) {
 		// plugin repository front page
 		case "all":
-			include("$pages_dir/all.php");
+		case "index":
+			include "$pages_dir/index.php";
 			break;
 		// category listing page (deprecated, just preserved for compatibility and old bookmarks' sake)
 		case "category":
