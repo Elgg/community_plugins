@@ -19,7 +19,7 @@ if (!($release = get_entity($guid)) ||
 	!$release->canEdit() ) {
 
 	register_error('Unknown or insufficient access to release');
-	forward("/plugins/developer/" . get_loggedin_user()->username);
+	forward("/plugins/developer/" . elgg_get_logged_in_user_entity()->username);
 }
 
 // save release entity info

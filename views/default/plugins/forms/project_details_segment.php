@@ -29,7 +29,7 @@ if (array_key_exists('project', $vars)
 
 	$plugincat = 'uncategorized';
 	$access_id = ACCESS_PUBLIC;
-	$username = get_loggedin_user()->username;
+	$username = elgg_get_logged_in_user_entity()->username;
 
 	$msg = "You are creating a new plugin project. If you want to release a new
 	version of an existing plugin, go to the edit section of that plugin's project page.

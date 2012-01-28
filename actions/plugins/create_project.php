@@ -27,7 +27,7 @@ $version = strip_tags(get_input('version', 'Not specified'));
 $recommended = get_input('recommended', FALSE);
 $release_access_id = get_input('release_access_id', ACCESS_PUBLIC);
 
-$user = get_loggedin_user();
+$user = elgg_get_logged_in_user_entity();
 
 
 // validate data
