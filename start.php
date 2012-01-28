@@ -38,7 +38,7 @@ function plugins_init() {
 	register_notification_object('object', 'plugins', elgg_echo('plugins:new'));
 
 	//register a widget
-	add_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), 'profile');
+	elgg_register_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), 'profile');
 
 
 	// register url handlers for the 2 object subtypes
