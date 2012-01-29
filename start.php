@@ -169,8 +169,10 @@ function plugins_add_submenus() {
 	$plugins_base = elgg_get_site_url() . "plugins";
 
 	if (elgg_get_context() == 'admin') {
-		$title = elgg_echo("plugins:admin:menu");
-		add_submenu_item($title, "$plugins_base/admin/");
+		elgg_register_admin_menu_item('administer', 'community_plugins', 'statistics');
+		elgg_register_admin_menu_item('administer', 'utilities', 'community_plugins');
+		elgg_register_admin_menu_item('administer', 'search', 'community_plugins');
+		elgg_register_admin_menu_item('administer', 'upgrade', 'community_plugins');
 		return;
 	}
 

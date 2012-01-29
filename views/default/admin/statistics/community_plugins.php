@@ -11,7 +11,7 @@
 	for a particular plugin, enter the GUID of the plugin project below.
 </p>
 <?php
-echo elgg_view('plugins/admin/stats/plugin_select');
+echo elgg_view_form('plugins/admin/plugin_select', array('action' => current_page_url(), 'method' => 'get'));
 
 // default parameters for downloads plot
 $num_days = 30;
@@ -49,5 +49,5 @@ $(function () {
 <?php
 
 if ($guid) {
-	echo elgg_view('plugins/admin/stats/normalize', array('guid' => $guid));
+	echo elgg_view_form('plugins/admin/normalize', array(), array('guid' => $guid));
 }

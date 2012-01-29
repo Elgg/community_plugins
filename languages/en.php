@@ -4,7 +4,17 @@
  */
 
 $english = array(
+	/**
+	 * Administration area
+	 */
 
+	'admin:community_plugins' => 'Plugin Repo',
+	'admin:community_plugins:search' => 'Search settings',
+	'admin:community_plugins:upgrade' => 'Upgrade',
+	'admin:community_plugins:utilities' => 'Utilities',
+	'admin:statistics:community_plugins' => 'Plugin Repo',
+
+	
 	/**
 	 * Menu items and titles
 	 */
