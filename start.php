@@ -13,7 +13,15 @@ require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
  */
 function plugins_init() {
 	elgg_register_js('jquery.lightbox', '/mod/community_plugins/vendors/jquery.lightbox.js', 'foot');
-	elgg_register_js('elgg.communityPlugins.PluginImages', '/mod/community_plugins/js/communityPlugins/PluginImages', 'foot');
+	elgg_register_js('elgg.communityPlugins', '/mod/community_plugins/js/communityPlugins.js', 'foot');
+	elgg_register_js('elgg.communityPlugins.PluginImages', '/mod/community_plugins/js/communityPlugins/PluginImages.js', 'foot');
+	elgg_register_js('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.js', 'foot');
+	elgg_register_css('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.standalone.css');
+
+	// TODO(ewinslow): Surely these don't need to go on EVERY page?
+	elgg_load_css('jquery.ui.dropdownchecklist');
+	elgg_load_js('jquery.ui.dropdownchecklist');
+	elgg_load_js('elgg.communityPlugins');
 
 	run_function_once('plugins_run_once');
 	run_function_once('plugins_create_download_table');
@@ -27,8 +35,6 @@ function plugins_init() {
 
 	// Extend CSS and JS
 	elgg_extend_view('css', 'plugins/css');
-	elgg_extend_view('js/initialise_elgg', 'plugins/js');
-	elgg_extend_view('page/elements/head', 'plugins/metatags');
 
 	// Extend hover-over and profile menu
 	elgg_extend_view('profile/menu/links', 'plugins/profile_menu');
