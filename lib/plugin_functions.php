@@ -59,7 +59,13 @@ function plugins_get_downloads_histogram($guid = 0, $days = 30) {
 		$start_date = 0;
 	}
 
-	$downloads = get_annotations($guid, 'object', 'plugin_project', 'download', '', 0, 9999999, 0, 'asc', $start_date);
+	$downloads = elgg_get_annotations(array(
+		'guid' => $guid,
+		'limit' => 0,
+		'order_by' => 'time_created asc',
+		'annotation_name' => 'download',
+		'annotation_created_time_lower' => $start_date,
+	));
 
 	// if queried for all downloads, need to set epoch based on first download
 	$first_time = $downloads[0]->time_created;

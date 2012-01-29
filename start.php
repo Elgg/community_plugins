@@ -37,6 +37,7 @@ function plugins_init() {
 
 	// Extend CSS and JS
 	elgg_extend_view('css', 'plugins/css');
+	elgg_extend_view('css/admin', 'plugins/admin_css');
 
 	// Extend hover-over and profile menu
 	elgg_extend_view('profile/menu/links', 'plugins/profile_menu');

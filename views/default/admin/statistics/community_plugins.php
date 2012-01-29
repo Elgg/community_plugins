@@ -42,7 +42,7 @@ $plot_string = rtrim($plot_string, ',');
 <?php elgg_load_js('jquery.flot'); ?>
 <script>
 $(function () {
-    $.plot($("#plugins_download_plot"), [[<?php echo $plot_string; ?>]]);
+    $.plot($("#plugins_download_plot"), [<?php echo $plot_string; ?>]);
 });
 </script>
 
