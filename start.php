@@ -127,7 +127,7 @@ function plugins_init() {
 		'uncategorized' => 'Uncategorized',
 	);
 
-	$action_base = "{$CONFIG->pluginspath}community_plugins/actions/plugins";
+	$action_base = dirname(__FILE__) . "/actions/plugins";
 	elgg_register_action("plugins/create_project", "$action_base/create_project.php");
 	elgg_register_action("plugins/create_release", "$action_base/create_release.php");
 	elgg_register_action("plugins/save_project", "$action_base/save_project.php");
