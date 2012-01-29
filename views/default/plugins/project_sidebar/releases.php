@@ -10,8 +10,8 @@ $project = $vars['entity'];
 $ignore_guids = array();
 
 // check that it's a real entity and we have access to it
-if ($recommended = get_entity($project->recommended_release_guid)) {
-	$ignore_guids[] = $project->recommended_release_guid;
+if ($recommended = $project->getRecommendedRelease()) {
+	$ignore_guids[] = $recommended->guid;
 
 	echo elgg_view('object/plugin_release/links', array(
 		'entity' => $recommended,
@@ -24,6 +24,7 @@ $plugins = elgg_get_entities(array(
 	'type' => 'object',
 	'subtype' => 'plugin_release',
 	'container_guid' => $project->guid,
+	'limit' => 0,
 ));
 
 if ($plugins) {

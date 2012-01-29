@@ -21,13 +21,13 @@ if ($release->canEdit()) {
 		'text' => elgg_echo('delete'),
 		'confirm' => elgg_echo("plugins:delete_release:confirm"),
 	));
-	echo "[$delete]";
+	echo " [$delete]";
 
 	$edit = elgg_view('output/url', array(
 		'href' => "/plugins/edit/release/{$release->guid}",
 		'text' => elgg_echo('edit'),
 	));
-	echo "[$edit]";
+	echo " [$edit]";
 }
 
 echo '</div>';

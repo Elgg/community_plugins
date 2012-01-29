@@ -3,9 +3,20 @@
 /**
  * Models the concept of a plugin. Handles revisions with PluginRelease objects.
  * 
- * @property integer $recommended_release_guid GUID of the author-recommended release for this plugin.
+ * @property int $recommended_release_guid GUID of the author-recommended release for this plugin.
  */
 class PluginProject extends ElggObject {
+	/**
+	 * @var PluginRelease
+	 */
+	private $latest_release;
+	
+	/**
+	 * @var PluginRelease
+	 */
+	private $recommended_release;
+	
+	
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 
@@ -17,6 +28,10 @@ class PluginProject extends ElggObject {
 	 * @return PluginRelease The most recently uploaded version of this plugin.
 	 */
 	public function getLatestRelease() {
+		if (isset($this->latest_release)) {
+			return $this->latest_release;
+		}
+		
 		$releases = elgg_get_entities(array(
 			'type' => 'object',
 			'subtype' => 'plugin_release',
@@ -24,7 +39,7 @@ class PluginProject extends ElggObject {
 			'limit' => 1,
 		));
 		
-		return $releases[0];
+		return $this->latest_release = $releases[0];
 	}
 	
 	
@@ -50,9 +65,27 @@ class PluginProject extends ElggObject {
 	 * @return ElggRelease The author-recommended version of this plugin.
 	 */
 	public function getRecommendedRelease() {
-		return get_entity($this->recommended_release_guid);
+		if (isset($this->recommended_release)) {
+			return $this->recommended_release;
+		}
+		
+		return $this->recommended_release = get_entity($this->recommended_release_guid);
 	}
 	
+	
+	/**
+	 * Get a list of releases associated with this project
+	 * 
+	 * @param array $options
+	 * @return array
+	 */
+	public function getReleases(array $options) {
+		return elgg_get_entities(array_merge($options, array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'container_guid' => $this->guid,
+		)));
+	}
 	
 	/**
 	 * Increment the download count
