@@ -13,6 +13,9 @@ $title = elgg_echo('plugins:admin');
 $content = elgg_view_title($title);
 $content .= elgg_view('plugins/admin/main', array("tab" => $tab));
 
-$body = elgg_view_layout("two_column_left_sidebar", '', $content);
+$body = elgg_view_layout("two_column_left_sidebar", array(
+	'area1' => '',
+	'area2' => $content,
+));
 
 echo elgg_view_page($title, $body);

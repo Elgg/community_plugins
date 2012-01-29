@@ -22,5 +22,8 @@ $title = elgg_echo('plugins:edit:project');
 $content = elgg_view_title($title);
 $content .= elgg_view("plugins/forms/edit_project", array('project' => $project));
 
-$body = elgg_view_layout('sidebar_boxes', $sidebar, $content);
+$body = elgg_view_layout('sidebar_boxes', array(
+	'area1' => $sidebar, 
+	'area2' => $content,
+));
 echo elgg_view_page($title, $body);

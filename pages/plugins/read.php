@@ -47,6 +47,9 @@ set_page_owner($project->getOwner());
 $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 $content = elgg_view_entity($project, TRUE);
 
-$body = elgg_view_layout("sidebar_boxes", $sidebar, $content);
+$body = elgg_view_layout("sidebar_boxes", array(
+	'area1' => $sidebar, 
+	'area2' => $content,
+));
 
 echo elgg_view_page($title, $body);

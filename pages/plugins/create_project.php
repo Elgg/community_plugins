@@ -11,6 +11,9 @@ $title = elgg_echo('plugins:upload');
 
 $content = elgg_view_title($title);
 $content .= elgg_view("plugins/forms/create_project", array('container_guid' => $container_guid));
-$body = elgg_view_layout('two_column_left_sidebar', '', $content);
+$body = elgg_view_layout('two_column_left_sidebar', array(
+	'area1' => '', 
+	'area2' => $content,
+));
 	
 echo elgg_view_page($title, $body);

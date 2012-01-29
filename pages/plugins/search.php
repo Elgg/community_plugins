@@ -207,6 +207,9 @@
 	// Add the list of plugins to the main area
 	$main .= elgg_view('plugins/search/main', array('area1' => $list));
 	
-	$body = elgg_view_layout('plugins_layout', $main, $sidebar);
+	$body = elgg_view_layout('plugins_layout', array(
+		'area1' => $main, 
+		'area2' => $sidebar,
+	));
 	
 	echo elgg_view_page($title, $body);

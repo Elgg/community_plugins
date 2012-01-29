@@ -21,5 +21,9 @@ $title = elgg_echo('plugins:new:release');
 $content = elgg_view_title($title);
 $content .= elgg_view("plugins/forms/create_release", array('project' => $project));
 
-$body = elgg_view_layout('sidebar_boxes', $sidebar, $content);
+$body = elgg_view_layout('sidebar_boxes', array(
+	'area1' => $sidebar, 
+	'area2' => $content,
+));
+
 echo elgg_view_page($title, $body);
