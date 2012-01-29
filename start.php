@@ -19,7 +19,11 @@ function plugins_init() {
 	run_function_once('plugins_create_download_table');
 
 	// Set up menu for logged in users
-	add_menu(elgg_echo('plugins'), "/plugins");
+	elgg_register_menu_item('site', array(
+		'href' => "/plugins",
+		'name' => 'plugins',
+		'text' => elgg_echo('plugins'), 
+	));
 
 	// Extend CSS and JS
 	elgg_extend_view('css', 'plugins/css');
