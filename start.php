@@ -168,18 +168,33 @@ function plugins_add_submenus() {
 	$page_owner = elgg_get_page_owner_entity();
 
 	if (elgg_is_logged_in() && elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
-		$title = sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:'));
-		add_submenu_item($title, "$plugins_base/developer/$page_owner->username");
+		elgg_register_menu_item('page', array(
+			'href' => "/$plugins_base/developer/$page_owner->username",
+			'name' => 'plugins:yours',
+			'text' => sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:')),
+		));
 	} else if (elgg_get_page_owner_guid()) {
 		$title = sprintf(elgg_echo("plugins:user"), $page_owner->name, elgg_echo('plugins:types:'));
-		add_submenu_item($title, "$plugins_base/developer/$page_owner->username");
+		elgg_register_menu_item('page', array(
+			'href' => "$plugins_base/developer/$page_owner->username",
+			'name' => 'plugins:user',
+			'text' => $title, 
+		));
 	}
 
-	add_submenu_item(elgg_echo('plugins:all'), $plugins_base);
+	elgg_register_menu_item('page', array(
+		'href' => '/plugins',
+		'name' => 'plugins:all',
+		'text' => elgg_echo('plugins:all'), 
+	));
 
 	// add upload link when viewing own plugin page
 	if (elgg_get_logged_in_user_guid() == elgg_get_page_owner_guid()) {
-		add_submenu_item(elgg_echo('plugins:upload'), "$plugins_base/new/project/$page_owner->username");
+		elgg_register_menu_item('page', array(
+			'href' => "$plugins_base/new/project/$page_owner->username",
+			'name' => 'plugins:upload',
+			'text' => elgg_echo('plugins:upload'),
+		));
 	}
 }
 
