@@ -17,8 +17,8 @@ $newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_proje
 //Most downloaded
 $popular = PluginProject::getPluginsByDownloads();
 
-//Most dugg
-$dugg = elgg_get_entities_from_annotation_calculation(array(
+//Most recommended
+$recommended = elgg_get_entities_from_annotation_calculation(array(
 	'type' => 'object',
 	'subtype' => 'plugin_project',
 	'annotation_calculation' => 'count',
@@ -35,10 +35,11 @@ $sidebar = elgg_view('plugins/filters', array(
 	'settings' => $settings
 
 ));
-$bottom = elgg_view('plugins/front/bottom', array(	'newest' => $newest,
-													'popular' => $popular,
-													'dugg' => $dugg,));
-
+$bottom = elgg_view('plugins/front/bottom', array(
+	'newest' => $newest,
+	'popular' => $popular,
+	'recommended' => $recommended,
+));
 
 $body = elgg_view_layout('plugins_layout', array(
 	'area1' => $welcome,
