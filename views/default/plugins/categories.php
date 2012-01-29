@@ -27,12 +27,11 @@ if (elgg_is_logged_in()) {
 }
 
 // all plugins
-$params = array(
+$all_plugins_count = (int)elgg_get_entities(array(
 	'types' => 'object',
 	'subtypes' => 'plugin_project',
 	'count' => TRUE,
-);
-$all_plugins_count = (int)elgg_get_entities($params);
+));
 $url = elgg_get_site_url() . "plugins/category/all";
 ?>
 	<li>

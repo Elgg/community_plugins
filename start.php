@@ -15,6 +15,7 @@ function plugins_init() {
 	elgg_register_js('jquery.lightbox', '/mod/community_plugins/vendors/jquery.lightbox.js', 'foot');
 	elgg_register_js('elgg.communityPlugins', '/mod/community_plugins/js/communityPlugins.js', 'foot');
 	elgg_register_js('elgg.communityPlugins.PluginImages', '/mod/community_plugins/js/communityPlugins/PluginImages.js', 'foot');
+	elgg_register_js('elgg.communityPlugins.filters', '/mod/community_plugins/js/communityPlugins/filters.js', 'foot');
 	elgg_register_js('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.js', 'foot');
 	elgg_register_css('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.standalone.css');
 

@@ -4,7 +4,9 @@
  */
 
 $project = $vars['project'];
-$num_votes = count_annotations($project->guid, "object", "plugin_project", "plugin_digg");
+
+$num_votes = $project->countAnnotations('plugin_digg');
+
 ?>
 
 <div id="plugins_recommend">
@@ -15,13 +17,13 @@ $num_votes = count_annotations($project->guid, "object", "plugin_project", "plug
 	<div id="recommend_action">
 <?php
 if (!plugins_is_dugg($project) && elgg_is_logged_in()) {
-	$url = elgg_get_site_url() . "action/plugins/recommend?guid={$project->guid}";
-	$url = elgg_add_action_tokens_to_url($url);
-	echo "<a href=\"{$url}\">Recommend</a>";
+	echo elgg_view('output/url', array(
+		'href' => "/action/plugins/recommend?guid={$project->guid}",
+		'is_action' => TRUE,
+		'text' => 'Recommend',
+	));
 } else {
-?>
-		<p>Recommendations</p>
-<?php
+	echo "<p>Recommendations</p>";
 }
 ?>
 	</div>

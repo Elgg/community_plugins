@@ -19,7 +19,7 @@ if (get_input('q')) {
 		<input type="hidden" name="entity_subtype" value="plugin_project" />
 		<input type="hidden" name="entity_type" value="object" />
 		<input type="hidden" name="search_type" value="entities" />
-		<input type="text" name="q" value="<?php echo $search_text; ?>" onclick="if (this.value) { this.value='' }" />
+		<input type="text" name="q" value="<?php echo htmlspecialchars($search_text); ?>" placeholder="<?php echo elgg_echo('search'); ?>" />
 		<label for="category"><?php echo elgg_echo('plugins:search:choose'); ?>:</label>
 		<select name="category">
 			<option value="all"><?php echo elgg_echo('plugins:cat:all'); ?></option>

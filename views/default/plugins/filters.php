@@ -14,20 +14,11 @@ if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {
 }
 $prefix = '';
 
-if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) : ?>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('form#plugin_search_form').accordion({ 
-				header: 'div.filter_label' 
-			});
-			$('form#plugin_search_form').submit(function(e) {
-				// Remove all input and select elements that are outside of the active accordion
-				$('form#plugin_search_form').find('.filter_label:not(.ui-state-active)').next().find('input, select').remove();
-			});
-			
-		});
-	</script>
-<?php endif; ?>
+if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
+	elgg_load_js('elgg.communityPlugins.filters');
+}
+
+?>
 
 <div id="plugin_filters">
 

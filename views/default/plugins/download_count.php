@@ -18,6 +18,6 @@ $num_downloads = "<span>$num_downloads</span>";
 ?>
 <div class="plugins_download_total">
 	<p>
-		<?php echo sprintf(elgg_echo('plugins:counter'), $num_plugins, $num_downloads) . '.'; ?>
+		<?php echo elgg_echo('plugins:counter', array($num_plugins, $num_downloads)) . '.'; ?>
 	</p>
 </div>
