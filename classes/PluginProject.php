@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Models the concept of a plugin. Handles revisions with PluginRelease objects.
+ * 
+ * @property integer $recommended_release_guid GUID of the author-recommended release for this plugin.
+ */
 class PluginProject extends ElggObject {
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
