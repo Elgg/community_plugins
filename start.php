@@ -42,8 +42,8 @@ function plugins_init() {
 
 
 	// register url handlers for the 2 object subtypes
-	elgg_register_entity_url_handler('plugins_release_url_handler', 'object', 'plugin_release');
-	elgg_register_entity_url_handler('plugins_project_url_handler', 'object', 'plugin_project');
+	elgg_register_entity_url_handler('object', 'plugin_release', 'plugins_release_url_handler');
+	elgg_register_entity_url_handler('object', 'plugin_project', 'plugins_project_url_handler');
 
 	elgg_register_event_handler('pagesetup', 'system', 'plugins_add_submenus');
 
