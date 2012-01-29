@@ -1,14 +1,10 @@
 <?php
 
 class PluginProject extends ElggObject {
-	protected function initialise_attributes() {
-		parent::initialise_attributes();
+	protected function initializeAttributes() {
+		parent::initializeAttributes();
 
 		$this->attributes['subtype'] = "plugin_project";
-	}
-
-	public function __construct($guid = null) {
-		parent::__construct($guid);
 	}
 
 	/**
@@ -16,8 +12,8 @@ class PluginProject extends ElggObject {
 	 */
 	public function updateDownloadCount() {
 		// increment total downloads for all plugins
-		$count = (int)get_plugin_setting('site_plugins_downloads', 'community_plugins');
-		set_plugin_setting('site_plugins_downloads', ++$count, 'community_plugins');
+		$count = (int)elgg_get_plugin_setting('site_plugins_downloads', 'community_plugins');
+		elgg_set_plugin_setting('site_plugins_downloads', ++$count, 'community_plugins');
 
 		// increment this plugin project's downloads
 		$this->dbUpdateDownloadCount();
