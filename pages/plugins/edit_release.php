@@ -14,7 +14,7 @@ if (!$release || !$release->canEdit()) {
 
 $project = get_entity($release->container_guid);
 
-set_page_owner($project->owner_guid);
+elgg_set_page_owner_guid($project->owner_guid);
 
 $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 

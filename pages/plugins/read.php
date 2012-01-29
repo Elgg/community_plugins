@@ -41,7 +41,7 @@ if ($project->getSubtype() == 'plugin_release') {
 }
 
 // Set the page owner
-set_page_owner($project->getOwner());
+elgg_set_page_owner_guid($project->getOwner());
 
 // grab the entity and sidebar views
 $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
