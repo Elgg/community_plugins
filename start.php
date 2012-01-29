@@ -13,6 +13,7 @@ require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
  */
 function plugins_init() {
 	elgg_register_js('jquery.lightbox', '/mod/community_plugins/vendors/jquery.lightbox.js', 'foot');
+	elgg_register_js('jquery.flot', '/mod/community_plugins/vendors/flot/jquery.flot.js', 'foot');
 	elgg_register_js('elgg.communityPlugins', '/mod/community_plugins/js/communityPlugins.js', 'foot');
 	elgg_register_js('elgg.communityPlugins.PluginImages', '/mod/community_plugins/js/communityPlugins/PluginImages.js', 'foot');
 	elgg_register_js('elgg.communityPlugins.filters', '/mod/community_plugins/js/communityPlugins/filters.js', 'foot');
@@ -144,10 +145,10 @@ function plugins_init() {
 	elgg_register_action("plugins/delete_project_image", "$action_base/delete_project_image.php");
 	elgg_register_action("plugins/recommend", "$action_base/recommend.php");
 
-	elgg_register_action("plugins/upgrade", "$action_base/admin/upgrade.php", 'admin');
-	elgg_register_action("plugins/combine", "$action_base/admin/combine.php", 'admin');
-	elgg_register_action("plugins/normalize", "$action_base/admin/normalize.php", 'admin');
-	elgg_register_action("plugins/admin/search", "$action_base/admin/save.php", 'admin');
+	elgg_register_action("plugins/admin/upgrade", "$action_base/admin/upgrade.php", 'admin');
+	elgg_register_action("plugins/admin/combine", "$action_base/admin/combine.php", 'admin');
+	elgg_register_action("plugins/admin/normalize", "$action_base/admin/normalize.php", 'admin');
+	elgg_register_action("plugins/admin/search", "$action_base/admin/search.php", 'admin');
 }
 
 /**

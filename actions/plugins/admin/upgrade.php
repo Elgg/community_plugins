@@ -42,7 +42,7 @@ if ($handle = opendir($base_dir)) {
 	}
 }
 
-set_plugin_setting('version', $version, 'community_plugins');
+elgg_set_plugin_setting('version', $version, 'community_plugins');
 
 system_message("The community plugin repository has been upgraded");
 

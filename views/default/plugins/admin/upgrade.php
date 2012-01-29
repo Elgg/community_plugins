@@ -1,4 +1,5 @@
 <?php
+global $CONFIG;
 
 require_once "{$CONFIG->pluginspath}community_plugins/version.php";
 
@@ -16,16 +17,12 @@ if ($local_version === FALSE) {
 	} else {
 		$local_version = $version;
 	}
-	set_plugin_setting('version', $local_version, 'community_plugins');
+	elgg_set_plugin_setting('version', $local_version, 'community_plugins');
 }
 
 if ($version > $local_version) {
 	echo "<p>An upgrade is required for this plugin.</p>";
-	$url = "/action/plugins/upgrade";
-	$link = elgg_view('output/url', array('text' => 'Upgrade',
-										'href' => $url,
-										'is_action' => TRUE));
-	echo "<p>$link</p>";
+	echo elgg_view_form('plugins/admin/upgrade');
 } else {
 	echo "<p>No upgrades required.</p>";
 }

@@ -39,12 +39,10 @@ $plot_string = rtrim($plot_string, ',');
 ?>
 <div id="plugins_download_plot"></div>
 
-<script type="text/javascript" src="<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/flot/jquery.flot.js"></script>
-<script language="javascript" type="text/javascript">
+<?php elgg_load_js('jquery.flot'); ?>
+<script>
 $(function () {
-    var downloads = [<?php echo $plot_string; ?>];
-
-    $.plot($("#plugins_download_plot"), [downloads]);
+    $.plot($("#plugins_download_plot"), [[<?php echo $plot_string; ?>]]);
 });
 </script>
 

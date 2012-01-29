@@ -191,7 +191,7 @@ $sidebar = elgg_view('plugins/filters', array(
 	'versions' => $CONFIG->elgg_versions,
 	'licences' => $CONFIG->gpllicenses,
 	'current_values' => $filters,
-	'settings' => $settings
+	'settings' => $settings,
 ));
 
 // Add info block on search results to the main area
