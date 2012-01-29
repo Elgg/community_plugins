@@ -40,6 +40,10 @@ $bottom = elgg_view('plugins/front/bottom', array(	'newest' => $newest,
 													'dugg' => $dugg,));
 
 
-$body = elgg_view_layout('plugins_layout', $welcome, $sidebar, $bottom);
+$body = elgg_view_layout('plugins_layout', array(
+	'area1' => $welcome,
+	'area2' => $sidebar,
+	'area3' => $bottom,
+));
 
 echo elgg_view_page(elgg_echo("plugins:all"), $body);
