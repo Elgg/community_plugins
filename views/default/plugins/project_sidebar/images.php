@@ -3,23 +3,18 @@
  * Sidebar box for project images
  */
 
+elgg_load_js('jquery.lightbox');
+elgg_load_js('elgg.communityPlugins.lightboxInit');
+
 $project = $vars['entity'];
 
 // ordering by guid does not guarantee the correct order
 $img_files = elgg_get_entities_from_relationship(array(
 	'relationship_guid' => $project->getGUID(),
 	'relationship' => 'image',
-	'order_by' => 'guid'
+	'order_by' => 'guid',
 ));
 
-if ($img_files === FALSE || count($img_files) == 0) {
-	return TRUE;
-}
-?>
-<div class="sidebarBox">
-	<h3>Images</h3>
-	<div class="contentWrapper">
-<?php
 foreach ($img_files as $file) {
 	$thumb = get_entity($file->thumbnail_guid);
 	if (!$thumb) {
@@ -43,21 +38,3 @@ foreach ($img_files as $file) {
 	}
 	echo "</div>";
 }
-?>
-		<div class="clearfloat"></div>
-	</div>
-</div>
-
-<script src="<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/jquery.lightbox.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$('a.project_image').lightBox({
-		imageLoading: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-ico-loading.gif',
-		imageBtnClose: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-btn-close.gif',
-		imageBtnPrev: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-btn-prev.gif',
-		imageBtnNext: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-btn-next.gif',
-		imageBlank: '<?php echo elgg_get_site_url(); ?>mod/community_plugins/vendors/images/lightbox-blank.gif',
-		containerResizeSpeed: 300
-	});
-});
-</script>

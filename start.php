@@ -12,7 +12,8 @@ require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
  * Initialize the community plugin repository plugin
  */
 function plugins_init() {
-	global $CONFIG;
+	elgg_register_js('jquery.lightbox', '/mod/community_plugins/vendors/jquery.lightbox.js', 'foot');
+	elgg_register_js('elgg.communityPlugins.lightboxInit');
 
 	run_function_once('plugins_run_once');
 	run_function_once('plugins_create_download_table');
