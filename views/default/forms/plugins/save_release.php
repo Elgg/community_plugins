@@ -1,0 +1,18 @@
+<?php
+/**
+ * Edit release view
+ */
+
+if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRelease) {
+	$release = $vars['release'];
+	$project = get_entity($release->container_guid);
+	echo elgg_view('input/hidden', array('name' => 'release_guid', 'value' => $release->guid));
+}
+
+echo elgg_view('plugins/forms/release_details_segment', array('release' => $release, 'project' => $project));
+
+?>
+
+<div class="elgg-foot">
+	<?php echo elgg_view('input/submit', array('value' => elgg_echo('save'))); ?>
+</div>

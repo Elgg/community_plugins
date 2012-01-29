@@ -43,7 +43,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 		<label><?php echo elgg_echo("plugins:file"); ?>*<br />
 		<span class="pluginHint">Uploaded files must contain a working plugin or theme.  Any plugin containing ads will be deleted and the user banned.  Distribution packages must be .zip, .tar.gz, or .tgz files.</span><br />
 		<?php
-			echo elgg_view("input/file",array('internalname' => 'upload'));
+			echo elgg_view("input/file",array('name' => 'upload'));
 		?>
 		</label>
 	</p>
@@ -54,7 +54,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 
 		<?php
 			echo elgg_view("input/text",array(
-				"internalname" => "version",
+				"name" => "version",
 				"value" => $version,
 				'js' => 'style="width: 3em;"',
 			));
@@ -68,7 +68,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 
 		<?php
 			echo elgg_view("input/longtext",array(
-				"internalname" => "release_notes",
+				"name" => "release_notes",
 				"value" => $release_notes,
 			));
 		?>
@@ -79,8 +79,8 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 	<label>Elgg compatibility<br />
 	<span class="pluginHint">The version of Elgg this plugin was developed and tested on</span><br />
 	<?php
-		echo elgg_view("input/pulldown",array(
-			"internalname" => "elgg_version",
+		echo elgg_view("input/dropdown",array(
+			"name" => "elgg_version",
 			"value" => $elgg_version,
 			'options' => $vars['config']->elgg_versions
 		));
@@ -94,7 +94,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 			<?php
 
 				echo elgg_view("input/radio",array(
-					"internalname" => "comments",
+					"name" => "comments",
 					"value" => $comments,
 					'options' => array(
 						elgg_echo('plugins:yes') => 'yes',
@@ -110,7 +110,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 			<?php echo elgg_echo('access'); ?><br />
 			<span class="pluginHint">The access level of this release. Useful if you want to release only to a certain group or collection.</span>
 			<?php echo elgg_view('input/access', array(
-				'internalname' => 'release_access_id',
+				'name' => 'release_access_id',
 				'value' => $access_id
 			)); ?>
 		</label>
@@ -123,7 +123,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 
 			<?php
 				echo elgg_view("input/radio",array(
-					"internalname" => "recommended",
+					"name" => "recommended",
 					"value" => $recommended,
 					'options' => array(
 						elgg_echo('plugins:yes') => 'yes',
