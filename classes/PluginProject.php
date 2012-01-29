@@ -12,6 +12,48 @@ class PluginProject extends ElggObject {
 		$this->attributes['subtype'] = "plugin_project";
 	}
 
+	
+	/**
+	 * @return PluginRelease The most recently uploaded version of this plugin.
+	 */
+	public function getLatestRelease() {
+		$releases = elgg_get_entities(array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'container_guid' => $project->guid,
+			'limit' => 1,
+		));
+		
+		return $releases[0];
+	}
+	
+	
+	/**
+	 * @param string $version The version number to look for (e.g., '1.3.2')
+	 * @return PluginRelease The release of this plugin that matches the specified version. 
+	 */
+	public function getReleaseFromVersion($version) {
+		$releases = elgg_get_entities_from_metadata(array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'container_guid' => $project->guid,
+			'metadata_name' => 'version',
+			'metadata_value' => $version,
+			'limit' => 1,
+		));
+		
+		return $releases[0];
+	}
+	
+	
+	/**
+	 * @return ElggRelease The author-recommended version of this plugin.
+	 */
+	public function getRecommendedRelease() {
+		return get_entity($this->recommended_release_guid);
+	}
+	
+	
 	/**
 	 * Increment the download count
 	 */

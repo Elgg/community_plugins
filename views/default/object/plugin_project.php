@@ -20,11 +20,7 @@ if ($latest_releases) {
 	$latest_release = $latest_releases[0];
 }
 
-// get the recommend release (or use latest, if not available)
-$release = get_entity(get_input('release', $project->recommended_release_guid));
-if (!$release || !($release instanceof PluginRelease)) {
-	$release = $latest_release;
-}
+$release = $vars['release'];
 
 // get required variables
 $project_guid = $project->getGUID();

@@ -207,19 +207,12 @@ function plugins_add_submenus() {
 function plugins_page_handler($page) {
 	$plugin_dir = dirname(__FILE__);
 	$pages_dir = "$plugin_dir/pages/plugins";
-	if (!isset($page[0])) {
-		// send to main plugin page
-		$page[0] = 'index';
-	}
 
 	switch ($page[0]) {
 		// plugin repository front page
 		case "all":
 			system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
-			forward('/plugins', 301);
-			break;
-		case "index":
-			include "$pages_dir/index.php";
+			header('Location: /plugins', true, 301);
 			break;
 		// category listing page (deprecated, just preserved for compatibility and old bookmarks' sake)
 		case "category":
@@ -247,13 +240,21 @@ function plugins_page_handler($page) {
 			break;
 		// view plugin project
 		case "project":
-			set_input('guid', $page[1]);
-			include("$pages_dir/read.php");
+			$project = get_entity($page[1]);
+			if ($project) {
+				system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
+				header("Location: {$project->getURL()}", true, 301);
+				exit;
+			}
 			break;
 		// view specfic release of a project
 		case "release":
-			set_input('release', $page[1]);
-			include("$pages_dir/read.php");
+			$release = get_entity($page[1]);
+			if ($release) {
+				system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
+				header("Location: {$release->getURL()}", true, 301);
+				exit;
+			}
 			break;
 		// create new plugin project or release
 		case "new":
@@ -284,11 +285,28 @@ function plugins_page_handler($page) {
 			set_input('tab', $page[1]);
 			include("$pages_dir/admin.php");
 			break;
-		// for backwards compatibility this handles /plugins/<username>/read/<guid>/<title>
 		default:
-			set_input('guid', $page[2]);
-			include("$pages_dir/read.php");
-			break;
+			if (!isset($page[0])) {
+				// /plugins is the main page
+				include "$pages_dir/index.php";
+				break;
+			} elseif ($page[1] == 'read') {
+				// for backwards compatibility this handles /plugins/<username>/read/<guid>/<title>
+				$project = get_entity($page[2]);
+				if ($project) {
+					system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
+					header("Location: {$project->getURL()}", true, 301);
+					exit;
+				}
+				break;
+			} 
+			
+			set_input('guid', $page[0]);
+			set_input('version', $page[1]);					
+			
+			include "$pages_dir/read.php";
+			break;			
+			
 	}
 
 	return TRUE;
@@ -331,26 +349,22 @@ function plugins_image_page_handler($page) {
 /**
  * Handles plugin project URLs
  *
- * @param ElggEntity $entity
+ * @param PluginProject $entity
  * @return string
  */
 function plugins_project_url_handler($entity) {
-	$title = elgg_get_friendly_title($entity->title);
-
-	return "/plugins/project/{$entity->getGUID()}/developer/{$entity->getOwnerEntity()->username}/$title";
+	return "/plugins/{$entity->guid}";
 }
 
 /**
  * Populates the ->getUrl() method for plugin releases
  * Redirects to the project page.
  *
- * @param ElggEntity $entity 
+ * @param PluginRelease $release 
  * @return string
  */
-function plugins_release_url_handler($entity) {
-	$title = elgg_get_friendly_title($entity->title);
-
-	return "/plugins/release/$entity->guid/developer/{$entity->getOwnerEntity()->username}/$title";
+function plugins_release_url_handler($release) {
+	return $release->getProject()->getURL() . "/{$release->version}";
 }
 
 /**
