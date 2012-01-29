@@ -34,15 +34,12 @@ $title = $project->title;
 $desc = $project->description;
 $summary = $project->summary;
 $license = $project->license;
-$friendlytime = friendly_time($project->time_created);
+$friendlytime = elgg_view_friendly_time($project->time_created);
 $created = date('d M, Y', $project->time_created);
-$updated = friendly_time($latest_release->time_created);
+$updated = elgg_view_friendly_time($latest_release->time_created);
 $downloads = $project->getDownloadCount();
 $recommends = $project->countAnnotations('plugin_digg');
-$usericon = elgg_view("profile/icon", array(
-	'entity' => $project_owner,
-	'size' => 'small',
-));
+$usericon = elgg_view_entity_icon($project_owner, 'small');
 $iconpath = elgg_get_site_url() . 'mod/community_plugins/graphics/icons';
 
 
@@ -58,17 +55,14 @@ switch (elgg_get_context()) {
 		}
 		$user_url = elgg_get_site_url() . "plugins/developer/{$project_owner->username}";
 		$info .= "<p class=\"owner_timestamp\"><a href=\"$user_url\">{$project_owner->name}</a> {$created} ({$friendlytime})</p>";
-		echo elgg_view_listing($usericon, $info);
+		echo elgg_view_image_block($usericon, $info);
 		break;
 
 	case 'plugin_project':
-		echo elgg_view("profile/icon", array(
-			'entity' => $project_owner,
-			'size' => 'tiny',
-			'override' => true,
-		));
-		echo "<p><a href=\"{$project->getURL()}\">{$title}</a><br />";
-		echo "Uploaded $friendlytime ($downloads)</p>";
+		$icon = elgg_view_entity_icon($project_owner, 'tiny', array('use_hover' => false));
+		$info = "<a href=\"{$project->getURL()}\">{$title}</a>";
+		$info .= "<div class=\"elgg-subtext\">Uploaded $friendlytime ($downloads)</div>";
+		echo elgg_view_image_block($icon, $info);
 		break;
 
 	case 'widget':
