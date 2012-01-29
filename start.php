@@ -13,7 +13,7 @@ require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
  */
 function plugins_init() {
 	elgg_register_js('jquery.lightbox', '/mod/community_plugins/vendors/jquery.lightbox.js', 'foot');
-	elgg_register_js('elgg.communityPlugins.lightboxInit');
+	elgg_register_js('elgg.communityPlugins.PluginImages', '/mod/community_plugins/js/communityPlugins/PluginImages', 'foot');
 
 	run_function_once('plugins_run_once');
 	run_function_once('plugins_create_download_table');
