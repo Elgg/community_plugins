@@ -9,10 +9,10 @@ $english = array(
 	 */
 
 	'admin:community_plugins' => 'Plugin Repo',
-	'admin:community_plugins:search' => 'Search settings',
+	'admin:community_plugins:statistics' => 'Statistics',
 	'admin:community_plugins:upgrade' => 'Upgrade',
 	'admin:community_plugins:utilities' => 'Utilities',
-	'admin:statistics:community_plugins' => 'Plugin Repo',
+	'admin:settings:community_plugins' => 'Plugin Repo',
 
 	
 	/**
