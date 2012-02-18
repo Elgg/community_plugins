@@ -12,10 +12,11 @@
 	</div>
 <?php
 if (elgg_is_logged_in()) {
-	$url = elgg_get_site_url() . 'plugins/new/project/' . elgg_get_logged_in_user_entity()->username;
-?>
-	<a class="upload_plugin" href="<?php echo $url; ?>"><?php echo elgg_echo('plugins:upload:new'); ?></a>
-<?php
+	echo elgg_view('output/url', array(
+		'href' => '/plugins/new/project/' . elgg_get_logged_in_user_entity()->username,
+		'text' => elgg_echo('plugins:upload:new'),
+		'class' => 'elgg-button elgg-button-submit',
+	));
 }
 ?>
 </div>
