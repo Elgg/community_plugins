@@ -42,9 +42,9 @@ $bottom = elgg_view('plugins/front/bottom', array(
 ));
 
 $body = elgg_view_layout('plugins_layout', array(
-	'area1' => $welcome,
-	'area2' => $sidebar,
-	'area3' => $bottom,
+	'content' => $welcome,
+	'sidebar' => $sidebar,
+	'bottom' => $bottom,
 ));
 
 echo elgg_view_page(elgg_echo("plugins:all"), $body);

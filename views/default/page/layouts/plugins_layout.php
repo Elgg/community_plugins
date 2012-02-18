@@ -2,22 +2,15 @@
 /**
  * Elgg plugins layout used on repository home page
  *
- * @uses $vars['area1'] Main content area
- * @uses $vars['area2'] Sidebar
- * @uses $vars['area3'] Optional footer
+ * @uses $vars Passed to the 'one_sidebar' layout.
+ * @uses $vars['bottom'] Optional footer
  */
 
-?>
-<div id="plugins_sidebar">
-	<?php echo $vars['area2']; ?>
-</div>
-<div id="plugins_main">
-	<?php echo $vars['area1']; ?>
-</div>
 
-<?php
-if (isset($vars['area3'])) {
+echo elgg_view_layout('one_sidebar', $vars);
+
+if (isset($vars['bottom'])) {
 	echo '<div id="plugins_bottom">';
-	echo $vars['area3'];
+	echo $vars['bottom'];
 	echo '</div>';
 }

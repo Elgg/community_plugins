@@ -38,9 +38,9 @@ if ($type) {
 	$content .= elgg_list_entities($params);
 }
 
-$body = elgg_view_layout('two_column_left_sidebar', array(
-	'area1' => '',
-	'area2' => $content,
+$body = elgg_view_layout('one_sidebar', array(
+	'sidebar' => '',
+	'content' => $content,
 ));
 
 echo elgg_view_page($title, $body);
