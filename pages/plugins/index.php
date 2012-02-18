@@ -11,20 +11,6 @@ if (!is_array($settings)) {
 	$settings = array();
 }
 
-//Newest
-$newest = elgg_get_entities(array('type' => 'object', 'subtype' => 'plugin_project'));
-
-//Most downloaded
-$popular = PluginProject::getPluginsByDownloads();
-
-//Most recommended
-$recommended = elgg_get_entities_from_annotation_calculation(array(
-	'type' => 'object',
-	'subtype' => 'plugin_project',
-	'annotation_calculation' => 'count',
-	'annotation_name' => 'plugin_digg',
-));
-
 elgg_set_context('plugin_project');
 
 $welcome = elgg_view('plugins/front/main');
@@ -35,11 +21,7 @@ $sidebar = elgg_view('plugins/filters', array(
 	'settings' => $settings
 
 ));
-$bottom = elgg_view('plugins/front/bottom', array(
-	'newest' => $newest,
-	'popular' => $popular,
-	'recommended' => $recommended,
-));
+$bottom = elgg_view('plugins/front/bottom');
 
 $body = elgg_view_layout('plugins_layout', array(
 	'content' => $welcome,

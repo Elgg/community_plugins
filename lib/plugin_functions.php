@@ -213,3 +213,8 @@ function plugins_get_all_download_count() {
 	// the cached count is maintained in PluginProject::updateDownloadCount
 	return (int)elgg_get_plugin_setting('site_plugins_downloads', 'community_plugins');
 }
+
+// TODO(evan): This is why we need to use call_user_func_array in elgg_list_entities...
+function plugins_get_plugins_by_download_count(array $options = array()) {
+	return PluginProject::getPluginsByDownloads($options);
+}

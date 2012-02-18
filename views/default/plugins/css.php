@@ -40,6 +40,7 @@
 #plugins_front_welcome {
 	padding: 10px;
 	margin: 0 0 15px 0;
+	min-height: 250px;
 	border: 1px solid silver;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;

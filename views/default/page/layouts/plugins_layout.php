@@ -6,11 +6,8 @@
  * @uses $vars['bottom'] Optional footer
  */
 
-
 echo elgg_view_layout('one_sidebar', $vars);
 
 if (isset($vars['bottom'])) {
-	echo '<div id="plugins_bottom">';
 	echo $vars['bottom'];
-	echo '</div>';
 }
