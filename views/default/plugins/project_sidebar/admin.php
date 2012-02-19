@@ -5,11 +5,8 @@
 
 $project = $vars['entity'];
 
-$ts = time();
-$token = generate_action_token($ts);
-
-$delete = elgg_view('output/confirmlink',array(
-	'href' => "/action/plugins/delete_project?project_guid={$project->getGUID()}&__elgg_ts=$ts&__elgg_token=$token",
+$delete = elgg_view('output/confirmlink', array(
+	'href' => "/action/plugins/delete_project?project_guid={$project->getGUID()}",
 	'text' => 'Delete Project',
 	'confirm' => elgg_echo("plugins:delete_project:confirm"),
 ));

@@ -27,8 +27,8 @@ $content .= elgg_view_form("plugins/save_release", array(
 	'release' => $release,
 ));
 
-$body = elgg_view_layout('sidebar_boxes', array(
-	'area1' => $sidebar, 
-	'area2' => $content,
+$body = elgg_view_layout('one_sidebar', array(
+	'sidebar' => $sidebar, 
+	'content' => $content,
 ));
 echo elgg_view_page($title, $body);

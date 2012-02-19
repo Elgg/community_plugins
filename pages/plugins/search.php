@@ -207,7 +207,7 @@ if ($count) {
 // Add the list of plugins to the main area
 $main .= elgg_view('plugins/search/main', array('area1' => $list));
 
-$body = elgg_view_layout('plugins_layout', array(
+$body = elgg_view_layout('one_sidebar', array(
 	'content' => $main, 
 	'sidebar' => $sidebar,
 ));
