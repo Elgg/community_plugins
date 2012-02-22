@@ -43,7 +43,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 		<label><?php echo elgg_echo("plugins:file"); ?>*<br />
 		<span class="pluginHint">Uploaded files must contain a working plugin or theme.  Any plugin containing ads will be deleted and the user banned.  Distribution packages must be .zip, .tar.gz, or .tgz files.</span><br />
 		<?php
-			echo elgg_view("input/file",array('name' => 'upload'));
+			echo elgg_view("input/file", array('name' => 'upload'));
 		?>
 		</label>
 	</p>
@@ -56,7 +56,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 			echo elgg_view("input/text",array(
 				"name" => "version",
 				"value" => $version,
-				'js' => 'style="width: 3em;"',
+				'style' => 'width: 3em',
 			));
 		?>
 		</label>
@@ -82,7 +82,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 		echo elgg_view("input/dropdown",array(
 			"name" => "elgg_version",
 			"value" => $elgg_version,
-			'options' => $vars['config']->elgg_versions
+			'options' => elgg_get_config('elgg_versions'),
 		));
 	?>
 	</label>

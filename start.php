@@ -70,6 +70,7 @@ function plugins_init() {
 	elgg_register_plugin_hook_handler('cron', 'daily', 'plugins_update_download_counts');
 
 	// Elgg versions
+	global $CONFIG;
 	$CONFIG->elgg_versions = array(
 		'1.8',
 		'1.7',

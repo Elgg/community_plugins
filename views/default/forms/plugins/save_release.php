@@ -5,7 +5,7 @@
 
 if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRelease) {
 	$release = $vars['release'];
-	$project = get_entity($release->container_guid);
+	$project = $release->getProject();
 	echo elgg_view('input/hidden', array('name' => 'release_guid', 'value' => $release->guid));
 }
 

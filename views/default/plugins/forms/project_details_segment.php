@@ -38,154 +38,148 @@ if (array_key_exists('project', $vars)
 }
 
 ?>
-<div class="contentWrapper projectDetails">
-	<h2>Project Details</h2>
+<h2>Project Details</h2>
 
-	<p>
-	<?php echo $msg; ?>
-	</p>
+<p>
+<?php echo $msg; ?>
+</p>
 
-	<p>
-		<label>Project Name*<br />
-		<?php
-			echo elgg_view("input/text", array(
-				"name" => "title",
-				"value" => $title,
-			));
-		?>
-		</label>
-	</p>
-
-	<p>
-		<label>Project Summary<br />
-		<span class="pluginHint">A one- or two-sentence (250 characters) summary of your project's main features.</span>
-		<?php
-			echo elgg_view("input/text",array(
-				"name" => "summary",
-				"value" => $summary,
-				'maxlength' => 250,
-			));
-		?>
-		</label>
-	</p>
-
-	<p>
-		<label>Project Description<br />
-		<span class="pluginHint">A full description of your project's features. (As per <a href="http://community.elgg.org/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span>
-		<?php
-			echo elgg_view("input/longtext",array(
-				"name" => "description",
-				"value" => $description,
-			));
-		?>
-		</label>
-	</p>
-	<p>
-		<label for="license"><?php echo elgg_echo("license"); ?>*</label><br />
-		<em>
-			<a href="http://www.gnu.org/philosophy/license-list.html#GPLCompatibleLicenses" target="_blank"><?php echo elgg_echo('license:blurb'); ?></a>
-		</em><br />
-		<?php
-			echo elgg_view("input/dropdown",array(
-				"name" => "license",
-				"value" => $license,
-				'options_values' => $vars['config']->gpllicenses,
-			));
-		?>
-	</p>
-	<p>
-		<label>Type of Project<br />
-		<?php
-			echo elgg_view("input/dropdown",array(
-				"name" => "plugin_type",
-				"value" => $plugin_type,
-				'options_values' => array(
-					'plugin' => elgg_echo('plugins:plugin'),
-					'theme' => elgg_echo('plugins:theme'),
-					'languagepack' => elgg_echo('plugins:languagepack'),
-				),
-			));
-		?>
-		</label>
-	</p>
-	<p>
-		<label for="category"><?php echo elgg_echo("plugins:category"); ?></label><br />
-		<?php
-
-			echo elgg_view("input/dropdown",array(
-				"name" => "plugincat",
-				"value" => $plugincat,
-				'options_values' => $vars['config']->plugincats,
-			));
-		?>
-	</p>
-	<p>
-		<label>Project Homepage<br />
-		<?php
-			echo elgg_view("input/text",array(
-				"name" => "homepage",
-				"value" => $homepage,
-			));
-		?>
-		</label>
-	</p>
-	<p>
-		<label><?php echo elgg_echo("plugins:repo"); ?><br />
-		<?php echo elgg_view("input/text",array("name" => "repo","value" => $repo,)); ?>
-		</label>
-	</p>
-
-	<p>
-		<label>Donations URL<br />
-		<span class="pluginHint">If you accept donations, enter the URL to the donations section of your website.</span>
-		<?php
-			echo elgg_view("input/text",array(
-				"name" => "donate",
-				"value" => $donate,
-			));
-		?>
-		</label>
-	</p>
-	<p>
-		<label><?php echo elgg_echo("tags"); ?><br />
-		<span class="pluginHint">A comma-separated list of tags relevant to your project.</span>
-		<?php
-			echo elgg_view("input/tags", array(
-				"name" => "tags",
-				"value" => $tags,
-			));
-		?>
-		</label>
-	</p>
-	<p>
-		<label>
-			<?php echo elgg_echo('access'); ?><br />
-			<span class="pluginHint">The access level of the project. Note that individual releases can have their own access settings.</span>
-			<?php echo elgg_view('input/access', array('name' => 'project_access_id','value' => $access_id)); ?>
-		</label>
-	</p>
+<div class="elgg-input-wrapper">
+	<label>Project Name*</label><br/>
 	<?php
-		if ($project
-			&& ($entities = elgg_get_entities(array('container_guid' => $project->getGUID())))
-			&& is_array($entities)
-			&& (count($entities) > 0)) {
-
-			$releases = array(0 => 'No recommended release');
-
-			$recommended = ($project->recommended_release_guid) ? $project->recommended_release_guid : 0;
-			foreach ($entities as $entity) {
-				$time = friendly_time($entity->time_created);
-				$releases[$entity->guid] = "{$entity->version} ($time)";
-			}
-
-		}
+		echo elgg_view("input/text", array(
+			"name" => "title",
+			"value" => $title,
+		));
 	?>
-	<p>
-	<label>Project Images<br />
-		<span class="pluginHint">Show off your project by uploading images!</span><br /><br />
 	</label>
+</div>
+
+<div class="elgg-input-wrapper">
+	<label>Project Summary</label>
+	<span class="elgg-subtext">A one- or two-sentence (250 characters) summary of your project's main features.</span><br/>
 	<?php
-		for ($i=1; $i<=4; $i++) {
+		echo elgg_view("input/text",array(
+			"name" => "summary",
+			"value" => $summary,
+			'maxlength' => 250,
+		));
+	?>
+</div>
+
+<div class="elgg-input-wrapper">
+	<label>Project Description</label>
+	<span class="elgg-subtext">A full description of your project's features. (As per <a href="http://community.elgg.org/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span><br/>
+	<?php
+		echo elgg_view("input/longtext",array(
+			"name" => "description",
+			"value" => $description,
+		));
+	?>
+</div>
+<div class="elgg-input-wrapper">
+	<label for="license"><?php echo elgg_echo("license"); ?>*</label><br/>
+	<em class="elgg-subtext">
+		<a href="http://www.gnu.org/philosophy/license-list.html#GPLCompatibleLicenses" target="_blank"><?php echo elgg_echo('license:blurb'); ?></a>
+	</em>
+	<br />
+	<?php
+		echo elgg_view("input/dropdown",array(
+			"name" => "license",
+			"value" => $license,
+			'options_values' => $vars['config']->gpllicenses,
+		));
+	?>
+</div>
+<div class="elgg-input-wrapper">
+	<label>Type of Project</label><br/>
+	<?php
+		echo elgg_view("input/dropdown",array(
+			"name" => "plugin_type",
+			"value" => $plugin_type,
+			'options_values' => array(
+				'plugin' => elgg_echo('plugins:plugin'),
+				'theme' => elgg_echo('plugins:theme'),
+				'languagepack' => elgg_echo('plugins:languagepack'),
+			),
+		));
+	?>
+</div>
+<div class="elgg-input-wrapper">
+	<label for="category"><?php echo elgg_echo("plugins:category"); ?></label><br />
+	<?php
+
+		echo elgg_view("input/dropdown",array(
+			"name" => "plugincat",
+			"value" => $plugincat,
+			'options_values' => $vars['config']->plugincats,
+			'id' => 'category',
+		));
+	?>
+</div>
+<div class="elgg-input-wrapper">
+	<label>Project Homepage</label><br/>
+	<?php
+		echo elgg_view("input/text",array(
+			"name" => "homepage",
+			"value" => $homepage,
+		));
+	?>
+</div>
+<div class="elgg-input-wrapper">
+	<label><?php echo elgg_echo("plugins:repo"); ?><br />
+	<?php echo elgg_view("input/text",array("name" => "repo","value" => $repo,)); ?>
+	</label>
+</div>
+
+<div class="elgg-input-wrapper">
+	<label>Donations URL<br />
+	<span class="elgg-subtext">If you accept donations, enter the URL to the donations section of your website.</span>
+	<?php
+		echo elgg_view("input/text",array(
+			"name" => "donate",
+			"value" => $donate,
+		));
+	?>
+	</label>
+</div>
+<div class="elgg-input-wrapper">
+	<label><?php echo elgg_echo("tags"); ?></label>
+	<span class="elgg-subtext">A comma-separated list of tags relevant to your project.</span>
+	<?php
+		echo elgg_view("input/tags", array(
+			"name" => "tags",
+			"value" => $tags,
+		));
+	?>
+</div>
+<div class="elgg-input-wrapper">
+	<label><?php echo elgg_echo('access'); ?></label>
+	<span class="elgg-subtext">The access level of the project. Note that individual releases can have their own access settings.</span>
+	<br />
+	<?php echo elgg_view('input/access', array('name' => 'project_access_id','value' => $access_id)); ?>
+</div>
+<?php
+	if ($project
+		&& ($entities = elgg_get_entities(array('container_guid' => $project->getGUID())))
+		&& is_array($entities)
+		&& (count($entities) > 0)) {
+
+		$releases = array(0 => 'No recommended release');
+
+		$recommended = ($project->recommended_release_guid) ? $project->recommended_release_guid : 0;
+		foreach ($entities as $entity) {
+			$time = elgg_view_friendly_time($entity->time_created);
+			$releases[$entity->guid] = "{$entity->version} ($time)";
+		}
+
+	}
+?>
+<div class="elgg-input-wrapper">
+	<label>Project Images</label>
+	<span class="elgg-subtext">Show off your project by uploading images!</span><br /><br />
+	<?php
+		for ($i = 1; $i <= 4; $i++) {
 			// show existing images if any
 			if ($project) {
 				$options = array(
@@ -193,7 +187,7 @@ if (array_key_exists('project', $vars)
 					'relationship' => 'image',
 					'metadata_name_value_pair' => array('name' => 'project_image', 'value' => "$i")
 				);
-
+	
 				if (($image = elgg_get_entities_from_relationship($options))
 					&& ($image[0] instanceof ElggFile)
 					&& ($thumb = get_entity($image[0]->thumbnail_guid))
@@ -207,7 +201,7 @@ if (array_key_exists('project', $vars)
 					$img = $title = '';
 				}
 			}
-
+	
 			echo "<label>Description $i "
 			. elgg_view('input/text', array('name' => "image_{$i}_desc", 'value' => $title, 'js' => 'style="width:25em;"'))
 			. '</label><br />'
@@ -215,6 +209,4 @@ if (array_key_exists('project', $vars)
 			. "</label><br /><br /><br />";
 		}
 	?>
-	</p>
-
 </div>
