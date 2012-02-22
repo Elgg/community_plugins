@@ -33,51 +33,45 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 
 ?>
 
-<div class="contentWrapper releaseDetails">
-	<h2>Plugin Release Details</h2>
-	<p>This information is specific to the release you are uploading right now.  To edit the
-	general project details, visit the edit section of the project page.</p>
+<p>This information is specific to the release you are uploading right now.  To edit the
+general project details, visit the edit section of the project page.</p>
 
 <?php if (!$release) { ?>
-	<p>
-		<label><?php echo elgg_echo("plugins:file"); ?>*<br />
-		<span class="pluginHint">Uploaded files must contain a working plugin or theme.  Any plugin containing ads will be deleted and the user banned.  Distribution packages must be .zip, .tar.gz, or .tgz files.</span><br />
+	<div class="elgg-input-wrapper">
+		<label><?php echo elgg_echo("plugins:file"); ?>*</label>
+		<span class="elgg-subtext">Uploaded files must contain a working plugin or theme.  Any plugin containing ads will be deleted and the user banned.  Distribution packages must be .zip, .tar.gz, or .tgz files.</span><br />
 		<?php
 			echo elgg_view("input/file", array('name' => 'upload'));
 		?>
-		</label>
-	</p>
+	</div>
 <?php } ?>
 
-	<p>
-		<label>Release version<br />
+<div class="elgg-input-wrapper">
+	<label>Release version</label>
+	<?php
+		echo elgg_view("input/text",array(
+			"name" => "version",
+			"value" => $version,
+			'style' => 'width: 3em',
+		));
+	?>
+</div>
 
-		<?php
-			echo elgg_view("input/text",array(
-				"name" => "version",
-				"value" => $version,
-				'style' => 'width: 3em',
-			));
-		?>
-		</label>
-	</p>
+<div class="elgg-input-wrapper">
+	<label>Release Notes:</label>
+	<span class="elgg-subtext">A list of changes, bugfixes, bugs, todos, and general release notes for this release. (As per <a href="http://community.elgg.org/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span><br />
 
-	<p>
-		<label>Release Notes:<br />
-		<span class="pluginHint">A list of changes, bugfixes, bugs, todos, and general release notes for this release. (As per <a href="http://community.elgg.org/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span><br />
+	<?php
+		echo elgg_view("input/longtext",array(
+			"name" => "release_notes",
+			"value" => $release_notes,
+		));
+	?>
+</div>
 
-		<?php
-			echo elgg_view("input/longtext",array(
-				"name" => "release_notes",
-				"value" => $release_notes,
-			));
-		?>
-		</label>
-	</p>
-
-	<p>
-	<label>Elgg compatibility<br />
-	<span class="pluginHint">The version of Elgg this plugin was developed and tested on</span><br />
+<div class="elgg-input-wrapper">
+	<label>Elgg compatibility</label>
+	<span class="elgg-subtext">The version of Elgg this plugin was developed and tested on</span><br />
 	<?php
 		echo elgg_view("input/dropdown",array(
 			"name" => "elgg_version",
@@ -85,53 +79,43 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 			'options' => elgg_get_config('elgg_versions'),
 		));
 	?>
+</div>
+
+<div class="elgg-input-wrapper">
+	<label>Allow comments</label><br />
+		<?php
+			echo elgg_view("input/radio",array(
+				"name" => "comments",
+				"value" => $comments,
+				'options' => array(
+					elgg_echo('plugins:yes') => 'yes',
+					elgg_echo('plugins:no') => 'no',
+				),
+			));
+		?>
 	</label>
-	</p>
+</div>
 
-	<p>
-		<label>
-			<?php echo 'Allow comments'; ?><br />
-			<?php
+<div class="elgg-input-wrapper">
+	<label><?php echo elgg_echo('access'); ?></label>
+	<span class="elgg-subtext">The access level of this release. Useful if you want to release only to a certain group or collection.</span>
+	<?php echo elgg_view('input/access', array(
+		'name' => 'release_access_id',
+		'value' => $access_id
+	)); ?>
+</div>
 
-				echo elgg_view("input/radio",array(
-					"name" => "comments",
-					"value" => $comments,
-					'options' => array(
-						elgg_echo('plugins:yes') => 'yes',
-						elgg_echo('plugins:no') => 'no',
-					),
-				));
-			?>
-		</label>
-	</p>
-
-	<p>
-		<label>
-			<?php echo elgg_echo('access'); ?><br />
-			<span class="pluginHint">The access level of this release. Useful if you want to release only to a certain group or collection.</span>
-			<?php echo elgg_view('input/access', array(
-				'name' => 'release_access_id',
-				'value' => $access_id
-			)); ?>
-		</label>
-	</p>
-
-	<p>
-		<label>
-			<?php echo 'Set as the recommended release'; ?><br />
-			<span class="pluginHint">Recommend all users of this plugin use this release?</span><br />
-
-			<?php
-				echo elgg_view("input/radio",array(
-					"name" => "recommended",
-					"value" => $recommended,
-					'options' => array(
-						elgg_echo('plugins:yes') => 'yes',
-						elgg_echo('plugins:no') => 'no',
-					),
-				));
-			?>
-		</label>
-	</p>
-
+<div class="elgg-input-wrapper">
+	<label><?php echo 'Set as the recommended release'; ?></label>
+	<span class="elgg-subtext">Recommend all users of this plugin use this release?</span><br />
+	<?php
+		echo elgg_view("input/radio",array(
+			"name" => "recommended",
+			"value" => $recommended,
+			'options' => array(
+				elgg_echo('plugins:yes') => 'yes',
+				elgg_echo('plugins:no') => 'no',
+			),
+		));
+	?>
 </div>
