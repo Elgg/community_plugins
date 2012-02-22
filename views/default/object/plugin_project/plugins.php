@@ -10,8 +10,7 @@ $updated = elgg_view_friendly_time($project->getLatestRelease()->time_created);
 
 ?>
 
-<div class="plugins_wrapper">
-	<div class="plugins_owner_wrapper">
+<div class="plugins_owner_wrapper">
 	<?php 
 		echo elgg_view('output/url', array(
 			'href' => '/plugins',
@@ -28,26 +27,28 @@ $updated = elgg_view_friendly_time($project->getLatestRelease()->time_created);
 		));
 	?>
 	</h2>
-		<div class="pluginsrepo_owner">
-			<?php echo elgg_view_entity_icon($project_owner, 'tiny'); ?>
-			<p class="pluginsrepo_owner_details">
-				<b>by <a href="<?php echo elgg_get_site_url(); ?>plugins/developer/<?php echo $project_owner->username; ?>"><?php echo $project_owner->name; ?></a></b><br />
-				<small><b>Last updated</b> <?php echo $updated; ?></small>
-			</p>
-			<div class="pluginsrepo_tags">
-				<div class="object_tag_string">
-					<?php echo elgg_view('output/tags', array('value' => $project->tags)); ?>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="plugins_maincontent">
-		<?php echo elgg_view('plugins/recommend', array('project' => $project)); ?>
-		<h4>Summary:</h4>
-		<?php echo autop($summary); ?>
-		<h4>Full description:</h4>
-		<?php echo autop($project->description); ?>
-	</div>
+	<?php 
+		$image = elgg_view_entity_icon($project_owner, 'tiny');
+		$author_link = elgg_view('output/url', array(
+			'href' => "/plugins/developer/$project_owner->username",
+			'text' => $project_owner->name,
+			'encode_text' => TRUE,
+		));
+		$tags = elgg_view('output/tags', array('value' => $project->tags));
+		
+		$body =<<<DETAILS
+			<div class="elgg-subtext">by $author_link</div>
+			<div class="elgg-subtext">Last updated $updated</div>
+DETAILS;
+		echo elgg_view_image_block($image, $body); 
+	?>
+</div>
+<div class="plugins_maincontent">
+	<?php echo elgg_view('plugins/recommend', array('project' => $project)); ?>
+	<h4>Summary:</h4>
+	<?php echo autop($summary); ?>
+	<h4>Full description:</h4>
+	<?php echo autop($project->description); ?>
 </div>
 <?php
 
