@@ -38,8 +38,6 @@ if (array_key_exists('project', $vars)
 }
 
 ?>
-<h2>Project Details</h2>
-
 <p>
 <?php echo $msg; ?>
 </p>
