@@ -405,7 +405,9 @@ p.pluginsrepo_owner {
 	background:#efefef;
 }
 #plugins_recommend {
-	float:right;
+	position:absolute;
+	right:0;
+	top:32px;
 	width:auto;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
@@ -1110,8 +1112,11 @@ select.choose_plugin {
 	width: 100%;
 	z-index: 10;
 }
+
 #lightbox-container-image-box > #lightbox-nav { left: 0; }
+
 #lightbox-nav a { outline: none;}
+
 #lightbox-nav-btnPrev, #lightbox-nav-btnNext {
 	width: 49%;
 	height: 100%;
