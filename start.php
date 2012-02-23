@@ -34,6 +34,12 @@ function plugins_init() {
 		'name' => 'plugins',
 		'text' => elgg_echo('plugins'), 
 	));
+	
+	elgg_register_menu_item('site', array(
+		'href' => '/plugins/category/themes',
+		'name' => 'themes',
+		'text' => elgg_echo('plugins:type:theme'),
+	));
 
 	// Extend CSS and JS
 	elgg_extend_view('css', 'plugins/css');
