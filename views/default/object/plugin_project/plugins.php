@@ -46,7 +46,7 @@ DETAILS;
 <div class="plugins_maincontent">
 	<?php echo elgg_view('plugins/recommend', array('project' => $project)); ?>
 	<h4>Summary:</h4>
-	<?php echo autop($summary); ?>
+	<?php echo autop($project->summary); ?>
 	<h4>Full description:</h4>
 	<?php echo autop($project->description); ?>
 </div>

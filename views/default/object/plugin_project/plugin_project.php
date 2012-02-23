@@ -1,6 +1,5 @@
 <?php
 $project = $vars['entity'];
-$project instanceof PluginProject;
 
 $icon = elgg_view_entity_icon($project->getOwnerEntity(), 'tiny', array('use_hover' => false));
 
