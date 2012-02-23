@@ -112,5 +112,5 @@
 </p>
 <br />
 <p>
-	<input type="submit" name="button_submit" value="<?php echo elgg_echo('save'); ?>" />
+	<?php echo elgg_view('input/submit', array('value' => elgg_echo('save'))); ?>
 </p>
