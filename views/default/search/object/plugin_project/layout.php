@@ -26,4 +26,7 @@ if ($count == 0) {
 	$body = str_replace($results, $new_results, $body);
 }
 
-echo elgg_view_layout('plugins_layout', $body, $sidebar);
+echo elgg_view_layout('one_sidebar', array(
+	'content' => $body, 
+	'sidebar' => $sidebar,
+));

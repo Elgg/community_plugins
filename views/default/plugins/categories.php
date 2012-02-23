@@ -3,8 +3,6 @@
  * Sidebar list of categories
  */
 ?>
-<div class="plugins_sidebar_box">
-<h2><?php echo elgg_echo('plugins:categories'); ?></h2>
 <ul>
 <?php
 // your plugins
@@ -56,4 +54,3 @@ foreach ($vars['config']->plugincats as $value => $option) {
 }
 ?>
 </ul>
-</div>
