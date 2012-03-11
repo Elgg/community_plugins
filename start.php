@@ -193,7 +193,7 @@ function plugins_add_submenus() {
 
 	if (elgg_is_logged_in() && elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
 		elgg_register_menu_item('page', array(
-			'href' => "/$plugins_base/developer/$page_owner->username",
+			'href' => "$plugins_base/developer/$page_owner->username",
 			'name' => 'plugins:yours',
 			'text' => sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:')),
 		));
