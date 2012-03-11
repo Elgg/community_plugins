@@ -107,7 +107,7 @@ function community_groups_filter_menu($hook, $type, $menu, $params) {
 	$main_page = !(bool)get_input('filter');
 
 	$menu = array();
-	$groups = array('featured', 'popular', 'support', 'language', 'developers');
+	$groups = array('featured', 'popular', 'support', 'language', 'developers', 'plugins');
 	$priority = 100;
 	foreach ($groups as $name) {
 		$options = array(
