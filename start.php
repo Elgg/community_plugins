@@ -59,6 +59,8 @@ function community_groups_init() {
 		elgg_register_plugin_hook_handler('register', 'menu:cg:moderator', 'community_groups_moderator_menu');
 		elgg_extend_view('object/groupforumtopic', 'community_groups/discussion/controls');
 		elgg_extend_view('annotation/group_topic_post', 'community_groups/discussion/controls');
+		elgg_register_ajax_view('community_groups/discussion/offtopic');
+		elgg_register_ajax_view('community_groups/discussion/move');
 	}
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'community_groups_limit_editing');
 	elgg_register_plugin_hook_handler('register', 'menu:annotation', 'community_groups_limit_editing');
