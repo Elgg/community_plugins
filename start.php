@@ -157,6 +157,8 @@ function plugins_init() {
 	elgg_register_action("plugins/admin/combine", "$action_base/admin/combine.php", 'admin');
 	elgg_register_action("plugins/admin/normalize", "$action_base/admin/normalize.php", 'admin');
 	elgg_register_action("plugins/admin/search", "$action_base/admin/search.php", 'admin');
+	
+	elgg_register_tag_metadata_name('plugin_type');
 }
 
 /**
