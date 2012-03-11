@@ -149,12 +149,11 @@ if (isset($settings['sort']) && $settings['sort'] == 'enabled') {
     		$options['order_by'] = "u.name {$direction}";
     		break;
     	case 'downloads':
-    		$download_id = get_metastring_id('download', true);
-    		$options['selects'] = array("count(a.entity_guid) as downloads");
-    		$options['joins'][] = "LEFT JOIN {$CONFIG->dbprefix}annotations a on (e.guid = a.entity_guid AND a.name_id = $download_id)";
-			$group_bys = array_merge(array('e.guid', 'a.entity_guid'), $group_bys);
+    		$options['selects'] = array("a.downloads");
+    		$options['joins'][] = "LEFT JOIN {$CONFIG->dbprefix}plugin_downloads a on (e.guid = a.guid)";
+			$group_bys = array_merge(array('e.guid', 'a.guid'), $group_bys);
     		$options['group_by'] = implode(',', $group_bys);
-    		$options['order_by'] = "downloads {$direction}";
+    		$options['order_by'] = "a.downloads {$direction}";
     		break;
     	case 'recommendations':
     		$digg_id = get_metastring_id('plugin_digg', true);
