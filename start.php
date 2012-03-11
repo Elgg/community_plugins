@@ -10,9 +10,8 @@ elgg_register_event_handler('init', 'system', 'community_groups_init');
  * Initialize the community groups extension plugin
  */
 function community_groups_init() {
-	global $CONFIG;
-	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 
+	$action_path = elgg_get_plugins_path() . 'community_groups/actions';
 
 	elgg_extend_view('css/elgg', 'community_groups/css');
 
@@ -46,7 +45,7 @@ function community_groups_init() {
 	));
 	elgg_register_action('groups/combine', "$action_path/groups/combine.php", 'admin');
 	elgg_register_action('groups/categorize', "$action_path/groups/categorize.php", 'admin');
-	elgg_register_action("groups/delete", $CONFIG->pluginspath . "groups/actions/delete.php", 'admin');
+	elgg_register_action("groups/delete", elgg_get_plugins_path() . "groups/actions/groups/delete.php", 'admin');
 	elgg_register_action("groups/saveblogsettings", "$action_path/groups/saveblogsettings.php", 'admin');
 	elgg_register_action("groups/change_owner", "$action_path/groups/change_owner.php", 'admin');
 
@@ -60,6 +59,8 @@ function community_groups_init() {
 		elgg_register_plugin_hook_handler('register', 'menu:cg:moderator', 'community_groups_moderator_menu');
 		elgg_extend_view('object/groupforumtopic', 'community_groups/discussion/controls');
 		elgg_extend_view('annotation/group_topic_post', 'community_groups/discussion/controls');
+		elgg_register_ajax_view('community_groups/discussion/offtopic');
+		elgg_register_ajax_view('community_groups/discussion/move');
 	}
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'community_groups_limit_editing');
 	elgg_register_plugin_hook_handler('register', 'menu:annotation', 'community_groups_limit_editing');
@@ -108,7 +109,7 @@ function community_groups_filter_menu($hook, $type, $menu, $params) {
 	$main_page = !(bool)get_input('filter');
 
 	$menu = array();
-	$groups = array('featured', 'popular', 'support', 'language', 'developers');
+	$groups = array('featured', 'popular', 'support', 'language', 'developers', 'plugins');
 	$priority = 100;
 	foreach ($groups as $name) {
 		$options = array(
