@@ -35,7 +35,7 @@ class PluginProject extends ElggObject {
 		$releases = elgg_get_entities(array(
 			'type' => 'object',
 			'subtype' => 'plugin_release',
-			'container_guid' => $project->guid,
+			'container_guid' => $this->guid,
 			'limit' => 1,
 		));
 		
@@ -51,7 +51,7 @@ class PluginProject extends ElggObject {
 		$releases = elgg_get_entities_from_metadata(array(
 			'type' => 'object',
 			'subtype' => 'plugin_release',
-			'container_guid' => $project->guid,
+			'container_guid' => $this->guid,
 			'metadata_name' => 'version',
 			'metadata_value' => $version,
 			'limit' => 1,
