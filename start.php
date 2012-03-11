@@ -10,9 +10,8 @@ elgg_register_event_handler('init', 'system', 'community_groups_init');
  * Initialize the community groups extension plugin
  */
 function community_groups_init() {
-	global $CONFIG;
-	$action_path = $CONFIG->pluginspath . 'community_groups/actions';
 
+	$action_path = elgg_get_plugins_path() . 'community_groups/actions';
 
 	elgg_extend_view('css/elgg', 'community_groups/css');
 
@@ -46,7 +45,7 @@ function community_groups_init() {
 	));
 	elgg_register_action('groups/combine', "$action_path/groups/combine.php", 'admin');
 	elgg_register_action('groups/categorize', "$action_path/groups/categorize.php", 'admin');
-	elgg_register_action("groups/delete", $CONFIG->pluginspath . "groups/actions/delete.php", 'admin');
+	elgg_register_action("groups/delete", elgg_get_plugins_path() . "groups/actions/groups/delete.php", 'admin');
 	elgg_register_action("groups/saveblogsettings", "$action_path/groups/saveblogsettings.php", 'admin');
 	elgg_register_action("groups/change_owner", "$action_path/groups/change_owner.php", 'admin');
 
