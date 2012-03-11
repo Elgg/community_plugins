@@ -14,7 +14,15 @@ if (!$number) {
 }
 
 //get the user's plugin projects
-$plugins = get_user_objects($vars['entity']->owner_guid, "plugin_project", $number, 0);
+$options = array(
+  'owner_guids' => array($vars['entity']->owner_guid),
+  'types' => array('object'),
+  'subtypes' => array('plugin_project'),
+  'limit' => $number,
+  'offset' => 0,
+);
+
+$plugins = elgg_get_entities($options);
 
 if ($plugins) {
 	echo "<div id=\"pluginsrepo_widget_layout\">";

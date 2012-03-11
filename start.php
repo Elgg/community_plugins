@@ -157,6 +157,8 @@ function plugins_init() {
 	elgg_register_action("plugins/admin/combine", "$action_base/admin/combine.php", 'admin');
 	elgg_register_action("plugins/admin/normalize", "$action_base/admin/normalize.php", 'admin');
 	elgg_register_action("plugins/admin/search", "$action_base/admin/search.php", 'admin');
+	
+	elgg_register_tag_metadata_name('plugin_type');
 }
 
 /**
@@ -193,7 +195,7 @@ function plugins_add_submenus() {
 
 	if (elgg_is_logged_in() && elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()) {
 		elgg_register_menu_item('page', array(
-			'href' => "/$plugins_base/developer/$page_owner->username",
+			'href' => "$plugins_base/developer/$page_owner->username",
 			'name' => 'plugins:yours',
 			'text' => sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:')),
 		));
