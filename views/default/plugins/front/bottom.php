@@ -15,10 +15,10 @@ if (!isset($vars['popular'])) {
 
 if (!isset($vars['recommended'])) {
 	$vars['recommended'] = elgg_list_entities_from_annotation_calculation(array(
-		'type' => 'object',
-		'subtype' => 'plugin_project',
-		'annotation_calculation' => 'count',
-		'annotation_name' => 'plugin_digg',
+		'types' => array('object'),
+		'subtypes' => array('plugin_project'),
+		'annotation_names' => array('plugin_digg'),
+		'calculation' => 'count',
 	));
 }
 
