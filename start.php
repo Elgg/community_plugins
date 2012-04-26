@@ -140,6 +140,7 @@ function plugins_init() {
 	register_action("plugins/combine", FALSE, "$action_base/admin/combine.php", TRUE);
 	register_action("plugins/normalize", FALSE, "$action_base/admin/normalize.php", TRUE);
 	register_action("plugins/admin/search", FALSE, "$action_base/admin/save.php", TRUE);
+	register_action("plugins/transfer", FALSE, "$action_base/admin/transfer.php", TRUE);
 }
 
 /**

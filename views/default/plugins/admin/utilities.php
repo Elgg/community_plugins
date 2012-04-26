@@ -4,3 +4,4 @@
  */
 
 echo elgg_view('plugins/admin/utilities/combine');
+echo elgg_view('plugins/admin/utilities/transfer');
