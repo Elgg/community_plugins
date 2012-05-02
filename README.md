@@ -7,7 +7,7 @@ Groups
   * group categories
   * change owner
   * Elgg blog integration
-  * custom list page for groups
+  * custom list page for groups (Note that this disable the "all" page.)
 
 Discussion Forums
 -----------------
