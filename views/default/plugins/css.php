@@ -197,36 +197,9 @@
 	margin-right: 0;
 }
 
-.project_image img {
-	padding: 1px;
+.elgg-plugin-screenshots > li {
+	margin-left: 2px;
 }
-
-.project_image_wrapper {
-	float: left;
-	width: 60px;
-	text-align: center;
-	margin: 5px;
-}
-
-/*
-.search_box input {
-	margin:0 15px 0 0;
-}
-.search_box input.search_plugins {
-	margin-left:15px;
-	background-color:#0054A7;
-	border-color:#0054A7;
-	color:white;
-	font-size: 1.2em;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-}
-.search_box input.search_plugins:hover {
-	background-color: white;
-	border-color: white;
-	color:#4690D6;
-}
-*/
 
 .plugins_save_wrapper {
 	background:white;

@@ -36,8 +36,18 @@ class PluginProject extends ElggObject {
 		return add_entity_relationship(elgg_get_logged_in_user_guid(), 'has_dugg', $this->guid);
 	}
 	
+	/** @return int */
 	public function countDiggs() {
 		return $this->countAnnotations('plugin_digg');
+	}
+	
+	/** @return array */	
+	public function getScreenshots() {
+		return elgg_get_entities_from_relationship(array(
+			'relationship_guid' => $this->getGUID(),
+			'relationship' => 'image',
+			'order_by' => 'guid',
+		));
 	}
 	
 	/**

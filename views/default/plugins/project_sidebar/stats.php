@@ -12,4 +12,5 @@ $project = $vars['entity'];
 	<li><b><?php echo elgg_echo('license'); ?>:</b> <?php echo elgg_echo('license:' . $project->license); ?></li>
 	<li><b><?php echo elgg_echo('plugins:updated'); ?>:</b> <?php echo date("Y-n-j", $project->time_updated); ?></li>
 	<li><b>Downloads: </b> <?php echo $project->getDownloadCount(); ?></li>
+	<li><b>Recommendations: </b> <?php echo $project->countDiggs(); ?></li>
 </ul>

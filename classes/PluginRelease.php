@@ -14,6 +14,10 @@ class PluginRelease extends ElggFile {
 	public function getProject() {
 		return get_entity($this->container_guid);
 	}
+	
+	public function isRecommendedRelease() {
+		return $this->guid && $this->getProject()->recommended_release_guid == $this->guid;
+	}
 
 	public function updateDownloadCount() {
 		create_annotation($this->guid, 'download', 1, 'integer', 0, ACCESS_PUBLIC);
