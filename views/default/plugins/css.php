@@ -361,111 +361,6 @@ p.pluginsrepo_owner {
 	margin: 10px;
 	padding: 10px;
 }
-.pluginsrepo_file .pluginsrepo_maincontent {
-	padding:0 0 0 0;
-}
-#pluginsrepo_details {
-	clear:both;
-	padding:10px;
-/*
-	padding:10px;
-	border:1px solid #ddd;
-	margin:10px;
-*/
-}
-#previous_versions p.warning {
-	padding:4px;
-	background:#efefef;
-}
-#plugins_recommend {
-	position:absolute;
-	right:0;
-	top:32px;
-	width:auto;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	padding:3px 10px 3px 10px;
-	text-align: right;
-}
-
-#plugins_recommend #num_recommend {
-	background: url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/recommend.png) no-repeat;
-	width:50px;
-	height:50px;
-	margin:0 0 5px 0;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	float:right;
-}
-
-#plugins_recommend #num_recommend p {
-	font-size:1.4em;
-	padding:2px;
-}
-
-#plugins_recommend #recommend_action {
-	border:1px solid #efefef;
-	padding:2px;
-	font-size:80%;
-}
-
-#plugins_recommend #recommend_action p {
-	padding:0;
-	margin:0;
-}
-
-#download_action {
-	border-bottom:1px solid #efefef;
-	border-top:1px solid #efefef;
-	padding:10px;
-	clear:both;
-}
-
-#warning {
-	background:url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/warning.png)no-repeat;
-	height:40px;
-	width:40px;
-	float:left;
-	margin:0 4px 50px 0;
-}
-
-.pluginsrepo_file .pluginsrepo_icon {
-	margin:10px 0 10px 0;
-	position:absolute;
-	width:70px;
-}
-.pluginsrepo_file .pluginsrepo_title {
-	margin:0;
-	padding:4px 4px 5px 10px;
-	line-height: 1.2em;
-}
-.pluginsrepo_file .pluginsrepo_owner {
-	padding:0 0 0 10px;
-}
-.pluginsrepo_file .pluginsrepo_description {
-	margin:10px 0 0;
-	padding:0 0 0 10px;
-}
-.pluginsrepo_download,
-.pluginsrepo_controls {
-	padding:0 0 1px 10px;
-	margin:0;
-}
-
-.pluginsrepo_file p {
-	padding:0 0 5px 0;
-	margin:0;
-}
-
-.pluginsrepo_file .pluginsrepo_specialcontent img {
-	padding:5px;
-	margin:0 0 0 10px;
-}
-
-.pluginsrepo_tags {
-	padding:0;/*  0 10px 10px; */
-	margin:0;
-}
 
 /* file repro gallery items */
 .search_gallery .pluginsrepo_controls {
@@ -487,17 +382,6 @@ p.pluginsrepo_owner {
 }
 .search_gallery .pluginsrepo_comments {
 	font-size:90%;
-}
-
-.plugins_back_link {
-	padding:2px 25px 5px 0;
-	background: transparent url(<?php echo elgg_get_site_url(); ?>_graphics/icon_gallery.gif) no-repeat right top;
-	display:block;
-	float:right;
-}
-
-.plugins_back_link:hover {
-	background-position: right -40px;
 }
 
 .plugins_maincontent {
@@ -535,46 +419,6 @@ padding:0;
 .plugin_stats li {
  margin: 4px 0;
 }
-
-.pluginsrepo_warning {
-	margin:10px 0 20px 10px;
-	border:1px solid #D3322A;
-	background:#F7DAD8;
-	color:#000000;
-	padding:9px 10px 3px 10px;
-	margin:5px 0 5px 0;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-}
-
-.pluginsrepo_warning h3 {
-	font-size:1.2em;
-}
-
-.pluginsrepo_warning p {
-	font-size:12px / 100%;
-}
-
-.pluginsrepo_prev {
-	margin:10px 0 20px 10px;
-	color:#000000;
-	background:#efefef;
-	padding:3px 10px 3px 10px;
-	margin:5px 0 5px 0;
-	border:1px solid #ccc;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-}
-.pluginsrepo_next p,
-.pluginsrepo_prev p {
-	margin:0;padding:0;
-}
-.pluginsrepo_versions h2 {
-font-size:12px;
-margin:0;
-padding:0;
-}
-
 
 /* Custom plugin gallery page on community */
 
@@ -815,15 +659,6 @@ span.downloadsnumber {
 	color: #999999;
 	padding-right:3px;
 }
-
-.pluginsrepo_title_owner_wrapper span.downloadsnumber {
-	font-weight: bold;
-	margin-left:30px;
-	color:#999999;
-	float:none;
-}
-
-
 
 .groups .pagination {
 	margin:5px 0 5px 0;

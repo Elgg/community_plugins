@@ -11,4 +11,7 @@ $url = "<a href=\"{$performed_by->getURL()}\">{$performed_by->name}</a>";
 $string = sprintf(elgg_echo("plugins:river:project:created"), $url);
 $string .= " <a href=\"" . $object->getURL() . "\">" . $object->title . "</a>";
 
-echo $string;
+echo elgg_view('river/elements/layout', array(
+	'summary' => $string,
+	'item' => $vars['item'],
+));
