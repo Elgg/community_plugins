@@ -25,9 +25,6 @@ function plugins_init() {
 	elgg_load_js('jquery.ui.dropdownchecklist');
 	elgg_load_js('elgg.communityPlugins');
 
-	run_function_once('plugins_run_once');
-	run_function_once('plugins_create_download_table');
-
 	// Set up menu for logged in users
 	elgg_register_menu_item('site', array(
 		'href' => "/plugins",
@@ -55,6 +52,7 @@ function plugins_init() {
 	// Image handler
 	elgg_register_page_handler('plugins_image', 'plugins_image_page_handler');
 
+	// TODO: This looks like a bug. "plugins" is not a valid subtype
 	register_notification_object('object', 'plugins', elgg_echo('plugins:new'));
 
 	//register a widget
@@ -159,14 +157,6 @@ function plugins_init() {
 	elgg_register_action("plugins/admin/search", "$action_base/admin/search.php", 'admin');
 	
 	elgg_register_tag_metadata_name('plugin_type');
-}
-
-/**
- * Register classes for loading by Elgg when loading an entity
- */
-function plugins_run_once() {
-	add_subtype("object", "plugin_release", "PluginRelease");
-	add_subtype("object", "plugin_project", "PluginProject");
 }
 
 /**
@@ -427,19 +417,4 @@ function plugins_update_download_counts() {
 	$count = count_annotations(0, 'object', 'plugin_project', 'download', '', NULL);
 	$count += 1200000;
 	elgg_set_plugin_setting('site_plugins_downloads', $count, 'community_plugins');
-}
-
-/**
- * Creates the table for the plugin download count
- */
-function plugins_create_download_table() {
-	$db_prefix = get_config('dbprefix');
-	$sql = "CREATE TABLE `{$db_prefix}plugin_downloads` (
-		`guid` BIGINT UNSIGNED NOT NULL,
-		`downloads` INT UNSIGNED NOT NULL DEFAULT 0,
-		PRIMARY KEY (`guid`),
-		KEY `downloads` (`downloads`)
-	) ENGINE=MyISAM";
-
-	get_data($sql);
 }
