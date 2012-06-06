@@ -10,13 +10,6 @@ $updated = elgg_view_friendly_time($project->getLatestRelease()->time_created);
 
 ?>
 
-<?php 
-	echo elgg_view('output/url', array(
-		'href' => '/plugins',
-		'text' => 'back to plugins',
-		'class' => 'plugins_back_link',
-	));
-?>
 <h2>
 <?php 
 	echo elgg_view('output/url', array(
