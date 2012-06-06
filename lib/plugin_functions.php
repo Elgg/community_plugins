@@ -1,16 +1,4 @@
 <?php
-/**
- * Has the current user has dugg the plugin project
- * @param $project
- * @return bool
- */
-function plugins_is_dugg($project) {
-	if (check_entity_relationship(elgg_get_logged_in_user_guid(), "has_dugg", $project->guid)) {
-		return TRUE;
-	} else {
-		return FALSE;
-	}
-}
 
 /**
  * Get the mimetype of the plugin archive

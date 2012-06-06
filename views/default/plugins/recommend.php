@@ -5,7 +5,7 @@
 
 $project = $vars['project'];
 
-$num_votes = $project->countAnnotations('plugin_digg');
+$num_votes = $project->countDiggs();
 
 ?>
 
@@ -16,11 +16,11 @@ $num_votes = $project->countAnnotations('plugin_digg');
 	<div class="clearfloat"></div>
 	<div id="recommend_action">
 <?php
-if (!plugins_is_dugg($project) && elgg_is_logged_in()) {
+if (elgg_is_logged_in() && !$project->isDugg()) {
 	echo elgg_view('output/url', array(
 		'href' => "/action/plugins/recommend?guid={$project->guid}",
 		'is_action' => TRUE,
-		'text' => 'Recommend',
+		'text' => elgg_echo('recommend'),
 	));
 } else {
 	echo "<p>Recommendations</p>";

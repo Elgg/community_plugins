@@ -23,6 +23,22 @@ class PluginProject extends ElggObject {
 		$this->attributes['subtype'] = "plugin_project";
 	}
 
+	/**
+	 * Has the current user has dugg the plugin project
+	 * @return bool
+	 * @todo Use likes instead?
+	 */
+	public function isDugg() {
+		return !!check_entity_relationship(elgg_get_logged_in_user_guid(), "has_dugg", $this->guid);
+	}
+	
+	public function addDigg() {
+		return add_entity_relationship(elgg_get_logged_in_user_guid(), 'has_dugg', $this->guid);
+	}
+	
+	public function countDiggs() {
+		return $this->countAnnotations('plugin_digg');
+	}
 	
 	/**
 	 * @return PluginRelease The most recently uploaded version of this plugin.
