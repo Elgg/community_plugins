@@ -14,9 +14,17 @@ elgg_set_context('search');
 if ($category) {
 	if ($category == 'all') {
 		$title = sprintf(elgg_echo('plugins:category:title'), elgg_echo('plugins:cat:all'));
-		$list = list_entities('object', 'plugin_project', 0, 10, true, false, true);
+		$list = elgg_list_entities(array(
+			'type' => 'object',
+			'subtype' => 'plugin_project',
+		));
 	} else {
-		$list = list_entities_from_metadata("plugincat", $category, "object", "plugin_project", 0, 10, true, false, true);
+		$list = elgg_list_entities_from_metadata(array(
+			'type' => 'object',
+			'subtype' => 'plugin_project',
+			'metadata_name' => "plugincat",
+			'metadata_value' => $category,
+		));
 	}
 }
 elgg_set_context('plugins');
