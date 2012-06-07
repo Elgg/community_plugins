@@ -5,6 +5,8 @@
 
 global $CONFIG;
 
+elgg_make_sticky_form('plugins');
+
 // Get variables
 $title = strip_tags(get_input("title"));
 $desc = plugins_strip_tags(get_input("description"));

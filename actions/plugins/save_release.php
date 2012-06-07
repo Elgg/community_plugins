@@ -2,6 +2,9 @@
 /**
  * Update plugin release
  */
+ 
+elgg_make_sticky_form('plugins');
+
 
 // Get variables
 $access_id = (int) get_input('release_access_id');

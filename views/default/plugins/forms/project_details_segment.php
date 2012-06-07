@@ -24,11 +24,7 @@ if (array_key_exists('project', $vars)
 	click <a href=\"" . elgg_get_site_url() . "plugins/new/release/{$project->getGUID()}\">here</a>.";
 } else {
 	$project = NULL;
-	$title = $description = $homepage = $plugin_type = '';
-	$license = $donate = $tags = '';
-
-	$plugincat = 'uncategorized';
-	$access_id = ACCESS_PUBLIC;
+	
 	$username = elgg_get_logged_in_user_entity()->username;
 
 	$msg = "You are creating a new plugin project. If you want to release a new
@@ -36,6 +32,7 @@ if (array_key_exists('project', $vars)
 	You can view all of your plugins
 	<a href=\"" . elgg_get_site_url() . "plugins/developer/$username\">here</a>.";
 }
+	extract($vars);
 
 ?>
 <p>

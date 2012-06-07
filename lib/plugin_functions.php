@@ -206,3 +206,64 @@ function plugins_get_all_download_count() {
 function plugins_get_plugins_by_download_count(array $options = array()) {
 	return PluginProject::getPluginsByDownloads($options);
 }
+
+/** 
+ * Prepare the create_project form variables
+ *
+ * @param PluginProject $project
+ * @param PluginRelease $release
+ * @return array
+ */
+ function plugins_perform_form_vars($project = null, $release = null){
+	 	 
+	 $values = array(	
+	 	'title' => '',
+	 	'description' => '',
+		'homepage' => '',
+		'plugin_type' => '',
+					
+		'license' => '',
+		'donate' => '',
+		'tags' => '',
+
+		'plugincat' => 'uncategorized',
+		'access_id' => ACCESS_PUBLIC,
+		
+		'container_guid' => elgg_get_page_owner_guid(),
+		
+		'elgg_version' => '',
+		'version' => '',
+		'release_notes' => '', 
+		
+		'comments' => 'yes'
+	);
+	
+	if($project){
+		foreach (array_keys($values) as $field) {
+				if (isset($project->$field)) {
+					$values[$field] = $project->$field;
+				}
+			}	
+		$values['project'] = $project;	
+	}
+	if($release){
+		foreach (array_keys($values) as $field) {
+				if (isset($release->$field)) {
+					$values[$field] = $project->$field;
+				}
+			}	
+		$values['release'] = $release;	
+	}
+	
+	if (elgg_is_sticky_form('plugins')) {
+		$sticky_values = elgg_get_sticky_values('plugins');
+		foreach ($sticky_values as $key => $value) {
+			$values[$key] = $value;
+		}
+	}
+
+	elgg_clear_sticky_form('plugins');
+
+	return $values;
+
+ }

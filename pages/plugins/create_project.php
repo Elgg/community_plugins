@@ -5,16 +5,13 @@
 
 gatekeeper();
 
-$container_guid = elgg_get_page_owner_guid();
-
 $title = elgg_echo('plugins:upload');
 
 $content = elgg_view_title($title);
-$content .= elgg_view_form("plugins/create_project", array(
-	'enctype' => 'multipart/form-data'
-), array(
-	'container_guid' => $container_guid,
-));
+
+$form_vars = array('enctype' => 'multipart/form-data');
+$body_vars = plugins_perform_form_vars();
+$content .= elgg_view_form("plugins/create_project", $form_vars, $body_vars);
 $body = elgg_view_layout('one_sidebar', array(
 	'sidebar' => '', 
 	'content' => $content,

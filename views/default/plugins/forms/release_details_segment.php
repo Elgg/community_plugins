@@ -4,14 +4,15 @@
  */
 
 // see if we have a project
+
 if (array_key_exists('project', $vars)
 && $vars['project'] instanceof ElggObject
 && $vars['project']->getSubtype() == 'plugin_project') {
 	$project = $vars['project'];
+	$project_guid = $project->getGUID();
 } else {
 	$project = NULL;
 }
-
 // default vars to use if editing or new
 if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRelease) {
 	$release = $vars['release'];
@@ -23,12 +24,14 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 	$recommended = ($release->getGUID() == $project->recommended_release_guid) ? 'yes' : 'no';
 	$access_id = $release->access_id;
 } else {
-	$project = $release = $elgg_version = $version = $release_notes = NULL;
+	$project = $release = NULL;
 
 	$comments = 'yes';
 	// encourage authors to have recommended versions if they don't
-	$recommended = (!$project || ($project && $project->recommended_release_guid > 0)) ? 'no' : 'yes';
+	$recommended = (!$project || ($project && $project->recommended_release_guid > 0)) ? 'yes' : 'no';
 	$access_id = ($project) ? $project->access_id : ACCESS_PUBLIC;
+	
+	extract($vars);
 }
 
 ?>
@@ -119,3 +122,4 @@ general project details, visit the edit section of the project page.</p>
 		));
 	?>
 </div>
+<?php echo elgg_view("input/hidden", array("name" => "guid", "value" => $project_guid)); ?>

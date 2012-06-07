@@ -2,6 +2,8 @@
 /**
  * Upload new release
  */
+ 
+elgg_make_sticky_form('plugins');
 
 // Get variables
 $project_guid = get_input("guid");
