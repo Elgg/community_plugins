@@ -74,6 +74,7 @@ if ($result) {
 	}
 
 	system_message(elgg_echo("plugins:project:saved"));
+	elgg_clear_sticky_form('plugins');
 
 } else {
 	register_error(elgg_echo("plugins:error:uploadfailed"));
