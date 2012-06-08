@@ -1,6 +1,6 @@
 <?php
-echo elgg_view('plugins/forms/project_details_segment');
-echo elgg_view('plugins/forms/release_details_segment');
+echo elgg_view('plugins/forms/project_details_segment', $vars);
+echo elgg_view('plugins/forms/release_details_segment', $vars);
 
 if (isset($vars['container_guid'])) {
 	echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $vars['container_guid']));

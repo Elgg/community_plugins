@@ -5,6 +5,8 @@
 
 global $CONFIG;
 
+elgg_make_sticky_form('plugins');
+
 // Get variables
 $title = strip_tags(get_input("title"));
 $desc = plugins_strip_tags(get_input("description"));
@@ -72,6 +74,7 @@ if ($result) {
 	}
 
 	system_message(elgg_echo("plugins:project:saved"));
+	elgg_clear_sticky_form('plugins');
 
 } else {
 	register_error(elgg_echo("plugins:error:uploadfailed"));

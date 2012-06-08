@@ -3,6 +3,7 @@
  * Elgg plugin project creation action
  */
 
+elgg_make_sticky_form('plugins');
 
 // Get variables
 $title = strip_tags(get_input("title"));
@@ -109,5 +110,6 @@ for ($i=1; $i<=$max_num_images; $i++) {
 add_to_river('river/object/plugin_project/create', 'create', $user->getGUID(), $plugin_project->getGUID());
 plugins_send_notifications($plugin_project);
 system_message(elgg_echo("plugins:project:saved"));
+elgg_clear_sticky_form('plugins');
 
 forward($plugin_project->getURL());

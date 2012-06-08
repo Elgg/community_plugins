@@ -10,7 +10,7 @@ if (array_key_exists('project', $vars)
 		echo elgg_view('input/hidden', array('name' => 'plugins_guid', 'value' => $project->guid));
 }
 
-echo elgg_view('plugins/forms/project_details_segment', array('project' => $project)); 
+echo elgg_view('plugins/forms/project_details_segment',$vars); 
 
 ?>
 

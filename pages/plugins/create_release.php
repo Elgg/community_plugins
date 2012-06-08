@@ -19,11 +19,10 @@ $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 $title = elgg_echo('plugins:new:release');
 
 $content = elgg_view_title($title);
-$content .= elgg_view_form("plugins/create_release", array(
-	'enctype' => 'multipart/form-data',
-), array(
-	'project' => $project,
-));
+
+$form_vars = array('enctype' => 'multipart/form-data');
+$body_vars = plugins_perform_form_vars($project);
+$content .= elgg_view_form("plugins/create_release", $form_vars, $body_vars);
 
 $body = elgg_view_layout('one_sidebar', array(
 	'sidebar' => $sidebar, 

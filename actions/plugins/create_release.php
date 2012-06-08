@@ -2,6 +2,8 @@
 /**
  * Upload new release
  */
+ 
+elgg_make_sticky_form('plugins');
 
 // Get variables
 $project_guid = get_input("guid");
@@ -61,5 +63,6 @@ $release->setHash();
 add_to_river('river/object/plugin_release/create', 'create', elgg_get_logged_in_user_guid(), $release->guid);
 plugins_send_notifications($release);
 system_message(elgg_echo("plugins:release:saved"));
+elgg_clear_sticky_form('plugins');
 
 forward($release->getURL());
