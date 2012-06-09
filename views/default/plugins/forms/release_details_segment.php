@@ -26,8 +26,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 	$project = $release = $elgg_version = $version = $release_notes = NULL;
 
 	$comments = 'yes';
-	// encourage authors to have recommended versions if they don't
-	$recommended = (!$project || ($project && $project->recommended_release_guid > 0)) ? 'no' : 'yes';
+	$recommended = 'yes';
 	$access_id = ($project) ? $project->access_id : ACCESS_PUBLIC;
 }
 
