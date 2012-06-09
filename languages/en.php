@@ -136,13 +136,6 @@ $english = array(
 	'plugins:diggit' => "You have recommended this plugin.",
 	'plugins:display:number' => "Number of plugins, themes and language packs to display",
 
-
-	'plugins:river:project:created' => "%s uploaded a new plugin",
-	'plugins:river:release:created' => "%s released a new version of the plugin",
-	'plugins:river:annotate' => "a comment on this plugin",
-	'plugin_file:river:annotate' => "a comment on this plugin",
-	'plugin_release:river:annotate' => "a comment on this plugin",
-
 	'plugins:files:acceptable' => 'Distribution packages must be .zip or .tar.zip only.',
 
 	'item:object:plugin_project' => 'Plugin Projects',
@@ -306,7 +299,13 @@ $english = array(
 	'plugins:settings:save:success'	=> "Plugin search settings were successfully updated",
 	'plugins:settings:save:failure'	=> "Could not save plugin search settings: unrecognized parameters received.",
 
-	'plugins:filters:or' => '...or '
+	'plugins:filters:or' => '...or ',
+	
+	
+	'river:comment:object:plugin_release' => '%s commented on the plugin %s',
+	'river:comment:object:plugin_project' => '%s commented on the plugin %s',
+	'river:create:object:plugin_project' => "%s uploaded a new plugin: %s",
+	'river:create:object:plugin_release' => "%s released a new version of the plugin %s",
 
 );
 
