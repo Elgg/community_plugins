@@ -15,32 +15,27 @@ if (!$number) {
 
 //get the user's plugin projects
 $options = array(
-  'owner_guids' => array($vars['entity']->owner_guid),
-  'types' => array('object'),
-  'subtypes' => array('plugin_project'),
-  'limit' => $number,
-  'offset' => 0,
+	'owner_guids' => array($vars['entity']->owner_guid),
+	'types' => array('object'),
+	'subtypes' => array('plugin_project'),
+	'limit' => $number,
+	'offset' => 0,
+	'pagination' => false,
 );
 
-$plugins = elgg_get_entities($options);
+$plugins = elgg_list_entities($options);
+
+echo $plugins;
 
 if ($plugins) {
-	echo "<div id=\"pluginsrepo_widget_layout\">";
-	
-	//display in list mode
-	$context = elgg_get_context();
-	elgg_set_context('widget');
-	foreach ($plugins as $plugin) {
-		echo elgg_view_entity($plugin);
-	}
-	elgg_set_context($context);
+	$more_link = elgg_view('output/url', array(
+		'href' => "/plugins/developer/$owner_entity->username",
+		'text' => elgg_echo('plugins:more'),	
+		'is_trusted' => true,
+	));
 
-	//get a link to the user's plugins
-	$users_file_url = elgg_get_site_url() . "plugins/developer/" . $owner_entity->username;
-
-	echo "<div class=\"pluginsrepo_widget_singleitem_more\"><a href=\"{$users_file_url}\">" . elgg_echo('plugins:more') . "</a></div>";
-	echo "</div>";
+	echo "<span class=\"elgg-widget-more\">$more_link</span>";
 
 } else {
-	echo "<div class=\"contentWrapper\">" . elgg_echo("plugins:none") . "</div>";
+	echo elgg_echo("plugins:none");
 }

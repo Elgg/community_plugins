@@ -16,7 +16,7 @@ switch (elgg_get_context()) {
 	case 'plugin_project':
 		echo elgg_view('object/plugin_project/plugin_project', $vars);
 		break;
-	case 'widget':
+	case 'widgets':
 		echo elgg_view('object/plugin_project/widget', $vars);
 		break;
 	case 'plugins':

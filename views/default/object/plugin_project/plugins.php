@@ -13,9 +13,9 @@ elgg_register_menu_item('title', array(
 	'name' => 'download',
 	'href' => "/plugins/download/$release->guid",
 	'text' => "Download $release->version",
-	'class' => 'elgg-button elgg-button-' . ($release->isRecommendedRelease() ? 'submit' : 'delete'),
+	'class' => 'elgg-button elgg-button-' . ($release && $release->isRecommendedRelease() ? 'submit' : 'delete'),
 	'encode_text' => TRUE,
-	'confirm' => $release->isRecommendedRelease() ? false : 'Warning: The author recommends using a different release of this plugin! Do you still want to download this release?',
+	'confirm' => $release && $release->isRecommendedRelease() ? false : 'Warning: The author recommends using a different release of this plugin! Do you still want to download this release?',
 ));
 
 if (elgg_is_logged_in() && !$project->isDugg()) {
