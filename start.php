@@ -379,7 +379,16 @@ function plugins_project_url_handler($entity) {
  * @return string
  */
 function plugins_release_url_handler($release) {
-	return $release->getProject()->getURL() . "/{$release->version}";
+	if (!$release) {
+		error_log("Community plugins: unable to access release to get URL");
+		return;
+	}
+	$project = $release->getProject();
+	if (!$project) {
+		error_log("Community plugins: unable to access project for release $release->guid");
+		return;
+	}
+	return $project->getURL() . "/{$release->version}";
 }
 
 /**
