@@ -1,6 +1,15 @@
 <?php
-add_subtype("object", "plugin_release", "PluginRelease");
-add_subtype("object", "plugin_project", "PluginProject");
+
+if (get_subtype_id('object', 'plugin_release')) {
+	update_subtype('object', 'plugin_release', 'PluginRelease');
+} else {
+	add_subtype('object', 'plugin_release', 'PluginRelease');
+}
+if (get_subtype_id('object', 'plugin_project')) {
+	update_subtype('object', 'plugin_project', 'PluginProject');
+} else {
+	add_subtype('object', 'plugin_project', 'PluginProject');
+}
 
 /**
  * Creates the table for the plugin download count
