@@ -1,3 +1,3 @@
 <?php
-remove_subtype("object", "plugin_release");
-remove_subtype("object", "plugin_project");
+update_subtype("object", "plugin_release", "");
+update_subtype("object", "plugin_project", "");
