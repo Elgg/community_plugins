@@ -6,11 +6,11 @@
 
 // Note: Not using elgg_extract because these are potentially expensive database queries.
 if (!isset($vars['newest'])) {
-	$vars['newest'] = elgg_list_entities(array('type' => 'object', 'subtype' => 'plugin_project'));
+	$vars['newest'] = elgg_list_entities(array('type' => 'object', 'subtype' => 'plugin_project', 'pagination' => false));
 }
 
 if (!isset($vars['popular'])) {
-	$vars['popular'] = elgg_list_entities(array(), 'plugins_get_plugins_by_download_count');
+	$vars['popular'] = elgg_list_entities(array('pagination' => false), 'plugins_get_plugins_by_download_count');
 }
 
 if (!isset($vars['recommended'])) {
@@ -19,6 +19,7 @@ if (!isset($vars['recommended'])) {
 		'subtypes' => array('plugin_project'),
 		'annotation_names' => array('plugin_digg'),
 		'calculation' => 'count',
+		'pagination' => false,
 	));
 }
 
