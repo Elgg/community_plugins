@@ -52,7 +52,13 @@ $body =<<<DETAILS
 DETAILS;
 
 echo elgg_view_image_block($image, $body);
-echo autop($project->description);
+?>
+
+<div class="elgg-output">
+	<?php echo autop($project->description); ?>
+</div>
+
+<?php
 
 if ($release) {
 	echo elgg_view_entity($release);
