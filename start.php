@@ -13,6 +13,9 @@ function community_groups_init() {
 
 	$action_path = elgg_get_plugins_path() . 'community_groups/actions';
 
+	// @todo remove when this is in Elgg core
+	elgg_register_page_handler('forum', 'forum_page_handler');
+
 	elgg_extend_view('css/elgg', 'community_groups/css');
 
 	// admin controls use a lightbox
@@ -92,6 +95,21 @@ function community_groups_init() {
 		false,
 		false
 	);
+}
+
+/**
+ * Exists for backwards compatibility.
+ */
+function forum_page_handler($page) {
+	switch ($page[0]) {
+		case 'topic':
+			$page[0];
+			header('Status: 301 Moved Permanently');
+			forward("/discussion/view/{$page[1]}/{$page[2]}");
+			break;
+		default:
+			return false;
+	}
 }
 
 /**
