@@ -177,9 +177,10 @@ if (isset($settings['sort']) && $settings['sort'] == 'enabled') {
 
 // Get objects
 elgg_set_context('search');
-$count = elgg_get_entities_from_metadata(array_merge($options, array('count' => true)));
-$entities = elgg_get_entities_from_metadata($options);
-$list = elgg_view_entity_list($entities, $count, $offset, $limit, false, false, true);
+$options['full_view'] = false;
+$list = elgg_list_entities_from_metadata($options);
+$options['count'] = true;
+$count = elgg_get_entities_from_metadata($options);
 elgg_set_context('plugins');
 
 $title = elgg_echo('plugins:search:title');
@@ -196,7 +197,7 @@ $sidebar = elgg_view('plugins/filters', array(
 // Add info block on search results to the main area
 if ($count) {
 	$first_index = $offset + 1;
-	$last_index = $first_index + count($entities) - 1;
+	$last_index = min(array($offset + $limit, $count));
 	$main = elgg_view_title(sprintf(elgg_echo('plugins:search:results'), $count, $first_index, $last_index));
 } else {
 	$main = elgg_view_title(elgg_echo('plugins:search:noresults'));

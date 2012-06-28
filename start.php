@@ -402,7 +402,14 @@ function plugins_add_type_menu($owner_guid) {
 		return;
 	}
 
-	$plugin_types = get_tags(0, 10, 'plugin_type', 'object', 'plugin_project', $owner_guid);
+	$plugin_types = elgg_get_tags(array(
+		'threshold' => 0,
+		'limit' => 10,
+		'tag_names' => array('plugin_type'),
+		'type' => 'object',
+		'subtype' => 'plugin_project',
+		'container_guid' => $owner_guid,
+	));
 
 	if ($plugin_types) {
 		foreach ($plugin_types as $type) {
@@ -412,7 +419,7 @@ function plugins_add_type_menu($owner_guid) {
 
 			$url = "/plugins/developer/$owner->username/type/$tag/";
 
-			add_submenu_item($label, $url, 'pluginstypes');
+			elgg_register_menu_item('page', array('name' => $label, 'text' => $label, 'href' => $url));
 		}
 	}
 }
