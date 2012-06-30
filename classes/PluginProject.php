@@ -95,7 +95,11 @@ class PluginProject extends ElggObject {
 			return $this->recommended_release;
 		}
 		
-		return $this->recommended_release = get_entity($this->recommended_release_guid);
+		$release = $this->recommended_release = get_entity($this->recommended_release_guid);
+		if ($release) {
+			return $release;
+		}
+		return $this->getLatestRelease();
 	}
 	
 	

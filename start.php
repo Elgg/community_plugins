@@ -364,11 +364,14 @@ function plugins_image_page_handler($page) {
 /**
  * Handles plugin project URLs
  *
- * @param PluginProject $entity
+ * @param PluginProject $project
  * @return string
  */
-function plugins_project_url_handler($entity) {
-	return "/plugins/{$entity->guid}";
+function plugins_project_url_handler($project) {
+	$release = $project->getRecommendedRelease();
+	if ($release) {
+		return $release->getURL();
+	}
 }
 
 /**
@@ -388,7 +391,9 @@ function plugins_release_url_handler($release) {
 		error_log("Community plugins: unable to access project for release $release->guid");
 		return;
 	}
-	return $project->getURL() . "/{$release->version}";
+	$version = urlencode($release->version);
+	$title = elgg_get_friendly_title($project->title);
+	return  "plugins/$project->guid/$version/$title";
 }
 
 /**
