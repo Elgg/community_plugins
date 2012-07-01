@@ -391,7 +391,7 @@ function plugins_release_url_handler($release) {
 		error_log("Community plugins: unable to access project for release $release->guid");
 		return;
 	}
-	$version = urlencode($release->version);
+	$version = rawurlencode($release->version);
 	$title = elgg_get_friendly_title($project->title);
 	return  "plugins/$project->guid/$version/$title";
 }
