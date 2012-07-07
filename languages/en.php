@@ -140,6 +140,7 @@ $english = array(
 
 	'item:object:plugin_project' => 'Plugin Projects',
 	'item:object:plugin_release' => 'Plugin Releases',
+	'item:object:file' => 'Plugin Screenshots',
 
 	'plugins:tabs:stats' => 'Statistics',
 	'plugins:tabs:upgrade' => 'Upgrades',
