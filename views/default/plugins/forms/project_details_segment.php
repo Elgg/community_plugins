@@ -67,7 +67,7 @@ if (array_key_exists('project', $vars)
 
 <div class="elgg-input-wrapper">
 	<label>Project Description</label>
-	<span class="elgg-subtext">A full description of your project's features. (As per <a href="http://community.elgg.org/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span><br/>
+	<span class="elgg-subtext">A full description of your project's features. (As per <a href="http://community.elgg.org/terms#plugins">policy</a>, images and links will be removed.)</span><br/>
 	<?php
 		echo elgg_view("input/longtext",array(
 			"name" => "description",
