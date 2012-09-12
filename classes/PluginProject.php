@@ -89,6 +89,9 @@ class PluginProject extends ElggObject {
 	
 	/**
 	 * @return ElggRelease The author-recommended version of this plugin.
+	 *
+	 * @todo This probably shouldn't return the latest release by default.
+	 * Those are two different concepts.
 	 */
 	public function getRecommendedRelease() {
 		if (isset($this->recommended_release)) {

@@ -26,6 +26,11 @@ if (!$plugin_project || !$plugin_project->canEdit()) {
 	forward(REFERER);
 }
 
+if (!$version) {
+	register_error(elgg_echo('plugins:error:no_version'));
+	forward(REFERER);
+}
+
 
 // Extract file and save to default filestore (for now)
 $prefix = "plugins/";

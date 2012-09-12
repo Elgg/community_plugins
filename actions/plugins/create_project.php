@@ -23,7 +23,7 @@ if ($plugin_type != 'theme' && $plugin_type != 'languagepack') {
 $release_notes = plugins_strip_tags(get_input('release_notes'));
 $elgg_version = get_input('elgg_version', 'Not specified');
 $comments = get_input('comments', 'yes');
-$version = strip_tags(get_input('version', 'Not specified'));
+$version = strip_tags(get_input('version'));
 $recommended = get_input('recommended', FALSE);
 $release_access_id = get_input('release_access_id', ACCESS_PUBLIC);
 
@@ -42,6 +42,12 @@ if ($license == 'none' || !array_key_exists($license, $CONFIG->gpllicenses)) {
 $mimetype = plugins_get_mimetype('upload');
 if (!$mimetype) {
 	register_error(elgg_echo('plugins:error:badformat'));
+	forward(REFERER);
+}
+
+// version is sent but null, so get_input doesn't use defaults.
+if (!$version) {
+	register_error(elgg_echo('plugins:error:no_version'));
 	forward(REFERER);
 }
 

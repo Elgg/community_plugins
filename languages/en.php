@@ -213,6 +213,7 @@ $english = array(
 	'plugins:error:badformat' => 'We only support .zip and .tar.gz distribution packages.',
 	'plugins:error:badlicense' => 'You must select a GPL-compatible license.',
 	'plugins:error:notitle' => 'A title is required.',
+	'plugins:error:no_version' => 'A version is required.',
 
 	/**
 	 * New frontpage
