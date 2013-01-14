@@ -143,14 +143,15 @@ function plugins_init() {
 
 	$action_base = dirname(__FILE__) . "/actions/plugins";
 	elgg_register_action("plugins/create_project", "$action_base/create_project.php");
-	elgg_register_action("plugins/create_release", "$action_base/create_release.php");
+	elgg_register_action("plugins/update_project_from_github", "$action_base/update_project_from_github.php");
+    elgg_register_action("plugins/create_release", "$action_base/create_release.php");
 	elgg_register_action("plugins/save_project", "$action_base/save_project.php");
 	elgg_register_action("plugins/save_release", "$action_base/save_release.php");
 	elgg_register_action("plugins/delete_project", "$action_base/delete_project.php");
 	elgg_register_action("plugins/delete_release", "$action_base/delete_release.php");
 	elgg_register_action("plugins/delete_project_image", "$action_base/delete_project_image.php");
 	elgg_register_action("plugins/recommend", "$action_base/recommend.php");
-
+    
 	elgg_register_action("plugins/admin/upgrade", "$action_base/admin/upgrade.php", 'admin');
 	elgg_register_action("plugins/admin/combine", "$action_base/admin/combine.php", 'admin');
 	elgg_register_action("plugins/admin/normalize", "$action_base/admin/normalize.php", 'admin');
