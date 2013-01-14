@@ -13,7 +13,11 @@ if (!$plugin_project || !$plugin_project->canEdit()) {
 	forward(REFERER);
 }
 
-$repo = $plugin_project->github_repo;
+$matches = array();
+
+preg_match("#^https?://github.com/(.*)(.git)?$#", $plugin_project->repo, $matches);
+
+$repo = $matches[1];
 
 if (!isset($repo)) {
     register_error("No github repo associated with this plugin");
