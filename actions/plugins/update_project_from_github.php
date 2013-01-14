@@ -82,4 +82,4 @@ add_to_river('river/object/plugin_release/create', 'create', elgg_get_logged_in_
 plugins_send_notifications($release);
 system_message(elgg_echo("plugins:release:saved"));
 
-forward($release->getURL());
+forward("/plugins/edit/release/$release->guid");
