@@ -3,6 +3,8 @@
  * Project details to be used in a form body.
  */
 
+$sticky_values = elgg_get_sticky_values('community_plugins');
+
 // set defaults for new or editing
 if (array_key_exists('project', $vars)
 && $vars['project'] instanceof ElggObject
@@ -47,7 +49,7 @@ if (array_key_exists('project', $vars)
 	<?php
 		echo elgg_view("input/text", array(
 			"name" => "title",
-			"value" => $title,
+			"value" => $sticky_values['title'] ? $sticky_values['title'] : $title,
 		));
 	?>
 	</label>
@@ -59,7 +61,7 @@ if (array_key_exists('project', $vars)
 	<?php
 		echo elgg_view("input/text",array(
 			"name" => "summary",
-			"value" => $summary,
+			"value" => $sticky_values['summary'] ? $sticky_values['summary'] : $summary,
 			'maxlength' => 250,
 		));
 	?>
@@ -71,7 +73,7 @@ if (array_key_exists('project', $vars)
 	<?php
 		echo elgg_view("input/longtext",array(
 			"name" => "description",
-			"value" => $description,
+			"value" => $sticky_values['description'] ? $sticky_values['description'] : $description,
 		));
 	?>
 </div>
@@ -84,7 +86,7 @@ if (array_key_exists('project', $vars)
 	<?php
 		echo elgg_view("input/dropdown",array(
 			"name" => "license",
-			"value" => $license,
+			"value" => $sticky_values['license'] ? $sticky_values['license'] : $license,
 			'options_values' => $vars['config']->gpllicenses,
 		));
 	?>
@@ -94,7 +96,7 @@ if (array_key_exists('project', $vars)
 	<?php
 		echo elgg_view("input/dropdown",array(
 			"name" => "plugin_type",
-			"value" => $plugin_type,
+			"value" => $sticky_values['plugin_type'] ? $sticky_values['plugin_type'] : $plugin_type,
 			'options_values' => array(
 				'plugin' => elgg_echo('plugins:plugin'),
 				'theme' => elgg_echo('plugins:theme'),
@@ -109,7 +111,7 @@ if (array_key_exists('project', $vars)
 
 		echo elgg_view("input/dropdown",array(
 			"name" => "plugincat",
-			"value" => $plugincat,
+			"value" => $sticky_values['plugincat'] ? $sticky_values['plugincat'] : $plugincat,
 			'options_values' => $vars['config']->plugincats,
 			'id' => 'category',
 		));
@@ -120,13 +122,16 @@ if (array_key_exists('project', $vars)
 	<?php
 		echo elgg_view("input/text",array(
 			"name" => "homepage",
-			"value" => $homepage,
+			"value" => $sticky_values['homepage'] ? $sticky_values['homepage'] : $homepage,
 		));
 	?>
 </div>
 <div class="elgg-input-wrapper">
 	<label><?php echo elgg_echo("plugins:repo"); ?><br />
-	<?php echo elgg_view("input/text",array("name" => "repo","value" => $repo,)); ?>
+	<?php echo elgg_view("input/text",array(
+		"name" => "repo",
+		"value" => $sticky_values['repo'] ? $sticky_values['repo'] : $repo
+		)); ?>
 	</label>
 </div>
 
@@ -136,7 +141,7 @@ if (array_key_exists('project', $vars)
 	<?php
 		echo elgg_view("input/text",array(
 			"name" => "donate",
-			"value" => $donate,
+			"value" => $sticky_values['donate'] ? $sticky_values['donate'] : $donate,
 		));
 	?>
 	</label>
@@ -147,7 +152,7 @@ if (array_key_exists('project', $vars)
 	<?php
 		echo elgg_view("input/tags", array(
 			"name" => "tags",
-			"value" => $tags,
+			"value" => $sticky_values['tags'] ? $sticky_values['tags'] : $tags,
 		));
 	?>
 </div>
@@ -155,7 +160,10 @@ if (array_key_exists('project', $vars)
 	<label><?php echo elgg_echo('access'); ?></label>
 	<span class="elgg-subtext">The access level of the project. Note that individual releases can have their own access settings.</span>
 	<br />
-	<?php echo elgg_view('input/access', array('name' => 'project_access_id','value' => $access_id)); ?>
+	<?php echo elgg_view('input/access', array(
+		'name' => 'project_access_id',
+		'value' => $sticky_values['project_access_id'] ? $sticky_values['project_access_id'] : $access_id
+		)); ?>
 </div>
 <?php
 	if ($project
@@ -201,7 +209,11 @@ if (array_key_exists('project', $vars)
 			}
 	
 			echo "<label>Description $i "
-			. elgg_view('input/text', array('name' => "image_{$i}_desc", 'value' => $title, 'js' => 'style="width:25em;"'))
+			. elgg_view('input/text', array(
+				'name' => "image_{$i}_desc",
+				'value' => $sticky_values["image_{$i}_desc"] ? $sticky_values["image_{$i}_desc"] : $title,
+				'js' => 'style="width:25em;"'
+			))
 			. '</label><br />'
 			. "<label>Image $i " . elgg_view('input/file', array('name' => "image_$i"))
 			. "</label><br /><br /><br />";
