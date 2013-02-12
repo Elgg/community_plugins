@@ -31,6 +31,20 @@ if (!$version) {
 	forward(REFERER);
 }
 
+//ensure unique version string
+$releases = elgg_get_entities_from_metadata(array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'container_guid' => $plugin_project->guid,
+			'metadata_name' => 'version',
+			'metadata_value' => $version,
+			'limit' => 1,
+		));
+
+if ($releases) {
+	register_error(elgg_echo('plugins:error:duplicate_version'));
+	forward(REFERER);
+}
 
 // Extract file and save to default filestore (for now)
 $prefix = "plugins/";
