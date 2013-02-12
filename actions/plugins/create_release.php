@@ -3,6 +3,8 @@
  * Upload new release
  */
 
+elgg_make_sticky_form('community_plugins');
+
 // Get variables
 $project_guid = get_input("guid");
 $recommended = get_input('recommended', 'no');
@@ -67,4 +69,5 @@ add_to_river('river/object/plugin_release/create', 'create', elgg_get_logged_in_
 plugins_send_notifications($release);
 system_message(elgg_echo("plugins:release:saved"));
 
+elgg_clear_sticky_form('community_plugins');
 forward($release->getURL());
