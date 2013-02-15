@@ -138,7 +138,7 @@ if (!empty($wheres)) {
 
 // Handle entity sorting
 // Duplicate join clauses will be removed by elgg_get_entities(), so no need to keep track of joins
-if (isset($settings['sort']) && $settings['sort'] == 'enabled') {
+if ((isset($settings['sort']) && $settings['sort'] == 'enabled') || empty($settings)) {
     switch($sort) {
     	case 'title':
     		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}objects_entity o ON (e.guid = o.guid)";
