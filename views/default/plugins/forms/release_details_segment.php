@@ -3,6 +3,8 @@
  * Release details for use inside a form body.
  */
 
+$sticky_values = elgg_get_sticky_values('community_plugins');
+
 // see if we have a project
 if (array_key_exists('project', $vars)
 && $vars['project'] instanceof ElggObject
@@ -46,11 +48,11 @@ general project details, visit the edit section of the project page.</p>
 <?php } ?>
 
 <div class="elgg-input-wrapper">
-	<label>Release version</label>
+	<label>Release version*</label>
 	<?php
 		echo elgg_view("input/text",array(
 			"name" => "version",
-			"value" => $version,
+			"value" => $sticky_values['version'] ? $sticky_values['version'] : $version,
 			'style' => 'width: 3em',
 		));
 	?>
@@ -63,7 +65,7 @@ general project details, visit the edit section of the project page.</p>
 	<?php
 		echo elgg_view("input/longtext",array(
 			"name" => "release_notes",
-			"value" => $release_notes,
+			"value" => $sticky_values['release_notes'] ? $sticky_values['release_notes'] : $release_notes,
 		));
 	?>
 </div>
@@ -74,7 +76,7 @@ general project details, visit the edit section of the project page.</p>
 	<?php
 		echo elgg_view("input/dropdown",array(
 			"name" => "elgg_version",
-			"value" => $elgg_version,
+			"value" => $sticky_values['elgg_version'] ? $sticky_values['elgg_version'] : $elgg_version,
 			'options' => elgg_get_config('elgg_versions'),
 		));
 	?>
@@ -85,7 +87,7 @@ general project details, visit the edit section of the project page.</p>
 		<?php
 			echo elgg_view("input/radio",array(
 				"name" => "comments",
-				"value" => $comments,
+				"value" => $sticky_values['comments'] ? $sticky_values['comments'] : $comments,
 				'options' => array(
 					elgg_echo('plugins:yes') => 'yes',
 					elgg_echo('plugins:no') => 'no',
@@ -100,7 +102,7 @@ general project details, visit the edit section of the project page.</p>
 	<span class="elgg-subtext">The access level of this release. Useful if you want to release only to a certain group or collection.</span>
 	<?php echo elgg_view('input/access', array(
 		'name' => 'release_access_id',
-		'value' => $access_id
+		'value' => $sticky_values['release_access_id'] ? $sticky_values['release_access_id'] : $access_id
 	)); ?>
 </div>
 
@@ -110,7 +112,7 @@ general project details, visit the edit section of the project page.</p>
 	<?php
 		echo elgg_view("input/radio",array(
 			"name" => "recommended",
-			"value" => $recommended,
+			"value" => $sticky_values['recommended'] ? $sticky_values['recommended'] : $recommended,
 			'options' => array(
 				elgg_echo('plugins:yes') => 'yes',
 				elgg_echo('plugins:no') => 'no',
