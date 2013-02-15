@@ -3,6 +3,7 @@
  * Update a plugin project
  */
 
+elgg_make_sticky_form('community_plugins');
 global $CONFIG;
 
 // Get variables
@@ -77,4 +78,5 @@ if ($result) {
 	register_error(elgg_echo("plugins:error:uploadfailed"));
 }
 
+elgg_clear_sticky_form('community_plugins');
 forward($plugin_project->getURL());
