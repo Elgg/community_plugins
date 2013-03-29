@@ -156,6 +156,7 @@ function plugins_init() {
 	elgg_register_action("plugins/admin/combine", "$action_base/admin/combine.php", 'admin');
 	elgg_register_action("plugins/admin/normalize", "$action_base/admin/normalize.php", 'admin');
 	elgg_register_action("plugins/admin/search", "$action_base/admin/search.php", 'admin');
+	elgg_register_action("plugins/admin/transfer", "$action_base/admin/transfer.php", 'admin');
 	
 	elgg_register_tag_metadata_name('plugin_type');
 }
@@ -300,6 +301,11 @@ function plugins_page_handler($page) {
 		case "admin":
 			set_input('tab', $page[1]);
 			include("$pages_dir/admin.php");
+			break;
+		case "transfer":
+			admin_gatekeeper();
+			set_input('guid', $page[1]);
+			include("$pages_dir/transfer.php");
 			break;
 		default:
 			if (!isset($page[0])) {
