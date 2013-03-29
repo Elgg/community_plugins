@@ -3,9 +3,6 @@
  * Project admin - edit, new release, delete
  */
 
-elgg_load_js('lightbox');
-elgg_load_css('lightbox');
-
 $project = $vars['entity'];
 
 $delete = elgg_view('output/confirmlink', array(
