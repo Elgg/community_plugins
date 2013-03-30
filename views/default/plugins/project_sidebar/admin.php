@@ -15,5 +15,6 @@ $delete = elgg_view('output/confirmlink', array(
 <ul class="plugins_menu">
 	<li><a href="<?php echo elgg_get_site_url(); ?>plugins/new/release/<?php echo $project->guid; ?>">Upload New Release</a></li>
 	<li><a href="<?php echo elgg_get_site_url(); ?>plugins/edit/project/<?php echo $project->guid; ?>">Edit Project Details</a></li>
+	<li><a href="<?php echo elgg_get_site_url(); ?>plugins/contributors/<?php echo $project->guid; ?>">Add Contributors</a></li>
 	<li><?php echo $delete; ?></li>
 </ul>

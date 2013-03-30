@@ -4,6 +4,8 @@
  * 
  */
 
+define(PLUGINS_CONTRIBUTOR_RELATIONSHIP, 'plugin_contributor');
+
 elgg_register_event_handler('init', 'system', 'plugins_init');
 
 require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
@@ -150,6 +152,8 @@ function plugins_init() {
 	elgg_register_action("plugins/delete_release", "$action_base/delete_release.php");
 	elgg_register_action("plugins/delete_project_image", "$action_base/delete_project_image.php");
 	elgg_register_action("plugins/recommend", "$action_base/recommend.php");
+	elgg_register_action("plugins/add_contributors", "$action_base/add_contributors.php");
+	elgg_register_action("plugins/delete_contributor", "$action_base/delete_contributor.php");
 
 	elgg_register_action("plugins/admin/upgrade", "$action_base/admin/upgrade.php", 'admin');
 	elgg_register_action("plugins/admin/combine", "$action_base/admin/combine.php", 'admin');
@@ -299,6 +303,10 @@ function plugins_page_handler($page) {
 		case "admin":
 			set_input('tab', $page[1]);
 			include("$pages_dir/admin.php");
+			break;
+		case "contributors":
+			set_input('guid', $page[1]);
+			include("$pages_dir/contributors.php");
 			break;
 		default:
 			if (!isset($page[0])) {
