@@ -44,3 +44,18 @@ if ($all_user_plugins_count > 1) {
 	$content = elgg_view('plugins/project_sidebar/other', array('entity' => $project));
 	echo elgg_view_module('aside', $title, $content);
 }
+
+// Contributors
+$contributors_count = elgg_get_entities_from_relationship(array(
+	'type' => 'user',
+	'relationship' => PLUGINS_CONTRIBUTOR_RELATIONSHIP,
+	'relationship_guid' => $project->guid,
+	'inverse_relationship' => TRUE,
+	'count' => TRUE
+));
+
+if ($contributors_count) {
+  $title = 'Contributors';
+  $content = elgg_view('plugins/project_sidebar/contributors', array('entity' => $project));
+  echo elgg_view_module('aside', $title, $content);
+}
