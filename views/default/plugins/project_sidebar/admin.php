@@ -25,5 +25,6 @@ $transfer = elgg_view('output/url', array(
 	  echo "<li>$transfer</li>";
 	}
 	?>
+	<li><a href="<?php echo elgg_get_site_url(); ?>plugins/contributors/<?php echo $project->guid; ?>">Add Contributors</a></li>
 	<li><?php echo $delete; ?></li>
 </ul>
