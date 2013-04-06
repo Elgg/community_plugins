@@ -169,7 +169,6 @@ function plugins_init() {
  *
  */
 function plugins_add_submenus() {
-	global $CONFIG;
 
 	$plugins_base = elgg_get_site_url() . "plugins";
 
@@ -192,10 +191,10 @@ function plugins_add_submenus() {
 		elgg_register_menu_item('page', array(
 			'href' => "$plugins_base/developer/$page_owner->username",
 			'name' => 'plugins:yours',
-			'text' => sprintf(elgg_echo("plugins:yours"), elgg_echo('plugins:types:')),
+			'text' => elgg_echo("plugins:yours", array(elgg_echo('plugins:types:'))),
 		));
 	} else if (elgg_get_page_owner_guid()) {
-		$title = sprintf(elgg_echo("plugins:user"), $page_owner->name, elgg_echo('plugins:types:'));
+		$title = elgg_echo("plugins:user", array($page_owner->name, elgg_echo('plugins:types:')));
 		elgg_register_menu_item('page', array(
 			'href' => "$plugins_base/developer/$page_owner->username",
 			'name' => 'plugins:user',
@@ -364,7 +363,7 @@ function plugins_image_page_handler($page) {
 	header('Pragma: public');
 	header('Cache-Control: public');
 	header("Content-Disposition: inline; filename=\"{$file->originalfilename}\"");
-	header("Content-type: {$mime}");
+	header("Content-type: {$file->getMimeType()}");
 	header("Content-Length: " . strlen($contents));
 
 	$split_output = str_split($contents, 1024);
