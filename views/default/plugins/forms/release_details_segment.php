@@ -32,15 +32,14 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 	$access_id = ($project) ? $project->access_id : ACCESS_PUBLIC;
 }
 
-?>
+echo elgg_view('output/longtext', array(
+	'value' => elgg_echo('plugins:edit:help:release')
+));
 
-<p>This information is specific to the release you are uploading right now.  To edit the
-general project details, visit the edit section of the project page.</p>
-
-<?php if (!$release) { ?>
+if (!$release) { ?>
 	<div class="elgg-input-wrapper">
 		<label><?php echo elgg_echo("plugins:file"); ?>*</label>
-		<span class="elgg-subtext">Uploaded files must contain a working plugin or theme.  Any plugin containing ads will be deleted and the user banned.  Distribution packages must be .zip, .tar.gz, or .tgz files.</span><br />
+		<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:file'); ?>x</span><br />
 		<?php
 			echo elgg_view("input/file", array('name' => 'upload'));
 		?>
@@ -48,7 +47,7 @@ general project details, visit the edit section of the project page.</p>
 <?php } ?>
 
 <div class="elgg-input-wrapper">
-	<label>Release version*</label>
+	<label><?php echo elgg_echo('plugins:edit:label:release_version'); ?>*</label>
 	<?php
 		echo elgg_view("input/text",array(
 			"name" => "version",
@@ -58,9 +57,16 @@ general project details, visit the edit section of the project page.</p>
 	?>
 </div>
 
+<?php
+	$release_link = elgg_view('output/url', array(
+		'text' => elgg_echo('policy'),
+		'href' => "http://community.elgg.org/expages/read/Terms/#plugins",
+		'is_trusted' => true
+	));
+?>
 <div class="elgg-input-wrapper">
-	<label>Release Notes:</label>
-	<span class="elgg-subtext">A list of changes, bugfixes, bugs, todos, and general release notes for this release. (As per <a href="http://community.elgg.org/expages/read/Terms/#plugins">policy</a>, images and links will be removed.)</span><br />
+	<label><?php echo elgg_echo('plugins:edit:label:release_notes'); ?>:</label>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:release_notes', array($release_link)); ?></span><br />
 
 	<?php
 		echo elgg_view("input/longtext",array(
@@ -71,8 +77,8 @@ general project details, visit the edit section of the project page.</p>
 </div>
 
 <div class="elgg-input-wrapper">
-	<label>Elgg compatibility</label>
-	<span class="elgg-subtext">The version of Elgg this plugin was developed and tested on</span><br />
+	<label><?php echo elgg_echo('plugins:edit:label:elgg_version'); ?></label>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:elgg_version'); ?></span><br />
 	<?php
 		echo elgg_view("input/dropdown",array(
 			"name" => "elgg_version",
@@ -83,7 +89,7 @@ general project details, visit the edit section of the project page.</p>
 </div>
 
 <div class="elgg-input-wrapper">
-	<label>Allow comments</label><br />
+	<label><?php echo elgg_echo('plugins:edit:label:comments'); ?></label><br />
 		<?php
 			echo elgg_view("input/radio",array(
 				"name" => "comments",
@@ -99,7 +105,7 @@ general project details, visit the edit section of the project page.</p>
 
 <div class="elgg-input-wrapper">
 	<label><?php echo elgg_echo('access'); ?></label>
-	<span class="elgg-subtext">The access level of this release. Useful if you want to release only to a certain group or collection.</span>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:access'); ?></span>
 	<?php echo elgg_view('input/access', array(
 		'name' => 'release_access_id',
 		'value' => $sticky_values['release_access_id'] ? $sticky_values['release_access_id'] : $access_id
@@ -107,8 +113,8 @@ general project details, visit the edit section of the project page.</p>
 </div>
 
 <div class="elgg-input-wrapper">
-	<label><?php echo 'Set as the recommended release'; ?></label>
-	<span class="elgg-subtext">Recommend all users of this plugin use this release?</span><br />
+	<label><?php echo elgg_echo('plugins:edit:label:recommended'); ?></label>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:recommended'); ?></span><br />
 	<?php
 		echo elgg_view("input/radio",array(
 			"name" => "recommended",

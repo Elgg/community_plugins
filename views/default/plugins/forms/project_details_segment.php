@@ -22,8 +22,13 @@ if (array_key_exists('project', $vars)
 	$access_id = $project->access_id;
 	$repo = $project->repo;
 
-	$msg = "You are editing the plugin project information for {$project->title}.  To upload a new release,
-	click <a href=\"" . elgg_get_site_url() . "plugins/new/release/{$project->getGUID()}\">here</a>.";
+	$msglink = elgg_view('output/url', array(
+		'text' => elgg_echo('here'),
+		'href' => elgg_get_site_url() . "plugins/new/release/{$project->getGUID()}",
+		'is_trusted' => true
+	));
+	$msg = elgg_echo('plugins:edit:helptext', array($project->title, $msglink));
+
 } else {
 	$project = NULL;
 	$title = $description = $homepage = $plugin_type = '';
@@ -33,10 +38,12 @@ if (array_key_exists('project', $vars)
 	$access_id = ACCESS_PUBLIC;
 	$username = elgg_get_logged_in_user_entity()->username;
 
-	$msg = "You are creating a new plugin project. If you want to release a new
-	version of an existing plugin, go to the edit section of that plugin's project page.
-	You can view all of your plugins
-	<a href=\"" . elgg_get_site_url() . "plugins/developer/$username\">here</a>.";
+	$msglink = elgg_view('output/url', array(
+		'text' => elgg_echo('here'),
+		'href' => elgg_get_site_url() . "plugins/developer/{$username}",
+		'is_trusted' => true
+	));
+	$msg = elgg_echo('plugins:add:helptext', array($msglink));
 }
 
 ?>
@@ -45,7 +52,7 @@ if (array_key_exists('project', $vars)
 </p>
 
 <div class="elgg-input-wrapper">
-	<label>Project Name*</label><br/>
+	<label><?php echo elgg_echo('plugins:edit:label:name'); ?></label><br/>
 	<?php
 		echo elgg_view("input/text", array(
 			"name" => "title",
@@ -56,8 +63,8 @@ if (array_key_exists('project', $vars)
 </div>
 
 <div class="elgg-input-wrapper">
-	<label>Project Summary</label>
-	<span class="elgg-subtext">A one- or two-sentence (250 characters) summary of your project's main features.</span><br/>
+	<label><?php echo elgg_echo('plugins:edit:label:project_summary'); ?></label>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:project_summary'); ?></span><br/>
 	<?php
 		echo elgg_view("input/text",array(
 			"name" => "summary",
@@ -67,9 +74,15 @@ if (array_key_exists('project', $vars)
 	?>
 </div>
 
+<?php
+	$policylink = elgg_view('output/url', array(
+		'text' => elgg_echo('policy'),
+		'href' => 'http://community.elgg.org/terms#plugins'
+	));
+?>
 <div class="elgg-input-wrapper">
-	<label>Project Description</label>
-	<span class="elgg-subtext">A full description of your project's features. (As per <a href="http://community.elgg.org/terms#plugins">policy</a>, images and links will be removed.)</span><br/>
+	<label><?php echo elgg_echo('plugins:edit:label:description'); ?></label>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:description'); ?></span><br/>
 	<?php
 		echo elgg_view("input/longtext",array(
 			"name" => "description",
@@ -92,7 +105,7 @@ if (array_key_exists('project', $vars)
 	?>
 </div>
 <div class="elgg-input-wrapper">
-	<label>Type of Project</label><br/>
+	<label><?php echo elgg_echo('plugins:edit:label:plugin_type'); ?></label><br/>
 	<?php
 		echo elgg_view("input/dropdown",array(
 			"name" => "plugin_type",
@@ -118,7 +131,7 @@ if (array_key_exists('project', $vars)
 	?>
 </div>
 <div class="elgg-input-wrapper">
-	<label>Project Homepage</label><br/>
+	<label><?php echo elgg_echo('plugins:edit:label:project_homepage'); ?></label><br/>
 	<?php
 		echo elgg_view("input/text",array(
 			"name" => "homepage",
@@ -136,8 +149,8 @@ if (array_key_exists('project', $vars)
 </div>
 
 <div class="elgg-input-wrapper">
-	<label>Donations URL<br />
-	<span class="elgg-subtext">If you accept donations, enter the URL to the donations section of your website.</span>
+	<label><?php echo elgg_echo('plugins:edit:label:donate'); ?><br />
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:donate'); ?></span>
 	<?php
 		echo elgg_view("input/text",array(
 			"name" => "donate",
@@ -148,7 +161,7 @@ if (array_key_exists('project', $vars)
 </div>
 <div class="elgg-input-wrapper">
 	<label><?php echo elgg_echo("tags"); ?></label>
-	<span class="elgg-subtext">A comma-separated list of tags relevant to your project.</span>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:tags'); ?></span>
 	<?php
 		echo elgg_view("input/tags", array(
 			"name" => "tags",
@@ -158,7 +171,7 @@ if (array_key_exists('project', $vars)
 </div>
 <div class="elgg-input-wrapper">
 	<label><?php echo elgg_echo('access'); ?></label>
-	<span class="elgg-subtext">The access level of the project. Note that individual releases can have their own access settings.</span>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:access'); ?></span>
 	<br />
 	<?php echo elgg_view('input/access', array(
 		'name' => 'project_access_id',
@@ -171,7 +184,7 @@ if (array_key_exists('project', $vars)
 		&& is_array($entities)
 		&& (count($entities) > 0)) {
 
-		$releases = array(0 => 'No recommended release');
+		$releases = array(0 => elgg_echo('plugins:edit:recommended:none'));
 
 		$recommended = ($project->recommended_release_guid) ? $project->recommended_release_guid : 0;
 		foreach ($entities as $entity) {
@@ -182,8 +195,8 @@ if (array_key_exists('project', $vars)
 	}
 ?>
 <div class="elgg-input-wrapper">
-	<label>Project Images</label>
-	<span class="elgg-subtext">Show off your project by uploading images!</span><br /><br />
+	<label><?php echo elgg_echo('plugins:edit:label:project_images'); ?></label>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:project_images'); ?></span><br /><br />
 	<?php
 		for ($i = 1; $i <= 4; $i++) {
 			// show existing images if any
@@ -208,14 +221,14 @@ if (array_key_exists('project', $vars)
 				}
 			}
 	
-			echo "<label>Description $i "
+			echo "<label>" . elgg_echo('plugins:desc') . " $i "
 			. elgg_view('input/text', array(
 				'name' => "image_{$i}_desc",
 				'value' => $sticky_values["image_{$i}_desc"] ? $sticky_values["image_{$i}_desc"] : $title,
 				'js' => 'style="width:25em;"'
 			))
 			. '</label><br />'
-			. "<label>Image $i " . elgg_view('input/file', array('name' => "image_$i"))
+			. "<label>" . elgg_echo('plugins:edit:image') . " $i " . elgg_view('input/file', array('name' => "image_$i"))
 			. "</label><br /><br /><br />";
 		}
 	?>
