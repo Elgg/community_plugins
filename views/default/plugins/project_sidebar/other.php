@@ -12,9 +12,7 @@ $all_user_plugins = elgg_get_entities(array(
 	'limit' => 0,
 ));
 
-?>
-<p><?php echo $project->getOwnerEntity()->name; ?>'s plugins:</p>
-<?php
+echo '<p>' . elgg_echo('plugins:user:plugin', array($project->getOwnerEntity()->name)) . '</p>';
 
 echo "<select class='choose_plugin' onchange=\"window.open(this.options[this.selectedIndex].value,'_top')\">";
 foreach ($all_user_plugins as $up) {

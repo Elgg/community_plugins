@@ -15,7 +15,7 @@ if ($recommended = $project->getRecommendedRelease()) {
 
 	echo elgg_view('object/plugin_release/links', array(
 		'entity' => $recommended,
-		'label' => 'Author Recommended',
+		'label' => elgg_echo('plugins:author:recommended'),
 	));
 }
 
@@ -53,5 +53,5 @@ if ($plugins) {
 		echo elgg_view('object/plugin_release/links', array('entity' => $p));
 	}
 } else {
-	echo '<div class="plugins_release_links">None</div>';
+	echo '<div class="plugins_release_links">' . elgg_echo('None') . '</div>';
 }
