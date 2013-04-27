@@ -19,18 +19,18 @@ if ($version) {
 	$release = $project->getReleaseFromVersion($version);
 	
 	if (!isset($release)) {
-		register_error("We could not find the release you specified.");
+		register_error(elgg_echo('plugins:error:invalid_release'));
 		
 		$release = $project->getRecommendedRelease();
 		if ($release) {
-			register_error("Forwarded to recommended release.");
+			register_error(elgg_echo('plugins:forward:recommended_release'));
 			forward($release->getURL());
 		}
 		
 		forward();
 	}
 } else {
-	register_error("We did not recognize that plugin");
+	register_error(elgg_echo('plugins:error:unrecognized_plugin'));
 	forward('plugins');
 }
 

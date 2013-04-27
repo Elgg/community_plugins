@@ -10,7 +10,7 @@ require_once "{$CONFIG->pluginspath}community_plugins/version.php";
 $local_version = elgg_get_plugin_setting('version', 'community_plugins');
 
 if ($version <= $local_version) {
-	register_error('No upgrade required');
+	register_error(elgg_echo('plugins:action:upgrade:not_required'));
 	forward(REFERER);
 }
 
@@ -44,6 +44,6 @@ if ($handle = opendir($base_dir)) {
 
 elgg_set_plugin_setting('version', $version, 'community_plugins');
 
-system_message("The community plugin repository has been upgraded");
+system_message(elgg_echo('plugins:action:upgrade:success'));
 
 forward(REFERER);

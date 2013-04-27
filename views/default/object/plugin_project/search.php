@@ -11,19 +11,23 @@ $link = elgg_view('output/url', array(
 ));
 
 $created = date('d M, Y', $project->time_created);
-$downloads = $project->getDownloadCount();
+$download_count = $project->getDownloadCount();
 $friendlytime = elgg_view_friendly_time($project->time_created);
 $iconpath = elgg_get_site_url() . 'mod/community_plugins/graphics/icons';
 $owner = $project->getOwnerEntity();
 $recommends = $project->countAnnotations('plugin_digg');
 $summary = $project->summary;
-$updated = elgg_view_friendly_time($project->getLatestRelease()->time_created);
+$updated_time = elgg_view_friendly_time($project->getLatestRelease()->time_created);
 $image = elgg_view_entity_icon($owner, 'small');
 
+$updated = elgg_echo('plugins:updated');
+$recommendations = elgg_echo('plugins:recommendations');
+$downloads = elgg_echo('plugins:downloads');
+
 $info = "<div class='pluginName'> $link";
-$info .= "<span class=\"info_item\"><img src=\"$iconpath/updated.png\" alt=\"Updated\" title=\"Updated\">$updated</span>";
-$info .= "<span class=\"info_item\"><img src=\"$iconpath/recommended.png\" alt=\"Recommendations\" title=\"Recommendations\">$recommends</span>";
-$info .= "<span class=\"info_item\"><img src=\"$iconpath/downloaded.png\" alt=\"Downloads\" title=\"Downloads\">$downloads</span>";
+$info .= "<span class=\"info_item\"><img src=\"$iconpath/updated.png\" alt=\"$updated\" title=\"$updated\">$updated_time</span>";
+$info .= "<span class=\"info_item\"><img src=\"$iconpath/recommended.png\" alt=\"$recommendations\" title=\"$recommendations\">$recommends</span>";
+$info .= "<span class=\"info_item\"><img src=\"$iconpath/downloaded.png\" alt=\"$downloads\" title=\"$downloads\">$download_count</span>";
 $info .= '</div>';
 if ($summary) {
 	$info .= "<p class='description'>" . $summary . "</p>";

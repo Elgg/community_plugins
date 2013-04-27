@@ -5,14 +5,14 @@ $guid = get_input('guid');
 $project = get_entity($guid);
 
 if (!$project || !$project->canEdit()) {
-  register_error("Invalid Project");
+  register_error(elgg_echo('plugins:action:invalid_project'));
   forward(REFERER);
 }
 
 $content = elgg_view_form('plugins/admin/transfer', array(), array('project' => $project));
 $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 
-$title = "Transfer Plugin: {$project->title}";
+$title = elgg_echo('plugins:title:transfer_plugin', array($project->title));
 
 $body = elgg_view_layout("one_sidebar", array(
 	'title' => $title,

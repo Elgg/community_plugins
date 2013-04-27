@@ -5,12 +5,12 @@ $project = get_entity($guid);
 $members = get_input('members');
 
 if (!$project || !$project->canEdit() || !elgg_instanceof($project, 'object', 'plugin_project')) {
-  register_error('Invalid Project');
+  register_error(elgg_echo('plugins:action:invalid_project'));
   forward(REFERER);
 }
 
 if (!$members || !is_array($members)) {
-  register_error('Invalid Contributors');
+  register_error(elgg_echo('plugins:action:invalid_contributors'));
   forward(REFERER);
 }
 
@@ -24,5 +24,5 @@ foreach ($members as $guid) {
 }
 
 
-system_message('Contributors have been added.');
+system_message(elgg_echo('plugins:action:add_contributors:success'));
 forward($project->getURL());
