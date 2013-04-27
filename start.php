@@ -231,7 +231,7 @@ function plugins_page_handler($page) {
 	switch ($page[0]) {
 		// plugin repository front page
 		case "all":
-			system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
+			system_message(elgg_echo('plugins:warning:page:all:bookmark'));
 			header('Location: /plugins', true, 301);
 			break;
 		// category listing page (deprecated, just preserved for compatibility and old bookmarks' sake)
@@ -262,7 +262,7 @@ function plugins_page_handler($page) {
 		case "project":
 			$project = get_entity($page[1]);
 			if ($project) {
-				system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
+				system_message(elgg_echo('plugins:warning:page:all:bookmark'));
 				header("Location: {$project->getURL()}", true, 301);
 				exit;
 			}
@@ -271,7 +271,7 @@ function plugins_page_handler($page) {
 		case "release":
 			$release = get_entity($page[1]);
 			if ($release) {
-				system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
+				system_message(elgg_echo('plugins:warning:page:all:bookmark'));
 				header("Location: {$release->getURL()}", true, 301);
 				exit;
 			}
@@ -322,7 +322,7 @@ function plugins_page_handler($page) {
 				// for backwards compatibility this handles /plugins/<username>/read/<guid>/<title>
 				$project = get_entity($page[2]);
 				if ($project) {
-					system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
+					system_message(elgg_echo('plugins:warning:page:all:bookmark'));
 					header("Location: {$project->getURL()}", true, 301);
 					exit;
 				}

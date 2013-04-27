@@ -1,8 +1,7 @@
-<p>
-	This displays the downloads for the past 30 days. To see the downloads
-	for a particular plugin, enter the GUID of the plugin project below.
-</p>
 <?php
+
+echo elgg_view('output/longtext', array('value' => elgg_echo('plugins:admin:trends:help')));
+
 
 echo elgg_view_form('plugins/admin/plugin_select', array('action' => current_page_url(), 'method' => 'get'));
 
@@ -15,9 +14,9 @@ if ($guid != 0) {
 
 if ($guid) {
 	$project = get_entity($guid);
-	echo "<h4>Stats for $project->title</h4>";
+	echo "<h4>" . elgg_echo('plugins:admin:trends:single', array($plugin->title)) . "</h4>";
 } else {
-	echo "<h4>Stats for all plugins</h4>";
+	echo "<h4>" . elgg_echo('plugins:admin:trends:all') . "</h4>";
 }
 
 $histogram = plugins_get_downloads_histogram($guid, $num_days);

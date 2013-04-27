@@ -20,7 +20,7 @@ if (!($release = get_entity($guid)) ||
 	!($release instanceof PluginRelease) ||
 	!$release->canEdit() ) {
 
-	register_error('Unknown or insufficient access to release');
+	register_error(elgg_echo('plugins:action:invalid_access'));
 	forward("/plugins/developer/" . elgg_get_logged_in_user_entity()->username);
 }
 

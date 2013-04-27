@@ -39,7 +39,7 @@ echo elgg_view('output/longtext', array(
 if (!$release) { ?>
 	<div class="elgg-input-wrapper">
 		<label><?php echo elgg_echo("plugins:file"); ?>*</label>
-		<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:file'); ?>x</span><br />
+		<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:file'); ?></span><br />
 		<?php
 			echo elgg_view("input/file", array('name' => 'upload'));
 		?>

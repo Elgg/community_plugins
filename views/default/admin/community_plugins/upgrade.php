@@ -21,10 +21,10 @@ if ($local_version === FALSE) {
 }
 
 if ($version > $local_version) {
-	echo "<p>An upgrade is required for this plugin.</p>";
+	echo elgg_view('output/longtext', array('value' => elgg_echo('plugins:admin:upgrade:required')));
 	echo elgg_view_form('plugins/admin/upgrade');
 } else {
-	echo "<p>No upgrades required.</p>";
+	echo elgg_view('output/longtext', array('value' => elgg_echo('plugins:admin:upgrade:ok')));
 }
 
 

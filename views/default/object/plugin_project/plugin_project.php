@@ -10,6 +10,6 @@ $link = elgg_view('output/url', array(
 ));
 $friendlytime = elgg_view_friendly_time($project->time_created);
 $downloads = $project->getDownloadCount();
-$info = "<div class=\"elgg-subtext\">Uploaded $friendlytime ($downloads)</div>";
+$info = "<div class=\"elgg-subtext\">" . elgg_echo('plugins:uploadtime', array($friendlytime, $downloads)) . "</div>";
 
 echo elgg_view_image_block($icon, $link . $info);

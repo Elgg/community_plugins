@@ -1,12 +1,11 @@
 <?php
 
-echo "<b>Transfer ownership of the plugin to another user.</b>";
+echo "<b>" . elgg_echo('plugins:admin:transfer:title') . "</b>";
 
 echo elgg_view('input/userpicker');
 
 echo elgg_view('output/longtext', array(
-	'value' => 'Begin typing the name of the user you wish to tranfer the plugin to and select them from the list.
-	  Select only one user, if more than one is selected, only the first user selected will receive ownership.',
+	'value' => elgg_echo('plugins:admin:transfer:help'),
 	'class' => 'elgg-subtext'
 ));
 

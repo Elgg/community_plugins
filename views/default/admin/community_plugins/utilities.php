@@ -3,4 +3,4 @@
  * Admin utilities
  */
 
-echo elgg_view_module('info', 'Combine plugin projects', elgg_view_form('plugins/admin/combine'));
+echo elgg_view_module('info', elgg_echo('plugins:admin:utilities:combine'), elgg_view_form('plugins/admin/combine'));

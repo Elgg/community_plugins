@@ -13,7 +13,35 @@ return array(
 	'admin:community_plugins:upgrade' => 'Upgrade',
 	'admin:community_plugins:utilities' => 'Utilities',
 	'admin:settings:community_plugins' => 'Plugin Repo',
-
+	'plugins:admin:trends:title' => 'Plugin download trends',
+	'plugins:admin:trends:help' => "This displays the downloads for the past 30 days. To see the downloads for a particular plugin, enter the GUID of the plugin project below.",
+	'plugins:admin:trends:single' => "Stats for %s",
+	'plugins:admin:trends:all' => "Stats for all plugins",
+	'plugins:admin:upgrade:required' => "An upgrade is required for this plugin.",
+	'plugins:admin:upgrade:ok' => "No upgrades required.",
+	'plugins:admin:utilities:combine' => 'Combine plugin projects',
+	'plugins:admin:combine:old_guid' => 'GUID of plugin project that is be replaced in the combination',
+	'plugins:admin:combine:new_guid' => 'GUID of plugin project that remains in the combination',
+	'plugins:admin:normalize:help' => 'Remove inflated download counts for the currently graphed plugin',
+	'plugins:admin:transfer:title' => "Transfer ownership of the plugin to another user.",
+	'plugins:admin:transfer:help' => 'Begin typing the name of the user you wish to tranfer the plugin to and select them from the list.
+	  Select only one user, if more than one is selected, only the first user selected will receive ownership.',
+	'plugins:admin:contributors:title' => "List users as contributors to this plugin",
+	'plugins:admin:contributors:help' => "Adding users as contributors <b>does not</b> give them any special privileges with regard to the plugin page, it does however list them as contributing members.
+		It is a way of recognizing community members for their collaborative work of reporting bugs, and submitting patches for bugfixes and enhancements.
+		Begin typing the name of the user who has contributed to the plugin.  You can select as many users as necessary.",
+	
+	
+	/**
+	 *	Object views
+	 */
+	 'plugins:uploadtime' => "Uploaded %s (%s)",
+	 'plugins:release:version_warning' => 'Warning: The author recommends using a different release of this plugin! Do you still want to download this release?',
+	 'plugins:download:version' => "Download %s",
+	 'plugins:project:title:version' => "%s for Elgg %s",
+	 'plugins:author:byline' => "by %s",
+	 'plugins:last:updated' => "Last updated %s",
+	 
 	
 	/**
 	 * Menu items and titles
@@ -152,6 +180,9 @@ return array(
 	'plugins:tabs:upgrade' => 'Upgrades',
 	'plugins:tabs:utilities' => 'Utilities',
 	'plugins:tabs:search' => 'Search settings',
+	'plugins:matching' => 'Plugins matching',
+	'plugins:add:contributor' => "Add Contributors: %s",
+	'plugins:title:transfer_plugin' => "Transfer Plugin: %s",
 
 	/**
 	 * Notifications
@@ -348,4 +379,33 @@ general project details, visit the edit section of the project page.'
 	'plugins:edit:help:access' => "The access level of this release. Useful if you want to release only to a certain group or collection.",
 	'plugins:edit:label:recommended' => "Set as the recommended release",
 	'plugins:edit:help:recommended' => "Recommend all users of this plugin use this release?",
+	'plugins:link:here' => 'here',
+	
+	/**
+	 * Misc
+	 */
+	 'plugins:warning:page:all:bookmark' => 'Please update your bookmark or report this link to the site owner as this page has moved.',
+	 'plugins:error:invalid_release' => "We could not find the release you specified.",
+	 'plugins:forward:recommended_release' => "Forwarded to recommended release.",
+	 'plugins:error:unrecognized_plugin' => "We did not recognize that plugin",
+	 
+	/**
+	 *	Actions
+	 */
+	'plugins:action:combine:invalid_guids' => 'The GUIDs must be for 2 plugin projects',
+	'plugins:action:combine:success' => "%s has been combined into the project %s",
+	'plugins:action:normalize:invalid_guid' => "No GUID specified",
+	'plugins:action:normalize:notpreview' => "Normalized downloads removing %s annotations",
+	'plugins:action:normalize:preview' => "Would have removed %s annotations using a max of %s",
+	'plugins:action:invalid_project' => 'Invalid Project',
+	'plugins:action:transfer:invalid_recipient' => 'Invalid Recipient',
+	'plugins:action:transfer:success' => 'Plugin ownership has been transferred.',
+	'plugins:action:upgrade:not_required' => 'No upgrade required',
+	'plugins:action:upgrade:success' => "The community plugin repository has been upgraded",
+	'plugins:action:invalid_contributors' => 'Invalid Contributors',
+	'plugins:action:add_contributors:success' => 'Contributors have been added.',
+	'plugins:action:invalid_user' => "Invalid user",
+	'plugins:action:delete_contributor:success' => 'User has been removed from the contributors list',
+	'plugins:action:invalid_access' => 'Unknown or insufficient access to release',
+	
 );
