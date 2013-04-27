@@ -5,7 +5,7 @@
 
 $guid = get_input('guid');
 if (!$guid) {
-	register_error("No GUID specified");
+	register_error(elgg_echo('plugins:action:normalize:invalid_guid'));
 	forward(REFERER);
 }
 
@@ -62,8 +62,8 @@ foreach ($downloads as $download) {
 
 
 if (!$preview) {
-	system_message("Normalized downloads removing $annotations_removed annotations");
+	system_message(elgg_echo('plugins:action:normalize:notpreview'));
 } else {
-	system_message("Would have removed $annotations_removed annotations using a max of $cutoff");
+	system_message(elgg_echo('plugins:action:normalize:preview'));
 }
 forward(REFERER);

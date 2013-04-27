@@ -1,6 +1,6 @@
 <?php
 echo '<p>';
-echo 'Remove inflated download counts for the currently graphed plugin<br />';
+echo elgg_echo('plugins:admin:normalize:help') . '<br />';
 echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['guid']));
 
 echo elgg_view('input/submit', array('value' => elgg_echo('Normalize')));

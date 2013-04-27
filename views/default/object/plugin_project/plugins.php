@@ -12,10 +12,10 @@ $updated = elgg_view_friendly_time($project->getLatestRelease()->time_created);
 elgg_register_menu_item('title', array(
 	'name' => 'download',
 	'href' => "/plugins/download/$release->guid",
-	'text' => "Download $release->version",
+	'text' => elgg_echo('plugins:download:version', array($release->version)),
 	'class' => 'elgg-button elgg-button-' . ($release && $release->isRecommendedRelease() ? 'submit' : 'delete'),
 	'encode_text' => TRUE,
-	'confirm' => $release && $release->isRecommendedRelease() ? false : 'Warning: The author recommends using a different release of this plugin! Do you still want to download this release?',
+	'confirm' => $release && $release->isRecommendedRelease() ? false : elgg_echo('plugins:release:version_warning'),
 ));
 
 if (elgg_is_logged_in() && !$project->isDugg()) {
@@ -28,7 +28,8 @@ if (elgg_is_logged_in() && !$project->isDugg()) {
 	));
 }
 
-echo elgg_view('page/layouts/content/header', array('title' => "$project->title for Elgg $release->elgg_version"));
+$title = elgg_echo('plugins:project:title:version', array($project->title, $release->elgg_version));
+echo elgg_view('page/layouts/content/header', array('title' => $title));
 
 echo elgg_view('object/plugin_project/screenshots', array('entity' => $project));
 ?>
@@ -46,9 +47,12 @@ $author_link = elgg_view('output/url', array(
 ));
 $tags = elgg_view('output/tags', array('value' => $project->tags));
 
+$by_author = elgg_echo('plugins:author:byline', array($author_link));
+$last_updated = elgg_echo('plugins:last:updated', array($updated));
+
 $body =<<<DETAILS
-	<div class="elgg-subtext">by $author_link</div>
-	<div class="elgg-subtext">Last updated $updated</div>
+	<div class="elgg-subtext">$by_author</div>
+	<div class="elgg-subtext">$last_updated</div>
 DETAILS;
 
 echo elgg_view_image_block($image, $body);
