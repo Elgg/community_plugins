@@ -23,7 +23,7 @@ if (array_key_exists('project', $vars)
 	$repo = $project->repo;
 
 	$msglink = elgg_view('output/url', array(
-		'text' => elgg_echo('here'),
+		'text' => elgg_echo('plugins:link:here'),
 		'href' => elgg_get_site_url() . "plugins/new/release/{$project->getGUID()}",
 		'is_trusted' => true
 	));
@@ -39,7 +39,7 @@ if (array_key_exists('project', $vars)
 	$username = elgg_get_logged_in_user_entity()->username;
 
 	$msglink = elgg_view('output/url', array(
-		'text' => elgg_echo('here'),
+		'text' => elgg_echo('plugins:link:here'),
 		'href' => elgg_get_site_url() . "plugins/developer/{$username}",
 		'is_trusted' => true
 	));

@@ -40,9 +40,17 @@
 
         if ($sort_field == $sort) {
             if ($direction == 'asc') {
-                $sort_arrow = '<img src="' . elgg_get_site_url() . 'mod/community_plugins/graphics/icons/up_arrow.png" title="Ascending" alt="Ascending"></img>';
+                $sort_arrow = elgg_view('output/img', array(
+					'src' => elgg_get_site_url() . 'mod/community_plugins/graphics/icons/up_arrow.png',
+					'alt' => elgg_echo('Ascending'),
+					'title' => elgg_echo('Ascending')
+				));
             } else {
-                $sort_arrow = '<img src="' . elgg_get_site_url() . 'mod/community_plugins/graphics/icons/down_arrow.png" title="Descending" alt="Descending"></img>';
+                $sort_arrow = elgg_view('output/img', array(
+					'src' => elgg_get_site_url() . 'mod/community_plugins/graphics/icons/down_arrow.png',
+					'alt' => elgg_echo('Descending'),
+					'title' => elgg_echo('Descending')
+				));
             }
         }
 ?>

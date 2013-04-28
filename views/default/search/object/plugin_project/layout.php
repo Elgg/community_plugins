@@ -11,7 +11,8 @@ $sidebar = elgg_view('plugins/search/sidebar');
 // hack the title
 $body = $vars['body'];
 $title_section = trim(sprintf(elgg_echo('search:results'), ''));
-$body = str_replace("<h2>$title_section", "<h2>Plugins matching", $body);
+$plugins_matching = elgg_echo('plugins:matching');
+$body = str_replace("<h2>$title_section", "<h2>$plugins_matching", $body);
 
 // hack the section heading
 $category = get_input('category', 'all');

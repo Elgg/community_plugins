@@ -10,6 +10,6 @@ require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
 
 elgg_set_context('plugins');
 
-system_message('Please update your bookmark or report this link to the site owner as this page has moved.');
+system_message(elgg_echo('plugins:warning:page:all:bookmark'));
 
 include dirname(__FILE__) . "/pages/plugins/category_list.php";

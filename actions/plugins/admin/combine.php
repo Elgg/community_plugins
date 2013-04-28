@@ -13,7 +13,7 @@ $new_project = get_entity($new_guid);
 
 if (!($old_project instanceof PluginProject) ||
 	!($new_project instanceof PluginProject)) {
-	register_error('The GUIDs must be for 2 plugin projects');
+	register_error(elgg_echo('plugins:action:combine:invalid_guids'));
 	forward(REFERER);
 }
 
@@ -43,5 +43,5 @@ if ($annotation_name) {
 
 $old_project->delete();
 
-system_message("$old_name has been combined into the project $new_project->title");
+system_message(elgg_echo('plugins:action:combine:success'));
 forward(REFERER);

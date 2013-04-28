@@ -8,7 +8,7 @@ gatekeeper();
 $project_guid = (int) get_input('project_guid');
 $project = get_entity($project_guid);
 if (!$project || !$project->canEdit()) {
-	register_error('Unknown project or insufficient access to specified project.');
+	register_error(elgg_echo('plugins:action:invalid_access'));
 	forward();
 }
 
