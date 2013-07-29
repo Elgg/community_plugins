@@ -156,7 +156,7 @@ if ((isset($settings['sort']) && $settings['sort'] == 'enabled') || empty($setti
     		$options['order_by'] = "a.downloads {$direction}";
     		break;
     	case 'recommendations':
-    		$digg_id = get_metastring_id('plugin_digg', true);
+    		$digg_id = add_metastring('plugin_digg', true);
     		$options['selects'] = array("count(a.entity_guid) as recommendations");
     		$options['joins'][] = "LEFT JOIN {$CONFIG->dbprefix}annotations a on (e.guid = a.entity_guid AND a.name_id = $digg_id)";
 			$group_bys = array_merge(array('e.guid', 'a.entity_guid'), $group_bys);
