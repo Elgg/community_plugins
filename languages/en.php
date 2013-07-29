@@ -369,7 +369,7 @@ $english = array(
 	'plugins:edit:help:release' => "This information is specific to the release you are uploading right now.  To edit the
 general project details, visit the edit section of the project page.",
 	'plugins:edit:help:file' => 'This information is specific to the release you are uploading right now.  To edit the
-general project details, visit the edit section of the project page.'
+general project details, visit the edit section of the project page.',
 	'plugins:edit:label:release_version' => "Release version",
 	'plugins:edit:label:release_notes' => "Release Notes",
 	'plugins:edit:help:release_notes' => "A list of changes, bugfixes, bugs, todos, and general release notes for this release. (As per %s, images and links will be removed.)",
