@@ -6,8 +6,6 @@
  * loading the entire engine for each image.
  */
 
-require_once(dirname(dirname(dirname(__FILE__))) . "/engine/start.php");
-
 $guid = (int)get_input("guid");
 
 $image = get_entity($guid);
@@ -15,12 +13,15 @@ if (!$image) {
 	exit;
 }
 
-$mime = $image->getMimeType();
-
 $filename = $image->originalfilename;
-
-header("Content-type: $mime");
+$filelocation = $image->getFilenameOnFilestore();
+$size = @filesize($filelocation);
 header("Content-Disposition: inline; filename=\"$filename\"");
+header("Content-type: image/jpeg");
+header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', strtotime("+6 months")), true);
+header("Pragma: public");
+header("Cache-Control: public");
+header("Content-Length: $size");
+readfile($filelocation);
+exit;
 
-$contents = $image->grabFile();
-echo $contents;

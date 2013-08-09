@@ -16,9 +16,7 @@ require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
 function plugins_init() {
 	elgg_register_js('elgg.communityPlugins', '/mod/community_plugins/js/communityPlugins.js', 'footer');
 	elgg_register_js('elgg.communityPlugins.filters', '/mod/community_plugins/js/communityPlugins/filters.js', 'footer');
-	elgg_register_js('elgg.communityPlugins.PluginImages', '/mod/community_plugins/js/communityPlugins/PluginImages.js', 'footer');
 	elgg_register_js('jquery.flot', '/mod/community_plugins/vendors/flot/jquery.flot.js', 'footer');
-	elgg_register_js('jquery.lightbox', '/mod/community_plugins/vendors/jquery.lightbox.js', 'footer');
 	elgg_register_js('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.js', 'footer');
 	elgg_register_css('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.standalone.css');
 
@@ -313,6 +311,10 @@ function plugins_page_handler($page) {
 		case "contributors":
 			set_input('guid', $page[1]);
 			include("$pages_dir/contributors.php");
+			break;
+		case "icon":
+			set_input('guid', $page[1]);
+			include(dirname(__FILE__) . '/image.php');
 			break;
 		default:
 			if (!isset($page[0])) {

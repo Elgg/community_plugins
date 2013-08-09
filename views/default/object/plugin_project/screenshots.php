@@ -3,8 +3,9 @@
  * Sidebar box for project images
  */
 
-elgg_load_js('jquery.lightbox');
-elgg_load_js('elgg.communityPlugins.PluginImages');
+elgg_load_js('lightbox');
+elgg_load_css('lightbox');
+//elgg_load_js('elgg.communityPlugins.PluginImages');
 
 $project = $vars['entity'];
 
@@ -18,11 +19,11 @@ foreach ($img_files as $file) {
 		continue;
 	}
 
-	$src = elgg_get_site_url() . "mod/community_plugins/image.php?guid={$thumb->getGUID()}";
-	$link = elgg_get_site_url() . "mod/community_plugins/image.php?guid={$file->getGUID()}";
+	$src = elgg_get_site_url() . "plugins/icon/{$thumb->getGUID()}/icon.jpg";
+	$link = elgg_get_site_url() . "plugins/icon/{$file->getGUID()}/icon.jpg";
 
 	echo "<li>";
-	echo "<a class=\"elgg-plugin-screenshot\" href=\"$link\"><img src=\"$src\" alt=\"$file->title\" title=\"$file->title\" height=\"60\" width=\"60\"/></a>";
+	echo "<a class=\"elgg-plugin-screenshot elgg-lightbox\" href=\"$link\" rel=\"plugins-gallery\"><img src=\"$src\" alt=\"$file->title\" title=\"$file->title\" height=\"60\" width=\"60\"/></a>";
 
 	if ($project->canEdit()) {
 		echo "<br/>";
