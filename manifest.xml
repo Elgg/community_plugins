@@ -2,7 +2,7 @@
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
 	<name>Community Plugins</name>
 	<author>Elgg core developers</author>
-	<version>1.8</version>
+	<version>1.9</version>
 	<description>Community plugin repository</description>
 	<website>http://www.elgg.org/</website>
 	<copyright>(C) Elgg Foundation 2011 and Curverider 2008-2010</copyright>
@@ -11,7 +11,7 @@
 	<!-- All plugins must require either elgg_version or elgg_release. -->
 	<requires>
 		<type>elgg_release</type>
-		<version>1.8</version>
+		<version>1.9-dev</version>
 	</requires>
   
 	<category>Enhancements</category>

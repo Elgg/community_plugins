@@ -3,7 +3,7 @@
  * Elgg community plugin repository language pack
  */
 
-$english = array(
+return array(
 	/**
 	 * Administration area
 	 */
@@ -310,5 +310,3 @@ $english = array(
 	'river:create:object:plugin_release' => "%s released a new version of the plugin %s",
 
 );
-
-add_translation("en", $english);
