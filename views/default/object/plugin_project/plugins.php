@@ -28,7 +28,19 @@ if (elgg_is_logged_in() && !$project->isDugg()) {
 	));
 }
 
-$title = elgg_echo('plugins:project:title:version', array($project->title, $release->elgg_version));
+$title = $project->title;
+if ($release->elgg_version) {
+	if (is_array($release->elgg_version)) {
+		$versions = implode('/', array_reverse($release->elgg_version));
+	}
+	else {
+		$versions = $release->elgg_version;
+	}
+	
+	$title = elgg_echo('plugins:project:title:version', array($project->title, $versions));
+}
+
+
 echo elgg_view('page/layouts/content/header', array('title' => $title));
 
 echo elgg_view('object/plugin_project/screenshots', array('entity' => $project));

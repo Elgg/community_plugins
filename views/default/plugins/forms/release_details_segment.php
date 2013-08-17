@@ -80,8 +80,9 @@ if (!$release) { ?>
 	<label><?php echo elgg_echo('plugins:edit:label:elgg_version'); ?></label>
 	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:elgg_version'); ?></span><br />
 	<?php
-		echo elgg_view("input/dropdown",array(
+		echo elgg_view("input/checkboxes",array(
 			"name" => "elgg_version",
+			"default" => false,
 			"value" => $sticky_values['elgg_version'] ? $sticky_values['elgg_version'] : $elgg_version,
 			'options' => elgg_get_config('elgg_versions'),
 		));
