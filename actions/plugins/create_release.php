@@ -8,7 +8,7 @@ elgg_make_sticky_form('community_plugins');
 // Get variables
 $project_guid = get_input("guid");
 $recommended = get_input('recommended', 'no');
-$elgg_version = get_input('elgg_version', 'Not specified');
+$elgg_version = get_input('elgg_version', false);
 $version = strip_tags(get_input('version'));
 $access_id = (int) get_input("release_access_id", ACCESS_PUBLIC);
 $comments = get_input('comments', 'yes');
@@ -30,6 +30,12 @@ if (!$plugin_project || !$plugin_project->canEdit()) {
 
 if (!$version) {
 	register_error(elgg_echo('plugins:error:no_version'));
+	forward(REFERER);
+}
+
+// we require an elgg version now
+if (!$elgg_version) {
+	register_error(elgg_echo('plugins:error:no_elgg_version'));
 	forward(REFERER);
 }
 

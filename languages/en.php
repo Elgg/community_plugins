@@ -251,6 +251,7 @@ $english = array(
 	'plugins:error:badlicense' => 'You must select a GPL-compatible license.',
 	'plugins:error:notitle' => 'A title is required.',
 	'plugins:error:no_version' => 'A version is required.',
+	'plugins:error:no_elgg_version' => 'An Elgg version is required',
 	'plugins:error:duplicate_version' => 'This version is already in use for this project',
 
 	/**
