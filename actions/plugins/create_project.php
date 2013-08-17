@@ -23,7 +23,7 @@ if ($plugin_type != 'theme' && $plugin_type != 'languagepack') {
 }
 
 $release_notes = plugins_strip_tags(get_input('release_notes'));
-$elgg_version = get_input('elgg_version', 'Not specified');
+$elgg_version = get_input('elgg_version', false);
 $comments = get_input('comments', 'yes');
 $version = strip_tags(get_input('version'));
 $recommended = get_input('recommended', FALSE);
@@ -50,6 +50,12 @@ if (!$mimetype) {
 // version is sent but null, so get_input doesn't use defaults.
 if (!$version) {
 	register_error(elgg_echo('plugins:error:no_version'));
+	forward(REFERER);
+}
+
+// we require an elgg version now
+if (!$elgg_version) {
+	register_error(elgg_echo('plugins:error:no_elgg_version'));
 	forward(REFERER);
 }
 
