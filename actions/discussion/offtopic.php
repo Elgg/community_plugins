@@ -26,7 +26,7 @@ if (!$grouptopic->save()) {
 	forward(REFERER);
 }
 
-remove_from_river_by_annotation($reply->id);
+elgg_delete_river(array('annotation_id' => $reply->id));
 add_to_river('river/object/groupforumtopic/create', 'create', $user_guid, $grouptopic->guid, $grouptopic->access_id, $original_topic->getTimeCreated());
 
 $new_text = $reply->value;
