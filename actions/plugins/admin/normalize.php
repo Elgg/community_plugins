@@ -31,7 +31,15 @@ $median = $downloads[(int)round(.5 * count($downloads))];
 
 // delete annotations beyond the daily cutoff - there must be a better way to do this
 // This does not process the last day
-$downloads = get_annotations($guid, 'object', 'plugin_project', 'download', '', 0, 9999999, 0, 'asc', 0);
+$options = array(
+	'guid' => $guid,
+	'type' => 'object',
+	'subtype' => 'plugin_project',
+	'annotation_name' => 'download',
+	'limit' => 0,
+	'order_by' => 'n_table.time_created asc',
+);
+$downloads = elgg_get_annotations($options);
 $start_date = $downloads[0]->time_created;
 $current_day = 0;
 $count = 0;
@@ -48,7 +56,7 @@ foreach ($downloads as $download) {
 			if (!$preview) {
 				while (count($annotation_stack) > $median) {
 					$annotation = array_pop($annotation_stack);
-					delete_annotation($annotation->id);
+					elgg_delete_annotations(array('annotation_id' => $annotation->id));
 				}
 			}
 			$annotations_removed += $count - $median;
