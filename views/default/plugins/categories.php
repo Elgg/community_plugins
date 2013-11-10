@@ -46,7 +46,7 @@ $params = array(
 	'subtypes' => 'plugin_project',
 	'count' => TRUE,
 );
-foreach ($vars['config']->plugincats as $value => $option) {
+foreach (elgg_get_config('plugincats') as $value => $option) {
 	$params['metadata_name'] = 'plugincat';
 	$params['metadata_value'] = $value;
 	$counter = (int)elgg_get_entities_from_metadata($params);
