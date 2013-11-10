@@ -72,20 +72,22 @@ function community_groups_init() {
 	elgg_register_action('discussion/remove_ad', "$action_path/discussion/remove_ad.php", 'admin');
 	elgg_register_action('discussion/offtopic', "$action_path/discussion/offtopic.php", 'admin');
 
-	expose_function(
-		'blog.post',
-		'community_groups_post_blog',
-		array(
-			'username' => array('type' => 'string'),
-			'title' => array('type' => 'string'),
-			'body' => array('type' => 'string'),
-			'token' => array('type' => 'string'),
-		),
-		'Post a blog.elgg.org blog post to the group forums',
-		'POST',
-		false,
-		false
-	);
+	if (function_exists("elgg_ws_expose_function")) {
+		elgg_ws_expose_function(
+			'blog.post',
+			'community_groups_post_blog',
+			array(
+				'username' => array('type' => 'string'),
+				'title' => array('type' => 'string'),
+				'body' => array('type' => 'string'),
+				'token' => array('type' => 'string'),
+			),
+			'Post a blog.elgg.org blog post to the group forums',
+			'POST',
+			false,
+			false
+		);
+	}
 }
 
 /**
