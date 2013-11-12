@@ -4,4 +4,4 @@
  * Used for the upgrade system.
  */
 
-$version = 2011111502;
+$version = 2013062700;

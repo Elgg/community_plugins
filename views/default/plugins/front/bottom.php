@@ -10,17 +10,11 @@ if (!isset($vars['newest'])) {
 }
 
 if (!isset($vars['popular'])) {
-	$vars['popular'] = elgg_list_entities(array('pagination' => false), 'plugins_get_plugins_by_download_count');
+	$vars['popular'] = elgg_list_entities(array('pagination' => false), array('PluginProject', 'getPluginsByDownloads'));
 }
 
 if (!isset($vars['recommended'])) {
-	$vars['recommended'] = elgg_list_entities_from_annotation_calculation(array(
-		'types' => array('object'),
-		'subtypes' => array('plugin_project'),
-		'annotation_names' => array('plugin_digg'),
-		'calculation' => 'count',
-		'pagination' => false,
-	));
+	$vars['recommended'] = elgg_list_entities(array('pagination' => false), array('PluginProject', 'getPluginsByRecommendations'));
 }
 
 ?>

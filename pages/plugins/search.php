@@ -156,12 +156,11 @@ if ((isset($settings['sort']) && $settings['sort'] == 'enabled') || empty($setti
     		$options['order_by'] = "a.downloads {$direction}";
     		break;
     	case 'recommendations':
-    		$digg_id = add_metastring('plugin_digg', true);
-    		$options['selects'] = array("count(a.entity_guid) as recommendations");
-    		$options['joins'][] = "LEFT JOIN {$CONFIG->dbprefix}annotations a on (e.guid = a.entity_guid AND a.name_id = $digg_id)";
-			$group_bys = array_merge(array('e.guid', 'a.entity_guid'), $group_bys);
-    		$options['group_by'] = implode(',', $group_bys);
-    		$options['order_by'] = "recommendations {$direction}";
+			$options['selects'] = array("a.recommendations");
+			$options['joins'][] = "LEFT JOIN {$CONFIG->dbprefix}plugin_recommendations a on (e.guid = a.guid)";
+			$group_bys = array_merge(array('e.guid', 'a.guid'), $group_bys);
+			$options['group_by'] = implode(',', $group_bys);
+			$options['order_by'] = "a.recommendations {$direction}";
     		break;
     	case 'created':
     		$options['order_by'] = "e.time_created {$direction}";

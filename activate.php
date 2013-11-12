@@ -23,4 +23,18 @@ $sql = "CREATE TABLE IF NOT EXISTS `{$db_prefix}plugin_downloads` (
 	KEY `downloads` (`downloads`)
 ) ENGINE=MyISAM";
 
-get_data($sql);
+update_data($sql);
+
+/**
+ * Creates the table for the plugin recommendations count
+ * TODO: Switch this to InnoDB and use foreign keys on entity table?
+ */
+$db_prefix = elgg_get_config('dbprefix');
+$sql = "CREATE TABLE IF NOT EXISTS `{$db_prefix}plugin_recommendations` (
+	`guid` BIGINT UNSIGNED NOT NULL,
+	`recommendations` INT UNSIGNED NOT NULL DEFAULT 0,
+	PRIMARY KEY (`guid`),
+	KEY `recommendations` (`recommendations`)
+) ENGINE=MyISAM";
+
+update_data($sql);
