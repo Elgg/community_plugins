@@ -37,7 +37,8 @@ if (!$title) {
 	register_error(elgg_echo('plugins:error:notitle'));
 	forward(REFERER);
 }
-if ($license == 'none' || !array_key_exists($license, $CONFIG->gpllicenses)) {
+$licenses = elgg_get_config('gpllicenses');
+if ($license == 'none' || !array_key_exists($license, $licenses)) {
 	register_error(elgg_echo('plugins:error:badlicense'));
 	forward(REFERER);
 }

@@ -5,7 +5,8 @@
 
 set_time_limit(0);
 
-require_once "{$CONFIG->pluginspath}community_plugins/version.php";
+$plugins_path = elgg_get_plugins_path();
+require_once "{$plugins_path}community_plugins/version.php";
 
 $local_version = elgg_get_plugin_setting('version', 'community_plugins');
 
@@ -14,7 +15,7 @@ if ($version <= $local_version) {
 	forward(REFERER);
 }
 
-$base_dir = $CONFIG->pluginspath . 'community_plugins/upgrades';
+$base_dir = "{$plugins_path}community_plugins/upgrades";
 
 // taken from engine/lib/version.php
 if ($handle = opendir($base_dir)) {
