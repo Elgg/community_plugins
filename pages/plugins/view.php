@@ -17,16 +17,16 @@ $version = get_input('version');
 
 if ($version) {
 	$release = $project->getReleaseFromVersion($version);
-	
+
 	if (!isset($release)) {
 		register_error(elgg_echo('plugins:error:invalid_release'));
-		
+
 		$release = $project->getRecommendedRelease();
 		if ($release) {
 			register_error(elgg_echo('plugins:forward:recommended_release'));
 			forward($release->getURL());
 		}
-		
+
 		forward();
 	}
 } else {
@@ -43,7 +43,19 @@ $content = elgg_view_entity($project, array(
 	'release' => $release,
 ));
 
+$title = $project->title;
+if ($release->elgg_version) {
+	if (is_array($release->elgg_version)) {
+		$versions = implode('/', array_reverse($release->elgg_version));
+	} else {
+		$versions = $release->elgg_version;
+	}
+
+	$title = elgg_echo('plugins:project:title:version', array($project->title, $versions));
+}
+
 $body = elgg_view_layout("one_sidebar", array(
+	'title' => $title,
 	'sidebar' => $sidebar, 
 	'content' => $content,
 ));
