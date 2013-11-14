@@ -3,8 +3,6 @@
  * Action for combining two plugin projects
  */
 
-global $CONFIG;
-
 $old_guid = (int)get_input('old_guid');
 $new_guid = (int)get_input('new_guid');
 
@@ -35,7 +33,8 @@ foreach ($releases as $release) {
 // move download count to new project
 $annotation_name = get_metastring_id('download', TRUE);
 if ($annotation_name) {
-	$query = "UPDATE {$CONFIG->dbprefix}annotations
+	$dbprefix = elgg_get_config('dbprefix');
+	$query = "UPDATE {$dbprefix}annotations
 		SET entity_guid=$new_project->guid
 		WHERE entity_guid=$old_project->guid AND name_id=$annotation_name";
 	update_data($query);

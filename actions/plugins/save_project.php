@@ -4,7 +4,6 @@
  */
 
 elgg_make_sticky_form('community_plugins');
-global $CONFIG;
 
 // Get variables
 $title = strip_tags(get_input("title"));
@@ -34,11 +33,11 @@ if (!$title) {
 	register_error(elgg_echo('plugins:error:notitle'));
 	forward(REFERER);
 }
-if ($license == 'none' || !array_key_exists($license, $CONFIG->gpllicenses)) {
+$licenses = elgg_get_config('gpllicenses');
+if ($license == 'none' || !array_key_exists($license, $licenses)) {
 	register_error(elgg_echo('plugins:error:badlicense'));
 	forward(REFERER);
 }
-
 
 if (!$plugin_project->canEdit()) {
 	register_error(elgg_echo('plugins:error:permissions'));
