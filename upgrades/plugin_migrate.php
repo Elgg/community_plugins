@@ -193,7 +193,14 @@ foreach ($data as $plugin_guid) {
 }
 
 // set site md for download count
-$count = count_annotations(0, "object", "plugins", "download");
+$options = array(
+	'type' => 'object',
+	'subtype' => 'plugins',
+	'annotation_name' => 'download',
+	'count' => true,
+);
+$count = elgg_get_annotations($options);
+
 $CONFIG->site->plugins_download_count = $count;
 
 echo "Ding!";

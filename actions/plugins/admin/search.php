@@ -10,7 +10,7 @@
 	
 	// For the sake of simplicity, lets serialize the whole array and store it as a single string in private settings
 	$settings = serialize($settings_array);
-	set_plugin_setting('search-settings', $settings, 'community_plugins');
+	elgg_set_plugin_setting('search-settings', $settings, 'community_plugins');
 	
 	system_message(elgg_echo('plugins:settings:save:success'));
 	forward($forward_url);

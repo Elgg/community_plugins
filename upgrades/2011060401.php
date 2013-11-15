@@ -6,8 +6,8 @@
 global $DB_QUERY_CACHE, $DB_PROFILE, $ENTITY_CACHE, $CONFIG;
 
 // poorly implemented logging can use up all our memory (fixed in 1.8.0)
-unregister_elgg_event_handler('all', 'all', 'system_log_listener');
-unregister_elgg_event_handler('log', 'systemlog', 'system_log_default_logger');
+elgg_unregister_event_handler('all', 'all', 'system_log_listener');
+elgg_unregister_event_handler('log', 'systemlog', 'system_log_default_logger');
 
 $limit = 50;
 $offset = 0;

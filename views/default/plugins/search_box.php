@@ -24,7 +24,7 @@ if (get_input('q')) {
 		<select name="category">
 			<option value="all"><?php echo elgg_echo('plugins:cat:all'); ?></option>
 <?php
-foreach($vars['config']->plugincats as $value => $option) {
+foreach(elgg_get_config('plugincats') as $value => $option) {
 	if ($value == $category) {
 		$selected = 'selected="selected"';
 	} else {

@@ -451,7 +451,13 @@ function plugins_add_type_menu($owner_guid) {
  * Adds 1.2M to the figure to account for downloads before this system as implemented.
  */
 function plugins_update_download_counts() {
-	$count = count_annotations(0, 'object', 'plugin_project', 'download', '', NULL);
+	$options = array(
+		'type' => 'object',
+		'subtype' => 'plugin_project',
+		'annotation_name' => 'download',
+		'count' => true,
+	);
+	$count = elgg_get_annotations($options);
 	$count += 1200000;
 	elgg_set_plugin_setting('site_plugins_downloads', $count, 'community_plugins');
 }

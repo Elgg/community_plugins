@@ -100,7 +100,7 @@ if (array_key_exists('project', $vars)
 		echo elgg_view("input/dropdown",array(
 			"name" => "license",
 			"value" => $sticky_values['license'] ? $sticky_values['license'] : $license,
-			'options_values' => $vars['config']->gpllicenses,
+			'options_values' => elgg_get_config('gpllicenses'),
 		));
 	?>
 </div>
@@ -125,7 +125,7 @@ if (array_key_exists('project', $vars)
 		echo elgg_view("input/dropdown",array(
 			"name" => "plugincat",
 			"value" => $sticky_values['plugincat'] ? $sticky_values['plugincat'] : $plugincat,
-			'options_values' => $vars['config']->plugincats,
+			'options_values' => elgg_get_config('plugincats'),
 			'id' => 'category',
 		));
 	?>
