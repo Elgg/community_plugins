@@ -1,3 +1,5 @@
-/.settings
-/.project
-/.buildpath
+.*
+!.gitignore
+!.tx
+!.travis.yml
+

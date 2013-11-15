@@ -3,7 +3,7 @@
  * Elgg community plugin repository language pack
  */
 
-$english = array(
+return array(
 	/**
 	 * Administration area
 	 */
@@ -410,5 +410,3 @@ general project details, visit the edit section of the project page.',
 	'plugins:action:invalid_access' => 'Unknown or insufficient access to release',
 	
 );
-
-add_translation("en", $english);
