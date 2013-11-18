@@ -333,7 +333,7 @@ function plugins_page_handler($page) {
 			} 
 			
 			set_input('guid', $page[0]);
-			set_input('version', $page[1]);					
+			set_input('version', urldecode($page[1]));
 			
 			include "$pages_dir/view.php";
 			break;			
