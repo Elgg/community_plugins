@@ -13,7 +13,7 @@ elgg_register_menu_item('title', array(
 	'name' => 'download',
 	'href' => "/plugins/download/$release->guid",
 	'text' => elgg_echo('plugins:download:version', array($release->version)),
-	'class' => 'elgg-button elgg-button-' . ($release && $release->isRecommendedRelease() ? 'submit' : 'delete'),
+	'link_class' => 'elgg-button elgg-button-' . ($release && $release->isRecommendedRelease() ? 'submit' : 'delete'),
 	'encode_text' => TRUE,
 	'confirm' => $release && $release->isRecommendedRelease() ? false : elgg_echo('plugins:release:version_warning'),
 ));
@@ -21,7 +21,7 @@ elgg_register_menu_item('title', array(
 if (elgg_is_logged_in() && !$project->isDugg()) {
 	elgg_register_menu_item('title', array(
 		'name' => 'recommend',
-		'class' => 'elgg-button elgg-button-action',
+		'link_class' => 'elgg-button elgg-button-action',
 		'href' => "/action/plugins/recommend?guid={$project->guid}",
 		'is_action' => TRUE,
 		'text' => elgg_echo('Recommend'),
@@ -34,7 +34,7 @@ echo elgg_view('object/plugin_project/screenshots', array('entity' => $project))
 <h4>
 	<?php echo elgg_view('output/text', array('value' => $project->summary)); ?>
 </h4>
-<?php 
+<?php
 
 $image = elgg_view_entity_icon($project_owner, 'tiny');
 $author_link = elgg_view('output/url', array(
@@ -56,7 +56,7 @@ echo elgg_view_image_block($image, $body);
 ?>
 
 <div class="elgg-output">
-	<?php echo autop($project->description); ?>
+	<?php echo elgg_autop($project->description); ?>
 </div>
 
 <?php

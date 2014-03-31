@@ -1,7 +1,7 @@
 <?php
 /**
  * Elgg community plugin repository
- * 
+ *
  */
 
 define(PLUGINS_CONTRIBUTOR_RELATIONSHIP, 'plugin_contributor');
@@ -29,9 +29,9 @@ function plugins_init() {
 	elgg_register_menu_item('site', array(
 		'href' => "/plugins",
 		'name' => 'plugins',
-		'text' => elgg_echo('plugins'), 
+		'text' => elgg_echo('plugins'),
 	));
-	
+
 	elgg_register_menu_item('site', array(
 		'href' => '/plugins/category/themes',
 		'name' => 'themes',
@@ -56,12 +56,11 @@ function plugins_init() {
 	register_notification_object('object', 'plugins', elgg_echo('plugins:new'));
 
 	//register a widget
-	elgg_register_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), 'profile');
-
+	elgg_register_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), array('profile'));
 
 	// register url handlers for the 2 object subtypes
-	elgg_register_entity_url_handler('object', 'plugin_release', 'plugins_release_url_handler');
-	elgg_register_entity_url_handler('object', 'plugin_project', 'plugins_project_url_handler');
+	elgg_register_plugin_hook_handler('entity:url', 'object', 'plugins_release_url_handler');
+	elgg_register_plugin_hook_handler('entity:url', 'object', 'plugins_project_url_handler');
 
 	elgg_register_event_handler('pagesetup', 'system', 'plugins_add_submenus');
 
@@ -159,7 +158,7 @@ function plugins_init() {
 	elgg_register_action("plugins/admin/normalize", "$action_base/admin/normalize.php", 'admin');
 	elgg_register_action("plugins/admin/search", "$action_base/admin/search.php", 'admin');
 	elgg_register_action("plugins/admin/transfer", "$action_base/admin/transfer.php", 'admin');
-	
+
 	elgg_register_tag_metadata_name('plugin_type');
 }
 
@@ -175,7 +174,7 @@ function plugins_add_submenus() {
 		elgg_register_admin_menu_item('administer', 'upgrade', 'community_plugins');
 		elgg_register_admin_menu_item('administer', 'statistics', 'community_plugins');
 		elgg_register_admin_menu_item('administer', 'utilities', 'community_plugins');
-		
+
 		elgg_register_admin_menu_item('configure', 'community_plugins', 'settings');
 		return;
 	}
@@ -197,14 +196,14 @@ function plugins_add_submenus() {
 		elgg_register_menu_item('page', array(
 			'href' => "$plugins_base/developer/$page_owner->username",
 			'name' => 'plugins:user',
-			'text' => $title, 
+			'text' => $title,
 		));
 	}
 
 	elgg_register_menu_item('page', array(
 		'href' => '/plugins',
 		'name' => 'plugins:all',
-		'text' => elgg_echo('plugins:all'), 
+		'text' => elgg_echo('plugins:all'),
 	));
 
 	// add upload link when viewing own plugin page
@@ -330,14 +329,14 @@ function plugins_page_handler($page) {
 					exit;
 				}
 				break;
-			} 
-			
+			}
+
 			set_input('guid', $page[0]);
 			set_input('version', urldecode($page[1]));
-			
+
 			include "$pages_dir/view.php";
-			break;			
-			
+			break;
+
 	}
 
 	return TRUE;
@@ -380,10 +379,19 @@ function plugins_image_page_handler($page) {
 /**
  * Handles plugin project URLs
  *
- * @param PluginProject $project
+ * @param string $hook
+ * @param string $type
+ * @param string $url
+ * @param array  $params
  * @return string
  */
-function plugins_project_url_handler($project) {
+function plugins_project_url_handler($hook, $type, $url, $params) {
+	$project = $params['entity'];
+
+	if (!$project instanceof PluginProject) {
+		return $url;
+	}
+
 	$release = $project->getRecommendedRelease();
 	if ($release) {
 		return $release->getURL();
@@ -394,19 +402,26 @@ function plugins_project_url_handler($project) {
  * Populates the ->getUrl() method for plugin releases
  * Redirects to the project page.
  *
- * @param PluginRelease $release 
+ * @param string $hook
+ * @param string $type
+ * @param string $url
+ * @param array  $params
  * @return string
  */
-function plugins_release_url_handler($release) {
-	if (!$release) {
+function plugins_release_url_handler($hook, $type, $url, $params) {
+	$release = $params['entity'];
+
+	if (!$release instanceof PluginRelease) {
 		error_log("Community plugins: unable to access release to get URL");
 		return;
 	}
+
 	$project = $release->getProject();
 	if (!$project) {
 		error_log("Community plugins: unable to access project for release $release->guid");
 		return;
 	}
+
 	$version = rawurlencode($release->version);
 	$title = elgg_get_friendly_title($project->title);
 	return  "plugins/$project->guid/$version/$title";
