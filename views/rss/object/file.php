@@ -2,7 +2,7 @@
 
 	/**
 	 * Elgg RSS file object view
-	 * 
+	 *
 	 * @package ElggFile
 	 * @subpackage Core
 	 * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
@@ -25,6 +25,6 @@
 	  <pubDate><?php echo date("r",$vars['entity']->time_created) ?></pubDate>
 	  <link><?php echo $vars['entity']->getURL(); ?></link>
 	  <title><![CDATA[<?php echo $title; ?>]]></title>
-	  <description><![CDATA[<?php echo (autop($vars['entity']->description)); ?>]]></description>
+	  <description><![CDATA[<?php echo (elgg_autop($vars['entity']->description)); ?>]]></description>
 	  <enclosure url="<?php echo elgg_get_site_url(); ?>plugins/download/<?php echo $vars['entity']->getGUID(); ?>" length="<?php echo $vars['entity']->size(); ?>" type="<?php echo $vars['entity']->getMimeType(); ?>" />
 	</item>
