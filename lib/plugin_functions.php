@@ -2,7 +2,7 @@
 
 /**
  * Get the mimetype of the plugin archive
- * 
+ *
  * @param string $name
  * @return string/bool
  */
@@ -75,7 +75,7 @@ function plugins_get_downloads_histogram($guid = 0, $days = 30) {
 
 /**
  * Plugin project search hook
- * 
+ *
  * @param string $hook
  * @param string $type
  * @param <type> $value
@@ -145,56 +145,9 @@ function plugins_search_hook($hook, $type, $value, $params) {
 	);
 }
 
-// need our own notification code because core Elgg code uses container for matches
-function plugins_send_notifications($entity) {
-	global $CONFIG, $NOTIFICATION_HANDLERS;
-
-	$owner = $entity->getOwnerEntity();
-
-	// Get users interested in content from this person and notify them
-	foreach ($NOTIFICATION_HANDLERS as $method => $foo) {
-		$interested_users = elgg_get_entities_from_relationship(array(
-			'relationship' => 'notify' . $method,
-			'relationship_guid' => $owner->guid,
-			'inverse_relationship' => TRUE,
-			'types' => 'user',
-			'limit' => 99999
-		));
-
-		if ($interested_users && is_array($interested_users)) {
-			foreach ($interested_users as $user) {
-				if ($user instanceof ElggUser && !$user->isBanned()) {
-					if (($user->guid != elgg_get_logged_in_user_guid()) && has_access_to_entity($entity, $user)) {
-
-						$subtype = $entity->getSubtype();
-						if ($subtype == 'plugin_project') {
-							$text = $entity->description;
-						} else {
-							$text = $entity->release_notes;
-						}
-
-						$subject = sprintf(elgg_echo("plugins:$subtype:notify:subject"), $owner->name, $entity->title);
-						$body = sprintf(elgg_echo("plugins:$subtype:notify:body"), $owner->name, $entity->title, $text, $entity->getURL());
-
-						notify_user(
-							$user->guid,
-							$entity->owner_guid,
-							$subject,
-							$body,
-							NULL,
-							array($method)
-						);
-					}
-				}
-			}
-		}
-	}
-}
-
-
 /**
  * Return the count of all downloads
- * 
+ *
  * @return int
  */
 function plugins_get_all_download_count() {

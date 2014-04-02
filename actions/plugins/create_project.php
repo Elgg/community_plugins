@@ -5,7 +5,6 @@
 
 elgg_make_sticky_form('community_plugins');
 
-
 // Get variables
 $title = strip_tags(get_input("title"));
 $description = plugins_strip_tags(get_input("description"));
@@ -127,7 +126,6 @@ elgg_create_river_item(array(
 	'object_guid' => $plugin_project->getGUID(),
 ));
 
-plugins_send_notifications($plugin_project);
 system_message(elgg_echo("plugins:project:saved"));
 
 elgg_clear_sticky_form('community_plugins');

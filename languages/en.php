@@ -30,8 +30,8 @@ $english = array(
 	'plugins:admin:contributors:help' => "Adding users as contributors <b>does not</b> give them any special privileges with regard to the plugin page, it does however list them as contributing members.
 		It is a way of recognizing community members for their collaborative work of reporting bugs, and submitting patches for bugfixes and enhancements.
 		Begin typing the name of the user who has contributed to the plugin.  You can select as many users as necessary.",
-	
-	
+
+
 	/**
 	 *	Object views
 	 */
@@ -41,8 +41,8 @@ $english = array(
 	 'plugins:project:title:version' => "%s for Elgg %s",
 	 'plugins:author:byline' => "by %s",
 	 'plugins:last:updated' => "Last updated %s",
-	 
-	
+
+
 	/**
 	 * Menu items and titles
 	 */
@@ -75,8 +75,8 @@ $english = array(
 	'plugins:listing:newest' => 'Newest',
 	'plugins:listing:popular' => 'Most downloads',
 	'plugins:listing:dugg' => 'Most recommended',
-	
-	
+
+
 	'plugins:upload:new' => "Upload a new plugin",
 
 
@@ -191,6 +191,8 @@ $english = array(
 	'plugins:plugin_release:notify:subject' => '%s has released a new version of the plugin %s',
 	'plugins:plugin_project:notify:body' => "%s has uploaded a new plugin called %s \n\n %s \n\n %s",
 	'plugins:plugin_release:notify:body' => "%s has released a new version of the plugin %s \n\n %s \n\n %s",
+	'plugins:plugin_project:notify:summary' => 'New plugin project called %s',
+	'plugins:plugin_project:notify:summary' => 'New release of the plugin %s',
 
 	/**
 	 * Licenses
@@ -341,13 +343,13 @@ $english = array(
 	'plugins:settings:save:failure'	=> "Could not save plugin search settings: unrecognized parameters received.",
 
 	'plugins:filters:or' => '...or ',
-	
-	
+
+
 	'river:comment:object:plugin_release' => '%s commented on the plugin %s',
 	'river:comment:object:plugin_project' => '%s commented on the plugin %s',
 	'river:create:object:plugin_project' => "%s uploaded a new plugin: %s",
 	'river:create:object:plugin_release' => "%s released a new version of the plugin %s",
-	
+
 	/* Edit Form */
 	'plugins:edit:helptext' => "You are editing the plugin project information for %s.  To upload a new release click %s.",
 	'plugins:add:helptext' => "You are creating a new plugin project. If you want to release a new
@@ -381,7 +383,7 @@ general project details, visit the edit section of the project page.',
 	'plugins:edit:label:recommended' => "Set as the recommended release",
 	'plugins:edit:help:recommended' => "Recommend all users of this plugin use this release?",
 	'plugins:link:here' => 'here',
-	
+
 	/**
 	 * Misc
 	 */
@@ -389,7 +391,7 @@ general project details, visit the edit section of the project page.',
 	 'plugins:error:invalid_release' => "We could not find the release you specified.",
 	 'plugins:forward:recommended_release' => "Forwarded to recommended release.",
 	 'plugins:error:unrecognized_plugin' => "We did not recognize that plugin",
-	 
+
 	/**
 	 *	Actions
 	 */
@@ -408,7 +410,7 @@ general project details, visit the edit section of the project page.',
 	'plugins:action:invalid_user' => "Invalid user",
 	'plugins:action:delete_contributor:success' => 'User has been removed from the contributors list',
 	'plugins:action:invalid_access' => 'Unknown or insufficient access to release',
-	
+
 );
 
 add_translation("en", $english);

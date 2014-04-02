@@ -92,7 +92,6 @@ elgg_create_river_item(array(
 	'object_guid' => $release->guid,
 ));
 
-plugins_send_notifications($release);
 system_message(elgg_echo("plugins:release:saved"));
 
 elgg_clear_sticky_form('community_plugins');
