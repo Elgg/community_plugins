@@ -1,7 +1,6 @@
 <?php
 
-$english = array(
-
+return array(
 	'admin:groups' => "Groups",
 	'admin:groups:main' => "Administration",
 
@@ -65,7 +64,6 @@ $english = array(
 	'cg:search:post_on' => "Comment on the discussion \"%s\" in the group %s",
 	'cg:search:discussions' => 'Search discussions',
 
-
 	'cg:discussion:howto' => 'Using discussions',
 	'cg:groups:howto' => 'Using groups',
 	'cg:howto:discussion:loggedout:' => "To participate in the group discussions, you need to register for this site and join one of the groups.",
@@ -84,9 +82,4 @@ $english = array(
 		Check out Elgg's roadmap group.",
 	'cg:howto:groups:loggedin:4' => "Want email notifications when there is new group activity?
 		Select Settings on the topbar menu.",
-
-
-
 );
-
-add_translation("en", $english);

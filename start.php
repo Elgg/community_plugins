@@ -10,11 +10,7 @@ elgg_register_event_handler('init', 'system', 'community_groups_init');
  * Initialize the community groups extension plugin
  */
 function community_groups_init() {
-
 	$action_path = elgg_get_plugins_path() . 'community_groups/actions';
-
-	// @todo remove when this is in Elgg core
-	elgg_register_page_handler('forum', 'forum_page_handler');
 
 	elgg_extend_view('css/elgg', 'community_groups/css');
 
@@ -52,7 +48,6 @@ function community_groups_init() {
 	elgg_register_action("groups/saveblogsettings", "$action_path/groups/saveblogsettings.php", 'admin');
 	elgg_register_action("groups/change_owner", "$action_path/groups/change_owner.php", 'admin');
 
-
 	// set up site menu for discussion
 	$item = new ElggMenuItem('discussion', elgg_echo('discussion'), 'discussion/all');
 	elgg_register_menu_item('site', $item);
@@ -87,21 +82,6 @@ function community_groups_init() {
 			false,
 			false
 		);
-	}
-}
-
-/**
- * Exists for backwards compatibility.
- */
-function forum_page_handler($page) {
-	switch ($page[0]) {
-		case 'topic':
-			$page[0];
-			header('Status: 301 Moved Permanently');
-			forward("/discussion/view/{$page[1]}/{$page[2]}");
-			break;
-		default:
-			return false;
 	}
 }
 
@@ -281,7 +261,7 @@ function community_groups_limit_editing($hook, $type, $menu, $params) {
 			}
 		}
 	}
-	
+
 	return $menu;
 }
 
@@ -393,7 +373,12 @@ function community_groups_post_blog($username, $title, $body, $token) {
 		throw new InvalidParameterException('Unable to save post');
 	}
 
-	add_to_river('river/object/groupforumtopic/create', 'create', $user->getGUID(), $grouptopic->guid);
+	elgg_create_river_item(array(
+		'view' => 'river/object/groupforumtopic/create',
+		'action_type' => 'create',
+		'subject_guid' => $user->getGUID(),
+		'object_guid' => $grouptopic->guid,
+	));
 
 	return true;
 }
