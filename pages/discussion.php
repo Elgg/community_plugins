@@ -13,11 +13,18 @@ if (!$filter) {
 }
 
 
-$context = get_context();
-set_context('search');
+$context = elgg_get_context();
+elgg_set_context('search');
 switch($filter) {
 	case "mine":
-		$listing = list_entities_from_annotations("object", "groupforumtopic", "group_topic_post", "", 20, get_loggedin_userid(), 0, false, true);
+		$options = array(
+			'type' => 'object',
+			'subtype' => 'groupforumtopic',
+			'annotation_name' => 'group_topic_post',
+			'limit' => 20,
+			'annotation_owner_guid' => elgg_get_logged_in_user_guid(),
+		);
+		$listing = elgg_list_entities_from_annotations($options);
 		break;
 //	case "mygroups":
 //		// get array of group ids this user belongs to
@@ -44,11 +51,17 @@ switch($filter) {
 //		break;
 	case "latest":
 	default:
-		$listing = list_entities_from_annotations("object", "groupforumtopic", "group_topic_post", "", 20, 0, 0, false, true);
+		$options = array(
+			'type' => 'object',
+			'subtype' => 'groupforumtopic',
+			'annotation_name' => 'group_topic_post',
+			'limit' => 20,
+		);
+		$listing = elgg_list_entities_from_annotations($options);
 		break;
 }
 
-set_context($context);
+elgg_set_context($context);
 
 $title = elgg_echo("groups:discussion");
 $area2 = elgg_view_title($title);
@@ -62,4 +75,7 @@ $area1 = elgg_view('community_groups/discussion_sidebar');
 
 $body = elgg_view_layout('sidebar_boxes', $area1, $area2);
 
-page_draw($title, $body);
+$vars = array(
+	'sidebar' => $sidebar
+);
+echo elgg_view_page($title, $body, 'default', $vars);

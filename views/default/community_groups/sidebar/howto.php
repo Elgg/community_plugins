@@ -1,6 +1,6 @@
 <?php
 $type = $vars['type'];
-if (!isloggedin()) {
+if (!elgg_is_logged_in()) {
 	$subtype = 'loggedout';
 	$id = '';
 } else {
