@@ -52,8 +52,16 @@ function plugins_init() {
 	// Image handler
 	elgg_register_page_handler('plugins_image', 'plugins_image_page_handler');
 
-	// TODO: This looks like a bug. "plugins" is not a valid subtype
-	register_notification_object('object', 'plugins', elgg_echo('plugins:new'));
+	// Tell core to send notifications when new projects and releases are created
+	elgg_register_notification_event('object', 'plugin_project', array('create'));
+	elgg_register_notification_event('object', 'plugin_release', array('create'));
+
+	// The notifications for projects and releases are almost identical so we can use the same handler for both
+	elgg_register_plugin_hook_handler('prepare', 'notification:create:object:plugin_project', 'plugins_prepare_notification');
+	elgg_register_plugin_hook_handler('prepare', 'notification:create:object:plugin_release', 'plugins_prepare_notification');
+
+	// Releases are contained by a project so we need to get the notification subscriptions manually
+	elgg_register_plugin_hook_handler('get', 'subscriptions', 'plugins_get_release_subscriptions');
 
 	//register a widget
 	elgg_register_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), array('profile'));
@@ -475,4 +483,73 @@ function plugins_update_download_counts() {
 	$count = elgg_get_annotations($options);
 	$count += 1200000;
 	elgg_set_plugin_setting('site_plugins_downloads', $count, 'community_plugins');
+}
+
+/**
+ * Prepare a notification message about a new plugin project or a new plugin release
+ *
+ * @param string                          $hook         Hook name
+ * @param string                          $type         Hook type
+ * @param Elgg_Notifications_Notification $notification The notification to prepare
+ * @param array                           $params       Hook parameters
+ * @return Elgg_Notifications_Notification
+ */
+function plugins_prepare_notification($hook, $type, $notification, $params) {
+	$entity = $params['event']->getObject();
+	$owner = $params['event']->getActor();
+	$recipient = $params['recipient'];
+	$language = $params['language'];
+	$method = $params['method'];
+
+	$subtype = $entity->getSubtype();
+	if ($subtype == 'plugin_project') {
+		$text = $entity->description;
+	} else {
+		$text = $entity->release_notes;
+	}
+
+	// Notification title
+	$notification->subject = elgg_echo("plugins:{$subtype}:notify:subject", array($owner->name, $entity->title), $language);
+
+	// Notification body
+	$notification->body = elgg_echo("plugins:{$subtype}:notify:body", array(
+	    $owner->name,
+	    $entity->title,
+	    $text,
+	    $entity->getURL()
+	), $language);
+
+	// Notification summary
+	$notification->summary = elgg_echo("plugins:{$subtype}:notify:summary", array($entity->title), $language);
+
+	return $notification;
+}
+
+/**
+ * Get notification subscriptions for a new plugin release
+ *
+ * The Elgg 1.9 subscriptions system is based on containers. By default it is
+ * possible to subscribe only to users. The container of a release is however
+ * a project, so we need to get subscriptions for the project when notifying
+ * about a new release.
+ *
+ * @param string $hook          Hook name
+ * @param string $type          Hook type
+ * @param array  $subscriptions Array of subscriptions
+ * @param array  $params        Hook parameters
+ * @return array $subscriptions
+ */
+function plugins_get_release_subscriptions($hook, $type, $subscriptions, $params) {
+	$entity = $params['event']->getObject();
+
+	if ($entity instanceof PluginRelease) {
+		$project = $entity->getContainerEntity();
+
+		// We skip the first release because we notify about the new plugin project instead
+		if ($project->getReleases(array('count' => true)) > 1) {
+			$subscriptions += elgg_get_subscriptions_for_container($project->container_guid);
+		}
+	}
+
+	return $subscriptions;
 }
