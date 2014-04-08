@@ -27,7 +27,14 @@ if (!$grouptopic->save()) {
 }
 
 elgg_delete_river(array('annotation_id' => $reply->id));
-add_to_river('river/object/groupforumtopic/create', 'create', $user_guid, $grouptopic->guid, $grouptopic->access_id, $original_topic->getTimeCreated());
+
+elgg_create_river_item(array(
+	'view' => 'river/object/groupforumtopic/create',
+	'action_type' => 'create',
+	'subject_guid' => $user_guid,
+	'object_guid' => $grouptopic->guid,
+	'posted' => $original_topic->time_created
+));
 
 $new_text = $reply->value;
 $new_text .= '<p>[' . elgg_echo('cg:form:offtopic:warning') . ']</p>';
