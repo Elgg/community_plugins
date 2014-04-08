@@ -55,6 +55,7 @@ return array(
 	'cg:forum:move:success' => "Successfully moved the forum post",
 	'cg:forum:move:error' => "Unable to move the forum post",
 	'cg:forum:removead:success' => "Issued advertising warning",
+	'cg:forum:removead:error' => "Failed to issue an advertising warning",
 	'cg:groups:combine:success' => "Successfully combined the groups %s and %s",
 	'cg:groups:combine:same' => "The groups are the same",
 	'cg:groups:combine:nogroup' => "Unable to load one of the groups",
