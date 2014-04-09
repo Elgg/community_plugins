@@ -56,7 +56,7 @@ function community_groups_init() {
 	if (elgg_is_admin_logged_in()) {
 		elgg_register_plugin_hook_handler('register', 'menu:cg:moderator', 'community_groups_moderator_menu');
 		elgg_extend_view('object/groupforumtopic', 'community_groups/discussion/controls');
-		elgg_extend_view('annotation/group_topic_post', 'community_groups/discussion/controls');
+		elgg_extend_view('object/discussion_reply', 'community_groups/discussion/controls');
 		elgg_register_ajax_view('community_groups/discussion/offtopic');
 		elgg_register_ajax_view('community_groups/discussion/move');
 	}
@@ -171,7 +171,7 @@ function community_groups_restrict_group_edit_action() {
 }
 
 /**
- * Add moderator buttons for discussions
+ * Add moderator buttons for discussions and discussion replies
  *
  * @param string $hook
  * @param string $type
@@ -179,8 +179,9 @@ function community_groups_restrict_group_edit_action() {
  * @param array  $params
  */
 function community_groups_moderator_menu($hook, $type, $menu, $params) {
-	if (isset($params['entity'])) {
-		$entity = $params['entity'];
+	$entity = $params['entity'];
+
+	if ($entity->getSubtype() === 'groupforumtopic') {
 		$options = array(
 			'name' => 'move',
 			'text' => elgg_echo('cg:menu:move'),
@@ -196,19 +197,20 @@ function community_groups_moderator_menu($hook, $type, $menu, $params) {
 		);
 		$menu[] = ElggMenuItem::factory($options);
 		return $menu;
-	} else if (isset($params['annotation'])) {
-		$reply = $params['annotation'];
+	}
+
+	if ($entity instanceof ElggDiscussionReply) {
 		$options = array(
 			'name' => 'offtopic',
 			'text' => elgg_echo('cg:menu:offtopic'),
-			'href' => "ajax/view/community_groups/discussion/offtopic?id=" . $reply->id,
+			'href' => "ajax/view/community_groups/discussion/offtopic?guid=" . $entity->guid,
 			'link_class' => 'elgg-lightbox',
 		);
 		$menu[] = ElggMenuItem::factory($options);
 		$options = array(
 			'name' => 'remove_ad',
 			'text' => elgg_echo('cg:menu:remove_ad'),
-			'href' => "action/discussion/remove_ad?id=" . $reply->id,
+			'href' => "action/discussion/remove_ad?guid=" . $entity->guid,
 			'is_action' => true,
 		);
 		$menu[] = ElggMenuItem::factory($options);

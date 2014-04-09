@@ -2,7 +2,7 @@
 /**
  * Promote a reply to its own topic
  *
- * @uses $vars['id']
+ * @uses $vars['guid']
  */
 
 echo '<h3>';
