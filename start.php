@@ -61,7 +61,6 @@ function community_groups_init() {
 		elgg_register_ajax_view('community_groups/discussion/move');
 	}
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'community_groups_limit_editing');
-	elgg_register_plugin_hook_handler('register', 'menu:annotation', 'community_groups_limit_editing');
 
 	elgg_register_action('discussion/move', "$action_path/discussion/move.php", 'admin');
 	elgg_register_action('discussion/remove_ad', "$action_path/discussion/remove_ad.php", 'admin');
@@ -219,35 +218,30 @@ function community_groups_moderator_menu($hook, $type, $menu, $params) {
 }
 
 /**
- * Limit editing of discussion topics based on time since posted
+ * Limit editing of discussion topics and replies based on time since posted
  *
  * This is to prevent people from posting inflammatory comments and then
  * editing them before an admin sees them.
  *
- * @param string $hook
- * @param string $type
- * @param array  $menu
- * @param array  $params
+ * @param string         $hook
+ * @param string         $type
+ * @param ElggMenuItem[] $menu
+ * @param array          $params
  */
 function community_groups_limit_editing($hook, $type, $menu, $params) {
 	if (!elgg_in_context('discussion')) {
 		return;
 	}
 
-	if ($type == 'menu:entity') {
-		$object = $params['entity'];
-		if (!elgg_instanceof($object, 'object', 'groupforumtopic')) {
-			return;
-		}
-	} else {
-		$object = $params['annotation'];
-		if ($object->getSubtype() != 'group_topic_post') {
-			return;
-		}
+	$entity = $params['entity'];
+
+	// Check that we're dealing either with a discussion or a discussion reply
+	if ($entity->getSubtype() != 'groupforumtopic' && !$entity instanceof ElggDiscussionReply) {
+		return;
 	}
 
-	$owner_guid = $object->getOwnerGUID();
-	$time = $object->getTimeCreated();
+	$owner_guid = $entity->getOwnerGUID();
+	$time = $entity->getTimeCreated();
 
 	if (!community_groups_can_edit($owner_guid, $time)) {
 		foreach ($menu as $index => $item) {
