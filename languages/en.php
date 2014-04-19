@@ -60,4 +60,12 @@ return array(
 	'cg:groups:combine:same' => "The groups are the same",
 	'cg:groups:combine:nogroup' => "Unable to load one of the groups",
 	'cg:groups:categorize:success' => "Group categories have been added",
+	
+	'cg:groups:join:success' => "You are now a member of the group: %s",
+	'cg:groups:join:failure' => "We couldn't join you to the group: %s. Membership is probably invite-only.",
+
+	'forms:discussion/save:container_guid:label' => 'Pick a group',
+	'forms:discussion/save:container_guid:hint' => 'If you are not already a member of the group, we will attempt to add you',
+	'forms:discussion/save:title:label' => 'What would you like to discuss?',
+	'forms:discussion/save:description:label' => 'Provide as many details as possible',
 );

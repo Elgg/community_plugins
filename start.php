@@ -25,6 +25,7 @@ function community_groups_init() {
 		elgg_register_plugin_hook_handler('register', 'menu:filter', 'community_groups_filter_menu');
 	}
 	elgg_register_plugin_hook_handler('route', 'groups', 'community_groups_router');
+	elgg_register_plugin_hook_handler('route', 'discussion', 'community_groups_router');
 
 	// do not need normal sidebar menu in community site
 	elgg_unregister_event_handler('pagesetup', 'system', 'groups_setup_sidebar_menus');
@@ -32,6 +33,10 @@ function community_groups_init() {
 	// only admins can create groups
 	elgg_register_plugin_hook_handler('register', 'menu:title', 'community_groups_restrict_group_add_button');
 	elgg_register_plugin_hook_handler('action', 'groups/edit', 'community_groups_restrict_group_edit_action');
+
+    // attempt to join a group on first post		
+	elgg_register_plugin_hook_handler('action', 'discussion/save', 'community_groups_discussion_save_handler');
+
 
 	// groups administration
 	elgg_register_menu_item('page', array(
@@ -58,11 +63,9 @@ function community_groups_init() {
 		elgg_extend_view('object/groupforumtopic', 'community_groups/discussion/controls');
 		elgg_extend_view('object/discussion_reply', 'community_groups/discussion/controls');
 		elgg_register_ajax_view('community_groups/discussion/offtopic');
-		elgg_register_ajax_view('community_groups/discussion/move');
 	}
 	elgg_register_plugin_hook_handler('register', 'menu:entity', 'community_groups_limit_editing');
 
-	elgg_register_action('discussion/move', "$action_path/discussion/move.php", 'admin');
 	elgg_register_action('discussion/remove_ad', "$action_path/discussion/remove_ad.php", 'admin');
 	elgg_register_action('discussion/offtopic', "$action_path/discussion/offtopic.php", 'admin');
 
@@ -82,6 +85,44 @@ function community_groups_init() {
 			false
 		);
 	}
+}
+
+
+
+/**
+ * Attempt to join a group before posting a new discussion topic.
+ *
+ * @param string $hook   'action'
+ * @param string $type   'discussion/save'
+ * @param mixed  $result ignored
+ * @param mixed  $params ignored
+ * 
+ * @return void
+ */
+function community_groups_discussion_save_handler($hook, $type, $result, $params) {
+    // just editing existing topic, so we don't need to join for permission to do that
+    if (get_input('topic_guid')) {
+        return NULL;
+    }
+    
+    $group = get_entity(get_input('container_guid'));
+    
+    // Not a valid group. The action will give the appropriate error message
+    if (!$group) {
+        return NULL;
+    }
+    
+    // Already a member, so the permissions check is useless
+    if ($group->isMember()) {
+        return NULL;
+    }
+    
+    // not a member; attempt join
+    if ($group->isPublicMembership() && $group->join(elgg_get_logged_in_user_entity())) {
+        system_message(elgg_echo("cg:groups:join:success", array($group->getDisplayName())));   
+    } else {
+        register_error(elgg_echo('cg:groups:join:failure', array($group->getDisplayName())));
+    }
 }
 
 /**
@@ -124,11 +165,32 @@ function community_groups_filter_menu($hook, $type, $menu, $params) {
  * @param type $context The context/handler
  * @param type $params  The parameters for routing
  */
-function community_groups_router($hook, $context, $params) {
-	if ($params['segments'][0] == 'all') {
-		$community_base = elgg_get_plugins_path() . "community_groups/pages";
+function community_groups_router($hook, $context, $params, $result) {
+    if ($result === false) {
+        return $result;
+    }
+    
+    $community_base = __DIR__ . "/pages";
+    
+	if ($context == 'groups' && $params['segments'][0] == 'all') {
 		require "$community_base/groups.php";
 		return false;
+	}
+	
+	if ($context == 'discussion') {
+	    switch ($params['segments'][0]) {
+	        case 'new':
+        	    require "$community_base/discussion/new.php";
+        	    return false;
+        	case 'all':
+        	    elgg_register_menu_item('title', array(
+        	        'name' => 'discussion:add',
+        	        'href' => '/discussion/new',
+        	        'text' => elgg_echo('discussion:add'),
+        	        'class' => 'elgg-button elgg-button-submit',
+                ));
+        	    break;
+    	}
 	}
 }
 
@@ -181,13 +243,6 @@ function community_groups_moderator_menu($hook, $type, $menu, $params) {
 	$entity = $params['entity'];
 
 	if ($entity->getSubtype() === 'groupforumtopic') {
-		$options = array(
-			'name' => 'move',
-			'text' => elgg_echo('cg:menu:move'),
-			'href' => "ajax/view/community_groups/discussion/move?guid=" . $entity->getGUID(),
-			'link_class' => 'elgg-lightbox',
-		);
-		$menu[] = ElggMenuItem::factory($options);
 		$options = array(
 			'name' => 'remove_ad',
 			'text' => elgg_echo('cg:menu:remove_ad'),
