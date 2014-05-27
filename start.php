@@ -420,14 +420,13 @@ function plugins_release_url_handler($hook, $type, $url, $params) {
 	$release = $params['entity'];
 
 	if (!$release instanceof PluginRelease) {
-		error_log("Community plugins: unable to access release to get URL");
-		return;
+		return $url;
 	}
 
 	$project = $release->getProject();
 	if (!$project) {
 		error_log("Community plugins: unable to access project for release $release->guid");
-		return;
+		return $url;
 	}
 
 	$version = rawurlencode($release->version);
