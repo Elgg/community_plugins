@@ -1,0 +1,22 @@
+{
+    "name": "elgg/community_plugins",
+    "description": "Community plugin repository",
+    "type": "elgg-plugin",
+    "keywords": [
+        "elgg",
+        "plugin",
+        "Enhancements"
+    ],
+    "homepage": "http://www.elgg.org/",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Elgg core developers",
+            "homepage": "http://www.elgg.org/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "composer/installers": ">=1.0.8"
+    }
+}
