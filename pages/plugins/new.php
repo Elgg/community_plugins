@@ -5,7 +5,7 @@
 
 gatekeeper();
 
-$container_guid = elgg_get_page_owner_guid();
+$container_guid = elgg_get_logged_in_user_guid();
 
 $title = elgg_echo('plugins:upload');
 

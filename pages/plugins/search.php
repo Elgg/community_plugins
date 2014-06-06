@@ -24,13 +24,13 @@ $sort = get_input('sort', 'created');
 $direction = get_input('direction', 'desc');
 
 $options = array(
-	'type'						=> 'object',
+	'type'                      => 'object',
 	'subtype'                   => 'plugin_project',
     'offset'                    => $offset,
     'limit'                     => $limit,
-    'metadata_name_value_pairs'	=> array(),
+    'metadata_name_value_pairs' => array(),
     'metadata_case_sensitive'   => false,
-	'joins'						=> array(),
+	'joins'                     => array(),
 );
 $wheres = array();
 $group_bys = array();
@@ -84,9 +84,9 @@ if (is_array($filters) && !empty($filters)) {
                 	}
                 }
                 break;
+	    	// Categories
             case 'c' :
             	if (is_array($settings['category']) && in_array('enabled', $settings['category'])) {
-                	// Categories
                 	if (is_array($value) && !empty($value)) {
                 		$categories = '("' . implode('","', $value) . '")';
                 		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata cm ON (e.guid = cm.entity_guid)";
@@ -129,6 +129,20 @@ if (is_array($filters) && !empty($filters)) {
         }
     }
 }    
+
+// Support for ?owner={username} query parameter
+$owner = get_user_by_username(get_input('owner'));
+if ($owner) {
+	$options['owner_guid'] = $owner->guid;
+}
+
+$category = get_input('category');
+if (!empty($category)) {
+	$options['metadata_name_value_pairs'][] = array(
+		'name' => 'plugincat',
+		'value' => $category,
+	);
+}
 
 // WHERE clauses were only added for full text search - so far all WHEREs can be safely joined by 'OR'
 if (!empty($wheres)) {

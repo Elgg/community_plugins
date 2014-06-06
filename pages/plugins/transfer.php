@@ -1,8 +1,6 @@
 <?php
 
-$guid = get_input('guid');
-
-$project = get_entity($guid);
+$project = get_entity(get_input('plugin'));
 
 if (!$project || !$project->canEdit()) {
   register_error(elgg_echo('plugins:action:invalid_project'));

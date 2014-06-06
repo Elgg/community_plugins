@@ -5,8 +5,7 @@
 
 gatekeeper();
 
-$project_guid = (int) get_input('project_guid');
-$project = get_entity($project_guid);
+$project = get_entity(get_input('plugin'));
 if (!$project || !$project->canEdit()) {
 	register_error(elgg_echo('plugins:action:invalid_access'));
 	forward();

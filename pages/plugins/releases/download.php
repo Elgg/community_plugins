@@ -3,8 +3,8 @@
  * Download handler
  */
 
-$release = get_entity(get_input("release_guid"));
-$project = get_entity($release->container_guid);
+$project = get_entity(get_input("plugin"));
+$release = $project->getReleaseFromVersion($project->version);
 
 if (!$release || !$project) {
 	register_error(elgg_echo("plugins:error:downloadfailed"));

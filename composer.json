@@ -9,6 +9,9 @@
     ],
     "homepage": "http://www.elgg.org/",
     "license": "GPL-2.0",
+    "autoload": {
+        "psr-0": {"": "classes/"}
+    },
     "authors": [
         {
             "name": "Elgg core developers",
@@ -18,5 +21,8 @@
     ],
     "require": {
         "composer/installers": ">=1.0.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.3"
     }
 }
