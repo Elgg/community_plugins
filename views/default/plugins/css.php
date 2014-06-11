@@ -7,20 +7,23 @@
  * @link http://elgg.com/
  */
 ?>
+/* <style> /**/
 
 #plugins_front_welcome {
-	padding: 10px;
-	margin: 0 0 15px 0;
-	min-height: 250px;
+	line-height: 1.6em;
+	padding: 20px;
+	margin: 20px 0;
 	border: 1px solid silver;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
 	background: url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/plugins_back.gif) no-repeat right top;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
 
 #plugins_welcome_text {
 	width: 340px;
-	line-height: 1.6em;
+	padding: 20px 0;
 }
 
 .plugins_download_total {
@@ -30,6 +33,15 @@
 
 .plugins_download_total p span {
 	font-weight: bold;
+}
+.elgg-community-plugins {
+	position: relative;
+	float: left;
+	margin-left: -15px;
+	margin-right: -15px;
+}
+.elgg-community-plugins .elgg-module {
+	margin: 0 15px 20px;
 }
 
 .plugins_front_listing {
@@ -140,4 +152,20 @@ form#plugins_search_settings p label {
 form#plugins_search_settings p.sub-option {
 	padding-left: 15px;
 	font-style: italic;
+}
+/* ***************************************
+	Responsive
+*************************************** */
+@media (max-width: 1030px) {
+	#plugins_front_welcome {
+		background: none;
+	}
+	#plugins_welcome_text {
+		width: 100%;
+	}
+}
+@media (max-width: 820px) {
+	.elgg-community-plugins {
+		margin: 20px 0 0;		
+	}
 }

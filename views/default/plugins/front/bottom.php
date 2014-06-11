@@ -25,49 +25,47 @@ if (!isset($vars['recommended'])) {
 
 ?>
 
-<div class="elgg-grid mtm">
+<div class="elgg-grid elgg-community-plugins">
 <?php
 
 // Newest
 echo '<div class="elgg-col elgg-col-1of3">';
-echo '<div class="elgg-inner" style="border-radius:3px;">';
-echo elgg_view_module('info', elgg_echo('plugins:listing:newest'), $vars['newest'], array(
-	'footer' => elgg_view('output/url', array(
-		'href' => '/plugins/search?sort=created',
-		'text' => elgg_echo('plugins:browse_more:newest'),
-	)),
-));
+	echo '<div class="elgg-inner">';
+	echo elgg_view_module('info', elgg_echo('plugins:listing:newest'), $vars['newest'], array(
+		'footer' => elgg_view('output/url', array(
+			'href' => '/plugins/search?sort=created',
+			'text' => elgg_echo('plugins:browse_more:newest'),
+		)),
+	));
+	echo '</div>';
 echo '</div>';
-echo '</div>';
-
 
 echo '<div class="elgg-col elgg-col-1of3">';
-echo '<div class="elgg-inner phm" style="border-radius:3px;">';
-
-// Most downloaded
-echo elgg_view_module('info', elgg_echo('plugins:listing:popular'), $vars['popular'], array(
-	'footer' => elgg_view('output/url', array(
-		'href' => '/plugins/search?sort=downloads',
-		'text' => elgg_echo('plugins:browse_more:popular'),
-	)),
-));
-
+	echo '<div class="elgg-inner">';
+	
+	// Most downloaded
+	echo elgg_view_module('info', elgg_echo('plugins:listing:popular'), $vars['popular'], array(
+		'footer' => elgg_view('output/url', array(
+			'href' => '/plugins/search?sort=downloads',
+			'text' => elgg_echo('plugins:browse_more:popular'),
+		)),
+	));
+	
+	echo '</div>';
 echo '</div>';
-echo '</div>';
-
 
 echo '<div class="elgg-col elgg-col-1of3 elgg-col-last">';
-echo '<div class="elgg-inner" style="border-radius:3px;">';
-
-// Most recommended
-echo elgg_view_module('info', elgg_echo('plugins:listing:dugg'), $vars['recommended'], array(
-	'footer' => elgg_view('output/url', array(
-		'href' => '/plugins/search?sort=recommendations',
-		'text' => elgg_echo('plugins:browse_more:dugg'),
-	)),
-));
-
-echo '</div>';
+	echo '<div class="elgg-inner">';
+	
+	// Most recommended
+	echo elgg_view_module('info', elgg_echo('plugins:listing:dugg'), $vars['recommended'], array(
+		'footer' => elgg_view('output/url', array(
+			'href' => '/plugins/search?sort=recommendations',
+			'text' => elgg_echo('plugins:browse_more:dugg'),
+		)),
+	));
+	
+	echo '</div>';
 echo '</div>';
 ?>
 </div>
