@@ -192,7 +192,7 @@ $english = array(
 	'plugins:plugin_project:notify:body' => "%s has uploaded a new plugin called %s \n\n %s \n\n %s",
 	'plugins:plugin_release:notify:body' => "%s has released a new version of the plugin %s \n\n %s \n\n %s",
 	'plugins:plugin_project:notify:summary' => 'New plugin project called %s',
-	'plugins:plugin_project:notify:summary' => 'New release of the plugin %s',
+	'plugins:plugin_release:notify:summary' => 'New release of the plugin %s',
 
 	/**
 	 * Licenses
