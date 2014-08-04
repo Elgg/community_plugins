@@ -80,20 +80,19 @@ function plugins_init() {
 
 	elgg_register_plugin_hook_handler('cron', 'daily', 'plugins_update_download_counts');
 
-	// Elgg versions
-	global $CONFIG;
-	$CONFIG->elgg_versions = array(
-		'1.9',
-		'1.8',
-		'1.7',
-		'1.6',
-		'1.5',
-		'1.2',
-		'1.0'
-	);
+	// Elgg versions (The forms expect this to be an associative array)
+	elgg_set_config('elgg_versions', array(
+		'1.9' => '1.9',
+		'1.8' => '1.8',
+		'1.7' => '1.7',
+		'1.6' => '1.6',
+		'1.5' => '1.5',
+		'1.2' => '1.2',
+		'1.0' => '1.0',
+	));
 
 	// GPL-compatible licenses
-	$CONFIG->gpllicenses = array(
+	elgg_set_config('gpllicenses', array(
 		'none' => 'No license selected',
 		'gpl2' => 'GNU General Public License (GPL) version 2',
 		//'gpl3' => 'GNU General Public License (GPL) version 3',
@@ -124,10 +123,10 @@ function plugins_init() {
 		'w3c' => 'W3C Software Notice and License',
 		'x11' => 'X11 License',
 		'zope' => 'Zope Public License, versions 2.0 and 2.1',
-	);
+	));
 
 	// Defined plugin categories
-	$CONFIG->plugincats = array(
+	elgg_set_config('plugincats', array(
 		'admin' => 'Site admin',
 		'user' => 'User admin',
 		'authentication' => 'Authentication',
@@ -147,7 +146,7 @@ function plugins_init() {
 		'themes' => 'Themes',
 		'misc' => 'Misc',
 		'uncategorized' => 'Uncategorized',
-	);
+	));
 
 	$action_base = dirname(__FILE__) . "/actions/plugins";
 	elgg_register_action("plugins/create_project", "$action_base/create_project.php");
