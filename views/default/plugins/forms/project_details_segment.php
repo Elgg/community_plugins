@@ -206,12 +206,12 @@ if (array_key_exists('project', $vars)
 					'relationship' => 'image',
 					'metadata_name_value_pair' => array('name' => 'project_image', 'value' => "$i")
 				);
-	
+
 				if (($image = elgg_get_entities_from_relationship($options))
 					&& ($image[0] instanceof ElggFile)
 					&& ($thumb = get_entity($image[0]->thumbnail_guid))
 					&& ($thumb instanceof ElggFile)) {
-					
+
 					$title = $image[0]->title;
 					$src = elgg_get_site_url() . "plugins_image/{$thumb->getGUID()}/{$thumb->time_created}.jpg";
 					$img = "<img style=\"float: left; padding-right: 1em;\" src=\"$src\" />\n";
@@ -220,12 +220,12 @@ if (array_key_exists('project', $vars)
 					$img = $title = '';
 				}
 			}
-	
+
 			echo "<label>" . elgg_echo('plugins:desc') . " $i "
 			. elgg_view('input/text', array(
 				'name' => "image_{$i}_desc",
 				'value' => $sticky_values["image_{$i}_desc"] ? $sticky_values["image_{$i}_desc"] : $title,
-				'js' => 'style="width:25em;"'
+				'style' => 'width: 25em;',
 			))
 			. '</label><br />'
 			. "<label>" . elgg_echo('plugins:edit:image') . " $i " . elgg_view('input/file', array('name' => "image_$i"))
