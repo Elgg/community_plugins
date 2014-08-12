@@ -19,14 +19,14 @@ $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 
 $title = elgg_echo('plugins:edit:project');
 
-$content = elgg_view_title($title);
-$content .= elgg_view_form("plugins/save_project", array(
+$content = elgg_view_form("plugins/save_project", array(
 	'enctype' => 'multipart/form-data',
 ), array(
 	'project' => $project,
 ));
 
 $body = elgg_view_layout('one_sidebar', array(
+    'title' => $title,
 	'sidebar' => $sidebar, 
 	'content' => $content,
 ));

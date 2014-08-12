@@ -20,14 +20,14 @@ $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 
 $title = elgg_echo('plugins:edit:release');
 
-$content = elgg_view_title($title);
-$content .= elgg_view_form("plugins/save_release", array(
+$content = elgg_view_form("plugins/save_release", array(
 	'enctype' => 'multipart/form-data',
 ), array(
 	'release' => $release,
 ));
 
 $body = elgg_view_layout('one_sidebar', array(
+    'title' => $title,
 	'sidebar' => $sidebar, 
 	'content' => $content,
 ));

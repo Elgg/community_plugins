@@ -198,16 +198,17 @@ $sidebar = elgg_view('plugins/filters', array(
 if ($count) {
 	$first_index = $offset + 1;
 	$last_index = min(array($offset + $limit, $count));
-	$main = elgg_view_title(sprintf(elgg_echo('plugins:search:results'), $count, $first_index, $last_index));
+	$heading = elgg_view_title(sprintf(elgg_echo('plugins:search:results'), $count, $first_index, $last_index));
 } else {
-	$main = elgg_view_title(elgg_echo('plugins:search:noresults'));
-	$main .= elgg_echo('plugins:search:noresults:info');
+	$heading = elgg_view_title(elgg_echo('plugins:search:noresults'));
+	$main = elgg_echo('plugins:search:noresults:info');
 }
 
 // Add the list of plugins to the main area
 $main .= elgg_view('plugins/search/main', array('area1' => $list));
 
 $body = elgg_view_layout('one_sidebar', array(
+	'title' => $heading,
 	'content' => $main, 
 	'sidebar' => $sidebar,
 ));
