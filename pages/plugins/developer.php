@@ -16,8 +16,6 @@ if (elgg_get_page_owner_guid() == elgg_get_logged_in_user_guid()){
 	$title = sprintf(elgg_echo("plugins:user"), elgg_get_page_owner_entity()->name, $types_string);
 }
 
-$content = elgg_view_title($title);
-
 //$pop = get_input('pop');
 //$area2 = list_entities_from_annotation_count("object", "plugin_project", "download", 10, 0, 0, false, true, false);
 
@@ -39,6 +37,7 @@ if ($type) {
 }
 
 $body = elgg_view_layout('one_sidebar', array(
+    'title' => $title,
 	'sidebar' => '',
 	'content' => $content,
 ));

@@ -38,6 +38,7 @@ $sidebar = elgg_view('plugins/filters', array(
 $main = elgg_view('plugins/search/main', array('area1' => $list));
 
 $body = elgg_view_layout('one_sidebar', array(
+	'title' => $title,
 	'content' => $main, 
 	'sidebar' => $sidebar,
 ));
