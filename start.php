@@ -49,9 +49,6 @@ function plugins_init() {
 	// Register a page handler, so we can have nice URLs
 	elgg_register_page_handler('plugins', 'plugins_page_handler');
 
-	// Image handler
-	elgg_register_page_handler('plugins_image', 'plugins_image_page_handler');
-
 	// Tell core to send notifications when new projects and releases are created
 	elgg_register_notification_event('object', 'plugin_project', array('create'));
 	elgg_register_notification_event('object', 'plugin_release', array('create'));
@@ -318,10 +315,6 @@ function plugins_page_handler($page) {
 			set_input('guid', $page[1]);
 			include("$pages_dir/contributors.php");
 			break;
-		case "icon":
-			set_input('guid', $page[1]);
-			include(dirname(__FILE__) . '/image.php');
-			break;
 		default:
 			if (!isset($page[0])) {
 				// /plugins is the main page
@@ -347,40 +340,6 @@ function plugins_page_handler($page) {
 	}
 
 	return TRUE;
-}
-
-/**
- * Serve up image.
- *
- * @param unknown_type $page
- * @return unknown_type
- */
-function plugins_image_page_handler($page) {
-	// fileguid/createtime.jpg
-	if (!is_array($page) || !array_key_exists(0, $page) || !array_key_exists(1, $page)) {
-		exit;
-	}
-
-	if (!($file = get_entity($page[0])) || !($file instanceof ElggFile)
-	|| !($time = str_replace('.jpg', '', strtolower($page[1])))
-	|| ($file->time_created != $time)) {
-		exit;
-	}
-
-	$contents = $file->grabFile();
-	header('Expires: ' . date('r', time() + 60*60*24*7));
-	header('Pragma: public');
-	header('Cache-Control: public');
-	header("Content-Disposition: inline; filename=\"{$file->originalfilename}\"");
-	header("Content-type: {$file->getMimeType()}");
-	header("Content-Length: " . strlen($contents));
-
-	$split_output = str_split($contents, 1024);
-	foreach($split_output as $chunk) {
-		echo $chunk;
-	}
-
-	exit;
 }
 
 /**

@@ -1,22 +1,24 @@
 <?php
 /**
  * Serve plugin project images
- *
- * This hasn't been moved into the page directory because we may want to skip
- * loading the entire engine for each image.
  */
 
-require_once(dirname(dirname(dirname(__FILE__))) . '/engine/start.php');
+// This allows adding the plugin in mod/ using a symbolic link
+$filepath = $_SERVER['SCRIPT_FILENAME'];
 
-$guid = (int)get_input("guid");
+$elgg_root = dirname(dirname(dirname($filepath)));
 
-$image = get_entity($guid);
-if (!$image) {
-	exit;
-}
+require_once("{$elgg_root}/engine/settings.php");
+require_once("{$elgg_root}/engine/classes/Elgg/EntityDirLocator.php");
 
-$filename = $image->originalfilename;
-$filelocation = $image->getFilenameOnFilestore();
+$owner_guid = (int) $_GET['owner_guid'];
+$filename = $_GET['name'];
+
+$locator = new Elgg_EntityDirLocator($owner_guid);
+$path = $locator->getPath();
+
+$filelocation = "{$CONFIG->dataroot}{$path}plugins/$filename";
+
 $size = @filesize($filelocation);
 header("Content-Disposition: inline; filename=\"$filename\"");
 header("Content-type: image/jpeg");
@@ -26,4 +28,3 @@ header("Cache-Control: public");
 header("Content-Length: $size");
 readfile($filelocation);
 exit;
-
