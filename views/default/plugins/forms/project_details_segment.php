@@ -204,27 +204,35 @@ if (array_key_exists('project', $vars)
 				$options = array(
 					'relationship_guid' => $project->getGUID(),
 					'relationship' => 'image',
-					'metadata_name_value_pair' => array('name' => 'project_image', 'value' => "$i")
+					'metadata_name_value_pair' => array(
+						'name' => 'project_image',
+						'value' => "$i",
+					)
 				);
 
-				if (($image = elgg_get_entities_from_relationship($options))
-					&& ($image[0] instanceof ElggFile)
-					&& ($thumb = get_entity($image[0]->thumbnail_guid))
-					&& ($thumb instanceof ElggFile)) {
+				$image = elgg_get_entities_from_relationship($options);
 
-					$title = $image[0]->title;
-					$src = elgg_get_site_url() . "plugins_image/{$thumb->getGUID()}/{$thumb->time_created}.jpg";
-					$img = "<img style=\"float: left; padding-right: 1em;\" src=\"$src\" />\n";
-					echo $img;
-				} else {
-					$img = $title = '';
+				if ($image && $image[0] instanceof ElggFile) {
+					$file = $image[0];
+
+					$thumb = get_entity($file->thumbnail_guid);
+
+					if ($thumb instanceof ElggFile) {
+						$img = elgg_view('output/img', array(
+							'src' => "mod/community_plugins/image.php?owner_guid={$project->owner_guid}&name={$project->guid}_image_{$i}_thumb.jpg",
+							'style' => "float: left; padding-right: 1em;",
+							'title' => $file->title
+						));
+
+						echo $img;
+					}
 				}
 			}
 
 			echo "<label>" . elgg_echo('plugins:desc') . " $i "
 			. elgg_view('input/text', array(
 				'name' => "image_{$i}_desc",
-				'value' => $sticky_values["image_{$i}_desc"] ? $sticky_values["image_{$i}_desc"] : $title,
+				'value' => isset($sticky_values["image_{$i}_desc"]) ? $sticky_values["image_{$i}_desc"] : '',
 				'style' => 'width: 25em;',
 			))
 			. '</label><br />'

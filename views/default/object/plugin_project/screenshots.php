@@ -12,29 +12,49 @@ $project = $vars['entity'];
 // ordering by guid does not guarantee the correct order
 $img_files = $project->getScreenshots();
 
-echo '<ul class="elgg-gallery elgg-plugin-screenshots float-alt">';
+$thumbnails = '';
 foreach ($img_files as $file) {
 	$thumb = get_entity($file->thumbnail_guid);
 	if (!$thumb) {
 		continue;
 	}
 
-	$src = elgg_get_site_url() . "plugins/icon/{$thumb->getGUID()}/icon.jpg";
-	$link = elgg_get_site_url() . "plugins/icon/{$file->getGUID()}/icon.jpg";
+	$path_parts = pathinfo($file->getFilenameOnFilestore());
+	$image_name = $path_parts['basename'];
+	$link = "mod/community_plugins/image.php?&owner_guid={$file->owner_guid}&name={$image_name}";
 
-	echo "<li>";
-	echo "<a class=\"elgg-plugin-screenshot elgg-lightbox\" href=\"$link\" rel=\"plugins-gallery\"><img src=\"$src\" alt=\"$file->title\" title=\"$file->title\" height=\"60\" width=\"60\"/></a>";
+	$path_parts = pathinfo($thumb->getFilenameOnFilestore());
+	$thumb_name = $path_parts['basename'];
 
+	$img = elgg_view('output/img', array(
+		'src' => "mod/community_plugins/image.php?&owner_guid={$thumb->owner_guid}&name={$thumb_name}",
+		'alt' => $file->title,
+		'title' => $file->title,
+		'width' => '60',
+		'height' => '60',
+	));
+
+	$thumbnail = elgg_view('output/url', array(
+		'href' => $link,
+		'text' => $img,
+		'rel' => 'plugins-gallery',
+		'class' => 'elgg-plugin-screenshot elgg-lightbox',
+	));
+
+	$delete_link = '';
 	if ($project->canEdit()) {
-		echo "<br/>";
 		$url = "/action/plugins/delete_project_image?project_guid={$project->getGUID()}&image_guid={$file->getGUID()}";
-		$url = elgg_add_action_tokens_to_url($url);
-		echo elgg_view('output/confirmlink', array(
-				'href' => $url,
-				'text' => 'delete',
-				'confirm' => elgg_echo("plugins:delete_project_image:confirm"),
+
+		$delete_link = elgg_view('output/confirmlink', array(
+			'href' => $url,
+			'text' => 'delete',
+			'confirm' => elgg_echo("plugins:delete_project_image:confirm"),
+			'is_action' => true,
+			'style' => 'display: block;',
 		));
 	}
-	echo "</li>";
+
+	$thumbnails .= "<li>{$thumbnail}{$delete_link}</li>";
 }
-echo '</ul>';
+
+echo "<ul class=\"elgg-gallery elgg-plugin-screenshots float-alt\">$thumbnails</ul>";
