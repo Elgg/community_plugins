@@ -4,7 +4,7 @@
  *
  */
 
-define(PLUGINS_CONTRIBUTOR_RELATIONSHIP, 'plugin_contributor');
+define('PLUGINS_CONTRIBUTOR_RELATIONSHIP', 'plugin_contributor');
 
 elgg_register_event_handler('init', 'system', 'plugins_init');
 
