@@ -33,12 +33,16 @@ class PluginProject extends ElggObject {
 	}
 	
 	public function addDigg() {
-		return add_entity_relationship(elgg_get_logged_in_user_guid(), 'has_dugg', $this->guid);
+		$result = add_entity_relationship(elgg_get_logged_in_user_guid(), 'has_dugg', $this->guid);
+		if ($result) {
+			$this->dbUpdateRecommendationsCount();
+		}
+		return $result;
 	}
 	
 	/** @return int */
 	public function countDiggs() {
-		return $this->countAnnotations('plugin_digg');
+		return $this->dbGetRecommendationsCount();
 	}
 	
 	/** @return array */	
@@ -215,6 +219,55 @@ class PluginProject extends ElggObject {
 	}
 
 	/**
+	 * Update the number of recommendations
+	 */
+	protected function dbUpdateRecommendationsCount() {
+		$guid = $this->getGUID();
+		$db_prefix = get_config('dbprefix');
+		$sql = "INSERT INTO {$db_prefix}plugin_recommendations
+			(guid, recommendations) VALUES ($guid, 1)
+			ON DUPLICATE KEY UPDATE recommendations=recommendations+1";
+		insert_data($sql);
+	}
+
+	/**
+	 * Get the number of recommendations from the database
+	 *
+	 * @return int
+	 */
+	protected function dbGetRecommendationsCount() {
+		$guid = $this->getGUID();
+		$db_prefix = get_config('dbprefix');
+		$sql = "SELECT recommendations FROM {$db_prefix}plugin_recommendations
+			WHERE guid = $guid";
+		$result = get_data_row($sql);
+		if ($result === false) {
+			return 0;
+		}
+		return (int)$result->recommendations;
+	}
+
+	/**
+	 * Get the plugins recommended the most
+	 *
+	 * @param array $options Options array for elgg_get_entities()
+	 * @return array
+	 */
+	static public function getPluginsByRecommendations(array $options = array()) {
+		$db_prefix = get_config('dbprefix');
+
+		$defaults = array(
+			'type' => 'object',
+			'subtype' => 'plugin_project',
+			'joins' => array("JOIN {$db_prefix}plugin_recommendations pd ON e.guid=pd.guid"),
+			'order_by' => 'pd.recommendations DESC',
+		);
+		$options = array_merge($defaults, $options);
+
+		return elgg_get_entities($options);
+	}
+
+	/**
 	 * Update the number of downloads
 	 */
 	protected function dbUpdateDownloadCount() {
@@ -228,7 +281,7 @@ class PluginProject extends ElggObject {
 
 	/**
 	 * Get the number of downloads from the database
-	 * 
+	 *
 	 * @return int
 	 */
 	protected function dbGetDownloadCount() {
