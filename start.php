@@ -223,165 +223,159 @@ function plugins_add_submenus() {
 	}
 }
 
+
 /**
  * Plugins page handler
  *
  * @param array $page Array of page elements
  */
-function plugins_page_handler($page) {
+function plugins_page_handler($segments) {
+	$urls = array(
+		"plugins/contributors" => "/plugins/{plugin}/contributors",
+		"plugins/developer" => "/users/{developer}/plugins",
+		"plugins/edit" => "/plugins/{plugin}/edit",
+		"plugins/icon" => "/plugins/{plugin}/icons/{icon}.jpg",
+		"plugins/index" => "/plugins",
+		"plugins/new" => "/plugins/new",
+		"plugins/search" => "/plugins/search",
+		"plugins/transfer" => "/plugins/{plugin}/transfer",
+		"plugins/view" => "/plugins/{plugin}",
+		"plugins/releases/index" => "/plugins/{plugin}/releases",
+		"plugins/releases/download" => "/plugins/{plugin}/releases/{release}/download",
+		"plugins/releases/edit" => "/plugins/{plugin}/releases/{release}/edit",
+		"plugins/releases/new" => "/plugins/{plugin}/releases/new",
+		"plugins/releases/view" => "/plugins/{plugin}/releases/{version}",
+		"plugins/screenshots/index" => "/plugins/{plugin}/screenshots",
+		"plugins/screenshots/view" => "/plugins/{plugin}/screenshots/{screenshot}.jpg",
+	);
+	
+	$forwards = array(
+		"/plugins/all" => function() {
+			forward("/plugins");
+		},
+		"/plugins/category/{category}" => function() {
+			$category = get_input('category');
+			forward("/plugins/search?category=$category");
+		},
+		"/plugins/contributors/{plugin}" => function() {
+			$plugin = get_input('plugin');
+			forward("/plugins/$plugin/contributors");
+		},
+		"/plugins/developer/{developer}" => function() {
+			$developer = get_input('developer');
+			forward("/plugins/search?owner=$developer");
+		},
+		"/plugins/developer/{developer}/type/{type}" => function() {
+			$developer = get_input('developer');
+			$type = get_input('type');
+			forward("/plugins/search?owner=$developer&type=$type");
+		},
+		"/plugins/download/{release}" => function() {
+			$release = get_entity(get_input('release'));
+			$plugin = $release->getProject();
+			forward("/plugins/{$plugin->guid}/releases/{$release->version}/download");
+		},
+		"/plugins/edit/project/{plugin}" => function() {
+			$plugin = get_input('plugin');
+			forward("/plugins/$plugin/edit");
+		},
+		"/plugins/edit/release/{release}" => function() {
+			$release = get_entity(get_input('release'));
+			$plugin = $release->getProject();
+			forward("/plugins/{$plugin->guid}/releases/{$release->version}");
+		},
+		"/plugins/icon/{guid}/icon.jpg" => function() {
+			$icon = get_input('guid');
+			$plugin = get_entity($icon)->getContainerGuid();
+			forward("/plugins/$plugin/icons/$icon.jpg");
+		},
+		"/plugins/new/project/{username}" => function() {
+			forward("/plugins/new");
+		},
+		"/plugins/new/release/{plugin}" => function() {
+			$plugin = get_input('plugin');
+			forward("/plugins/$plugin/releases/new");
+		},
+		"/plugins/project/{plugin}" => function() {
+			$plugin = get_input('plugin');
+			forward("/plugins/$plugin");
+		},
+		"/plugins/release/{release}" => function() {
+			$release = get_entity(get_input('release'));
+			$plugin = $release->getProject();
+			forward("/plugins/{plugin}/releases/{version}");
+		},
+		"/plugins/transfer/{plugin}" => function() {
+			$plugin = get_input('plugin');
+			forward("/plugins/$plugin/transfer");
+		},
+		"/plugins/{guid}/{release}" => function() {
+			$plugin = get_input('plugin');
+			$release = get_input('release');
+			
+			forward("/plugins/$plugin/releases/$release");
+		},
+		"/plugins/{username}/read/{plugin}/{title}" => function() {
+			$plugin = get_input('plugin');
+			forward("/plugins/$plugin");
+		},
+		"/plugins_image/{guid}/{timestamp}.jpg" => function() {
+			$screenshot = get_entity(get_input('guid'));
+			$plugin = $screenshot->getContainerEntity();
+			$timestamp = $screenshot->time_created;
+			forward("/plugins/$plugin/screenshots/$screenshot.$timestamp.jpg");
+		},
+	);
+	
+	array_unshift($segments, 'plugins');
+	$path = "/" . implode("/", $segments);
 	$plugin_dir = dirname(__FILE__);
-	$pages_dir = "$plugin_dir/pages/plugins";
-
-	switch ($page[0]) {
-		// plugin repository front page
-		case "all":
-			system_message(elgg_echo('plugins:warning:page:all:bookmark'));
-			header('Location: /plugins', true, 301);
-			break;
-		// category listing page (deprecated, just preserved for compatibility and old bookmarks' sake)
-		case "category":
-			elgg_set_view_location('entities/entity_list', "$plugin_dir/views/override/");
-			set_input('category', $page[1]);
-			include("$pages_dir/category_list.php");
-			break;
-		// New advanced search page (with filtering and sorting)
-		case "search":
-			elgg_set_view_location('entities/entity_list', "$plugin_dir/views/override/");
-			include("$pages_dir/search.php");
-			break;
-			// list a developer's plugins
-		case "developer":
-			set_input('username', $page[1]);
-			if (isset($page[2])) {
-				set_input($page[2], $page[3]);
+	$pages_dir = "$plugin_dir/pages";
+	
+	foreach($urls as $state => $template_str) {
+		$template = new Elgg\CommunityPlugins\UriTemplate($template_str);
+		
+		$result = $template->match($path);
+		if ($result !== null) {
+			foreach ($result as $name => $value) {
+				set_input($name, $value);
 			}
-			include("$pages_dir/developer.php");
-			break;
-		case "download":
-			// download/<release_guid>/
-			set_input('release_guid', $page[1]);
-			include("$pages_dir/download.php");
-			break;
-		// view plugin project
-		case "project":
-			$project = get_entity($page[1]);
-			if ($project) {
-				system_message(elgg_echo('plugins:warning:page:all:bookmark'));
-				header("Location: {$project->getURL()}", true, 301);
-				exit;
-			}
-			break;
-		// view specfic release of a project
-		case "release":
-			$release = get_entity($page[1]);
-			if ($release) {
-				system_message(elgg_echo('plugins:warning:page:all:bookmark'));
-				header("Location: {$release->getURL()}", true, 301);
-				exit;
-			}
-			break;
-		// create new plugin project or release
-		case "new":
-			if ($page[1] == 'release') {
-				// new/release/<project guid>/
-				set_input('project_guid', $page[2]);
-				include("$pages_dir/create_release.php");
-			} else {
-				// new/project/<username>/
-				set_input('username', $page[2]);
-				include("$pages_dir/create_project.php");
-			}
-			break;
-		// edit plugin project or release
-		case 'edit':
-			if ($page[1] == 'release') {
-				// edit/release/<release guid>/
-				set_input('release_guid', $page[2]);
-				include("$pages_dir/edit_release.php");
-			} else {
-				// edit/project/<project guid>/
-				set_input('project_guid', $page[2]);
-				include("$pages_dir/edit_project.php");
-			}
-			break;
-		// admin page
-		case "admin":
-			set_input('tab', $page[1]);
-			include("$pages_dir/admin.php");
-			break;
-		case "transfer":
-			admin_gatekeeper();
-			set_input('guid', $page[1]);
-			include("$pages_dir/transfer.php");
-			break;
-		case "contributors":
-			set_input('guid', $page[1]);
-			include("$pages_dir/contributors.php");
-			break;
-		case "icon":
-			set_input('guid', $page[1]);
-			include(dirname(__FILE__) . '/image.php');
-			break;
-		default:
-			if (!isset($page[0])) {
-				// /plugins is the main page
-				include "$pages_dir/index.php";
-				break;
-			} elseif ($page[1] == 'read') {
-				// for backwards compatibility this handles /plugins/<username>/read/<guid>/<title>
-				$project = get_entity($page[2]);
-				if ($project) {
-					system_message(elgg_echo('plugins:warning:page:all:bookmark'));
-					header("Location: {$project->getURL()}", true, 301);
-					exit;
-				}
-				break;
-			}
-
-			set_input('guid', $page[0]);
-			set_input('version', urldecode($page[1]));
-
-			include "$pages_dir/view.php";
-			break;
-
+			
+			include_once("$pages_dir/$state.php");
+			return true;
+		}
 	}
 
-	return TRUE;
+	foreach($forwards as $template_str => $callback) {
+		$template = new Elgg\CommunityPlugins\UriTemplate($template_str);
+		$result = $template->match($path);
+		if ($result !== null) {
+			foreach ($result as $name => $value) {
+				set_input($name, $value);
+			}
+			
+			$callback();
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /**
- * Serve up image.
+ * Serve up /plugins_image/{image}/{timestamp}.jpg
  *
- * @param unknown_type $page
- * @return unknown_type
+ * @param array $page
+ * @return void
  */
 function plugins_image_page_handler($page) {
 	// fileguid/createtime.jpg
-	if (!is_array($page) || !array_key_exists(0, $page) || !array_key_exists(1, $page)) {
-		exit;
-	}
-
-	if (!($file = get_entity($page[0])) || !($file instanceof ElggFile)
-	|| !($time = str_replace('.jpg', '', strtolower($page[1])))
-	|| ($file->time_created != $time)) {
-		exit;
-	}
-
-	$contents = $file->grabFile();
-	header('Expires: ' . date('r', time() + 60*60*24*7));
-	header('Pragma: public');
-	header('Cache-Control: public');
-	header("Content-Disposition: inline; filename=\"{$file->originalfilename}\"");
-	header("Content-type: {$file->getMimeType()}");
-	header("Content-Length: " . strlen($contents));
-
-	$split_output = str_split($contents, 1024);
-	foreach($split_output as $chunk) {
-		echo $chunk;
-	}
-
-	exit;
+	$icon_guid = $page[0];
+	$plugin_guid = get_entity($icon_guid)->getContainerGuid();
+	
+	forward("/plugins/$plugin_guid/icons/$icon_guid.jpg");
 }
+
 
 /**
  * Handles plugin project URLs
@@ -399,10 +393,7 @@ function plugins_project_url_handler($hook, $type, $url, $params) {
 		return $url;
 	}
 
-	$release = $project->getRecommendedRelease();
-	if ($release) {
-		return $release->getURL();
-	}
+    return "/plugins/$project->guid";
 }
 
 /**
@@ -429,8 +420,7 @@ function plugins_release_url_handler($hook, $type, $url, $params) {
 	}
 
 	$version = rawurlencode($release->version);
-	$title = elgg_get_friendly_title($project->title);
-	return  "plugins/$project->guid/$version/$title";
+	return  "/plugins/$project->guid/releases/$version";
 }
 
 /**

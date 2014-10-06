@@ -3,8 +3,7 @@
  * View a plugin project or release
  */
 
-$project = get_entity((int) get_input('guid'));
-
+$project = get_entity(get_input('plugin'));
 if (!$project instanceof PluginProject) {
 	header('Status: 404 Not Found');
 	$body = elgg_view("plugins/notfound");
@@ -13,25 +12,15 @@ if (!$project instanceof PluginProject) {
 	exit;
 }
 
-$version = get_input('version');
-
+$version = get_input('release');
 if ($version) {
 	$release = $project->getReleaseFromVersion($version);
-
 	if (!isset($release)) {
 		register_error(elgg_echo('plugins:error:invalid_release'));
-
-		$release = $project->getRecommendedRelease();
-		if ($release) {
-			register_error(elgg_echo('plugins:forward:recommended_release'));
-			forward($release->getURL());
-		}
-
-		forward();
+		forward($project->getUrl());
 	}
 } else {
-	register_error(elgg_echo('plugins:error:unrecognized_plugin'));
-	forward('plugins');
+	$release = $project->getRecommendedRelease();
 }
 
 elgg_set_page_owner_guid($project->getOwnerGUID());
@@ -44,7 +33,7 @@ $content = elgg_view_entity($project, array(
 ));
 
 $title = $project->title;
-if ($release->elgg_version) {
+if ($release && $release->elgg_version) {
 	if (is_array($release->elgg_version)) {
 		$versions = implode('/', array_reverse($release->elgg_version));
 	} else {
@@ -60,4 +49,5 @@ $body = elgg_view_layout("one_sidebar", array(
 	'content' => $content,
 ));
 
-echo elgg_view_page("$project->title, version $release->version", $body);
+
+echo elgg_view_page($project->title . ($release ? ", version $release->version" : ""), $body);

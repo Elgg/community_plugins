@@ -1,29 +1,27 @@
 <?php
 /**
- * Edit plugin release
+ * Edit plugin project
  */
 
 gatekeeper();
 
-$release_guid = (int) get_input('release_guid');
-$release = get_entity($release_guid);
-if (!$release || !$release->canEdit()) {
+$project = get_entity(get_input('plugin'));
+
+if (!$project || !$project->canEdit()) {
 	register_error(elgg_echo('plugins:action:invalid_access'));
 	forward();
 }
-
-$project = get_entity($release->container_guid);
 
 elgg_set_page_owner_guid($project->owner_guid);
 
 $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 
-$title = elgg_echo('plugins:edit:release');
+$title = elgg_echo('plugins:edit:project');
 
-$content = elgg_view_form("plugins/save_release", array(
+$content = elgg_view_form("plugins/save_project", array(
 	'enctype' => 'multipart/form-data',
 ), array(
-	'release' => $release,
+	'project' => $project,
 ));
 
 $body = elgg_view_layout('one_sidebar', array(
