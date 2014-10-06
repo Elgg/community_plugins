@@ -7,13 +7,13 @@ $members = get_input('members');
 $recipient = get_user($members[0]);
 
 if (!$project || !$project->canEdit() || !elgg_instanceof($project, 'object', 'plugin_project')) {
-  register_error(elgg_echo('plugins:action:invalid_project'));
-  forward(REFERER);
+	register_error(elgg_echo('plugins:action:invalid_project'));
+	forward(REFERER);
 }
 
 if (!$recipient || $recipient->isBanned() || $recipient->getGUID() == $project->owner_guid) {
-  register_error(elgg_echo('plugins:action:transfer:invalid_recipient'));
-  forward(REFERER);
+	register_error(elgg_echo('plugins:action:transfer:invalid_recipient'));
+	forward(REFERER);
 }
 
 //get all releases associated with the project
@@ -25,12 +25,6 @@ $releases = elgg_get_entities(array(
 ));
 
 $ia = elgg_set_ignore_access(true);
-
-// change owner for all releases
-foreach ($releases as $release) {
-  $release->owner_guid = $recipient->getGUID();
-  $release->save();
-}
 
 // change owner for the whole project
 $project->owner_guid = $recipient->getGUID();

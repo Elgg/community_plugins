@@ -14,6 +14,8 @@ require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
  * Initialize the community plugin repository plugin
  */
 function plugins_init() {
+	elgg_register_library('plugins:upgrades', __DIR__ . '/lib/upgrades.php');
+	
 	elgg_register_js('elgg.communityPlugins', '/mod/community_plugins/js/communityPlugins.js', 'footer');
 	elgg_register_js('elgg.communityPlugins.filters', '/mod/community_plugins/js/communityPlugins/filters.js', 'footer');
 	elgg_register_js('jquery.flot', '/mod/community_plugins/vendors/flot/jquery.flot.js', 'footer');
@@ -62,6 +64,9 @@ function plugins_init() {
 
 	// Releases are contained by a project so we need to get the notification subscriptions manually
 	elgg_register_plugin_hook_handler('get', 'subscriptions', 'plugins_get_release_subscriptions');
+	
+	// Make sure Releases are editable
+	elgg_register_plugin_hook_handler('permissions_check', 'object', 'plugins_release_permissions_check');
 
 	//register a widget
 	elgg_register_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), array('profile'));
@@ -167,6 +172,10 @@ function plugins_init() {
 	elgg_register_action("plugins/admin/transfer", "$action_base/admin/transfer.php", 'admin');
 
 	elgg_register_tag_metadata_name('plugin_type');
+	
+	if (elgg_is_admin_logged_in()) {
+		elgg_register_event_handler('upgrade', 'system', 'plugins_upgrades');
+	}
 }
 
 /**
@@ -550,4 +559,31 @@ function plugins_get_release_subscriptions($hook, $type, $subscriptions, $params
 	}
 
 	return $subscriptions;
+}
+
+
+/**
+ * Releases are owned by the plugin, so this hook is needed for non-admins
+ * To have edit permission on their releases.  Release is editable if the
+ * Plugin is editable.
+ * 
+ * @param type $h
+ * @param type $t
+ * @param type $r
+ * @param array $p
+ * @return bool
+ */
+function plugin_release_permissions_check($h, $t, $r, $p) {
+	if (!($p['entity'] instanceof PluginRelease)) {
+		return $r;
+	}
+	
+	$project = $p['entity']->getContainerEntity();
+	return $project->canEdit();
+}
+
+
+function plugins_upgrades() {
+	elgg_load_library('plugins:upgrades');
+	run_function_once('plugins_upgrade_20141107');
 }
