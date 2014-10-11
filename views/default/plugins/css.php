@@ -81,7 +81,9 @@ span.downloadsnumber {
 	padding-right:3px;
 }
 
-
+.elgg-sidebar .choose_plugin {
+	width: 100%; 
+}
 
 /***************** Entity listing ********************/
 
