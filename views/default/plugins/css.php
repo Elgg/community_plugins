@@ -98,6 +98,25 @@ span.info_item img {
 
 /***************** Filters ********************/
 
+.filter_fields .input-select {
+	width: 100%;
+	margin-bottom: 10px;
+}
+.filter_fields .ui-state-default {
+	border-radius: 3px;
+	background-color: #F0F0F0;
+	cursor: pointer;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+.filter_fields .ui-state-default:hover {
+	background-color: #E5E5E5;
+}
+.filter_fields .ui-state-active {
+	background-color: #E5E5E5;
+	cursor: default;
+}
+
 div#plugin_filters select.input-select {
     width: 222px;
 }
