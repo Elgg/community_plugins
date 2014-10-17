@@ -35,13 +35,22 @@ $english = array(
 	/**
 	 *	Object views
 	 */
-	 'plugins:uploadtime' => "Uploaded %s (%s)",
-	 'plugins:release:version_warning' => 'Warning: The author recommends using a different release of this plugin! Do you still want to download this release?',
-	 'plugins:download:version' => "Download %s",
-	 'plugins:project:title:version' => "%s for Elgg %s",
-	 'plugins:author:byline' => "by %s",
-	 'plugins:last:updated' => "Last updated %s",
+	'plugins:uploadtime' => "Uploaded %s (%s)",
+	'plugins:release:version_warning' => 'Warning: The author recommends using a different release of this plugin! Do you still want to download this release?',
+	'plugins:download:version' => "Download %s",
+	'plugins:project:title:version' => "%s for Elgg %s",
+	'plugins:author:byline' => "by %s",
+	'plugins:last:updated' => "Last updated %s",
 
+	'plugins:project:outdated_warning' => "<strong>Warning:</strong> This plugin has't been updated in over %s years. It may no longer be maintained.",
+	'plugins:project:help' => "What <i>you</i> can do to help:",
+
+	'plugins:project:pull_request' => 'pull request',
+	'plugins:project:repo' => 'plugin code',
+	'plugins:project:collaborate' => "Submit a %s to update the %s", // Submit a <pull request> to update the <plugin code>
+
+	'plugins:project:request' => 'become the new maintainer',
+	'plugins:project:request_ownership' => "Request to %s of the plugin",
 
 	/**
 	 * Menu items and titles
@@ -111,6 +120,7 @@ $english = array(
 	'plugins:edit:release' => "Edit plugin release",
 	'plugins:contributors:add' => "Add contributors",
 	'plugins:delete:project' => "Delete Project",
+	'plugins:requests:ownership' => "Pending ownership requests",
 	'plugins:transfer:ownership' => "Transfer Ownership",
 	'plugins:author:homepage' => "Author homepage",
 	'plugins:author:recommended' => "Author Recommended",
@@ -183,6 +193,15 @@ $english = array(
 	'plugins:matching' => 'Plugins matching',
 	'plugins:add:contributor' => "Add Contributors: %s",
 	'plugins:title:transfer_plugin' => "Transfer Plugin: %s",
+	'plugins:title:request_ownership' => "Request ownership of the plugin: %s",
+	'plugins:project:request_ownership:desc' => "<p>This form allows you to request ownership of the plugin project.</p>
+<p>Please tell us a bit about yourself so we'll know that the plugin will be in good hands. You can tell for example:</p>
+<ul>
+	<li>Why do you want to become the author?</li>
+	<li>What kind of experience do you have in plugin development?</li>
+	<li>What would make you a good author or the plugin?</li>
+	<li>What kind of changes would you do to the plugin?</li>
+</ul>",
 
 	/**
 	 * Notifications
@@ -193,6 +212,10 @@ $english = array(
 	'plugins:plugin_release:notify:body' => "%s has released a new version of the plugin %s \n\n %s \n\n %s",
 	'plugins:plugin_project:notify:summary' => 'New plugin project called %s',
 	'plugins:plugin_release:notify:summary' => 'New release of the plugin %s',
+
+	'plugins:ownership_request:notify:subject' => 'A new plugin ownership request',
+	'plugins:ownership_request:notify:body' => "There's a new plugin ownership request:
+%s",
 
 	/**
 	 * Licenses
@@ -239,6 +262,7 @@ $english = array(
 	'plugins:release:saved' => "The plugin release was successfully saved.",
 	'plugins:project:deleted' => "The plugin was deleted.",
 	'plugins:release:deleted' => "The plugin release was deleted.",
+	'plugins:ownership_request:success' => "Ownership request has been sent",
 
 	/**
 	 * Error messages
@@ -255,6 +279,10 @@ $english = array(
 	'plugins:error:no_version' => 'A version is required.',
 	'plugins:error:no_elgg_version' => 'An Elgg version is required',
 	'plugins:error:duplicate_version' => 'This version is already in use for this project',
+	'plugins:error:not_found' => 'The plugin project was not found',
+	'plugins:error:invalid_ownership_request' => 'The description is a required field',
+	'plugins:error:ownership_request_failed' => 'The ownership request failed',
+	'plugins:error:ownership_request_exists' => 'You already have a pending ownership request',
 
 	/**
 	 * New frontpage

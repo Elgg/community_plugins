@@ -15,7 +15,7 @@
 	margin: 20px 0;
 	border: 1px solid silver;
 	background: url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/plugins_back.gif) no-repeat right top;
-	
+
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
@@ -70,6 +70,10 @@ padding:0;
 
 .plugin_stats li {
  margin: 4px 0;
+}
+
+.elgg-plugin-warning a {
+	color: #000;
 }
 
 /* download number visible to admins only */
@@ -185,6 +189,6 @@ form#plugins_search_settings p.sub-option {
 }
 @media (max-width: 820px) {
 	.elgg-community-plugins {
-		margin: 20px 0 0;		
+		margin: 20px 0 0;
 	}
 }

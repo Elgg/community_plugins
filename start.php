@@ -70,6 +70,8 @@ function plugins_init() {
 	elgg_register_plugin_hook_handler('entity:url', 'object', 'plugins_release_url_handler');
 	elgg_register_plugin_hook_handler('entity:url', 'object', 'plugins_project_url_handler');
 
+	elgg_register_plugin_hook_handler('register', 'menu:annotation', 'plugins_ownership_request_menu');
+
 	elgg_register_event_handler('pagesetup', 'system', 'plugins_add_submenus');
 
 	// Only projects should show up in search
@@ -159,6 +161,7 @@ function plugins_init() {
 	elgg_register_action("plugins/recommend", "$action_base/recommend.php");
 	elgg_register_action("plugins/add_contributors", "$action_base/add_contributors.php");
 	elgg_register_action("plugins/delete_contributor", "$action_base/delete_contributor.php");
+	elgg_register_action("plugins/request_ownership", "$action_base/request_ownership.php");
 
 	elgg_register_action("plugins/admin/upgrade", "$action_base/admin/upgrade.php", 'admin');
 	elgg_register_action("plugins/admin/combine", "$action_base/admin/combine.php", 'admin');
@@ -247,8 +250,10 @@ function plugins_page_handler($segments) {
 		"plugins/releases/view" => "/plugins/{plugin}/releases/{version}",
 		"plugins/screenshots/index" => "/plugins/{plugin}/screenshots",
 		"plugins/screenshots/view" => "/plugins/{plugin}/screenshots/{screenshot}.jpg",
+		"plugins/ownership_request" => "/plugins/{plugin}/ownership_request",
+		"plugins/ownership_requests" => "/plugins/{plugin}/ownership_requests",
 	);
-	
+
 	$forwards = array(
 		"/plugins/all" => function() {
 			forward("/plugins");
@@ -312,7 +317,7 @@ function plugins_page_handler($segments) {
 		"/plugins/{guid}/{release}" => function() {
 			$plugin = get_input('plugin');
 			$release = get_input('release');
-			
+
 			forward("/plugins/$plugin/releases/$release");
 		},
 		"/plugins/{username}/read/{plugin}/{title}" => function() {
@@ -326,21 +331,21 @@ function plugins_page_handler($segments) {
 			forward("/plugins/$plugin/screenshots/$screenshot.$timestamp.jpg");
 		},
 	);
-	
+
 	array_unshift($segments, 'plugins');
 	$path = "/" . implode("/", $segments);
 	$plugin_dir = dirname(__FILE__);
 	$pages_dir = "$plugin_dir/pages";
-	
+
 	foreach($urls as $state => $template_str) {
 		$template = new Elgg\CommunityPlugins\UriTemplate($template_str);
-		
+
 		$result = $template->match($path);
 		if ($result !== null) {
 			foreach ($result as $name => $value) {
 				set_input($name, $value);
 			}
-			
+
 			include_once("$pages_dir/$state.php");
 			return true;
 		}
@@ -353,7 +358,7 @@ function plugins_page_handler($segments) {
 			foreach ($result as $name => $value) {
 				set_input($name, $value);
 			}
-			
+
 			$callback();
 			return true;
 		}
@@ -372,7 +377,7 @@ function plugins_image_page_handler($page) {
 	// fileguid/createtime.jpg
 	$icon_guid = $page[0];
 	$plugin_guid = get_entity($icon_guid)->getContainerGuid();
-	
+
 	forward("/plugins/$plugin_guid/icons/$icon_guid.jpg");
 }
 
@@ -454,6 +459,33 @@ function plugins_add_type_menu($owner_guid) {
 			elgg_register_menu_item('page', array('name' => $label, 'text' => $label, 'href' => $url));
 		}
 	}
+}
+
+/**
+ * Add menu items for the ownership_request annotation
+ *
+ * @param string $hook
+ * @param string $type
+ * @param string $menu
+ * @param array  $params
+ * @return array $menu
+ */
+function plugins_ownership_request_menu($hook, $type, $menu, $params) {
+	$annotation = elgg_extract('annotation', $params);
+
+	if ($annotation->name !== 'ownership_request') {
+		return $menu;
+	}
+
+	$menu[] = ElggMenuItem::factory(array(
+		'name' => 'approve_ownership_request',
+		'text' => elgg_echo('approve'),
+		'href' => "action/plugins/admin/transfer?project_guid={$annotation->entity_guid}&members[]={$annotation->owner_guid}",
+		'link_class' => 'elgg-button elgg-button-action',
+		'is_action' => true,
+	));
+
+	return $menu;
 }
 
 /**
