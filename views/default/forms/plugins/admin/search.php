@@ -1,5 +1,4 @@
 <?php 
-	global $CONFIG;
 	$serialized_settings = elgg_get_plugin_setting('search-settings', 'community_plugins');
 	$settings = unserialize($serialized_settings);
 	if (!is_array($settings)) {

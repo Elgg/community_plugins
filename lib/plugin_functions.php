@@ -83,14 +83,15 @@ function plugins_get_downloads_histogram($guid = 0, $days = 30) {
  * @return array
  */
 function plugins_search_hook($hook, $type, $value, $params) {
-	global $CONFIG;
 	$query = sanitise_string($params['query']);
 
-	$join = "JOIN {$CONFIG->dbprefix}objects_entity oe ON e.guid = oe.guid";
+	$dbprefix = elgg_get_config('dbprefix');
+
+	$join = "JOIN {$dbprefix}objects_entity oe ON e.guid = oe.guid";
 	$params['joins'] = array($join);
-	$params['joins'][] = "JOIN {$CONFIG->dbprefix}metadata summary_md on e.guid = summary_md.entity_guid";
-	$params['joins'][] = "JOIN {$CONFIG->dbprefix}metastrings summary_msn on summary_md.name_id = summary_msn.id";
-	$params['joins'][] = "JOIN {$CONFIG->dbprefix}metastrings summary_msv on summary_md.value_id = summary_msv.id";
+	$params['joins'][] = "JOIN {$dbprefix}metadata summary_md on e.guid = summary_md.entity_guid";
+	$params['joins'][] = "JOIN {$dbprefix}metastrings summary_msn on summary_md.name_id = summary_msn.id";
+	$params['joins'][] = "JOIN {$dbprefix}metastrings summary_msv on summary_md.value_id = summary_msv.id";
 
 	$fields = array('title', 'description');
 	$where = search_get_where_sql('oe', $fields, $params);

@@ -1,14 +1,15 @@
 <?php
-global $CONFIG;
 
-require_once "{$CONFIG->pluginspath}community_plugins/version.php";
+require_once elgg_get_plugins_path() . 'community_plugins/version.php';
 
 $local_version = elgg_get_plugin_setting('version', 'community_plugins');
 
 // bootstrap version detection for newly activated or never been upgraded plugin
 if ($local_version === FALSE) {
+	$dbprefix = elgg_get_config('dbprefix');
+
 	// original subtype before version 1
-	$subtype_info = get_data_row("SELECT * from {$CONFIG->dbprefix}entity_subtypes
+	$subtype_info = get_data_row("SELECT * from {$dbprefix}entity_subtypes
 		WHERE type='object' AND subtype='plugin_file'");
 
 	if ($subtype_info != FALSE) {

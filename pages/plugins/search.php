@@ -6,6 +6,8 @@
 
 global $CONFIG;
 
+$dbprefix = elgg_get_config('dbprefix');
+
 // Get search-specific settings
 $serialized_settings = elgg_get_plugin_setting('search-settings', 'community_plugins');
 $settings = unserialize($serialized_settings);
@@ -46,13 +48,13 @@ if (is_array($filters) && !empty($filters)) {
                 	if (strlen($value) > 0) {
 	                	$value = sanitise_string($value);
                         // Match title and description
-	                	$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}objects_entity o ON (e.guid = o.guid)";
+	                	$options['joins'][] = "INNER JOIN {$dbprefix}objects_entity o ON (e.guid = o.guid)";
 						$fields = array('title', 'description');
 						$wheres[] = search_get_where_sql('o', $fields, array('query' => $value, 'joins' => $options['joins']));
 						
 						//Match author name and username 
                         if  (in_array('author-name', $settings['text']) || in_array('author-username', $settings['text'])) {
-							$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}users_entity u ON (e.owner_guid = u.guid)";
+							$options['joins'][] = "INNER JOIN {$dbprefix}users_entity u ON (e.owner_guid = u.guid)";
 							$fields = array();
 							if (in_array('author-name', $settings['text'])) {
 								$fields[] = 'name';
@@ -74,9 +76,9 @@ if (is_array($filters) && !empty($filters)) {
 								$fields[] = 'tags';
 							}
 							$fields_str = "'"  . implode("','", $fields) . "'";
-	                        $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata tm ON (e.guid = tm.entity_guid)";
-		                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings tm_name ON (tm.name_id = tm_name.id AND tm_name.string IN ($fields_str))";
-		                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings tm_value ON (tm.value_id = tm_value.id)";
+	                        $options['joins'][] = "INNER JOIN {$dbprefix}metadata tm ON (e.guid = tm.entity_guid)";
+		                    $options['joins'][] = "INNER JOIN {$dbprefix}metastrings tm_name ON (tm.name_id = tm_name.id AND tm_name.string IN ($fields_str))";
+		                    $options['joins'][] = "INNER JOIN {$dbprefix}metastrings tm_value ON (tm.value_id = tm_value.id)";
 		                    foreach ($value_parts as $expression) {
 		                    	$wheres[] = "tm_value.string LIKE \"%$expression%\"";
 		                    }
@@ -89,9 +91,9 @@ if (is_array($filters) && !empty($filters)) {
             	if (is_array($settings['category']) && in_array('enabled', $settings['category'])) {
                 	if (is_array($value) && !empty($value)) {
                 		$categories = '("' . implode('","', $value) . '")';
-                		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata cm ON (e.guid = cm.entity_guid)";
-	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings cs_name ON (cm.name_id = cs_name.id AND cs_name.string = 'plugincat')";
-	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings cs_value ON (cm.value_id = cs_value.id AND cs_value.string IN $categories)";
+                		$options['joins'][] = "INNER JOIN {$dbprefix}metadata cm ON (e.guid = cm.entity_guid)";
+	                    $options['joins'][] = "INNER JOIN {$dbprefix}metastrings cs_name ON (cm.name_id = cs_name.id AND cs_name.string = 'plugincat')";
+	                    $options['joins'][] = "INNER JOIN {$dbprefix}metastrings cs_value ON (cm.value_id = cs_value.id AND cs_value.string IN $categories)";
                 	}
             	}
                 break;
@@ -100,9 +102,9 @@ if (is_array($filters) && !empty($filters)) {
                 	// Licences
                 	if (is_array($value) && !empty($value)) {
                 		$licences = '("' . implode('","', $value) . '")';
-                		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata lm ON (e.guid = lm.entity_guid)";
-	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings ls_name ON (lm.name_id = ls_name.id AND ls_name.string = 'license')";
-	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings ls_value ON (lm.value_id = ls_value.id AND ls_value.string IN $licences)";
+                		$options['joins'][] = "INNER JOIN {$dbprefix}metadata lm ON (e.guid = lm.entity_guid)";
+	                    $options['joins'][] = "INNER JOIN {$dbprefix}metastrings ls_name ON (lm.name_id = ls_name.id AND ls_name.string = 'license')";
+	                    $options['joins'][] = "INNER JOIN {$dbprefix}metastrings ls_value ON (lm.value_id = ls_value.id AND ls_value.string IN $licences)";
                 	}
             	}
                 break;
@@ -112,10 +114,10 @@ if (is_array($filters) && !empty($filters)) {
                 	if (is_array($value) && !empty($value)) {
                 		$versions = '("' . implode('","', $value) . '")';
                 		$plugin_release_subtype = get_subtype_id('object', 'plugin_release');
-                		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}entities pre ON (e.guid = pre.container_guid AND pre.subtype = $plugin_release_subtype)";
-	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metadata prm ON (pre.guid = prm.entity_guid)";
-	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_name ON (prm.name_id = prm_name.id AND prm_name.string = 'elgg_version')";
-	                    $options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}metastrings prm_value ON (prm.value_id = prm_value.id AND prm_value.string IN $versions)";
+                		$options['joins'][] = "INNER JOIN {$dbprefix}entities pre ON (e.guid = pre.container_guid AND pre.subtype = $plugin_release_subtype)";
+	                    $options['joins'][] = "INNER JOIN {$dbprefix}metadata prm ON (pre.guid = prm.entity_guid)";
+	                    $options['joins'][] = "INNER JOIN {$dbprefix}metastrings prm_name ON (prm.name_id = prm_name.id AND prm_name.string = 'elgg_version')";
+	                    $options['joins'][] = "INNER JOIN {$dbprefix}metastrings prm_value ON (prm.value_id = prm_value.id AND prm_value.string IN $versions)";
 	                    $group_bys[] = 'pre.guid';
                 	}
             	}
@@ -123,7 +125,7 @@ if (is_array($filters) && !empty($filters)) {
             case 's' :
             	if (isset($settings['screenshot']) && $settings['screenshot'] == 'enabled') {
                 	// Only with screenshot
-                	$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}entity_relationships r on (r.relationship=\"image\" AND r.guid_one = e.guid)";
+                	$options['joins'][] = "INNER JOIN {$dbprefix}entity_relationships r on (r.relationship=\"image\" AND r.guid_one = e.guid)";
             	}
             	break;
         }
@@ -155,16 +157,16 @@ if (!empty($wheres)) {
 if ((isset($settings['sort']) && $settings['sort'] == 'enabled') || empty($settings)) {
     switch($sort) {
     	case 'title':
-    		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}objects_entity o ON (e.guid = o.guid)";
+    		$options['joins'][] = "INNER JOIN {$dbprefix}objects_entity o ON (e.guid = o.guid)";
     		$options['order_by'] = "o.title {$direction}";
     		break;
     	case 'author':
-    		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}users_entity u ON (e.owner_guid = u.guid)";
+    		$options['joins'][] = "INNER JOIN {$dbprefix}users_entity u ON (e.owner_guid = u.guid)";
     		$options['order_by'] = "u.name {$direction}";
     		break;
     	case 'downloads':
     		$options['selects'] = array("a.downloads");
-    		$options['joins'][] = "LEFT JOIN {$CONFIG->dbprefix}plugin_downloads a on (e.guid = a.guid)";
+    		$options['joins'][] = "LEFT JOIN {$dbprefix}plugin_downloads a on (e.guid = a.guid)";
 			$group_bys = array_merge(array('e.guid', 'a.guid'), $group_bys);
     		$options['group_by'] = implode(',', $group_bys);
     		$options['order_by'] = "a.downloads {$direction}";
@@ -172,7 +174,7 @@ if ((isset($settings['sort']) && $settings['sort'] == 'enabled') || empty($setti
     	case 'recommendations':
     		$digg_id = add_metastring('plugin_digg', true);
     		$options['selects'] = array("count(a.entity_guid) as recommendations");
-    		$options['joins'][] = "LEFT JOIN {$CONFIG->dbprefix}annotations a on (e.guid = a.entity_guid AND a.name_id = $digg_id)";
+    		$options['joins'][] = "LEFT JOIN {$dbprefix}annotations a on (e.guid = a.entity_guid AND a.name_id = $digg_id)";
 			$group_bys = array_merge(array('e.guid', 'a.entity_guid'), $group_bys);
     		$options['group_by'] = implode(',', $group_bys);
     		$options['order_by'] = "recommendations {$direction}";
@@ -182,7 +184,7 @@ if ((isset($settings['sort']) && $settings['sort'] == 'enabled') || empty($setti
     		break;
     	case 'updated':
     		$options['selects'] = array("max(er.time_created) as last_update");
-    		$options['joins'][] = "INNER JOIN {$CONFIG->dbprefix}entities er ON (er.container_guid = e.guid)";
+    		$options['joins'][] = "INNER JOIN {$dbprefix}entities er ON (er.container_guid = e.guid)";
     		$options['group_by'] = "e.guid";
     		$options['order_by'] = "last_update {$direction}";
     		break;
@@ -201,9 +203,9 @@ $title = elgg_echo('plugins:search:title');
 
 // Add sidebar filter
 $sidebar = elgg_view('plugins/filters', array(
-	'categories' => $CONFIG->plugincats,
-	'versions' => $CONFIG->elgg_versions,
-	'licences' => $CONFIG->gpllicenses,
+	'categories' => elgg_get_config('plugincats'),
+	'versions' => elgg_get_config('elgg_versions'),
+	'licences' => elgg_get_config('gpllicenses'),
 	'current_values' => $filters,
 	'settings' => $settings,
 ));

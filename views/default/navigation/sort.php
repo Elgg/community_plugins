@@ -13,8 +13,6 @@
 </span>
 <?php
 
-    global $CONFIG;
-
     $sort_fields = $vars['sort_fields'];
     $sort = $vars['sort'];
     $direction = $vars['direction'];
