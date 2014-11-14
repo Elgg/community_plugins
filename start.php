@@ -20,11 +20,6 @@ function plugins_init() {
 	elgg_register_js('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.js', 'footer');
 	elgg_register_css('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.standalone.css');
 
-	// TODO(ewinslow): Surely these don't need to go on EVERY page?
-	elgg_load_css('jquery.ui.dropdownchecklist');
-	elgg_load_js('jquery.ui.dropdownchecklist');
-	elgg_load_js('elgg.communityPlugins');
-
 	// Set up menu for logged in users
 	elgg_register_menu_item('site', array(
 		'href' => "/plugins",
