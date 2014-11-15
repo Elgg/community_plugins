@@ -63,6 +63,8 @@ function plugins_init() {
 	// Releases are contained by a project so we need to get the notification subscriptions manually
 	elgg_register_plugin_hook_handler('get', 'subscriptions', 'plugins_get_release_subscriptions');
 
+	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'plugins_owner_block_menu');
+
 	//register a widget
 	elgg_register_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), array('profile'));
 
@@ -221,6 +223,29 @@ function plugins_add_submenus() {
 			'text' => elgg_echo('plugins:upload'),
 		));
 	}
+}
+
+/**
+ * Add a menu item to the owner block
+ *
+ * @param string $hook   'register'
+ * @param string $type   'menu:owner_block'
+ * @param array  $menu   Array of ElggMenu object
+ * @param array  $params Hook patameters
+ * @return array $menu Array of ElggMenu object
+ */
+function plugins_owner_block_menu($hook, $type, $menu, $params) {
+	$user = $params['entity'];
+
+	if (!$user instanceof ElggUser) {
+		return $menu;
+	}
+
+	$url = "plugins/search?owner={$user->username}";
+	$item = new ElggMenuItem('plugins', elgg_echo('plugins'), $url);
+	$menu[] = $item;
+
+	return $menu;
 }
 
 
