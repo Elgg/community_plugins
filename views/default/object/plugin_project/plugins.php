@@ -7,6 +7,7 @@ $release = $vars['release'];
 
 // get required variables
 $project_owner = $project->getOwnerEntity();
+
 $updated = elgg_view_friendly_time($project->getLatestRelease()->time_created);
 
 elgg_register_menu_item('title', array(
@@ -28,8 +29,12 @@ if (elgg_is_logged_in() && !$project->isDugg()) {
 	));
 }
 
+echo elgg_view('object/plugin_project/warning', array('entity' => $project));
+
 echo elgg_view('object/plugin_project/screenshots', array('entity' => $project));
+
 ?>
+
 
 <h4>
 	<?php echo elgg_view('output/text', array('value' => $project->summary)); ?>

@@ -31,6 +31,9 @@ $project->owner_guid = $recipient->getGUID();
 $project->container_guid = $recipient->getGUID();
 $project->save();
 
+// Get pending ownership request
+$project->deleteAnnotations('ownership_request');
+
 elgg_set_ignore_access($ia);
 
 system_message(elgg_echo('plugins:action:transfer:success'));
