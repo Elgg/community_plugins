@@ -63,6 +63,7 @@ $release->setFilename($filestorename);
 $release->setMimetype($mimetype);
 $release->originalfilename = $_FILES['upload']['name'];
 $release->access_id = $access_id;
+$release->owner_guid = $plugin_project->getGUID();
 $release->container_guid = $plugin_project->getGUID();
 $release->version = $version;
 $release->release_notes = $release_notes;

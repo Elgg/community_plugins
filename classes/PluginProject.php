@@ -165,6 +165,7 @@ class PluginProject extends ElggObject {
 		$store_name_base = $prefix . strtolower($this->getGUID() . "_$name");
 		$image->title = $title;
 		$image->access_id = $this->access_id;
+		$image->owner_guid = $this->guid;
 		$image->setFilename($store_name_base . '.jpg');
 		$image->setMimetype('image/jpeg');
 		$image->originalfilename = $info['name'];
@@ -200,6 +201,7 @@ class PluginProject extends ElggObject {
 		$thumb = new ElggFile();
 		$thumb->setMimeType('image/jpeg');
 		$thumb->access_id = $this->access_id;
+		$thumb->owner_guid = $this->guid;
 		$thumb->setFilename($name);
 		$thumb->open("write");
 		$thumb->write($thumbnail);
@@ -263,4 +265,43 @@ class PluginProject extends ElggObject {
 		return elgg_get_entities($options);
 	}
 
+	/*
+	 * move the files on the file system to a new owner guid
+	 * @param ElggFile $file - The file with resources to be moved
+	 * @param int $new_owner_guid - new owner guid where the resources will be moved
+	 */
+	static public function moveFilesOnSystem($file, $new_owner_guid) {
+		if (!($file instanceof ElggFile)) {
+			return false;
+		}
+		
+		if ($file->owner_guid == $new_owner_guid) {
+			return true; // no need to move
+		}
+		
+		$old_location = $file->getFileNameOnFilestore();
+
+		$file->owner_guid = $new_owner_guid;
+
+		$new_location = $file->getFileNameOnFilestore();
+
+		$move = true;
+		//make sure new location exists
+		if (!is_dir(dirname($new_location))) {
+			if (!@mkdir(dirname($new_location), 0700, true)) {
+				$move = false;
+			}
+		}
+
+		if (!$move || !rename($old_location, $new_location)) {
+			error_log(elgg_echo('plugins:action:transfer:not_moved', array($file->guid)));
+			return false;
+		}
+		
+		// cleanup
+		// note - rmdir only removes empty directories
+		@rmdir(dirname($old_location));
+		
+		return true;
+	}
 }

@@ -410,7 +410,7 @@ general project details, visit the edit section of the project page.',
 	'plugins:action:invalid_user' => "Invalid user",
 	'plugins:action:delete_contributor:success' => 'User has been removed from the contributors list',
 	'plugins:action:invalid_access' => 'Unknown or insufficient access to release',
-
+	'plugins:action:transfer:not_moved' => "Release ID: %s - the file could not be moved on the file system",
 );
 
 add_translation("en", $english);
