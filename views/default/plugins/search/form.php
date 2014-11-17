@@ -1,6 +1,5 @@
 <?php 
 
-global $CONFIG;
 $url = elgg_get_site_url() . 'plugins';
 $settings = $vars['settings'];
 

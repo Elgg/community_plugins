@@ -2,15 +2,13 @@
 /**
  * Front page for plugin repository
  */
-global $CONFIG; 
-
 elgg_set_context('plugin_project');
 
 $welcome = elgg_view('plugins/front/main');
 $sidebar = elgg_view('plugins/filters', array(
-	'categories' => $CONFIG->plugincats,
-	'versions' => $CONFIG->elgg_versions,
-	'licences' => $CONFIG->gpllicenses,
+	'categories' => elgg_get_config('plugincats'),
+	'versions' => elgg_get_config('elgg_versions'),
+	'licences' => elgg_get_config('gpllicenses'),
 	'settings' => $settings
 
 ));
