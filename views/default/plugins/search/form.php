@@ -1,5 +1,9 @@
 <?php 
 
+elgg_load_css('jquery.ui.dropdownchecklist');
+elgg_load_js('jquery.ui.dropdownchecklist');
+elgg_load_js('elgg.communityPlugins');
+
 global $CONFIG;
 $url = elgg_get_site_url() . 'plugins';
 $settings = $vars['settings'];
