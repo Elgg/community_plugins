@@ -371,6 +371,11 @@ $english = array(
 	'plugins:settings:save:failure'	=> "Could not save plugin search settings: unrecognized parameters received.",
 
 	'plugins:filters:or' => '...or ',
+	
+	'plugins:placeholder:categories' => "Choose categories",
+	'plugins:placeholder:versions' => "Choose Elgg versions",
+	'plugins:placeholder:licences' => "Choose licenses",
+	'plugins:placeholder:keyword' => "Filter by keyword",
 
 
 	'river:comment:object:plugin_release' => '%s commented on the plugin %s',

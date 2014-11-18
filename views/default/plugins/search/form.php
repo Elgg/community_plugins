@@ -4,6 +4,12 @@ global $CONFIG;
 $url = elgg_get_site_url() . 'plugins';
 $settings = $vars['settings'];
 
+//elgg_load_css('jquery.ui.dropdownchecklist');
+//elgg_load_js('jquery.ui.dropdownchecklist');
+elgg_load_js('jquery.chosen');
+elgg_load_css('jquery.chosen');
+elgg_load_js('elgg.communityPlugins');
+
 if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {
 	$label_prefix ='';
 } else {
@@ -22,7 +28,7 @@ if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
 		<div class="filter_fields">
 			<div class="filter_label"><?php echo $prefix . elgg_echo('plugins:filters:category'); ?></div>
 			<div>
-				<select name="f[c][]" <?php echo $classtext; ?>>
+				<select name="f[c][]" <?php echo $classtext; ?> data-placeholder="<?php echo elgg_echo('plugins:placeholder:categories'); ?>">
 				<?php foreach ($vars['categories'] as $key => $category) :?>
 					<option value="<?php echo $key; ?>" <?php echo (is_array($vars['current_values']['c']) && in_array($key, $vars['current_values']['c'])) ? 'selected="selected"' : ''; ?>><?php echo $category; ?></option>
 				<?php endforeach; ?>
@@ -37,7 +43,7 @@ if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
 		<div class="filter_fields">
 			<div class="filter_label"><?php echo $prefix . elgg_echo('plugins:filters:version'); ?></div>
 			<div>
-				<select name="f[v][]" <?php echo $classtext; ?>>
+				<select name="f[v][]" <?php echo $classtext; ?> data-placeholder="<?php echo elgg_echo('plugins:placeholder:versions'); ?>">
 				<?php foreach ($vars['versions'] as $version) :?>
 					<option value="<?php echo $version; ?>" <?php echo (is_array($vars['current_values']['v']) && in_array($version, $vars['current_values']['v'])) ? 'selected="selected"' : ''; ?>><?php echo $version; ?></option>
 				<?php endforeach; ?>
@@ -52,7 +58,7 @@ if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
 		<div class="filter_fields">
 			<div class="filter_label"><?php echo $prefix . elgg_echo('plugins:filters:licence'); ?></div>
 			<div>
-				<select name="f[l][]" <?php echo $classtext; ?>>
+				<select name="f[l][]" <?php echo $classtext; ?> data-placeholder="<?php echo elgg_echo('plugins:placeholder:licences'); ?>">
 				<?php foreach ($vars['licences'] as $key => $licence) :?>
 					<option value="<?php echo $key; ?>" <?php echo (is_array($vars['current_values']['l']) && in_array($key, $vars['current_values']['l'])) ? 'selected="selected"' : ''; ?>><?php echo $licence; ?></option>
 				<?php endforeach; ?>
@@ -66,7 +72,7 @@ if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
 		<div class="filter_fields">
 			<div class="filter_label"><?php echo $prefix . elgg_echo('plugins:filters:text'); ?></div>
 			<div>
-				<input type="text" name="f[t]" value="<?php echo $vars['current_values']['t']; ?>" class="input-text"/>
+				<input type="text" name="f[t]" value="<?php echo $vars['current_values']['t']; ?>" class="input-text" placeholder="<?php echo elgg_echo('plugins:placeholder:keyword'); ?>"/>
 			</div>
 		</div>
 		<?php $prefix = $label_prefix; ?>

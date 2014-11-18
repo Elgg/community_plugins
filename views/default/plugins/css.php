@@ -192,3 +192,12 @@ form#plugins_search_settings p.sub-option {
 		margin: 20px 0 0;
 	}
 }
+
+
+.elgg-module.plugin-search {
+	overflow: visible;
+}
+
+.elgg-module.plugin-search .elgg-body {
+	overflow: visible;
+}

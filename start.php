@@ -19,13 +19,9 @@ function plugins_init() {
 	elgg_register_js('elgg.communityPlugins', '/mod/community_plugins/js/communityPlugins.js', 'footer');
 	elgg_register_js('elgg.communityPlugins.filters', '/mod/community_plugins/js/communityPlugins/filters.js', 'footer');
 	elgg_register_js('jquery.flot', '/mod/community_plugins/vendors/flot/jquery.flot.js', 'footer');
-	elgg_register_js('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.js', 'footer');
-	elgg_register_css('jquery.ui.dropdownchecklist', '/mod/community_plugins/vendors/dropdown-check-list/ui.dropdownchecklist.standalone.css');
-
-	// TODO(ewinslow): Surely these don't need to go on EVERY page?
-	elgg_load_css('jquery.ui.dropdownchecklist');
-	elgg_load_js('jquery.ui.dropdownchecklist');
-	elgg_load_js('elgg.communityPlugins');
+	
+	elgg_register_js('jquery.chosen', '/mod/community_plugins/vendors/chosen/chosen.jquery.min.js', 'footer');
+	elgg_register_css('jquery.chosen', '/mod/community_plugins/vendors/chosen/chosen.min.css');
 
 	// Set up menu for logged in users
 	elgg_register_menu_item('site', array(
