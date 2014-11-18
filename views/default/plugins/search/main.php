@@ -4,7 +4,8 @@
  */
 
 $category = get_input('category', 'all');
-$category_label = $CONFIG->plugincats[$category];
+$categories = elgg_get_config('plugincats');
+$category_label = $categories[$category];
 
 $query = stripslashes(get_input('q', ''));
 

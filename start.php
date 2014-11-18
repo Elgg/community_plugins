@@ -273,6 +273,7 @@ function plugins_page_handler($segments) {
 		"plugins/edit" => "/plugins/{plugin}/edit",
 		"plugins/icon" => "/plugins/{plugin}/icons/{icon}.jpg",
 		"plugins/index" => "/plugins",
+		"plugins/list/{type}",
 		"plugins/new" => "/plugins/new",
 		"plugins/search" => "/plugins/search",
 		"plugins/transfer" => "/plugins/{plugin}/transfer",
@@ -347,6 +348,11 @@ function plugins_page_handler($segments) {
 		"/plugins/transfer/{plugin}" => function() {
 			$plugin = get_input('plugin');
 			forward("/plugins/$plugin/transfer");
+		},
+		"/plugins/list/{type}" => function() {
+			
+			include __DIR__ . '/pages/plugins/list.php';
+			return true;
 		},
 		"/plugins/{guid}/{release}" => function() {
 			$plugin = get_input('plugin');

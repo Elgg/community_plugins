@@ -33,7 +33,7 @@ echo '<div class="elgg-col elgg-col-1of3">';
 	echo '<div class="elgg-inner">';
 	echo elgg_view_module('info', elgg_echo('plugins:listing:newest'), $vars['newest'], array(
 		'footer' => elgg_view('output/url', array(
-			'href' => '/plugins/search?sort=created',
+			'href' => '/plugins/list/newest',
 			'text' => elgg_echo('plugins:browse_more:newest'),
 		)),
 	));
@@ -46,7 +46,7 @@ echo '<div class="elgg-col elgg-col-1of3">';
 	// Most downloaded
 	echo elgg_view_module('info', elgg_echo('plugins:listing:popular'), $vars['popular'], array(
 		'footer' => elgg_view('output/url', array(
-			'href' => '/plugins/search?sort=downloads',
+			'href' => '/plugins/list/popular',
 			'text' => elgg_echo('plugins:browse_more:popular'),
 		)),
 	));
@@ -60,7 +60,7 @@ echo '<div class="elgg-col elgg-col-1of3 elgg-col-last">';
 	// Most recommended
 	echo elgg_view_module('info', elgg_echo('plugins:listing:dugg'), $vars['recommended'], array(
 		'footer' => elgg_view('output/url', array(
-			'href' => '/plugins/search?sort=recommendations',
+			'href' => '/plugins/list/recommended',
 			'text' => elgg_echo('plugins:browse_more:dugg'),
 		)),
 	));
