@@ -17,7 +17,12 @@ $iconpath = elgg_get_site_url() . 'mod/community_plugins/graphics/icons';
 $owner = $project->getOwnerEntity();
 $recommends = $project->countAnnotations('plugin_digg');
 $summary = $project->summary;
-$updated_time = elgg_view_friendly_time($project->getLatestRelease()->time_created);
+if ($project->getLatestRelease()->time_created) {
+	$updated_time = elgg_view_friendly_time($project->getLatestRelease()->time_created);
+}
+else {
+	$updated_time = elgg_view_friendly_time($project->time_created);
+}
 $image = elgg_view_entity_icon($owner, 'small');
 
 $updated = elgg_echo('plugins:updated');
