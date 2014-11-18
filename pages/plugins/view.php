@@ -12,7 +12,7 @@ if (!$project instanceof PluginProject) {
 	exit;
 }
 
-$version = get_input('release');
+$version = get_input('version');
 if ($version) {
 	$release = $project->getReleaseFromVersion($version);
 	if (!isset($release)) {

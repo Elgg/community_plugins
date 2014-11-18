@@ -343,7 +343,7 @@ function plugins_page_handler($segments) {
 		"/plugins/release/{release}" => function() {
 			$release = get_entity(get_input('release'));
 			$plugin = $release->getProject();
-			forward("/plugins/{plugin}/releases/{version}");
+			forward("/plugins/{$plugin->guid}/releases/{$release->version}");
 		},
 		"/plugins/transfer/{plugin}" => function() {
 			$plugin = get_input('plugin');
@@ -354,8 +354,14 @@ function plugins_page_handler($segments) {
 			include __DIR__ . '/pages/plugins/list.php';
 			return true;
 		},
+		"/plugins/{guid}/{release}/{title}" => function() {
+			$plugin = get_input('guid');
+			$release = get_input('release');
+
+			forward("/plugins/$plugin/releases/$release");
+		},
 		"/plugins/{guid}/{release}" => function() {
-			$plugin = get_input('plugin');
+			$plugin = get_input('guid');
 			$release = get_input('release');
 
 			forward("/plugins/$plugin/releases/$release");
