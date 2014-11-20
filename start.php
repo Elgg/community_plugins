@@ -318,7 +318,7 @@ function plugins_page_handler($segments) {
 		"/plugins/edit/release/{release}" => function() {
 			$release = get_entity(get_input('release'));
 			$plugin = $release->getProject();
-			forward("/plugins/{$plugin->guid}/releases/{$release->version}");
+			forward("/plugins/{$plugin->guid}/releases/{$release->guid}/edit");
 		},
 		"/plugins/icon/{guid}/icon.jpg" => function() {
 			$icon = get_input('guid');

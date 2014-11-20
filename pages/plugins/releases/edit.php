@@ -6,14 +6,12 @@
 gatekeeper();
 
 $project = get_entity(get_input('plugin'));
-$release = $project->getReleaseFromVersion(get_input('release'));
+$release = get_entity(get_input('release'));
 
 if (!$release || !$release->canEdit()) {
 	register_error(elgg_echo('plugins:action:invalid_access'));
 	forward();
 }
-
-$project = get_entity($release->container_guid);
 
 elgg_set_page_owner_guid($project->owner_guid);
 
