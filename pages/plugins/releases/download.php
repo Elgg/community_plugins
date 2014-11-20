@@ -4,7 +4,7 @@
  */
 
 $project = get_entity(get_input("plugin"));
-$release = $project->getReleaseFromVersion($project->version);
+$release = $project->getReleaseFromVersion(get_input('release'));
 
 if (!$release || !$project) {
 	register_error(elgg_echo("plugins:error:downloadfailed"));
