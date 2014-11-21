@@ -104,13 +104,17 @@ if ($vars['stable']) {
 </table>
 
 <?php
+
+$release_toggle = 'Show recent releases';
 if ($vars['stable']) {
-	echo elgg_view('output/url', array(
-		'text' => 'Show all releases',
-		'href' => '#',
-		'class' => 'plugins-show-all'
-	));
+	$release_toggle = 'Show all releases';
 }
+echo elgg_view('output/url', array(
+		'text' => $release_toggle,
+		'href' => '#',
+		'class' => 'plugins-show-all',
+		'data-stable' => $vars['stable'] ? 0 : 1
+));
 
 if (!elgg_is_xhr()) {
 	echo '</div>';
