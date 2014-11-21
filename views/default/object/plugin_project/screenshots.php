@@ -13,8 +13,6 @@ if (!$img_files) {
 }
 
 elgg_load_css('smoothproducts');
-//elgg_require_js('smoothproducts');
-elgg_require_js('community_plugins/screenshots');
 
 echo '<div class="plugin-screenshots-wrapper clearfix">';
 echo '<div class="sp-wrap">';

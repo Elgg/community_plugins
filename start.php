@@ -194,6 +194,8 @@ function plugins_init() {
 	if (elgg_is_admin_logged_in()) {
 		elgg_register_event_handler('upgrade', 'system', 'plugins_upgrades');
 	}
+	
+	elgg_register_ajax_view('object/plugin_project/release_table');
 }
 
 /**

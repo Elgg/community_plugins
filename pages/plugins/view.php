@@ -40,7 +40,7 @@ if ($release && $release->elgg_version) {
 		$versions = $release->elgg_version;
 	}
 
-	$title = elgg_echo('plugins:project:title:version', array($project->title, $versions));
+	$title = $project->title;
 }
 
 $body = elgg_view_layout("one_sidebar", array(

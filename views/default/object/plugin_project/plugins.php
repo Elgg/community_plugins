@@ -2,6 +2,8 @@
 /** @var PluginProject $project */
 $project = $vars['entity'];
 
+elgg_require_js('community_plugins/plugin_page');
+
 /** @var PluginRelease $release */
 $release = $vars['release'];
 
@@ -37,7 +39,7 @@ $warning = elgg_view('object/plugin_project/warning', array('entity' => $project
 
 $screenshots = elgg_view('object/plugin_project/screenshots', array('entity' => $project));
 
-$stable_downloads = elgg_view('object/plugin_project/stable', array('entity' => $project));
+$stable_downloads = elgg_view('object/plugin_project/release_table', array('entity' => $project, 'stable' => true));
 ?>
 
 

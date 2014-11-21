@@ -223,6 +223,7 @@ form#plugins_search_settings p.sub-option {
 /* releases table */
 table.plugin-downloads {
 	border-radius: 5px;
+	width: 100%;
 }
 
 table.plugin-downloads thead tr.head {
@@ -235,10 +236,11 @@ table.plugin-downloads td {
 	padding: 3px 8px;
 }
 
-table.plugin-downloads tr:nth-child(odd) {
-	background-color: #E5E5E5;
+table.plugin-downloads tr {
+	/* background-color: #E5E5E5; */
+	border-bottom: 1px solid #E5E5E5;
 }
 
 table.plugin-downloads tr:nth-child(even) {
-	background-color: #f5f5f5;
+	background-color: #fcfcfc;
 }
