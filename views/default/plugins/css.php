@@ -201,3 +201,44 @@ form#plugins_search_settings p.sub-option {
 .elgg-module.plugin-search .elgg-body {
 	overflow: visible;
 }
+
+
+/* plugin screenshots */
+
+.plugin-screenshots-wrapper .sp-wrap {
+	float: none;
+	max-width: 80%;
+	text-align: center;
+}
+
+.plugin-screenshots-wrapper .sp-large {
+	display: none;
+}
+
+.plugin-screenshots-wrapper .sp-thumbs img {
+	width: 75px;
+	height: 75px;
+}
+
+/* releases table */
+table.plugin-downloads {
+	border-radius: 5px;
+}
+
+table.plugin-downloads thead tr.head {
+	background-color: #4787B8;
+	font-weight: bold;
+	color: white;
+}
+
+table.plugin-downloads td {
+	padding: 3px 8px;
+}
+
+table.plugin-downloads tr:nth-child(odd) {
+	background-color: #E5E5E5;
+}
+
+table.plugin-downloads tr:nth-child(even) {
+	background-color: #f5f5f5;
+}

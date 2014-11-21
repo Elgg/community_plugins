@@ -16,12 +16,29 @@ require_once(dirname(__FILE__) . '/lib/plugin_functions.php');
 function plugins_init() {
 	elgg_register_library('plugins:upgrades', __DIR__ . '/lib/upgrades.php');
 	
-	elgg_register_js('elgg.communityPlugins', '/mod/community_plugins/js/communityPlugins.js', 'footer');
-	elgg_register_js('elgg.communityPlugins.filters', '/mod/community_plugins/js/communityPlugins/filters.js', 'footer');
 	elgg_register_js('jquery.flot', '/mod/community_plugins/vendors/flot/jquery.flot.js', 'footer');
 	
-	elgg_register_js('jquery.chosen', '/mod/community_plugins/vendors/chosen/chosen.jquery.min.js', 'footer');
 	elgg_register_css('jquery.chosen', '/mod/community_plugins/vendors/chosen/chosen.min.css');
+	elgg_define_js('jquery.chosen', array(
+		'src' => '/mod/community_plugins/vendors/chosen/chosen.jquery.min.js',
+		'deps' => array('jquery')
+	));
+	
+	elgg_register_css('smoothproducts', '/mod/community_plugins/vendors/Smoothproducts/css/smoothproducts.css');
+	elgg_define_js('smoothproducts', array(
+		'src' => '/mod/community_plugins/vendors/Smoothproducts/js/smoothproducts.min.js',
+		'deps' => array('jquery')
+	));
+	
+	elgg_define_js('elgg.communityPlugins', array(
+		'src' => '/mod/community_plugins/js/communityPlugins.js',
+		'deps' => array('jquery')
+	));
+	
+	elgg_define_js('elgg.communityPlugins.filters', array(
+		'src' => '/mod/community_plugins/js/communityPlugins/filters.js',
+		'deps' => array('jquery', 'elgg.communityPlugins')
+	));
 
 	// Set up menu for logged in users
 	elgg_register_menu_item('site', array(

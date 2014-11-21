@@ -105,6 +105,27 @@ class PluginProject extends ElggObject {
 		return $this->getLatestRelease();
 	}
 	
+	/**
+	 * Get the most recent release for an elgg version
+	 * @param string $elgg_version
+	 */
+	public function getRecentReleaseByElggVersion($elgg_version) {
+		$options = array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'container_guid' => $this->guid,
+			'metadata_name_value_pairs' => array(
+				'name' => 'elgg_version',
+				'value' => $elgg_version
+			),
+			'limit' => 1
+		);
+		
+		$releases = elgg_get_entities_from_metadata($options);
+		
+		return $releases ? $releases[0] : false;
+	}
+	
 	
 	/**
 	 * Get a list of releases associated with this project

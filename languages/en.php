@@ -51,6 +51,7 @@ $english = array(
 
 	'plugins:project:request' => 'become the new maintainer',
 	'plugins:project:request_ownership' => "Request to %s of the plugin",
+	'plugins:latest:releases' => "Latest Releases",
 
 	/**
 	 * Menu items and titles
