@@ -1,5 +1,7 @@
 <?php
 
+namespace Community\Plugins;
+
 echo elgg_view('output/longtext', array('value' => elgg_echo('plugins:admin:trends:help')));
 
 
@@ -19,7 +21,7 @@ if ($guid) {
 	echo "<h4>" . elgg_echo('plugins:admin:trends:all') . "</h4>";
 }
 
-$histogram = plugins_get_downloads_histogram($guid, $num_days);
+$histogram = get_downloads_histogram($guid, $num_days);
 
 // create string for flot
 $plot_string = '';

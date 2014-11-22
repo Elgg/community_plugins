@@ -26,10 +26,6 @@ $title = elgg_echo('Stats');
 $content = elgg_view('plugins/project_sidebar/stats', array('entity' => $project));
 echo elgg_view_module('aside', $title, $content);
 
-// Releases
-$title = elgg_echo('Releases');
-$content = elgg_view('plugins/project_sidebar/releases', array('entity' => $project));
-echo elgg_view_module('aside', $title, $content);
 
 // Other plugins by the same user
 $all_user_plugins_count = elgg_get_entities(array(

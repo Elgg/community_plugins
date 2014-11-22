@@ -3,6 +3,9 @@
  * Upload new release
  */
 
+namespace Community\Plugins;
+use PluginRelease;
+
 elgg_make_sticky_form('community_plugins');
 
 // Get variables
@@ -15,7 +18,7 @@ $comments = get_input('comments', 'yes');
 $release_notes = plugins_strip_tags(get_input('release_notes'));
 
 // validate data
-$mimetype = plugins_get_mimetype('upload');
+$mimetype = get_mimetype('upload');
 if (!$mimetype) {
 	register_error(elgg_echo('plugins:error:badformat'));
 	forward(REFERER);

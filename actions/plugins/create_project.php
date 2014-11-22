@@ -3,6 +3,10 @@
  * Elgg plugin project creation action
  */
 
+namespace Community\Plugins;
+use PluginProject;
+use PluginRelease;
+
 elgg_make_sticky_form('community_plugins');
 
 // Get variables
@@ -41,7 +45,7 @@ if ($license == 'none' || !array_key_exists($license, $licenses)) {
 	register_error(elgg_echo('plugins:error:badlicense'));
 	forward(REFERER);
 }
-$mimetype = plugins_get_mimetype('upload');
+$mimetype = get_mimetype('upload');
 if (!$mimetype) {
 	register_error(elgg_echo('plugins:error:badformat'));
 	forward(REFERER);

@@ -3,6 +3,9 @@
  * Update plugin release
  */
 
+namespace Community\Plugins;
+use PluginRelease;
+
 elgg_make_sticky_form('community_plugins');
 
 // Get variables

@@ -3,6 +3,7 @@
  * Footer for main page
  */
 
+namespace Community\Plugins;
 
 // Note: Not using elgg_extract because these are potentially expensive database queries.
 if (!isset($vars['newest'])) {
@@ -10,7 +11,7 @@ if (!isset($vars['newest'])) {
 }
 
 if (!isset($vars['popular'])) {
-	$vars['popular'] = elgg_list_entities(array('pagination' => false), 'plugins_get_plugins_by_download_count');
+	$vars['popular'] = elgg_list_entities(array('pagination' => false), __NAMESPACE__ . '\\get_plugins_by_download_count');
 }
 
 if (!isset($vars['recommended'])) {

@@ -50,4 +50,4 @@ $body = elgg_view_layout("one_sidebar", array(
 ));
 
 
-echo elgg_view_page($project->title . ($release ? ", version $release->version" : ""), $body);
+echo elgg_view_page($project->title, $body);
