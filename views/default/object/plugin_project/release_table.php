@@ -60,7 +60,7 @@ if ($vars['stable']) {
 		foreach ($releases as $elgg_version => $ra) {
 			foreach ($ra as $key => $r) {
 				$download = elgg_view('output/url', array(
-					'text' => $r->originalfilename,
+					'text' => elgg_view_icon('download'),
 					'href' => 'plugins/download/' . $r->guid,
 				));
 
@@ -69,7 +69,7 @@ if ($vars['stable']) {
 				$hr_size = round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
 
 				$links = elgg_view('output/url', array(
-					'text' => elgg_echo('discussion'),
+					'text' => elgg_view_icon('speech-bubble'),
 					'href' => $r->getURL(),
 					'is_trusted' => true
 				));
