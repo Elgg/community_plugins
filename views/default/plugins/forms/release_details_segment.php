@@ -22,13 +22,13 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 	$release_notes = $release->release_notes;
 	$comments = $release->comments;
 
-	$recommended = ($release->recommended) ? 'yes' : 'no';
+	$recommended = $release->recommended;
 	$access_id = $release->access_id;
 } else {
 	$project = $release = $elgg_version = $version = $release_notes = NULL;
 
 	$comments = 'yes';
-	$recommended = 'yes';
+	$recommended = array();
 	$access_id = ($project) ? $project->access_id : ACCESS_PUBLIC;
 }
 
@@ -77,7 +77,8 @@ if (!$release) { ?>
 </div>
 
 <div class="elgg-input-wrapper">
-	<label><?php echo elgg_echo('plugins:edit:label:elgg_version'); ?>*</label>
+	<div class="elgg-col elgg-col-1of2">
+		<label><?php echo elgg_echo('plugins:edit:label:elgg_version'); ?>*</label><br>
 	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:elgg_version'); ?></span><br />
 	<?php
 		echo elgg_view("input/checkboxes",array(
@@ -87,6 +88,20 @@ if (!$release) { ?>
 			'options' => elgg_get_config('elgg_versions'),
 		));
 	?>
+	</div>
+	<div class="elgg-col elgg-col-1of2">
+		<label><?php echo elgg_echo('plugins:edit:label:recommended'); ?></label><br>
+	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:recommended'); ?></span><br />
+	<?php
+		echo elgg_view('input/checkboxes', array(
+			'name' => 'recommended',
+			'default' => false,
+			'value' => $sticky_values['recommended'] ? $sticky_values['recommended'] : $recommended,
+			'options' => elgg_get_config('elgg_versions'),
+		));
+	?>
+	</div>
+	<div class="clearfloat"></div>
 </div>
 
 <div class="elgg-input-wrapper">
@@ -111,19 +126,4 @@ if (!$release) { ?>
 		'name' => 'release_access_id',
 		'value' => $sticky_values['release_access_id'] ? $sticky_values['release_access_id'] : $access_id
 	)); ?>
-</div>
-
-<div class="elgg-input-wrapper">
-	<label><?php echo elgg_echo('plugins:edit:label:recommended'); ?></label>
-	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:recommended'); ?></span><br />
-	<?php
-		echo elgg_view("input/radio",array(
-			"name" => "recommended",
-			"value" => $sticky_values['recommended'] ? $sticky_values['recommended'] : $recommended,
-			'options' => array(
-				elgg_echo('plugins:yes') => 'yes',
-				elgg_echo('plugins:no') => 'no',
-			),
-		));
-	?>
 </div>

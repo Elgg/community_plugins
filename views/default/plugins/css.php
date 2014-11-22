@@ -244,3 +244,7 @@ table.plugin-downloads tr {
 table.plugin-downloads tr:nth-child(even) {
 	background-color: #fcfcfc;
 }
+
+table.plugin-downloads tr.recommended {
+	background-color: #CCFCD0;
+}

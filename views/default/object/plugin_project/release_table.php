@@ -24,7 +24,8 @@ if ($vars['stable']) {
 	$all_releases = $plugin->getReleases(array('limit' => false));
 	foreach ($elgg_versions as $v) {
 		foreach ($all_releases as $ar) {
-			if ($v == $ar->elgg_version) {
+			$versions = (array) $ar->elgg_version;
+			if (in_array($v, $versions)) {
 				$releases[$v][] = $ar;
 			}
 		}
@@ -89,8 +90,13 @@ if ($vars['stable']) {
 				}
 
 				$elgg_v = $key ? '' : $elgg_version;
+				
+				$class = '';
+				if (in_array($elgg_version, (array) $r->recommended) && !$vars['stable']) {
+					$class = 'recommended';
+				}
 
-				echo '<tr>';
+				echo "<tr class=\"{$class}\">";
 				echo '<td>' . $elgg_v . '</td>';
 				echo '<td>' . $r->version . '</td>';
 				echo '<td>' . $download . ' <span class="elgg-subtext">(' . $hr_size . ')</span>' . '</td>';
@@ -105,7 +111,7 @@ if ($vars['stable']) {
 
 <?php
 
-$release_toggle = elgg_echo('plugins:releases:show:recent');
+$release_toggle = elgg_echo('plugins:releases:show:recommended');
 if ($vars['stable']) {
 	$release_toggle = elgg_echo('plugins:releases:show:all');
 }

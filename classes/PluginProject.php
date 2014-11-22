@@ -102,14 +102,8 @@ class PluginProject extends ElggObject {
 			'type' => 'object',
 			'subtype' => 'plugin_release',
 			'metadata_name_value_pairs' => array(
-				array(
-					'name' => 'elgg_version',
-					'value' => $elgg_version
-				),
-				array(
 					'name' => 'recommended',
-					'value' => 'yes'
-				)
+					'value' => $elgg_version
 			),
 			'limit' => 1
 		));
@@ -118,7 +112,9 @@ class PluginProject extends ElggObject {
 			$this->recommended_release[$elgg_version] = $releases[0];
 			return $releases[0];
 		}
-		return $this->getRecentReleaseByElggVersion($elgg_version);
+		
+		$this->recommended_release[$elgg_version] = $this->getRecentReleaseByElggVersion($elgg_version);
+		return $this->recommended_release[$elgg_version];
 	}
 	
 	/**

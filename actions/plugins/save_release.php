@@ -35,17 +35,27 @@ $release->comments = $comments;
 $release->elgg_version = $elgg_version;
 
 // update recommended if required
-if ($recommended == 'yes') {
-	// remove any previous recommended
-	$existing_releases = $project->getReleasesByElggVersion($elgg_version);
-	if ($existing_releases) {
-		foreach ($existing_releases as $r) {
-			$r->recommended = 'no';
+// update recommended if required
+if ($recommended) {
+	foreach ($recommended as $ev) {
+		if (!in_array($ev, (array) $release->elgg_version)) {
+			continue;
+		}
+
+		$existing_releases = $project->getReleasesByElggVersion($ev);
+		if ($existing_releases) {
+			foreach ($existing_releases as $r) {
+				$r_recommended = (array) $r->recommended;
+				if (($key = array_search($ev, $r_recommended)) !== false) {
+					unset($r_recommended[$key]);
+				}
+				$r->recommended = $r_recommended;
+			}
 		}
 	}
-	
-	$release->recommended = $recommended;
 }
+
+$release->recommended = $recommended;
 
 if ($release->save()) {
 	system_message(elgg_echo("plugins:release:saved"));
