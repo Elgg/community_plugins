@@ -3,6 +3,8 @@
 namespace Community\Plugins;
 use PluginProject;
 use PluginRelease;
+use ElggUser;
+use ElggMenuItem;
 
 /**
  * Prepare a notification message about a new plugin project or a new plugin release
@@ -111,7 +113,11 @@ function owner_block_menu($hook, $type, $menu, $params) {
 	if (!$user instanceof ElggUser) {
 		return $menu;
 	}
-
+	
+	if (elgg_in_context('plugins')) {
+		return array(); // owner block menu causes clutter on these pages
+	}
+	
 	$url = "plugins/search?owner={$user->username}";
 	$item = new ElggMenuItem('plugins', elgg_echo('plugins'), $url);
 	$menu[] = $item;

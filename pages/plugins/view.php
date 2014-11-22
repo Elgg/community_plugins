@@ -12,36 +12,19 @@ if (!$project instanceof PluginProject) {
 	exit;
 }
 
-$version = get_input('version');
-if ($version) {
-	$release = $project->getReleaseFromVersion($version);
-	if (!isset($release)) {
-		register_error(elgg_echo('plugins:error:invalid_release'));
-		forward($project->getUrl());
-	}
-} else {
-	$release = $project->getRecommendedRelease();
-}
 
 elgg_set_page_owner_guid($project->getOwnerGUID());
+
+elgg_push_breadcrumb(elgg_echo('plugins'), 'plugins');
+elgg_push_breadcrumb($project->title);
 
 // grab the entity and sidebar views
 $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 $content = elgg_view_entity($project, array(
 	'full_view' => TRUE,
-	'release' => $release,
 ));
 
 $title = $project->title;
-if ($release && $release->elgg_version) {
-	if (is_array($release->elgg_version)) {
-		$versions = implode('/', array_reverse($release->elgg_version));
-	} else {
-		$versions = $release->elgg_version;
-	}
-
-	$title = $project->title;
-}
 
 $body = elgg_view_layout("one_sidebar", array(
 	'title' => $title,

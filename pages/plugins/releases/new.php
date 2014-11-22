@@ -13,6 +13,10 @@ if (!$project || !$project->canEdit()) {
 
 elgg_set_page_owner_guid($project->owner_guid);
 
+elgg_push_breadcrumb(elgg_echo('plugins'), 'plugins');
+elgg_push_breadcrumb($project->title, $project->getURL());
+elgg_push_breadcrumb(elgg_echo('projects:new:release'));
+
 $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 
 $title = elgg_echo('plugins:new:release');

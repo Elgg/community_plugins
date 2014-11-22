@@ -12,18 +12,6 @@ $project_owner = $project->getOwnerEntity();
 
 $updated = elgg_view_friendly_time($project->getLatestRelease()->time_created);
 
-$recommended = $project->getRecommendedRelease();
-
-if ($recommended) {
-	elgg_register_menu_item('title', array(
-		'name' => 'download',
-		'href' => "/plugins/download/" . $recommended->guid,
-		'text' => elgg_echo('plugins:download:version', array($release->version)),
-		'link_class' => 'elgg-button elgg-button-' . ($release && $release->isRecommendedRelease() ? 'submit' : 'delete'),
-		'encode_text' => TRUE,
-		'confirm' => $release && $release->isRecommendedRelease() ? false : elgg_echo('plugins:release:version_warning'),
-	));
-}
 
 if (elgg_is_logged_in() && !$project->isDugg()) {
 	elgg_register_menu_item('title', array(
@@ -35,7 +23,7 @@ if (elgg_is_logged_in() && !$project->isDugg()) {
 	));
 }
 
-$warning = elgg_view('object/plugin_project/warning', array('entity' => $project));
+echo elgg_view('object/plugin_project/warning', array('entity' => $project));
 
 $screenshots = elgg_view('object/plugin_project/screenshots', array('entity' => $project));
 
@@ -73,8 +61,3 @@ echo $stable_downloads;
 <div class="elgg-output">
 <?php echo elgg_autop($project->description); ?>
 </div>
-
-<?php
-if ($release) {
-	echo elgg_view_entity($release);
-}

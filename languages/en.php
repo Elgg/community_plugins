@@ -204,6 +204,9 @@ $english = array(
 	<li>What would make you a good author or the plugin?</li>
 	<li>What kind of changes would you do to the plugin?</li>
 </ul>",
+	
+	'projects:new:release' => "New Release",
+	'plugins:new:plugin' => "New Plugin",
 
 	/**
 	 * Notifications

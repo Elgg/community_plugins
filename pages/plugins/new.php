@@ -5,6 +5,9 @@
 
 gatekeeper();
 
+elgg_push_breadcrumb(elgg_echo('plugins'), 'plugins');
+elgg_push_breadcrumb(elgg_echo('plugins:new:plugin'));
+
 $container_guid = elgg_get_logged_in_user_guid();
 
 $title = elgg_echo('plugins:upload');
