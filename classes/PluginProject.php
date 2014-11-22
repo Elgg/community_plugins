@@ -93,16 +93,32 @@ class PluginProject extends ElggObject {
 	 * @todo This probably shouldn't return the latest release by default.
 	 * Those are two different concepts.
 	 */
-	public function getRecommendedRelease() {
-		if (isset($this->recommended_release)) {
-			return $this->recommended_release;
+	public function getRecommendedRelease($elgg_version) {
+		if (isset($this->recommended_release[$elgg_version])) {
+			return $this->recommended_release[$elgg_version];
 		}
 		
-		$release = $this->recommended_release = get_entity($this->recommended_release_guid);
-		if ($release) {
-			return $release;
+		$releases = elgg_get_entities_from_metadata(array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'metadata_name_value_pairs' => array(
+				array(
+					'name' => 'elgg_version',
+					'value' => $elgg_version
+				),
+				array(
+					'name' => 'recommended',
+					'value' => 'yes'
+				)
+			),
+			'limit' => 1
+		));
+		
+		if ($releases) {
+			$this->recommended_release[$elgg_version] = $releases[0];
+			return $releases[0];
 		}
-		return $this->getLatestRelease();
+		return $this->getRecentReleaseByElggVersion($elgg_version);
 	}
 	
 	/**
@@ -124,6 +140,21 @@ class PluginProject extends ElggObject {
 		$releases = elgg_get_entities_from_metadata($options);
 		
 		return $releases ? $releases[0] : false;
+	}
+	
+	public function getReleasesByElggVersion($elgg_version) {
+		$options = array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'container_guid' => $this->guid,
+			'metadata_name_value_pairs' => array(
+				'name' => 'elgg_version',
+				'value' => $elgg_version
+			),
+			'limit' => false
+		);
+		
+		return elgg_get_entities_from_metadata($options);
 	}
 	
 	

@@ -53,6 +53,9 @@ $english = array(
 	'plugins:project:request_ownership' => "Request to %s of the plugin",
 	'plugins:latest:releases' => "Latest Releases",
 	'plugins:releases:all' => "All releases",
+	'plugins:recommended:releases' => "Recommended Releases",
+	'plugins:releases:show:recent' => 'Show recent releases',
+	'plugins:releases:show:all' => "Show all releases",
 
 	/**
 	 * Menu items and titles

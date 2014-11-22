@@ -22,7 +22,7 @@ if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRele
 	$release_notes = $release->release_notes;
 	$comments = $release->comments;
 
-	$recommended = ($release->getGUID() == $project->recommended_release_guid) ? 'yes' : 'no';
+	$recommended = ($release->recommended) ? 'yes' : 'no';
 	$access_id = $release->access_id;
 } else {
 	$project = $release = $elgg_version = $version = $release_notes = NULL;

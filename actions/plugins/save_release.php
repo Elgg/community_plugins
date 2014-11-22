@@ -36,7 +36,15 @@ $release->elgg_version = $elgg_version;
 
 // update recommended if required
 if ($recommended == 'yes') {
-	$project->recommended_release_guid = $release->getGUID();
+	// remove any previous recommended
+	$existing_releases = $project->getReleasesByElggVersion($elgg_version);
+	if ($existing_releases) {
+		foreach ($existing_releases as $r) {
+			$r->recommended = 'no';
+		}
+	}
+	
+	$release->recommended = $recommended;
 }
 
 if ($release->save()) {

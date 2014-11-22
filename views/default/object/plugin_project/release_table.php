@@ -11,9 +11,9 @@ $elgg_versions = elgg_get_config('elgg_versions');
 // create an array of releases like array('1.9' => array(PluginRelease), '1.8' => array(PluginRelease))
 $releases = array();
 if ($vars['stable']) {
-	// only show the most recent for each elgg version
+	// only show the recommended release for each elgg version
 	foreach ($elgg_versions as $v) {
-		$release = $plugin->getRecentReleaseByElggVersion($v);
+		$release = $plugin->getRecommendedRelease($v);
 		if ($release) {
 			$releases[$v][] = $release;
 		}
@@ -41,7 +41,7 @@ if (!elgg_is_xhr()) {
 
 $header = elgg_echo('plugins:releases:all');
 if ($vars['stable']) {
-	$header = elgg_echo('plugins:latest:releases');
+	$header = elgg_echo('plugins:recommended:releases');
 }
 ?>
 <strong><?php echo $header; ?></strong>
@@ -105,9 +105,9 @@ if ($vars['stable']) {
 
 <?php
 
-$release_toggle = 'Show recent releases';
+$release_toggle = elgg_echo('plugins:releases:show:recent');
 if ($vars['stable']) {
-	$release_toggle = 'Show all releases';
+	$release_toggle = elgg_echo('plugins:releases:show:all');
 }
 echo elgg_view('output/url', array(
 		'text' => $release_toggle,

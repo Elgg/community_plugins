@@ -107,8 +107,17 @@ if (!$plugin_project->getGUID() || !$release->getGUID()) {
 	forward(REFERER);
 }
 
+// update recommended if required
 if ($recommended == 'yes') {
-	$plugin_project->recommended_release_guid = $release->getGUID();
+	// remove any previous recommended
+	$existing_releases = $project->getReleasesByElggVersion($elgg_version);
+	if ($existing_releases) {
+		foreach ($existing_releases as $r) {
+			$r->recommended = 'no';
+		}
+	}
+	
+	$release->recommended = $recommended;
 }
 
 // check for any project images and associate them with the project
