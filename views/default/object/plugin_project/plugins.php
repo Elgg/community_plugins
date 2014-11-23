@@ -12,6 +12,14 @@ $project_owner = $project->getOwnerEntity();
 
 $updated = elgg_view_friendly_time($project->getLatestRelease()->time_created);
 
+if ($project->canEdit()) {
+	elgg_register_menu_item('title', array(
+		'name' => 'edit',
+		'link_class' => 'elgg-button elgg-button-action',
+		'href' => "plugins/edit/project/{$project->guid}",
+		'text' => elgg_echo('edit'),
+	));
+}
 
 if (elgg_is_logged_in() && !$project->isDugg()) {
 	elgg_register_menu_item('title', array(
