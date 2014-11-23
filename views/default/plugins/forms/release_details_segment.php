@@ -3,6 +3,8 @@
  * Release details for use inside a form body.
  */
 
+elgg_require_js('elgg/community_plugins/releases_edit');
+
 $sticky_values = elgg_get_sticky_values('community_plugins');
 
 // see if we have a project
@@ -86,6 +88,7 @@ if (!$release) { ?>
 			"default" => false,
 			"value" => $sticky_values['elgg_version'] ? $sticky_values['elgg_version'] : $elgg_version,
 			'options' => elgg_get_config('elgg_versions'),
+			'data-release' => $release ? $release->guid : 0
 		));
 	?>
 	</div>
