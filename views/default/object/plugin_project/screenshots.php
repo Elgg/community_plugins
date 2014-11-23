@@ -26,20 +26,6 @@ foreach ($img_files as $file) {
 	$link = elgg_get_site_url() . "plugins/icon/{$file->getGUID()}/icon.jpg";
 
 	echo "<a href=\"$link\"><img src=\"$src\" alt=\"$file->title\" title=\"$file->title\" /></a>";
-
-	/*
-	if ($project->canEdit()) {
-		echo "<br/>";
-		$url = "/action/plugins/delete_project_image?project_guid={$project->getGUID()}&image_guid={$file->getGUID()}";
-		$url = elgg_add_action_tokens_to_url($url);
-		echo elgg_view('output/confirmlink', array(
-				'href' => $url,
-				'text' => 'delete',
-				'confirm' => elgg_echo("plugins:delete_project_image:confirm"),
-		));
-	}
-	 * 
-	 */
 }
 
 echo "</div>";
