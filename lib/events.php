@@ -56,6 +56,57 @@ function add_submenus() {
 	}
 }
 
+/**
+ * Triggered on comment creation
+ * Notifies plugin authors to comments on their releases
+ * Needed because releases are owned by the plugins, not the authors
+ * 
+ * @param type $event
+ * @param type $type
+ * @param type $comment
+ * @return boolean
+ */
+function release_comment_notification($event, $type, $comment) {
+	
+	if (!elgg_instanceof($comment, 'object', 'comment')) {
+		return true;
+	}
+	
+	$release = $comment->getContainerEntity();
+	if (!elgg_instanceof($release, 'object', 'plugin_release')) {
+		return true;
+	}
+	
+	$entity = $release->getContainerEntity();
+	
+	// plugin releases are owned by the projects, so we need to notify
+	// plugin owners manually
+	// Notify if poster wasn't owner
+	$user = $comment->getOwnerEntity();
+	if ($entity->owner_guid != $user->guid) {
+		$owner = $entity->getOwnerEntity();
+
+		notify_user($owner->guid,
+			$user->guid,
+			elgg_echo('generic_comment:email:subject', array(), $owner->language),
+			elgg_echo('generic_comment:email:body', array(
+				$entity->title,
+				$user->name,
+				$comment->description,
+				$entity->getURL(),
+				$user->name,
+				$user->getURL()
+			), $owner->language),
+			array(
+				'object' => $comment,
+				'action' => 'create',
+			)
+		);
+	}
+	
+	return true;
+}
+
 
 function upgrades() {
 	// only allow admin to perform upgrades
