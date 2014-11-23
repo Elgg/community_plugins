@@ -71,6 +71,9 @@ function init() {
 	
 	// Make sure Releases are editable
 	elgg_register_plugin_hook_handler('permissions_check', 'object', __NAMESPACE__ . '\\release_permissions_check');
+	
+	// make projects non-commentable in the river
+	elgg_register_plugin_hook_handler('permissions_check:comment', 'object', __NAMESPACE__ . '\\project_comments');
 
 	// manage owner block menu
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', __NAMESPACE__ . '\\owner_block_menu');

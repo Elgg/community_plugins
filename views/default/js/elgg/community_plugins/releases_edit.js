@@ -35,8 +35,8 @@ define(function(require) {
                 // if this has a data-release guid then we're editing
                 // if not then we're uploading a new plugin
                 // in which case we want to auto-set for convenience
-                var guid = $(this).attr('data-guid');
-                
+                var guid = $(this).attr('data-release');
+
                 if (guid) {
                     recommended.attr('checked', true);
                 }

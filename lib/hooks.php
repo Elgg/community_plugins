@@ -291,3 +291,12 @@ function update_download_counts() {
 	$count += 1200000;
 	elgg_set_plugin_setting('site_plugins_downloads', $count, 'community_plugins');
 }
+
+
+function project_comments($hook, $type, $return, $params) {
+	if (elgg_instanceof($params['entity'], 'object', 'plugin_project')) {
+		return false;
+	}
+	
+	return $return;
+}
