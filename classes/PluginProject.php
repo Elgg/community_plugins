@@ -313,6 +313,18 @@ class PluginProject extends ElggObject {
 
 		return elgg_get_entities($options);
 	}
+	
+	/**
+	 * Sync the titles of releases with the title of the project
+	 */
+	public function updateReleaseTitles() {
+		$releases = $this->getReleases(array('limit' => false));
+		
+		foreach ($releases as $r) {
+			$r->title = $this->title;
+			$r->save();
+		}
+	}
 
 	/*
 	 * move the files on the file system to a new owner guid

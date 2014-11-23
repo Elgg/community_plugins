@@ -93,6 +93,7 @@ function init() {
 	elgg_register_event_handler('pagesetup', 'system', __NAMESPACE__ . '\\add_submenus');
 	elgg_register_event_handler('upgrade', 'system', __NAMESPACE__ . '\\upgrades');
 	elgg_register_event_handler('create', 'object', __NAMESPACE__ . '\\release_comment_notification');
+	elgg_register_event_handler('update', 'object', __NAMESPACE__ . '\\project_update');
 	
 	//register a widget
 	elgg_register_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), array('profile'));

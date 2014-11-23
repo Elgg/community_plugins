@@ -130,6 +130,7 @@ $english = array(
 	'plugins:transfer:ownership' => "Transfer Ownership",
 	'plugins:author:homepage' => "Author homepage",
 	'plugins:author:recommended' => "Author Recommended",
+	'plugins:project:page:view' => "Project Page",
 
 	'plugins:elggversion' => "Version(s) of Elgg this plugin has been tested on",
 	'plugins:elgg_version' => "Elgg version",

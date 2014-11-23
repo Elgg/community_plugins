@@ -108,6 +108,15 @@ function release_comment_notification($event, $type, $comment) {
 }
 
 
+function project_update($event, $type, $project) {
+	if (!elgg_instanceof($project, 'object', 'plugin_project')) {
+		return true;
+	}
+	
+	$project->updateReleaseTitles();
+	return true;
+}
+
 function upgrades() {
 	// only allow admin to perform upgrades
 	if (!elgg_is_admin_logged_in()) {

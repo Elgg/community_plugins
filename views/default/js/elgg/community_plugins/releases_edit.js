@@ -31,6 +31,15 @@ define(function(require) {
             if ($(this).is(':checked')) {
                 // activate the corresponding recommended release
                 recommended.removeAttr('disabled');
+                
+                // if this has a data-release guid then we're editing
+                // if not then we're uploading a new plugin
+                // in which case we want to auto-set for convenience
+                var guid = $(this).attr('data-guid');
+                
+                if (guid) {
+                    recommended.attr('checked', true);
+                }
             }
             else {
                 // this was unchecked - uncheck the recommended box before disabling

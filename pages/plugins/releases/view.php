@@ -48,6 +48,14 @@ elgg_register_menu_item('title', array(
 	'encode_text' => TRUE,
 ));
 
+elgg_register_menu_item('title', array(
+	'name' => 'project_page',
+	'href' => $project->getURL(),
+	'text' => elgg_echo('plugins:project:page:view'),
+	'link_class' => 'elgg-button elgg-button-submit',
+	'encode_text' => TRUE,
+));
+
 
 // grab the entity and sidebar views
 $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
