@@ -3,10 +3,12 @@
  * List a developer's plugins
  */
 
+namespace Elgg\CommunityPlugins;
+
 $type = get_input('type', '');
 //$tag = get_input('tag', '');
 
-plugins_add_type_menu(elgg_get_page_owner_guid());
+add_type_menu(elgg_get_page_owner_guid());
 
 //set the title
 $types_string = elgg_echo("plugins:types:$type");

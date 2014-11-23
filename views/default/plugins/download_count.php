@@ -3,7 +3,9 @@
  * Total plugin stats for main page
  */
 
-$num_downloads = plugins_get_all_download_count();
+namespace Elgg\CommunityPlugins;
+
+$num_downloads = get_all_download_count();
 $num_downloads = number_format($num_downloads);
 
 $num_plugins = elgg_get_entities(array(

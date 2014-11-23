@@ -5,10 +5,15 @@
 
 $project = $vars['entity'];
 
+$dbprefix = elgg_get_config('dbprefix');
 $all_user_plugins = elgg_get_entities(array(
 	'types' => 'object',
 	'subtypes' => 'plugin_project',
 	'owner_guid' => $project->owner_guid,
+	'joins' => array(
+		"JOIN {$dbprefix}objects_entity oe ON oe.guid = e.guid"
+	),
+	'order_by' => "oe.title ASC",
 	'limit' => 0,
 ));
 

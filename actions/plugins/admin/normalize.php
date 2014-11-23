@@ -3,6 +3,8 @@
  * Finds daily download total outliers and replaces them with the median
  */
 
+namespace Elgg\CommunityPlugins;
+
 $guid = get_input('guid');
 if (!$guid) {
 	register_error(elgg_echo('plugins:action:normalize:invalid_guid'));
@@ -11,7 +13,7 @@ if (!$guid) {
 
 $preview = get_input('preview', FALSE);
 
-$downloads = plugins_get_downloads_histogram($guid, 0);
+$downloads = get_downloads_histogram($guid, 0);
 
 $mean = array_sum($downloads) / count($downloads);
 

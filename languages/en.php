@@ -51,6 +51,12 @@ $english = array(
 
 	'plugins:project:request' => 'become the new maintainer',
 	'plugins:project:request_ownership' => "Request to %s of the plugin",
+	'plugins:latest:releases' => "Latest Releases",
+	'plugins:releases:all' => "All releases",
+	'plugins:recommended:releases' => "Recommended Releases",
+	'plugins:releases:show:recent' => 'Show recent releases',
+	'plugins:releases:show:all' => "Show all releases",
+	'plugins:releases:show:recommended' => "Show recommended releases",
 
 	/**
 	 * Menu items and titles
@@ -124,6 +130,7 @@ $english = array(
 	'plugins:transfer:ownership' => "Transfer Ownership",
 	'plugins:author:homepage' => "Author homepage",
 	'plugins:author:recommended' => "Author Recommended",
+	'plugins:project:page:view' => "Project Page",
 
 	'plugins:elggversion' => "Version(s) of Elgg this plugin has been tested on",
 	'plugins:elgg_version' => "Elgg version",
@@ -202,6 +209,9 @@ $english = array(
 	<li>What would make you a good author or the plugin?</li>
 	<li>What kind of changes would you do to the plugin?</li>
 </ul>",
+	
+	'projects:new:release' => "New Release",
+	'plugins:new:plugin' => "New Plugin",
 
 	/**
 	 * Notifications

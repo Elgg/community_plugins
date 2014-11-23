@@ -1,7 +1,13 @@
 <?php
+
 /**
  * Elgg plugin project creation action
  */
+
+namespace Elgg\CommunityPlugins;
+
+use PluginProject;
+use PluginRelease;
 
 elgg_make_sticky_form('community_plugins');
 
@@ -25,7 +31,7 @@ $release_notes = plugins_strip_tags(get_input('release_notes'));
 $elgg_version = get_input('elgg_version', false);
 $comments = get_input('comments', 'yes');
 $version = strip_tags(get_input('version'));
-$recommended = get_input('recommended', FALSE);
+$recommended = get_input('recommended', array());
 $release_access_id = get_input('release_access_id', ACCESS_PUBLIC);
 
 $user = elgg_get_logged_in_user_entity();
@@ -41,7 +47,7 @@ if ($license == 'none' || !array_key_exists($license, $licenses)) {
 	register_error(elgg_echo('plugins:error:badlicense'));
 	forward(REFERER);
 }
-$mimetype = plugins_get_mimetype('upload');
+$mimetype = get_mimetype('upload');
 if (!$mimetype) {
 	register_error(elgg_echo('plugins:error:badformat'));
 	forward(REFERER);
@@ -103,13 +109,11 @@ if (!$plugin_project->getGUID() || !$release->getGUID()) {
 	forward(REFERER);
 }
 
-if ($recommended == 'yes') {
-	$plugin_project->recommended_release_guid = $release->getGUID();
-}
+$release->setRecommended($recommended);
 
 // check for any project images and associate them with the project
 $max_num_images = 4;
-for ($i=1; $i<=$max_num_images; $i++) {
+for ($i = 1; $i <= $max_num_images; $i++) {
 	if (!array_key_exists("image_$i", $_FILES)) {
 		continue;
 	}

@@ -3,11 +3,14 @@
  * Upload new release
  */
 
+namespace Elgg\CommunityPlugins;
+use PluginRelease;
+
 elgg_make_sticky_form('community_plugins');
 
 // Get variables
 $project_guid = get_input("guid");
-$recommended = get_input('recommended', 'no');
+$recommended = get_input('recommended', array());
 $elgg_version = get_input('elgg_version', false);
 $version = strip_tags(get_input('version'));
 $access_id = (int) get_input("release_access_id", ACCESS_PUBLIC);
@@ -15,7 +18,7 @@ $comments = get_input('comments', 'yes');
 $release_notes = plugins_strip_tags(get_input('release_notes'));
 
 // validate data
-$mimetype = plugins_get_mimetype('upload');
+$mimetype = get_mimetype('upload');
 if (!$mimetype) {
 	register_error(elgg_echo('plugins:error:badformat'));
 	forward(REFERER);
@@ -80,9 +83,7 @@ if ($release->saveArchive('upload') != TRUE) {
 	forward(REFERER);
 }
 
-if ($recommended == 'yes') {
-	$plugin_project->recommended_release_guid = $release->getGUID();
-}
+$release->setRecommended($recommended);
 
 $release->setHash();
 

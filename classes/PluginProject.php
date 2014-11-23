@@ -93,16 +93,65 @@ class PluginProject extends ElggObject {
 	 * @todo This probably shouldn't return the latest release by default.
 	 * Those are two different concepts.
 	 */
-	public function getRecommendedRelease() {
-		if (isset($this->recommended_release)) {
-			return $this->recommended_release;
+	public function getRecommendedRelease($elgg_version) {
+		if (isset($this->recommended_release[$elgg_version])) {
+			return $this->recommended_release[$elgg_version];
 		}
 		
-		$release = $this->recommended_release = get_entity($this->recommended_release_guid);
-		if ($release) {
-			return $release;
+		$releases = elgg_get_entities_from_metadata(array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'container_guid' => $this->guid,
+			'metadata_name_value_pairs' => array(
+					'name' => 'recommended',
+					'value' => $elgg_version
+			),
+			'limit' => 1
+		));
+		
+		if ($releases) {
+			$this->recommended_release[$elgg_version] = $releases[0];
+			return $releases[0];
 		}
-		return $this->getLatestRelease();
+		
+		$this->recommended_release[$elgg_version] = $this->getRecentReleaseByElggVersion($elgg_version);
+		return $this->recommended_release[$elgg_version];
+	}
+	
+	/**
+	 * Get the most recent release for an elgg version
+	 * @param string $elgg_version
+	 */
+	public function getRecentReleaseByElggVersion($elgg_version) {
+		$options = array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'container_guid' => $this->guid,
+			'metadata_name_value_pairs' => array(
+				'name' => 'elgg_version',
+				'value' => $elgg_version
+			),
+			'limit' => 1
+		);
+		
+		$releases = elgg_get_entities_from_metadata($options);
+		
+		return $releases ? $releases[0] : false;
+	}
+	
+	public function getReleasesByElggVersion($elgg_version) {
+		$options = array(
+			'type' => 'object',
+			'subtype' => 'plugin_release',
+			'container_guid' => $this->guid,
+			'metadata_name_value_pairs' => array(
+				'name' => 'elgg_version',
+				'value' => $elgg_version
+			),
+			'limit' => false
+		);
+		
+		return elgg_get_entities_from_metadata($options);
 	}
 	
 	
@@ -263,6 +312,18 @@ class PluginProject extends ElggObject {
 		$options = array_merge($defaults, $options);
 
 		return elgg_get_entities($options);
+	}
+	
+	/**
+	 * Sync the titles of releases with the title of the project
+	 */
+	public function updateReleaseTitles() {
+		$releases = $this->getReleases(array('limit' => false));
+		
+		foreach ($releases as $r) {
+			$r->title = $this->title;
+			$r->save();
+		}
 	}
 
 	/*

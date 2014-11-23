@@ -3,6 +3,9 @@
  * Update plugin release
  */
 
+namespace Elgg\CommunityPlugins;
+use PluginRelease;
+
 elgg_make_sticky_form('community_plugins');
 
 // Get variables
@@ -11,7 +14,7 @@ $version = strip_tags(get_input('version'));
 $release_notes = plugins_strip_tags(get_input('release_notes'));
 $elgg_version = get_input('elgg_version');
 $comments = get_input('comments', 'yes');
-$recommended = get_input('recommended', 'no');
+$recommended = get_input('recommended', array());
 $guid = (int) get_input('release_guid');
 
 // check permissions and existence of release
@@ -31,10 +34,7 @@ $release->release_notes = $release_notes;
 $release->comments = $comments;
 $release->elgg_version = $elgg_version;
 
-// update recommended if required
-if ($recommended == 'yes') {
-	$project->recommended_release_guid = $release->getGUID();
-}
+$release->setRecommended($recommended);
 
 if ($release->save()) {
 	system_message(elgg_echo("plugins:release:saved"));

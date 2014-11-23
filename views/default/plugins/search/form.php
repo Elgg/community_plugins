@@ -4,11 +4,9 @@ global $CONFIG;
 $url = elgg_get_site_url() . 'plugins';
 $settings = $vars['settings'];
 
-//elgg_load_css('jquery.ui.dropdownchecklist');
-//elgg_load_js('jquery.ui.dropdownchecklist');
-elgg_load_js('jquery.chosen');
 elgg_load_css('jquery.chosen');
-elgg_load_js('elgg.communityPlugins');
+elgg_require_js('jquery.chosen');
+elgg_require_js('elgg/community_plugins/plugins');
 
 if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {
 	$label_prefix ='';
@@ -18,7 +16,7 @@ if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {
 $prefix = '';
 
 if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
-	elgg_load_js('elgg.communityPlugins.filters');
+	elgg_require_js('elgg/community_plugins/filters');
 }
 
 ?>
