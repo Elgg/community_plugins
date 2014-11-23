@@ -6,7 +6,7 @@ $settings = $vars['settings'];
 
 elgg_load_css('jquery.chosen');
 elgg_require_js('jquery.chosen');
-elgg_require_js('community_plugins/plugins');
+elgg_require_js('elgg/community_plugins/plugins');
 
 if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {
 	$label_prefix ='';
@@ -16,7 +16,7 @@ if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {
 $prefix = '';
 
 if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
-	elgg_require_js('community_plugins/filters');
+	elgg_require_js('elgg/community_plugins/filters');
 }
 
 ?>

@@ -237,7 +237,6 @@ table.plugin-downloads td {
 }
 
 table.plugin-downloads tr {
-	/* background-color: #E5E5E5; */
 	border-bottom: 1px solid #E5E5E5;
 }
 

@@ -2,7 +2,7 @@
 /** @var PluginProject $project */
 $project = $vars['entity'];
 
-elgg_require_js('community_plugins/plugin_page');
+elgg_require_js('elgg/community_plugins/plugin_page');
 
 /** @var PluginRelease $release */
 $release = $vars['release'];

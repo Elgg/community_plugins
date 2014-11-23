@@ -31,16 +31,11 @@ foreach ($histogram as $k=>$v) {
 $plot_string = rtrim($plot_string, ',');
 
 ?>
-<div id="plugins_download_plot"></div>
-
-<?php elgg_load_js('jquery.flot'); ?>
-<script>
-$(function () {
-    $.plot($("#plugins_download_plot"), [<?php echo $plot_string; ?>]);
-});
-</script>
+<div id="plugins_download_plot" data-plot="[<?php echo $plot_string; ?>]"></div>
 
 <?php
+
+elgg_require_js('elgg/community_plugins/plugin_trends');
 
 if ($guid) {
 	echo elgg_view_form('plugins/admin/normalize', array(), array('guid' => $guid));

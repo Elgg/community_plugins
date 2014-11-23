@@ -129,7 +129,10 @@ function add_type_menu($owner_guid) {
 
 
 function register_js() {
-	elgg_register_js('jquery.flot', '/mod/community_plugins/vendors/flot/jquery.flot.js', 'footer');
+	elgg_define_js('jquery.flot', array(
+		'src' => '/mod/community_plugins/vendors/flot/jquery.flot.js',
+		'deps' => array('jquery')
+	));
 	
 	elgg_register_css('jquery.chosen', '/mod/community_plugins/vendors/chosen/chosen.min.css');
 	elgg_define_js('jquery.chosen', array(
