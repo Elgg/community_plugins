@@ -1,6 +1,6 @@
 <?php
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 
 
 /**

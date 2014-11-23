@@ -1,7 +1,6 @@
 <?php
 
-namespace Community\Plugins;
-use Elgg\CommunityPlugins\UriTemplate;
+namespace Elgg\CommunityPlugins;
 
 /**
  * Plugins page handler

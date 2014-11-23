@@ -1,6 +1,6 @@
 <?php
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 
 echo elgg_view('output/longtext', array('value' => elgg_echo('plugins:admin:trends:help')));
 

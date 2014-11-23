@@ -44,9 +44,8 @@ elgg_register_menu_item('title', array(
 	'name' => 'download',
 	'href' => "/plugins/download/" . $release->guid,
 	'text' => elgg_echo('plugins:download:version', array($release->version)),
-	'link_class' => 'elgg-button elgg-button-' . ($release && $release->isRecommendedRelease() ? 'submit' : 'delete'),
+	'link_class' => 'elgg-button elgg-button-submit',
 	'encode_text' => TRUE,
-	'confirm' => $release && $release->isRecommendedRelease() ? false : elgg_echo('plugins:release:version_warning'),
 ));
 
 

@@ -4,7 +4,7 @@
  * Elgg plugin project creation action
  */
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 
 use PluginProject;
 use PluginRelease;
@@ -31,7 +31,7 @@ $release_notes = plugins_strip_tags(get_input('release_notes'));
 $elgg_version = get_input('elgg_version', false);
 $comments = get_input('comments', 'yes');
 $version = strip_tags(get_input('version'));
-$recommended = get_input('recommended', FALSE);
+$recommended = get_input('recommended', array());
 $release_access_id = get_input('release_access_id', ACCESS_PUBLIC);
 
 $user = elgg_get_logged_in_user_entity();
@@ -109,27 +109,7 @@ if (!$plugin_project->getGUID() || !$release->getGUID()) {
 	forward(REFERER);
 }
 
-// update recommended if required
-if ($recommended) {
-	foreach ($recommended as $ev) {
-		if (!in_array($ev, (array) $release->elgg_version)) {
-			continue;
-		}
-
-		$existing_releases = $project->getReleasesByElggVersion($ev);
-		if ($existing_releases) {
-			foreach ($existing_releases as $r) {
-				$r_recommended = (array) $r->recommended;
-				if (($key = array_search($ev, $r_recommended)) !== false) {
-					unset($r_recommended[$key]);
-				}
-				$r->recommended = $r_recommended;
-			}
-		}
-	}
-}
-
-$release->recommended = $recommended;
+$release->setRecommended($recommended);
 
 // check for any project images and associate them with the project
 $max_num_images = 4;

@@ -3,7 +3,7 @@
  * Update a plugin project
  */
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 
 elgg_make_sticky_form('community_plugins');
 

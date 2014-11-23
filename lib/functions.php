@@ -1,6 +1,6 @@
 <?php
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 use PluginProject;
 
 /**
@@ -141,15 +141,5 @@ function register_js() {
 	elgg_define_js('smoothproducts', array(
 		'src' => '/mod/community_plugins/vendors/Smoothproducts/js/smoothproducts.min.js',
 		'deps' => array('jquery')
-	));
-	
-	elgg_define_js('elgg.communityPlugins', array(
-		'src' => '/mod/community_plugins/js/communityPlugins.js',
-		'deps' => array('jquery')
-	));
-	
-	elgg_define_js('elgg.communityPlugins.filters', array(
-		'src' => '/mod/community_plugins/js/communityPlugins/filters.js',
-		'deps' => array('jquery', 'elgg.communityPlugins')
 	));
 }

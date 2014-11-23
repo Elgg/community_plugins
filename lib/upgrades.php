@@ -1,6 +1,6 @@
 <?php
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 
 // start using plugin setting version to handle future upgrades
 function upgrade_20141121() {

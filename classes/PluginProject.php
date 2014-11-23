@@ -101,6 +101,7 @@ class PluginProject extends ElggObject {
 		$releases = elgg_get_entities_from_metadata(array(
 			'type' => 'object',
 			'subtype' => 'plugin_release',
+			'container_guid' => $this->guid,
 			'metadata_name_value_pairs' => array(
 					'name' => 'recommended',
 					'value' => $elgg_version

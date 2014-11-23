@@ -3,7 +3,7 @@
  * Finds daily download total outliers and replaces them with the median
  */
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 
 $guid = get_input('guid');
 if (!$guid) {

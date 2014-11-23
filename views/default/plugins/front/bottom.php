@@ -3,7 +3,7 @@
  * Footer for main page
  */
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 
 // Note: Not using elgg_extract because these are potentially expensive database queries.
 if (!isset($vars['newest'])) {

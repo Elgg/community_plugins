@@ -3,7 +3,7 @@
  * List a developer's plugins
  */
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 
 $type = get_input('type', '');
 //$tag = get_input('tag', '');

@@ -4,7 +4,7 @@
  *
  */
 
-namespace Community\Plugins;
+namespace Elgg\CommunityPlugins;
 
 require_once __DIR__ . '/lib/events.php';
 require_once __DIR__ . '/lib/hooks.php';
