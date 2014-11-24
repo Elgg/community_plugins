@@ -11,11 +11,12 @@ define(function(require) {
         // initialize the image zoomer
         $(window).load(function() {
             $('.sp-wrap').smoothproducts();
+			$('.sp-wrap').find('.sp-thumbs > .sp-current').removeClass('sp-current');
         });
 
         // open the image zoomer
         $(document).on('click', '.sp-thumbs a', function() {
-            $('.sp-large').slideDown();
+            $('.sp-large').show();
         });
 
         // close the image zoomer
@@ -26,6 +27,7 @@ define(function(require) {
                     && container.has(e.target).length === 0) // ... nor a descendant of the container
             {
                 container.find('.sp-large').slideUp();
+				container.find('.sp-thumbs > .sp-current').removeClass('sp-current');
             }
         });
         
