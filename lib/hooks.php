@@ -283,7 +283,7 @@ function search_hook($hook, $type, $value, $params) {
 function update_download_counts() {
 	$options = array(
 		'type' => 'object',
-		'subtype' => 'plugin_project',
+		'subtype' => 'plugin_release',
 		'annotation_name' => 'download',
 		'count' => true,
 	);
