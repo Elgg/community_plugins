@@ -216,7 +216,7 @@ form#plugins_search_settings p.sub-option {
 }
 
 .plugin-screenshots-wrapper .sp-thumbs img {
-	width: 75px;
+	width: auto;
 	height: 75px;
 }
 
