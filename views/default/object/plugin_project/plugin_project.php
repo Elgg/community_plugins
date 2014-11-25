@@ -8,8 +8,8 @@ $link = elgg_view('output/url', array(
 	'href' => $project->getURL(), 
 	'text' => $project->title, 
 ));
-$friendlytime = elgg_view_friendly_time($project->time_created);
+$friendlytime = elgg_view_friendly_time($project->last_action);
 $downloads = $project->getDownloadCount();
-$info = "<div class=\"elgg-subtext\">" . elgg_echo('plugins:uploadtime', array($friendlytime, $downloads)) . "</div>";
+$info = "<div class=\"elgg-subtext\">" . elgg_echo('plugins:updatedtime', array($friendlytime, $downloads)) . "</div>";
 
 echo elgg_view_image_block($icon, $link . $info);

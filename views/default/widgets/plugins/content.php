@@ -20,6 +20,7 @@ $options = array(
 	'subtypes' => array('plugin_project'),
 	'limit' => $number,
 	'offset' => 0,
+	'order_by' => 'e.last_action DESC',
 	'pagination' => false,
 );
 
