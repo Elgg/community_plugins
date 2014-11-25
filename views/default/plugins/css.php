@@ -121,6 +121,10 @@ span.info_item img {
 	cursor: default;
 }
 
+#plugin_search_form .filter_fields {
+	padding-bottom: 10px;
+}
+
 div#plugin_filters select.input-select {
     width: 222px;
 }
