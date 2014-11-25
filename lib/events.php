@@ -93,7 +93,7 @@ function release_comment_notification($event, $type, $comment) {
 				$entity->title,
 				$user->name,
 				$comment->description,
-				$entity->getURL(),
+				$release->getURL(),
 				$user->name,
 				$user->getURL()
 			), $owner->language),
