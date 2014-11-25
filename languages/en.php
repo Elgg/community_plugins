@@ -157,6 +157,7 @@ $english = array(
 	'plugins:title' => "Title",
 	'plugins:desc' => "Description",
 	'plugins:tags' => "Tags",
+	'plugins:notfound' => "The requested plugin cannot be found, please try a search",
 
 	'plugins:plugin_type' => 'Type of plugin?',
 	'plugins:plugin' => 'Plugin',

@@ -5,11 +5,7 @@
 
 $project = get_entity(get_input('plugin'));
 if (!$project instanceof PluginProject) {
-	header('Status: 404 Not Found');
-	$body = elgg_view("plugins/notfound");
-	$title = elgg_echo("plugins:notfound");
-	echo elgg_view_page($title, $body);
-	exit;
+	forward('plugins/search');
 }
 
 
