@@ -95,10 +95,14 @@ if ($vars['stable']) {
 				if (in_array($elgg_version, (array) $r->recommended) && !$vars['stable']) {
 					$class = 'recommended';
 				}
-if (!$r->version) { var_dump($r); }
+
+				$version = $r->version;
+				if (!$version) {
+					$version = elgg_echo('plugin:release:version:unknown');
+				}
 				echo "<tr class=\"{$class}\">";
 				echo '<td>' . $elgg_v . '</td>';
-				echo '<td>' . $r->version . '</td>';
+				echo '<td>' . $version . '</td>';
 				echo '<td>' . $download . ' <span class="elgg-subtext">(' . $hr_size . ')</span>' . '</td>';
 				echo '<td>' . date('Y-M-d', $r->time_created) . '</td>';
 				echo '<td>' . $links . '</td>';

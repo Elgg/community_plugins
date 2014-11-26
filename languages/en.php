@@ -58,6 +58,7 @@ $english = array(
 	'plugins:releases:show:recent' => 'Show recent releases',
 	'plugins:releases:show:all' => "Show all releases",
 	'plugins:releases:show:recommended' => "Show recommended releases",
+	'plugin:release:version:unknown' => "?",
 
 	/**
 	 * Menu items and titles
