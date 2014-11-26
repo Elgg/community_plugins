@@ -5,6 +5,7 @@
 
 $project = get_entity(get_input('plugin'));
 if (!$project instanceof PluginProject) {
+	register_error(elgg_echo('plugins:notfound'));
 	forward('plugins/search');
 }
 
