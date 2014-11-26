@@ -54,7 +54,7 @@ function plugins_page_handler($segments) {
 		"/plugins/download/{release}" => function() {
 			$release = get_entity(get_input('release'));
 			$plugin = $release->getProject();
-			forward("/plugins/{$plugin->guid}/releases/{$release->version}/download");
+			forward("/plugins/{$plugin->guid}/releases/{$release->guid}/download");
 		},
 		"/plugins/edit/project/{plugin}" => function() {
 			$plugin = get_input('plugin');

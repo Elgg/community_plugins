@@ -95,7 +95,7 @@ if ($vars['stable']) {
 				if (in_array($elgg_version, (array) $r->recommended) && !$vars['stable']) {
 					$class = 'recommended';
 				}
-
+if (!$r->version) { var_dump($r); }
 				echo "<tr class=\"{$class}\">";
 				echo '<td>' . $elgg_v . '</td>';
 				echo '<td>' . $r->version . '</td>';
