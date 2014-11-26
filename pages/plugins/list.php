@@ -36,7 +36,7 @@ switch ($list_type) {
 		break;
 	case 'newest':
 	default:
-		$options['order_by'] = 'e.time_created DESC';
+		$options['order_by'] = 'e.last_action DESC';
 		break;
 }
 
