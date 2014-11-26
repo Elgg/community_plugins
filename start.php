@@ -14,7 +14,7 @@ require_once __DIR__ . '/lib/page_handlers.php';
 define('PLUGINS_CONTRIBUTOR_RELATIONSHIP', 'plugin_contributor');
 
 const PLUGIN_ID = 'community_plugins';
-const UPGRADE_VERSION = 20141121;
+const UPGRADE_VERSION = 20141125;
 
 elgg_register_event_handler('init', 'system', __NAMESPACE__ . '\\init');
 

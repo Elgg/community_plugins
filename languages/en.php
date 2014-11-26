@@ -36,6 +36,7 @@ $english = array(
 	 *	Object views
 	 */
 	'plugins:uploadtime' => "Uploaded %s (%s)",
+	'plugins:updatedtime' => "Updated %s (%s)",
 	'plugins:release:version_warning' => 'Warning: The author recommends using a different release of this plugin! Do you still want to download this release?',
 	'plugins:download:version' => "Download %s",
 	'plugins:project:title:version' => "%s for Elgg %s",

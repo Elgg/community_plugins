@@ -7,7 +7,12 @@ namespace Elgg\CommunityPlugins;
 
 // Note: Not using elgg_extract because these are potentially expensive database queries.
 if (!isset($vars['newest'])) {
-	$vars['newest'] = elgg_list_entities(array('type' => 'object', 'subtype' => 'plugin_project', 'pagination' => false));
+	$vars['newest'] = elgg_list_entities(array(
+		'type' => 'object',
+		'subtype' => 'plugin_project',
+		'pagination' => false,
+		'order_by' => 'e.last_action DESC'
+		));
 }
 
 if (!isset($vars['popular'])) {
