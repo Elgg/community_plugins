@@ -4,9 +4,9 @@
  */
 
 $project = get_entity(get_input("plugin"));
-$release = $project->getReleaseFromVersion(get_input('release'));
+$release = get_entity(get_input('release'));
 
-if (!$release || !$project) {
+if (!$release || !$project || $release->container_guid != $project->guid) {
 	register_error(elgg_echo("plugins:error:downloadfailed"));
 	forward(REFERER);
 }

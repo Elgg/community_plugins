@@ -21,7 +21,7 @@ echo '<p>' . elgg_echo('plugins:user:plugin', array($project->getOwnerEntity()->
 
 echo "<select class='choose_plugin' onchange=\"window.open(this.options[this.selectedIndex].value,'_top')\">";
 foreach ($all_user_plugins as $up) {
-	if (get_input('guid') == $up->guid) {
+	if ($project->guid == $up->guid) {
 		$selected = "SELECTED";
 	} else {
 		$selected = '';
