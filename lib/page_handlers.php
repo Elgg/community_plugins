@@ -8,7 +8,7 @@ namespace Elgg\CommunityPlugins;
  * @param array $page Array of page elements
  */
 function plugins_page_handler($segments) {
-	$urls = array(
+	$resources = array(
 		"plugins/contributors" => "/plugins/{plugin}/contributors",
 		"plugins/developer" => "/users/{developer}/plugins",
 		"plugins/edit" => "/plugins/{plugin}/edit",
@@ -121,10 +121,8 @@ function plugins_page_handler($segments) {
 
 	array_unshift($segments, 'plugins');
 	$path = "/" . implode("/", $segments);
-	$plugin_dir = dirname(dirname(__FILE__));
-	$pages_dir = "$plugin_dir/pages";
 	
-	foreach($urls as $state => $template_str) {
+	foreach($resources as $resource_name => $template_str) {
 		$template = new UriTemplate($template_str);
 
 		$result = $template->match($path);
@@ -133,7 +131,12 @@ function plugins_page_handler($segments) {
 				set_input($name, $value);
 			}
 
-			include_once("$pages_dir/$state.php");
+			$view_name = "resources/$resource_name";
+			
+			if (!elgg_view_exists($view_name)) {
+				echo "You need to define this view: views/default/$view_name.php";
+			}
+			echo elgg_view($view_name);
 			return true;
 		}
 	}
