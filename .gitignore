@@ -1,4 +1,3 @@
-/.settings
-/.project
-/.buildpath
+.*
+!.tx
 /vendor/

@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+
+[elgg-community-plugins.en]
+file_filter = languages/<lang>.php
+source_file = languages/en.php
+source_lang = en
+source_type = PHP_ARRAY
