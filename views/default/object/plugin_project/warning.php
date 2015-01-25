@@ -4,11 +4,21 @@ $project = elgg_extract('entity', $vars);
 
 $time_created = $project->getLatestRelease()->time_created;
 
+$not_compatible = function() use ($project) {
+	// Get the latest Elgg version
+	$latest_elgg = array_shift(elgg_get_config('elgg_versions'));
+
+	// Check if there is a release compatible with latest Elgg
+	$version_found = $project->getRecentReleaseByElggVersion($latest_elgg);
+
+	return $version_found ? false : true;
+};
+
 $year = 60 * 60 * 24 * 365;
 $seconds_ago = time() - $time_created;
 $years_ago = (int) floor($seconds_ago / $year);
 
-if ($years_ago > 2) {
+if ($years_ago > 2 && $not_compatible()) {
 	$warning = elgg_echo('plugins:project:outdated_warning', array($years_ago));
 
 	$help = elgg_echo('plugins:project:help');
