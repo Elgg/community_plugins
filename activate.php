@@ -23,4 +23,4 @@ $sql = "CREATE TABLE IF NOT EXISTS `{$db_prefix}plugin_downloads` (
 	KEY `downloads` (`downloads`)
 ) ENGINE=MyISAM";
 
-get_data($sql);
+update_data($sql);
