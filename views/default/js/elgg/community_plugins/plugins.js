@@ -11,7 +11,7 @@ define(function(require) {
         $('form#plugin_search_form select.multiselect').chosen();
 
         // "Clear search" button loads search page without parameters
-        $('form#plugin_search_form .elgg-button-cancel').live('click', function() {
+        $(document).on('click', 'form#plugin_search_form .elgg-button-cancel', function() {
             window.location.href = elgg.get_site_url() + "plugins/search";
         });
     };
