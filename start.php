@@ -89,7 +89,9 @@ function init() {
 
 	elgg_register_plugin_hook_handler('cron', 'daily', __NAMESPACE__ . '\\update_download_counts');
 	
-
+	// add project info to <meta> tags
+	elgg_register_plugin_hook_handler('head', 'page', __NAMESPACE__ . '\\prepare_page_head_meta');
+	
 	/**
 	 * Register Events
 	 */

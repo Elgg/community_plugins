@@ -69,7 +69,10 @@ $body = elgg_view_layout("one_sidebar", array(
 	'title' => $title,
 	'sidebar' => $sidebar,
 	'content' => $content,
+	'entity' => $project,
 		));
 
 
-echo elgg_view_page($project->title, $body);
+echo elgg_view_page($project->title, $body, 'default', [
+	'entity' => $project,
+]);
