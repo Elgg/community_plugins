@@ -50,6 +50,7 @@ $fields = [
 	'title' => [
 		'value' => $sticky_values['title'] ? $sticky_values['title'] : $title,
 		'label' => elgg_echo('plugins:edit:label:name'),
+		'required' => true,
 	],
 	'summary' => [
 		'value' => $sticky_values['summary'] ? $sticky_values['summary'] : $summary,
@@ -77,6 +78,7 @@ $fields = [
 			'href' => 'http://www.gnu.org/philosophy/license-list.html#GPLCompatibleLicenses',
 			'target' => '_blank',
 				], elgg_echo('license:blurb')),
+		'required' => true,
 	],
 	'plugin_type' => [
 		'type' => 'dropdown',
