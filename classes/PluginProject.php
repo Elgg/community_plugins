@@ -1,22 +1,31 @@
 <?php
 
+use Elgg\CommunityPlugins\GithubService;
+use Elgg\CommunityPlugins\HttpClient;
+use Elgg\Filesystem\MimeTypeDetector;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 /**
  * Models the concept of a plugin. Handles revisions with PluginRelease objects.
  * 
- * @property int $recommended_release_guid GUID of the author-recommended release for this plugin.
+ * @property int    $recommended_release_guid GUID of the author-recommended release for this plugin.
+ * @property string $github_owner             Owner of the github repository
+ * @property string $github_repo              Name of the github repository
+ * @property int    $github_access_id         Access ID of releases imported from Github
+ * @property string $github_comments          Allows comments on releases imported from Github
  */
 class PluginProject extends ElggObject {
+
 	/**
 	 * @var PluginRelease
 	 */
 	private $latest_release;
-	
+
 	/**
 	 * @var PluginRelease
 	 */
 	private $recommended_release;
-	
-	
+
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 
@@ -31,17 +40,17 @@ class PluginProject extends ElggObject {
 	public function isDugg() {
 		return !!check_entity_relationship(elgg_get_logged_in_user_guid(), "has_dugg", $this->guid);
 	}
-	
+
 	public function addDigg() {
 		return add_entity_relationship(elgg_get_logged_in_user_guid(), 'has_dugg', $this->guid);
 	}
-	
+
 	/** @return int */
 	public function countDiggs() {
 		return $this->countAnnotations('plugin_digg');
 	}
-	
-	/** @return array */	
+
+	/** @return array */
 	public function getScreenshots() {
 		return elgg_get_entities_from_relationship(array(
 			'relationship_guid' => $this->getGUID(),
@@ -49,7 +58,7 @@ class PluginProject extends ElggObject {
 			'order_by' => 'guid',
 		));
 	}
-	
+
 	/**
 	 * @return PluginRelease The most recently uploaded version of this plugin.
 	 */
@@ -57,21 +66,20 @@ class PluginProject extends ElggObject {
 		if (isset($this->latest_release)) {
 			return $this->latest_release;
 		}
-		
+
 		$releases = elgg_get_entities(array(
 			'type' => 'object',
 			'subtype' => 'plugin_release',
 			'container_guid' => $this->guid,
 			'limit' => 1,
 		));
-		
+
 		return $this->latest_release = $releases[0];
 	}
-	
-	
+
 	/**
 	 * @param string $version The version number to look for (e.g., '1.3.2')
-	 * @return PluginRelease The release of this plugin that matches the specified version. 
+	 * @return PluginRelease The release of this plugin that matches the specified version.
 	 */
 	public function getReleaseFromVersion($version) {
 		$releases = elgg_get_entities_from_metadata(array(
@@ -82,11 +90,10 @@ class PluginProject extends ElggObject {
 			'metadata_value' => $version,
 			'limit' => 1,
 		));
-		
+
 		return $releases[0];
 	}
-	
-	
+
 	/**
 	 * @return ElggRelease The author-recommended version of this plugin.
 	 *
@@ -97,27 +104,27 @@ class PluginProject extends ElggObject {
 		if (isset($this->recommended_release[$elgg_version])) {
 			return $this->recommended_release[$elgg_version];
 		}
-		
+
 		$releases = elgg_get_entities_from_metadata(array(
 			'type' => 'object',
 			'subtype' => 'plugin_release',
 			'container_guid' => $this->guid,
 			'metadata_name_value_pairs' => array(
-					'name' => 'recommended',
-					'value' => $elgg_version
+				'name' => 'recommended',
+				'value' => $elgg_version
 			),
 			'limit' => 1
 		));
-		
+
 		if ($releases) {
 			$this->recommended_release[$elgg_version] = $releases[0];
 			return $releases[0];
 		}
-		
+
 		$this->recommended_release[$elgg_version] = $this->getRecentReleaseByElggVersion($elgg_version);
 		return $this->recommended_release[$elgg_version];
 	}
-	
+
 	/**
 	 * Get the most recent release for an elgg version
 	 * @param string $elgg_version
@@ -133,12 +140,12 @@ class PluginProject extends ElggObject {
 			),
 			'limit' => 1
 		);
-		
+
 		$releases = elgg_get_entities_from_metadata($options);
-		
+
 		return $releases ? $releases[0] : false;
 	}
-	
+
 	public function getReleasesByElggVersion($elgg_version) {
 		$options = array(
 			'type' => 'object',
@@ -150,11 +157,10 @@ class PluginProject extends ElggObject {
 			),
 			'limit' => false
 		);
-		
+
 		return elgg_get_entities_from_metadata($options);
 	}
-	
-	
+
 	/**
 	 * Get a list of releases associated with this project
 	 * 
@@ -168,13 +174,13 @@ class PluginProject extends ElggObject {
 			'container_guid' => $this->guid,
 		)));
 	}
-	
+
 	/**
 	 * Increment the download count
 	 */
 	public function updateDownloadCount() {
 		// increment total downloads for all plugins
-		$count = (int)elgg_get_plugin_setting('site_plugins_downloads', 'community_plugins');
+		$count = (int) elgg_get_plugin_setting('site_plugins_downloads', 'community_plugins');
 		elgg_set_plugin_setting('site_plugins_downloads', ++$count, 'community_plugins');
 
 		// increment this plugin project's downloads
@@ -291,7 +297,7 @@ class PluginProject extends ElggObject {
 		if ($result === false) {
 			return 0;
 		}
-		return (int)$result->downloads;
+		return (int) $result->downloads;
 	}
 
 	/**
@@ -302,7 +308,7 @@ class PluginProject extends ElggObject {
 	 */
 	static public function getPluginsByDownloads(array $options = array()) {
 		$db_prefix = get_config('dbprefix');
-		
+
 		$defaults = array(
 			'type' => 'object',
 			'subtype' => 'plugin_project',
@@ -313,13 +319,13 @@ class PluginProject extends ElggObject {
 
 		return elgg_get_entities($options);
 	}
-	
+
 	/**
 	 * Sync the titles of releases with the title of the project
 	 */
 	public function updateReleaseTitles() {
 		$releases = $this->getReleases(array('limit' => false));
-		
+
 		foreach ($releases as $r) {
 			$r->title = $this->title;
 			$r->save();
@@ -331,15 +337,16 @@ class PluginProject extends ElggObject {
 	 * @param ElggFile $file - The file with resources to be moved
 	 * @param int $new_owner_guid - new owner guid where the resources will be moved
 	 */
+
 	static public function moveFilesOnSystem($file, $new_owner_guid) {
 		if (!($file instanceof ElggFile)) {
 			return false;
 		}
-		
+
 		if ($file->owner_guid == $new_owner_guid) {
 			return true; // no need to move
 		}
-		
+
 		$old_location = $file->getFileNameOnFilestore();
 
 		$file->owner_guid = $new_owner_guid;
@@ -358,11 +365,302 @@ class PluginProject extends ElggObject {
 			error_log(elgg_echo('plugins:action:transfer:not_moved', array($file->guid)));
 			return false;
 		}
-		
+
 		// cleanup
 		// note - rmdir only removes empty directories
 		@rmdir(dirname($old_location));
-		
+
 		return true;
 	}
+
+	/**
+	 * Set Github project details
+	 *
+	 * @param string $owner Repo owner
+	 * @param string $repo  Repo name
+	 * @return void
+	 */
+	public function setGithubRepo($owner, $repo) {
+		if (empty($owner) || empty($repo)) {
+			return;
+		}
+		$this->github_owner = $owner;
+		$this->github_repo = $repo;
+		if (!isset($this->github_secret)) {
+			$this->github_secret = generate_random_cleartext_password();
+		}
+		if (empty($this->repo)) {
+			$this->repo = "https://github.com/$this->github_owner/$this->github_repo";
+		}
+	}
+
+	/**
+	 * Create a new release from uploaded file
+	 * 
+	 * @param string $input_name         File input name
+	 * @param array  $attrs              Attributes and metadata to set on the release
+	 * @param bool   $create_river_entry Create river entry for the new release
+	 * @return PluginRelease|false
+	 */
+	public function addReleaseFromUpload($input_name, array $attrs = [], $create_river_entry = false) {
+
+		$files = _elgg_services()->request->files;
+		if (!$files->has($input_name)) {
+			return false;
+		}
+
+		$input = $files->get($input_name);
+		if (!$input instanceof UploadedFile || !$input->isValid()) {
+			return false;
+		}
+
+		$originalfilename = $input->getClientOriginalName();
+		$release_filename = time() . $originalfilename;
+
+		$release = new PluginRelease();
+		$release->container_guid = $this->guid;
+		$release->setFilename("plugins/$release_filename");
+		$release->open('write');
+		$release->close();
+
+		copy($input->getPathname(), $release->getFilenameOnFilestore());
+
+		if (!$release->getManifest()) {
+			$release->delete();
+			return false;
+		}
+
+		$release->title = $this->title;
+		$release->mimetype = (new MimeTypeDetector())->getType($release_filename, $input->getClientMimeType());
+		$release->simpletype = elgg_get_file_simple_type($release->mimetype);
+		$release->originalfilename = $originalfilename;
+
+		unlink($input->getPathname());
+
+		foreach ($attrs as $key => $value) {
+			switch ($key) {
+				case 'recommended' :
+					$release->setRecommended((array) $value);
+					break;
+				case 'release_notes' :
+					$release->$key = \Elgg\CommunityPlugins\plugins_strip_tags($value);
+					break;
+				default :
+					$release->$key = $value;
+					break;
+			}
+		}
+
+		if ($release->save()) {
+			if ($create_river_entry) {
+				$release->createRiverEntry();
+			}
+			update_entity_last_action($this->guid);
+			return $release;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Create a new release from Github
+	 *
+	 * @param int   $github_release_id  Github release id
+	 * @param array $attrs              Attributes and metadata to set on the release
+	 * @param bool  $create_river_entry Create a river entry for the new release
+	 * @return PluginRelease|false
+	 */
+	public function addReleaseFromGithub($github_release_id, array $attrs = [], $create_river_entry = false) {
+
+		$ia = elgg_set_ignore_access(true);
+		$existing = elgg_get_entities_from_metadata([
+			'types' => 'object',
+			'subtypes' => 'plugin_release',
+			'metadata_name_value_pairs' => [
+				'name' => 'github_guid',
+				'value' => implode(':', [$this->github_owner, $this->github_repo, $github_release_id]),
+			],
+			'count' => true,
+		]);
+		elgg_set_ignore_access($ia);
+
+		if ($existing) {
+			return false;
+		}
+
+		$api = new GithubService();
+		$release_data = $api->getRelease($this->github_owner, $this->github_repo, $github_release_id);
+
+		if (empty($release_data)) {
+			return false;
+		}
+
+		$download_url = false;
+		$assets = $release_data['assets'];
+		if (empty($assets)) {
+			return false;
+		}
+		foreach ($assets as $asset) {
+			if ($asset['content_type'] !== 'application/zip') {
+				continue;
+			}
+			$download_url = $asset['browser_download_url'];
+			$originalfilename = $asset['name'];
+			break;
+		}
+
+		if (!$download_url) {
+			return false;
+		}
+
+		if (!$originalfilename) {
+			$originalfilename = pathinfo($download_url, PATHINFO_BASENAME);
+		}
+
+		$contents = (new HttpClient())->get($download_url);
+
+		if (empty($contents)) {
+			return false;
+		}
+
+		$release_filename = time() . $originalfilename;
+
+		$owner_guid = elgg_extract('owner_guid', $attrs);
+		unset($attrs['owner_guid']);
+		if (!$owner_guid) {
+			$owner_guid = elgg_is_logged_in() ? elgg_get_logged_in_user_entity() : $this->owner_guid;
+		}
+		$release = new PluginRelease();
+		$release->owner_guid = $owner_guid;
+		$release->container_guid = $this->guid;
+		$release->setFilename("plugins/$release_filename");
+
+		$release->open('write');
+		$release->write($contents);
+		$release->close();
+
+		if (!$release->getManifest()) {
+			$release->delete();
+			return false;
+		}
+
+		$release->title = $this->title;
+		$release->mimetype = 'application/zip';
+		$release->simpletype = elgg_get_file_simple_type($release->mimetype);
+		$release->originalfilename = $originalfilename;
+
+		$github_attrs = [
+			'release_notes' => $release_data['body'],
+			'version' => $release_data['tag_name'],
+			'github_owner' => $this->github_owner,
+			'github_repo' => $this->github_repo,
+			'access_id' => $this->github_access_id,
+			'comments' => $this->github_comments,
+			'github_id' => $release_data['id'],
+			'github_guid' => implode(':', [$this->github_owner, $this->github_repo, $release_data['id']]),
+			'github_tag_name' => $release_data['tag_name'],
+			'github_draft' => $release_data['draft'],
+			'github_prerelease' => $release_data['prerelease'], 'github_access_id  '
+		];
+
+		$attrs = array_merge($github_attrs, $attrs);
+
+		foreach ($attrs as $key => $value) {
+			switch ($key) {
+				case 'recommended' :
+					$release->setRecommended((array) $value);
+					break;
+				case 'release_notes' :
+					$release->$key = \Elgg\CommunityPlugins\plugins_strip_tags($value);
+					break;
+				default :
+					$release->$key = $value;
+					break;
+			}
+		}
+
+		if (empty($release->elgg_version)) {
+			$release->elgg_version = $release->getSupportedElggVersions(false);
+		}
+
+		if (!isset($attrs['recommended']) && !$release->github_draft && !$release->github_prerelease) {
+			$recommended = array();
+			$elgg_versions = (array) $release->elgg_version;
+			foreach ($elgg_versions as $elgg_version) {
+				$recommended_releases = elgg_get_entities_from_metadata(array(
+					'type' => 'object',
+					'subtype' => 'plugin_release',
+					'container_guid' => $this->guid,
+					'metadata_name_value_pairs' => array(
+						'name' => 'recommended',
+						'value' => $elgg_version
+					),
+					'limit' => 1
+				));
+
+				$recommended_release = false;
+				if ($recommended_releases) {
+					$recommended_release = $recommended_releases[0]->version;
+				}
+
+				if (!$recommended_release || version_compare($release->version, $recommended_release, '>')) {
+					$recommended[] = $elgg_version;
+				}
+			}
+			$release->setRecommended($recommended);
+		}
+
+		// Allow event handlers to do more stuff with data
+		$release->setVolatileData('github_release', $release_data);
+
+		if ($release->save()) {
+			if ($create_river_entry) {
+				$release->createRiverEntry();
+			}
+			update_entity_last_action($this->guid);
+			return $release;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Process Github webhook payload
+	 * @return PluginRelease
+	 * @throws \Elgg\CommunityPlugins\HttpException
+	 */
+	public function digestGithubPayload() {
+
+		if (!$this->github_secret) {
+			throw new \Elgg\CommunityPlugins\HttpException('Plugin project can not be released via Github', 400);
+		}
+
+		$api = new GithubService();
+		$payload = $api->filterPayload($this->github_secret);
+
+		$event = _elgg_services()->request->headers->get('X-GitHub-Event');
+		$delivery = _elgg_services()->request->headers->get('X-Github-Delivery');
+
+		switch ($event) {
+			case 'release' :
+				if ($payload['action'] != 'published' || !isset($payload['release'])) {
+					throw new \Elgg\CommunityPlugins\HttpException('Unrecognized payload structure', 400);
+				}
+				$github_release_id = $payload['release']['id'];
+				$release = $this->addReleaseFromGithub($github_release_id, [
+					'owner_guid' => $this->owner_guid,
+						], true);
+
+				if (!$release) {
+					throw new \Elgg\CommunityPlugins\HttpException("Unable to create new plugin project release for Github release $github_release_id", 400);
+				}
+				
+				$release->github_delivery_id = $delivery;
+				return $release;
+
+			default :
+				throw new  \Elgg\CommunityPlugins\HttpException("Payload for $event event can not be digested", 501);
+		}
+	}
+
 }

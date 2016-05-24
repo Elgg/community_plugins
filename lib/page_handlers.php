@@ -28,6 +28,7 @@ function plugins_page_handler($segments) {
 		"plugins/screenshots/view" => "/plugins/{plugin}/screenshots/{screenshot}.jpg",
 		"plugins/ownership_request" => "/plugins/{plugin}/ownership_request",
 		"plugins/ownership_requests" => "/plugins/{plugin}/ownership_requests",
+		"plugins/gh" => "/plugins/gh/{plugin}"
 	);
 
 	$forwards = array(

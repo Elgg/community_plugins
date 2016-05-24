@@ -1,6 +1,10 @@
 <?php
 echo elgg_view('plugins/forms/project_details_segment');
-echo elgg_view('plugins/forms/release_details_segment');
+
+$mod = elgg_view('plugins/forms/release_details_segment');
+echo elgg_view_module('aside', elgg_echo('plugins:edit:label:release'), $mod, [
+	'class' => 'plugins-project-create-release-details',
+]);
 
 if (isset($vars['container_guid'])) {
 	echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $vars['container_guid']));

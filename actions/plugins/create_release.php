@@ -84,15 +84,7 @@ if ($release->saveArchive('upload') != TRUE) {
 }
 
 $release->setRecommended($recommended);
-
-$release->setHash();
-
-elgg_create_river_item(array(
-	'view' => 'river/object/plugin_release/create',
-	'action_type' => 'create',
-	'subject_guid' => elgg_get_logged_in_user_guid(),
-	'object_guid' => $release->guid,
-));
+$release->createRiverEntry();
 
 update_entity_last_action($plugin_project->guid);
 

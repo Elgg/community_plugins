@@ -133,3 +133,6 @@ foreach ($fields as $name => $options) {
 
 $images = elgg_view('plugins/forms/project_images_segment', $vars);
 echo elgg_view_module('aside', elgg_echo('plugins:edit:label:project_images'), $images);
+
+$github = elgg_view('plugins/forms/project_github_segment', $vars);
+echo elgg_view_module('aside', elgg_echo('plugins:edit:label:project_github'), $github);

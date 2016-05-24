@@ -300,3 +300,18 @@ function project_comments($hook, $type, $return, $params) {
 	
 	return $return;
 }
+
+/**
+ * Adds Github Payload URL to public pages
+ *
+ * @param string $hook   "public_pages"
+ * @param string $type   "walled_garden"
+ * @param array  $return Public routes
+ * @param array  $params Hook params
+ * @return array
+ */
+function public_pages_hook($hook, $type, $return, $params) {
+
+	$return[] = "plugins/gh/\d+";
+	return $return;
+}
