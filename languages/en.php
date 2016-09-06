@@ -190,7 +190,7 @@ return array(
 	'plugins:diggit' => "You have recommended this plugin.",
 	'plugins:display:number' => "Number of plugins, themes and language packs to display",
 
-	'plugins:files:acceptable' => 'Distribution packages must be .zip or .tar.zip only.',
+	'plugins:files:acceptable' => 'Distribution packages must be .zip or .tar.zip only. Archives must contain a valid manifest.xml',
 
 	'item:object:plugin_project' => 'Plugin Projects',
 	'item:object:plugin_release' => 'Plugin Releases',
@@ -415,6 +415,7 @@ return array(
 	'plugins:edit:label:project_images' => "Project Images",
 	'plugins:edit:help:project_images' => "Show off your project by uploading images!",
 	'plugins:edit:image' => "Image",
+	'plugins:edit:label:release' => 'Upload Release',
 	'plugins:edit:help:release' => "This information is specific to the release you are uploading right now.  To edit the
 general project details, visit the edit section of the project page.",
 	'plugins:edit:help:file' => 'This information is specific to the release you are uploading right now.  To edit the
@@ -457,4 +458,39 @@ general project details, visit the edit section of the project page.',
 	'plugins:action:delete_contributor:success' => 'User has been removed from the contributors list',
 	'plugins:action:invalid_access' => 'Unknown or insufficient access to release',
 	'plugins:action:transfer:not_moved' => "Release ID: %s - the file could not be moved on the file system",
+
+	/**
+	 * Github integratin
+	 */
+	'plugins:edit:label:project_github' => 'Github Repository',
+	'plugins:edit:help:project_github' => 'You can connect your plugin project to a specific Github repository and automate the release process',
+	'plugins:edit:label:github_owner' => 'Github repository owner',
+	'plugins:edit:label:github_repo' => 'Github repository name',
+	'plugins:edit:label:fetch_releases' => 'Fetch releases',
+	'plugins:fetch_github_relases:missed_info' => 'Github repository name and owner are required to fetch releases information',
+	'plugins:fetch_github_relases:no_releases' => 'Github repository does not have any releases with a downloadable .zip archive',
+	'plugins:edit:label:github_release' => 'Github Releases',
+	'plugins:edit:help:github_release' => 'Select project releases you would like to import',
+	'plugins:edit:label:github_instructions' => 'Supported Elgg versions for each of the imported releases will be determined by your plugin\'s manifest.xml. '
+	. 'If you need to constraint supported versions, use additional %s tags with e.g. \'>=\' comparison operand.',
+	'plugins:github:setup_instructions' => 'Once you add your Github repository details, you will be provided with instructions on how to setup your github
+		project to automatically push plugin releases to the community. Note that, in order to import or sync releases you will need to:
+		<ol>
+			<li>Ensure you have constrained minimum and maximum supported Elgg version in your manifest.xml</li>
+			<li>Ensure your release workflow attaches a dist .zip package to the release (we are unable to use Github\'s default zipballs)</li>
+		</ol>
+	',
+	'plugins:github:auto_release_instructions' => 'In order to automatically release your plugin in the community whenever a new release is created on github:
+		<ol>
+			<li>Ensure you have constrained minimum and maximum supported Elgg version in your manifest.xml</li>
+			<li>Ensure your release workflow attaches a dist .zip package to the release (we are unable to use Github\'s default zipballs)</li>
+			<li>Go to your project\'s Settings on Github. Under Webhooks&Services, click Add webhook and enter the following details: <br />%s</li>
+			<li>Update webhook events to include Release and save</li>
+		</ol>
+	',
+	'plugins:github:payload_url' => 'Payload URL',
+	'plugins:github:content_type' => 'Content Type',
+	'plugins:github:secret' => 'Secret',
+	'plugins:edit:help:github_access' => 'Access level to set on releases made via Github',
+	'plugins:edit:help:github_comments' => 'Allow comments on releases made via Github',
 );

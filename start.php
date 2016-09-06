@@ -179,6 +179,7 @@ function init() {
 	elgg_register_action("plugins/add_contributors", "$action_base/add_contributors.php");
 	elgg_register_action("plugins/delete_contributor", "$action_base/delete_contributor.php");
 	elgg_register_action("plugins/request_ownership", "$action_base/request_ownership.php");
+	elgg_register_action("plugins/fetch_github_releases", "$action_base/fetch_github_releases.php");
 
 	elgg_register_action("plugins/admin/upgrade", "$action_base/admin/upgrade.php", 'admin');
 	elgg_register_action("plugins/admin/combine", "$action_base/admin/combine.php", 'admin');
@@ -189,4 +190,8 @@ function init() {
 	elgg_register_tag_metadata_name('plugin_type');
 	
 	elgg_register_ajax_view('object/plugin_project/release_table');
+
+	// Github
+	elgg_register_plugin_hook_handler('public_pages', 'walled_garden', __NAMESPACE__ . '\\public_pages_hook');
+
 }

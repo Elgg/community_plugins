@@ -1,0 +1,7 @@
+<phpunit bootstrap="./tests/phpunit/bootstrap.php" colors="true">
+	<testsuites>
+		<testsuite name="community_plugins">
+			<directory>./tests/phpunit/</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

@@ -276,3 +276,10 @@ table.plugin-downloads tr:nth-child(even) {
 table.plugin-downloads tr.recommended {
 	background-color: #CCFCD0;
 }
+.plugins-github-instructions {
+	margin-bottom: 10px;
+}
+.plugins-github-instructions ol {
+    padding-left: 20px;
+    list-style: decimal;
+}

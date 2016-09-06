@@ -58,6 +58,10 @@ $plugin_project->summary = $summary;
 $plugin_project->plugin_type = $plugin_type;
 $plugin_project->tags = string_to_tag_array($tags);
 
+$plugin_project->setGithubRepo(get_input('github_owner', ''), get_input('github_repo', ''));
+$plugin_project->github_access_id = get_input('github_access_id', $plugin_project->access_id);
+$plugin_project->github_comments = get_input('github_comments', 'yes');
+
 $result = $plugin_project->save();
 
 if ($result) {
