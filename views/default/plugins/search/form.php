@@ -9,7 +9,7 @@ elgg_require_js('jquery.chosen');
 elgg_require_js('elgg/community_plugins/plugins');
 
 if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {
-	$label_prefix ='';
+	$label_prefix = '';
 } else {
 	$label_prefix = elgg_echo('plugins:filters:or');
 }
@@ -19,48 +19,58 @@ if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
 	elgg_require_js('elgg/community_plugins/filters');
 }
 
+$build_select = function ($settings_key, $vars_key, $values_key) use ($settings, $vars) {
+	$select_attrs = [
+		'name' => "f[$values_key][]",
+		'class' => ['input-select'],
+		'data-placeholder' => elgg_echo("plugins:placeholder:$vars_key"),
+	];
+	if (in_array('multiple', $settings[$settings_key])) {
+		$select_attrs['class'][] = 'multiselect';
+		$select_attrs['multiple'] = true;
+	}
+
+	$options = array_map(
+		function ($key, $category) use ($vars, $values_key) {
+			return elgg_format_element('option', [
+				'value' => $key,
+				'selected' => isset($vars['current_values'][$values_key])
+								&& in_array($key, $vars['current_values'][$values_key]),
+			], $category);
+		},
+		array_keys($vars[$vars_key]),
+		$vars[$vars_key]
+	);
+	return elgg_format_element('select', $select_attrs, implode('', $options));
+};
+
 ?>
 <form method="get" name="plugin_search_form" id="plugin_search_form" action="<?php echo elgg_get_site_url(); ?>plugins/search">
 	<?php if (is_array($settings['category']) && in_array('enabled', $settings['category'])) : ?>
-		<?php $classtext = in_array('multiple', $settings['category']) ? 'class="input-select multiselect" multiple="multiple"' : 'class="input-select"'; ?>
 		<div class="filter_fields">
-			<div class="filter_label"><?php echo $prefix . elgg_echo('plugins:filters:category'); ?></div>
+			<div class="filter_label"><?= $prefix . elgg_echo('plugins:filters:category'); ?></div>
 			<div>
-				<select name="f[c][]" <?php echo $classtext; ?> data-placeholder="<?php echo elgg_echo('plugins:placeholder:categories'); ?>">
-				<?php foreach ($vars['categories'] as $key => $category) :?>
-					<option value="<?php echo $key; ?>" <?php echo (is_array($vars['current_values']['c']) && in_array($key, $vars['current_values']['c'])) ? 'selected="selected"' : ''; ?>><?php echo $category; ?></option>
-				<?php endforeach; ?>
-				</select>
+				<?= $build_select('category', 'categories', 'c'); ?>
 			</div>
 		</div>
 		<?php $prefix = $label_prefix; ?>
 	<?php endif; ?>
 
 	<?php if (is_array($settings['version']) && in_array('enabled', $settings['version'])) : ?>
-		<?php $classtext = in_array('multiple', $settings['version']) ? 'class="input-select multiselect" multiple="multiple"' : 'class="input-select"'; ?>
 		<div class="filter_fields">
-			<div class="filter_label"><?php echo $prefix . elgg_echo('plugins:filters:version'); ?></div>
+			<div class="filter_label"><?= $prefix . elgg_echo('plugins:filters:version'); ?></div>
 			<div>
-				<select name="f[v][]" <?php echo $classtext; ?> data-placeholder="<?php echo elgg_echo('plugins:placeholder:versions'); ?>">
-				<?php foreach ($vars['versions'] as $version) :?>
-					<option value="<?php echo $version; ?>" <?php echo (is_array($vars['current_values']['v']) && in_array($version, $vars['current_values']['v'])) ? 'selected="selected"' : ''; ?>><?php echo $version; ?></option>
-				<?php endforeach; ?>
-				</select>
+				<?= $build_select('version', 'versions', 'v'); ?>
 			</div>
 		</div>
 		<?php $prefix = $label_prefix; ?>
 	<?php endif; ?>
 
 	<?php if (is_array($settings['licence']) && in_array('enabled', $settings['licence'])) : ?>
-		<?php $classtext = in_array('multiple', $settings['licence']) ? 'class="input-select multiselect" multiple="multiple"' : 'class="input-select"'; ?>
 		<div class="filter_fields">
-			<div class="filter_label"><?php echo $prefix . elgg_echo('plugins:filters:licence'); ?></div>
+			<div class="filter_label"><?= $prefix . elgg_echo('plugins:filters:licence'); ?></div>
 			<div>
-				<select name="f[l][]" <?php echo $classtext; ?> data-placeholder="<?php echo elgg_echo('plugins:placeholder:licences'); ?>">
-				<?php foreach ($vars['licences'] as $key => $licence) :?>
-					<option value="<?php echo $key; ?>" <?php echo (is_array($vars['current_values']['l']) && in_array($key, $vars['current_values']['l'])) ? 'selected="selected"' : ''; ?>><?php echo $licence; ?></option>
-				<?php endforeach; ?>
-				</select>
+				<?= $build_select('licence', 'licences', 'l'); ?>
 			</div>
 		</div>
 		<?php $prefix = $label_prefix; ?>
@@ -68,9 +78,15 @@ if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
 
 	<?php if (is_array($settings['text']) && in_array('enabled', $settings['text'])) : ?>
 		<div class="filter_fields">
-			<div class="filter_label"><?php echo $prefix . elgg_echo('plugins:filters:text'); ?></div>
+			<div class="filter_label"><?= $prefix . elgg_echo('plugins:filters:text'); ?></div>
 			<div>
-				<input type="text" name="f[t]" value="<?php echo $vars['current_values']['t']; ?>" class="input-text" placeholder="<?php echo elgg_echo('plugins:placeholder:keyword'); ?>"/>
+				<?= elgg_format_element('input', [
+					'type' => 'text',
+					'name' => 'f[t]',
+					'value' => isset($vars['current_values']['t']) ? $vars['current_values']['t'] : '',
+					'class' => 'input-text',
+					'placeholder' => elgg_echo('plugins:placeholder:keyword'),
+				]); ?>
 			</div>
 		</div>
 		<?php $prefix = $label_prefix; ?>
@@ -80,13 +96,16 @@ if (!isset($settings['filter']) || ($settings['filter'] != 'multiple')) {
 		<div class="filter_fields">
 			<div class="filter_label"><?php echo $prefix . elgg_echo('plugins:filters:screenshot:label'); ?></div>
 			<div>
-				<input type="checkbox" name="f[s]" <?php echo (isset($vars['current_values']['s'])) ? 'checked="checked"' : ''; ?>/>
+				<?= elgg_format_element('input', [
+					'type' => 'checkbox',
+					'name' => 'f[s]',
+					'checked' => isset($vars['current_values']['s']),
+				]); ?>
 				<?php echo elgg_echo('plugins:filters:screenshot'); ?>
 			</div>
 		</div>
 		<?php $prefix = $label_prefix; ?>
 	<?php endif; ?>
-
 
 	<div class="search_fields">
 		<?php echo elgg_view('input/submit', array('name' => 'sb', 'value' => 'Search')); ?>

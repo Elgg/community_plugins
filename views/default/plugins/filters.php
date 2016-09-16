@@ -14,8 +14,8 @@ if (!is_array($settings)) {
 $vars['settings'] = $settings;
 
 echo elgg_view_module(
-		'aside',
-		elgg_echo('plugins:filters:title'),
-		elgg_view('plugins/search/form', $vars),
-		array('class' => 'plugin-search')
+	'aside',
+	elgg_echo('plugins:filters:title'),
+	elgg_view('plugins/search/form', $vars),
+	array('class' => 'plugin-search')
 );

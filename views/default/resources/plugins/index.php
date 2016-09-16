@@ -11,8 +11,6 @@ $sidebar = elgg_view('plugins/filters', array(
 	'categories' => $CONFIG->plugincats,
 	'versions' => $CONFIG->elgg_versions,
 	'licences' => $CONFIG->gpllicenses,
-	'settings' => $settings
-
 ));
 $bottom = elgg_view('plugins/front/bottom');
 
