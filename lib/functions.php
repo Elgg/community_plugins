@@ -88,12 +88,6 @@ function get_all_download_count() {
 	return (int)elgg_get_plugin_setting('site_plugins_downloads', 'community_plugins');
 }
 
-// TODO(evan): This is why we need to use call_user_func_array in elgg_list_entities...
-function get_plugins_by_download_count(array $options = array()) {
-	return PluginProject::getPluginsByDownloads($options);
-}
-
-
 /**
  * Add a sidebar menu of plugin types for this developer
  *

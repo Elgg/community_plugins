@@ -12,7 +12,8 @@ $limit = get_input('limit', 10);
 
 $options = array(
 	'type' => 'object',
-	'subtype' => 'plugin_project'
+	'subtype' => 'plugin_project',
+	'preload_owners' => true,
 );
 
 $list_type = get_input('type');

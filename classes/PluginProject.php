@@ -270,10 +270,12 @@ class PluginProject extends ElggObject {
 	 */
 	protected function dbUpdateDownloadCount() {
 		$guid = $this->getGUID();
-		$db_prefix = get_config('dbprefix');
-		$sql = "INSERT INTO {$db_prefix}plugin_downloads
+		$db_prefix = elgg_get_config('dbprefix');
+		$sql = "
+			INSERT INTO {$db_prefix}plugin_downloads
 			(guid, downloads) VALUES ($guid, 1)
-			ON DUPLICATE KEY UPDATE downloads=downloads+1";
+			ON DUPLICATE KEY UPDATE downloads = downloads + 1
+		";
 		insert_data($sql);
 	}
 
@@ -284,9 +286,12 @@ class PluginProject extends ElggObject {
 	 */
 	protected function dbGetDownloadCount() {
 		$guid = $this->getGUID();
-		$db_prefix = get_config('dbprefix');
-		$sql = "SELECT downloads FROM {$db_prefix}plugin_downloads
-			WHERE guid = $guid";
+		$db_prefix = elgg_get_config('dbprefix');
+		$sql = "
+			SELECT downloads
+			FROM {$db_prefix}plugin_downloads
+			WHERE guid = $guid
+		";
 		$result = get_data_row($sql);
 		if ($result === false) {
 			return 0;
@@ -301,12 +306,12 @@ class PluginProject extends ElggObject {
 	 * @return array
 	 */
 	static public function getPluginsByDownloads(array $options = array()) {
-		$db_prefix = get_config('dbprefix');
+		$db_prefix = elgg_get_config('dbprefix');
 		
 		$defaults = array(
 			'type' => 'object',
 			'subtype' => 'plugin_project',
-			'joins' => array("JOIN {$db_prefix}plugin_downloads pd ON e.guid=pd.guid"),
+			'joins' => array("JOIN {$db_prefix}plugin_downloads pd ON e.guid = pd.guid"),
 			'order_by' => 'pd.downloads DESC',
 		);
 		$options = array_merge($defaults, $options);
