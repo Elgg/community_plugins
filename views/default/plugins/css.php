@@ -99,6 +99,10 @@ span.info_item img {
 	vertical-align: middle;
 }
 
+a.plugin_preview img {
+	margin: 0.5rem 0.5rem 0.5rem 0;
+	float: left;
+}
 
 /***************** Filters ********************/
 
