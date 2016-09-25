@@ -23,7 +23,7 @@ elgg_register_event_handler('init', 'system', __NAMESPACE__ . '\\init');
  */
 function init() {
 	elgg_register_library('plugins:upgrades', __DIR__ . '/lib/upgrades.php');
-	
+
 	register_js();
 
 	// Set up menu for logged in users
@@ -39,7 +39,7 @@ function init() {
 		'text' => elgg_echo('plugins:type:theme'),
 	));
 
-	
+
 	/**
 	 * Extend views
 	 */
@@ -58,7 +58,7 @@ function init() {
 	elgg_register_notification_event('object', 'plugin_project', array('create'));
 	elgg_register_notification_event('object', 'plugin_release', array('create'));
 
-	
+
 	/**
 	 * Register Hooks
 	 */
@@ -68,27 +68,27 @@ function init() {
 
 	// Releases are contained by a project so we need to get the notification subscriptions manually
 	elgg_register_plugin_hook_handler('get', 'subscriptions', __NAMESPACE__ . '\\get_release_subscriptions');
-	
+
 	// Make sure Releases are editable
 	elgg_register_plugin_hook_handler('permissions_check', 'object', __NAMESPACE__ . '\\release_permissions_check');
-	
+
 	// make projects non-commentable in the river
 	elgg_register_plugin_hook_handler('permissions_check:comment', 'object', __NAMESPACE__ . '\\project_comments');
 
 	// manage owner block menu
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', __NAMESPACE__ . '\\owner_block_menu');
-	
+
 	// register url handlers for the 2 object subtypes
 	elgg_register_plugin_hook_handler('entity:url', 'object', __NAMESPACE__ . '\\release_url_handler');
 	elgg_register_plugin_hook_handler('entity:url', 'object', __NAMESPACE__ . '\\project_url_handler');
 
 	elgg_register_plugin_hook_handler('register', 'menu:annotation', __NAMESPACE__ . '\\ownership_request_menu');
-	
+
 	// Special hook for searching against metadata (category)
 	elgg_register_plugin_hook_handler('search', 'object:plugin_project', __NAMESPACE__ . '\\search_hook');
 
 	elgg_register_plugin_hook_handler('cron', 'daily', __NAMESPACE__ . '\\update_download_counts');
-	
+
 
 	/**
 	 * Register Events
@@ -97,7 +97,7 @@ function init() {
 	elgg_register_event_handler('upgrade', 'system', __NAMESPACE__ . '\\upgrades');
 	elgg_register_event_handler('create', 'object', __NAMESPACE__ . '\\release_comment_notification');
 	elgg_register_event_handler('update', 'object', __NAMESPACE__ . '\\project_update');
-	
+
 	//register a widget
 	elgg_register_widget_type('plugins', elgg_echo('plugins'), elgg_echo('plugins'), array('profile'));
 
@@ -127,6 +127,7 @@ function init() {
 	elgg_set_config('gpllicenses', array(
 		'none' => 'No license selected',
 		'gpl2' => 'GNU General Public License (GPL) version 2',
+		'gpl3' => 'GNU General Public License (GPL) version 3',
 		'lgpl2.1' => 'GNU Lesser General Public License (LGPL) version 2.1',
 		'berkeleydb' => 'Berkeley Database License (aka the Sleepycat Software Product License)',
 		'mbsd' => 'Modified BSD license',
@@ -163,7 +164,7 @@ function init() {
 		'uncategorized' => 'Uncategorized',
 	));
 
-	
+
 	/**
 	 * Register actions
 	 */
@@ -187,6 +188,6 @@ function init() {
 	elgg_register_action("plugins/admin/transfer", "$action_base/admin/transfer.php", 'admin');
 
 	elgg_register_tag_metadata_name('plugin_type');
-	
+
 	elgg_register_ajax_view('object/plugin_project/release_table');
 }
