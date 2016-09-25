@@ -10,6 +10,14 @@ $link = elgg_view('output/url', array(
 	'encode_text' => TRUE,
 ));
 
+$img_files = $project->getScreenshots();
+
+if ($img_files) {
+	$thumb = get_entity($img_files[0]->thumbnail_guid);
+	$src = elgg_get_site_url() . "plugins/icon/{$img_files[0]->getGUID()}/icon.jpg";
+	$preview_img = "<a href=\"$project->getURL()\" class=\"plugin_preview\"><img src=\"$src\" alt=\"$project->title\" title=\"$project->title\" width=\"150\"/></a>";
+}
+
 $created = date('d M, Y', $project->time_created);
 $download_count = $project->getDownloadCount();
 $friendlytime = elgg_view_friendly_time($project->time_created);
@@ -34,10 +42,12 @@ $info .= "<span class=\"info_item\"><img src=\"$iconpath/updated.png\" alt=\"$up
 $info .= "<span class=\"info_item\"><img src=\"$iconpath/recommended.png\" alt=\"$recommendations\" title=\"$recommendations\">$recommends</span>";
 $info .= "<span class=\"info_item\"><img src=\"$iconpath/downloaded.png\" alt=\"$downloads\" title=\"$downloads\">$download_count</span>";
 $info .= '</div>';
+$info .= $preview_img;
 if ($summary) {
 	$info .= "<p class='description'>" . $summary . "</p>";
-}
 
+}
+$info .= "<div class=\"clearfloat\"></div>";
 $user_link = elgg_view('output/url', array(
 	'text' => $owner->name,
 	'href' => "/plugins/developer/{$owner->username}",
