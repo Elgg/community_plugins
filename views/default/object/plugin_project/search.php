@@ -15,7 +15,16 @@ $img_files = $project->getScreenshots();
 if ($img_files) {
 	$thumb = get_entity($img_files[0]->thumbnail_guid);
 	$src = elgg_get_site_url() . "plugins/icon/{$img_files[0]->getGUID()}/icon.jpg";
-	$preview_img = "<a href=\"$project->getURL()\" class=\"plugin_preview\"><img src=\"$src\" alt=\"$project->title\" title=\"$project->title\" width=\"150\"/></a>";
+	$preview_img = elgg_view('output/url', array(
+		'href' => $project->getURL(),
+		'text' => elgg_view('output/img', array(
+			'src' => $src,
+			'alt' => $project->title,
+			'title' => $project->title,
+			'width' => 150
+		)),
+		'class' => 'plugin_preview'
+	));
 }
 
 $created = date('d M, Y', $project->time_created);
@@ -45,9 +54,8 @@ $info .= '</div>';
 $info .= $preview_img;
 if ($summary) {
 	$info .= "<p class='description'>" . $summary . "</p>";
-
 }
-$info .= "<div class=\"clearfloat\"></div>";
+$info .= elgg_format_element('div', array('class' => "clearfloat"));
 $user_link = elgg_view('output/url', array(
 	'text' => $owner->name,
 	'href' => "/plugins/developer/{$owner->username}",
