@@ -108,6 +108,7 @@ function init() {
 
 	// Elgg versions (The forms expect this to be an associative array)
 	elgg_set_config('elgg_versions', array(
+		'2.3' => '2.3',
 		'2.2' => '2.2',
 		'2.1' => '2.1',
 		'2.0' => '2.0',
