@@ -50,6 +50,7 @@ echo '<div class="elgg-col elgg-col-1of3">';
 		'footer' => elgg_view('output/url', array(
 			'href' => '/plugins/list/newest',
 			'text' => elgg_echo('plugins:browse_more:newest'),
+			'class' => 'elgg-widget-more',
 		)),
 	));
 	echo '</div>';
@@ -63,6 +64,7 @@ echo '<div class="elgg-col elgg-col-1of3">';
 		'footer' => elgg_view('output/url', array(
 			'href' => '/plugins/list/popular',
 			'text' => elgg_echo('plugins:browse_more:popular'),
+			'class' => 'elgg-widget-more',
 		)),
 	));
 	
@@ -77,6 +79,7 @@ echo '<div class="elgg-col elgg-col-1of3 elgg-col-last">';
 		'footer' => elgg_view('output/url', array(
 			'href' => '/plugins/list/recommended',
 			'text' => elgg_echo('plugins:browse_more:dugg'),
+			'class' => 'elgg-widget-more',
 		)),
 	));
 	

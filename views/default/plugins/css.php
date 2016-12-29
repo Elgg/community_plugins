@@ -11,23 +11,26 @@
 
 #plugins_front_welcome {
 	line-height: 1.6em;
-	padding: 20px;
-	margin: 20px 0;
-	border: 1px solid silver;
-	background: url(<?php echo elgg_get_site_url(); ?>mod/community_plugins/graphics/plugins_back.gif) no-repeat right top;
-
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
+}
+.elgg-plugins-layout > * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 20px auto;
+}
+@media screen and (min-width: 820px) {
+	.elgg-plugins-intro,
+	.elgg-plugins-search {
+		padding: 20px;
+	}
 }
 
 #plugins_welcome_text {
-	width: 340px;
-	padding: 20px 0;
+	padding: 10px 0 20px;
 }
 
 .plugins_download_total {
-	color:#666666;
+	color: #666666;
 	font-size: 1.2em;
 }
 

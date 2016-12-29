@@ -15,6 +15,6 @@ return [
 	'default' => [
 		'flot/' => $path . '/vendor/bower-asset/flot/',
 		'chosen/' => $path . '/vendor/bower-asset/chosen/',
-		'smoothproducts/' => $path . '/vendor/bower-asset/Smoothproducts/',
+		'smoothproducts/' => $path . '/vendor/bower-asset/smoothproducts/',
 	],
 ];
