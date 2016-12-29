@@ -22,8 +22,7 @@
     "require": {
         "composer/installers": ">=1.0.8",
 		"bower-asset/flot": "~0.8",
-		"bower-asset/chosen": "~1.6",
-		"bower-asset/smoothproducts": "dev-master"
+		"bower-asset/chosen": "~1.6"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.7"

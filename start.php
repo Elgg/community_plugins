@@ -25,7 +25,6 @@ function init() {
 	elgg_register_library('plugins:upgrades', __DIR__ . '/lib/upgrades.php');
 	
 	elgg_register_css('jquery.chosen', elgg_get_simplecache_url('chosen/chosen.css'));
-	elgg_register_css('smoothproducts', elgg_get_simplecache_url('smoothproducts/css/smoothproducts.css'));
 
 	// Set up menu for logged in users
 	elgg_register_menu_item('site', array(

@@ -209,47 +209,18 @@ form#plugins_search_settings p.sub-option {
 	overflow: visible;
 }
 
-
-/* plugin screenshots */
-
-.plugin-screenshots-wrapper .sp-wrap {
-	float: none;
-	width: 100%;
-	max-width: 100%;
-	text-align: center;
-	margin: 0 auto 15px;
+.plugin-screenshots-wrapper {
+    margin: 20px 0;
 }
 
-.plugin-screenshots-wrapper .sp-large {
-	display: none;
+.plugin-screenshots-wrapper img {
+    max-height: 150px;
+    vertical-align: middle;
 }
 
-.plugin-screenshots-wrapper .sp-large .sp-current-big {
-	width: 100%;
-	max-height: 400px;
-	overflow: hidden;
-	display: block;
-	text-align: center;
-}
-
-.plugin-screenshots-wrapper .sp-large .sp-current-big img {
-	max-height: 400px;
-	max-width: 100%;
-	vertical-align: middle;
-	display: inline;
-}
-
-.plugin-screenshots-wrapper .sp-large .sp-zoom img {
-	min-width: 800px; // scale small images so zoom effect is visible
-}
-
-.plugin-screenshots-wrapper .sp-thumbs {
-	width: 100%;
-	text-align: center;
-}
-.plugin-screenshots-wrapper .sp-thumbs img {
-	width: auto;
-	height: 75px;
+.plugin-screenshots-wrapper a {
+    display: inline-block;
+    margin: 5px;
 }
 
 /* releases table */

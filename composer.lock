@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b3c1e1dea10ccee49d15527631246387",
+    "content-hash": "0995aa5ff221be78c21a0f37259d801d",
     "packages": [
         {
             "name": "bower-asset/chosen",
@@ -92,23 +92,6 @@
                 "jquery",
                 "library"
             ]
-        },
-        {
-            "name": "bower-asset/smoothproducts",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/raphaelcoder/Smoothproducts.git",
-                "reference": "431f126eec2b93d31f22a99aa0917f8b7a4ba91e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/raphaelcoder/Smoothproducts/zipball/431f126eec2b93d31f22a99aa0917f8b7a4ba91e",
-                "reference": "431f126eec2b93d31f22a99aa0917f8b7a4ba91e",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "time": "2016-05-31 16:47:47"
         },
         {
             "name": "composer/installers",
@@ -1333,9 +1316,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bower-asset/smoothproducts": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
