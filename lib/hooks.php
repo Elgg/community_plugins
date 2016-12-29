@@ -300,3 +300,83 @@ function project_comments($hook, $type, $return, $params) {
 	
 	return $return;
 }
+
+/**
+ * Setup head <meta> tags for plugin projects
+ *
+ * @param string $hook   "head"
+ * @param string $type   "page"
+ * @param array  $return Head params
+ * @param array  $params Hook params
+ * @return array
+ */
+function prepare_page_head_meta($hook, $type, $return, $params) {
+
+	$entity = elgg_extract('entity', $params);
+
+	if (!$entity instanceof \PluginProject) {
+		return;
+	}
+
+	$tags = (array) $entity->tags;
+	if (!empty($tags)) {
+		$return['metas']['keywords'] = [
+			'name' => 'keywords',
+			'content' => implode(', ', $tags),
+		];
+	}
+
+	$owner = $entity->getOwnerEntity();
+	if ($owner) {
+		$return['metas']['author'] = [
+			'name' => 'author',
+			'content' => $owner->getDisplayName(),
+		];
+	}
+
+	$summary = $entity->summary ? : $entity->desription;
+	if ($summary) {
+		$summary = elgg_get_excerpt($summary);
+		$return['metas']['description'] = [
+			'name' => 'description',
+			'content' => $summary,
+		];
+
+		$return['metas']['og:description'] = [
+			'property' => 'og:description',
+			'content' => $summary
+		];
+	}
+
+	$return['metas']['og:type'] = [
+		'property' => 'og:type',
+		'content' => 'article',
+	];
+	$return['metas']['og:title'] = [
+		'property' => 'og:title',
+		'content' => $entity->getDisplayName(),
+	];
+
+	$return['metas']['og:url'] = [
+		'property' => 'og:url',
+		'content' => $entity->getURL(), // set canonical URL for release pages
+	];
+
+	$screenshots = $entity->getScreenshots();
+	if ($screenshots) {
+		$i = 0;
+		foreach ($screenshots as $screenshot) {
+			$thumb = get_entity($screenshot->thumbnail_guid);
+			if (!$thumb) {
+				continue;
+			}
+			$return['metas']["og:image:$i"] = [
+				'property' => 'og:image',
+				'content' => elgg_normalize_url("plugins/icon/$screenshot->guid/icon.jpg"),
+			];
+			$i++;
+		}
+	}
+
+	return $return;
+}
