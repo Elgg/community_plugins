@@ -4,7 +4,7 @@
 define(function(require) {
     var $ = require('jquery');
     var elgg = require('elgg');
-    require('jquery.chosen');
+    require('chosen/chosen.jquery');
 
     var init = function() {
 

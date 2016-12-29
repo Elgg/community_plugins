@@ -4,7 +4,7 @@
 define(function(require) {
     var $ = require('jquery');
     var elgg = require('elgg');
-    require('smoothproducts');
+    require('smoothproducts/smoothproducts.min');
 
     var init = function() {
         

@@ -120,23 +120,3 @@ function add_type_menu($owner_guid) {
 		}
 	}
 }
-
-
-function register_js() {
-	elgg_define_js('jquery.flot', array(
-		'src' => '/mod/community_plugins/vendors/flot/jquery.flot.js',
-		'deps' => array('jquery')
-	));
-	
-	elgg_register_css('jquery.chosen', '/mod/community_plugins/vendors/chosen/chosen.min.css');
-	elgg_define_js('jquery.chosen', array(
-		'src' => '/mod/community_plugins/vendors/chosen/chosen.jquery.min.js',
-		'deps' => array('jquery')
-	));
-	
-	elgg_register_css('smoothproducts', '/mod/community_plugins/vendors/Smoothproducts/css/smoothproducts.css');
-	elgg_define_js('smoothproducts', array(
-		'src' => '/mod/community_plugins/vendors/Smoothproducts/js/smoothproducts.min.js',
-		'deps' => array('jquery')
-	));
-}

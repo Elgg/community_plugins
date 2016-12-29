@@ -4,7 +4,7 @@
 define(function(require) {
     var $ = require('jquery');
     var elgg = require('elgg');
-    require('jquery.flot');
+    require('flot/jquery.flot');
 
     var init = function() {
         $.plot($("#plugins_download_plot"), $('#plugins_download_plot').attr('data-plot'));

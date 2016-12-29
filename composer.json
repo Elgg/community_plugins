@@ -20,9 +20,12 @@
         }
     ],
     "require": {
-        "composer/installers": ">=1.0.8"
+        "composer/installers": ">=1.0.8",
+		"bower-asset/flot": "~0.8",
+		"bower-asset/chosen": "~1.6",
+		"bower-asset/smoothproducts": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.3"
+        "phpunit/phpunit": "^4.7"
     }
 }

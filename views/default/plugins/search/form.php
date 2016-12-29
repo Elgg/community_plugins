@@ -5,7 +5,7 @@ $url = elgg_get_site_url() . 'plugins';
 $settings = $vars['settings'];
 
 elgg_load_css('jquery.chosen');
-elgg_require_js('jquery.chosen');
+elgg_require_js('chosen/chosen.jquery');
 elgg_require_js('elgg/community_plugins/plugins');
 
 if (isset($settings['filter']) && ($settings['filter'] == 'multiple')) {
