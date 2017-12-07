@@ -1,4 +1,7 @@
 <?php
+/**
+ * Called when the plugin is activated
+ */
 
 if (get_subtype_id('object', 'plugin_release')) {
 	update_subtype('object', 'plugin_release', 'PluginRelease');
