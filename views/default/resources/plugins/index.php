@@ -14,22 +14,22 @@ ob_start();
 	</div>
 	<div class="elgg-col elgg-col-2of3 elgg-plugins-search">
 		<?=
-		elgg_view('plugins/filters', array(
+		elgg_view('plugins/filters', [
 			'categories' => $CONFIG->plugincats,
 			'versions' => $CONFIG->elgg_versions,
 			'licences' => $CONFIG->gpllicenses,
-		))
+		]);
 		?>
 	</div>
 </div>
-<?= elgg_view('plugins/front/bottom') ?>
+<?= elgg_view('plugins/front/bottom'); ?>
 
 <?php
 $welcome = ob_get_clean();
 
-$body = elgg_view_layout('one_column', array(
+$body = elgg_view_layout('one_column', [
 	'content' => $welcome,
 	'sidebar' => false,
-		));
+]);
 
 echo elgg_view_page(elgg_echo("plugins:all"), $body);

@@ -1,6 +1,10 @@
 <?php
 
+elgg_admin_gatekeeper();
+
 $project_guid = get_input('plugin');
+elgg_entity_gatekeeper($project_guid, 'object', PluginProject::SUBTYPE);
+
 $project = get_entity($project_guid);
 
 $title = elgg_echo('plugins:requests:ownership');

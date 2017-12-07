@@ -1,16 +1,18 @@
 <?php
-$plugin = $vars['entity'];
 
-if (!$plugin) {
+$plugin = elgg_extract('entity', $vars);
+if (!$plugin instanceof PluginProject) {
 	return;
 }
 
 // get one release for each version of elgg
 $elgg_versions = elgg_get_config('elgg_versions');
 
+$stable = elgg_extract('stable', $vars);
+
 // create an array of releases like array('1.9' => array(PluginRelease), '1.8' => array(PluginRelease))
-$releases = array();
-if ($vars['stable']) {
+$releases = [];
+if ($stable) {
 	// only show the recommended release for each elgg version
 	foreach ($elgg_versions as $v) {
 		$release = $plugin->getRecommendedRelease($v);
@@ -21,7 +23,9 @@ if ($vars['stable']) {
 } else {
 	// show *all* versions
 	// @TODO - scalability?
-	$all_releases = $plugin->getReleases(array('limit' => false));
+	$all_releases = $plugin->getReleases([
+		'limit' => false,
+	]);
 	foreach ($elgg_versions as $v) {
 		foreach ($all_releases as $ar) {
 			$versions = (array) $ar->elgg_version;
@@ -32,7 +36,7 @@ if ($vars['stable']) {
 	}
 }
 
-if (!$releases) {
+if (empty($releases)) {
 	return;
 }
 
@@ -41,9 +45,10 @@ if (!elgg_is_xhr()) {
 }
 
 $header = elgg_echo('plugins:releases:all');
-if ($vars['stable']) {
+if ($stable) {
 	$header = elgg_echo('plugins:recommended:releases');
 }
+
 ?>
 <strong><?php echo $header; ?></strong>
 <table class="plugin-downloads">
@@ -60,33 +65,36 @@ if ($vars['stable']) {
 		<?php
 		foreach ($releases as $elgg_version => $ra) {
 			foreach ($ra as $key => $r) {
-				$download = elgg_view('output/url', array(
+				$download = elgg_view('output/url', [
 					'text' => elgg_view_icon('download'),
 					'href' => 'plugins/download/' . $r->guid,
-				));
+				]);
 
-				$base = log($r->getSize()) / log(1024);
-				$suffixes = array('', 'KB', 'MB', 'GB', 'TB');
-				$hr_size = round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
-
-				$links = elgg_view('output/url', array(
+				$hr_size = elgg_format_bytes($r->getSize());
+				
+				$links = elgg_view('output/url', [
 					'text' => elgg_view_icon('speech-bubble'),
 					'href' => $r->getURL(),
-					'is_trusted' => true
-				));
+					'is_trusted' => true,
+				]);
 
 				if ($r->canEdit()) {
 					$links .= ' ';
-					$links .= elgg_view('output/url', array(
+					$links .= elgg_view('output/url', [
 						'text' => elgg_view_icon('settings-alt'),
 						'href' => 'plugins/edit/release/' . $r->guid
-					));
-					
+					]);
+				}
+				
+				if ($r->canDelete()) {
 					$links .= ' ';
-					$links .= elgg_view('output/confirmlink', array(
+					$links .= elgg_view('output/url', [
 						'text' => elgg_view_icon('delete'),
-						'href' => 'action/plugins/delete_release?release_guid=' . $r->guid
-					));
+						'href' => elgg_http_add_url_query_elements('action/plugins/delete_release', [
+							'release_guid' => $r->guid,
+						]),
+						'confirm' => elgg_echo('plugins:delete_release:confirm'),
+					]);
 				}
 
 				$elgg_v = $key ? '' : $elgg_version;
@@ -116,15 +124,15 @@ if ($vars['stable']) {
 <?php
 
 $release_toggle = elgg_echo('plugins:releases:show:recommended');
-if ($vars['stable']) {
+if ($stable) {
 	$release_toggle = elgg_echo('plugins:releases:show:all');
 }
-echo elgg_view('output/url', array(
+echo elgg_view('output/url', [
 		'text' => $release_toggle,
 		'href' => '#',
 		'class' => 'plugins-show-all',
 		'data-stable' => $vars['stable'] ? 0 : 1
-));
+]);
 
 if (!elgg_is_xhr()) {
 	echo '</div>';

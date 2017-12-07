@@ -7,18 +7,14 @@ elgg_require_js('elgg/community_plugins/releases_edit');
 
 $sticky_values = elgg_get_sticky_values('community_plugins');
 
-// see if we have a project
-if (array_key_exists('project', $vars)
-&& $vars['project'] instanceof ElggObject
-&& $vars['project']->getSubtype() == 'plugin_project') {
-	$project = $vars['project'];
-} else {
-	$project = NULL;
+$project = elgg_extract('project', $vars);
+if (!$project instanceof PluginProject) {
+	$project = null;
 }
 
+$release = elgg_extract('release', $vars);
 // default vars to use if editing or new
-if (array_key_exists('release', $vars) && $vars['release'] instanceof PluginRelease) {
-	$release = $vars['release'];
+if ($release instanceof PluginRelease) {
 	$elgg_version = $release->elgg_version;
 	$version = $release->version;
 	$release_notes = $release->release_notes;
@@ -38,95 +34,84 @@ echo elgg_view('output/longtext', array(
 	'value' => elgg_echo('plugins:edit:help:release')
 ));
 
-if (!$release) { ?>
-	<div class="elgg-input-wrapper">
-		<label><?php echo elgg_echo("plugins:file"); ?>*</label>
-		<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:file'); ?></span><br />
-		<?php
-			echo elgg_view("input/file", array('name' => 'upload'));
-		?>
-	</div>
-<?php } ?>
+if (empty($release)) {
+	echo elgg_view_field([
+		'#type' => 'file',
+		'#label' => elgg_echo('plugins:file'),
+		'#help' => elgg_echo('plugins:edit:help:file'),
+		'name' => 'upload',
+		'required' => true,
+	]);
+}
 
-<div class="elgg-input-wrapper">
-	<label><?php echo elgg_echo('plugins:edit:label:release_version'); ?>*</label>
-	<?php
-		echo elgg_view("input/text",array(
-			"name" => "version",
-			"value" => $sticky_values['version'] ? $sticky_values['version'] : $version,
-			'style' => 'width: 3em',
-		));
-	?>
-</div>
+echo elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('plugins:edit:label:release_version'),
+	'#help' => elgg_echo('plugins:edit:help:file'),
+	'name' => 'version',
+	'value' => elgg_extract('version', $sticky_values, $version),
+	'required' => true,
+	'style' => 'width: 5em',
+]);
 
-<?php
-	$release_link = elgg_view('output/url', array(
-		'text' => elgg_echo('policy'),
-		'href' => "http://community.elgg.org/expages/read/Terms/#plugins",
-		'is_trusted' => true
-	));
-?>
-<div class="elgg-input-wrapper">
-	<label><?php echo elgg_echo('plugins:edit:label:release_notes'); ?>:</label>
-	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:release_notes', array($release_link)); ?></span><br />
+$release_link = elgg_view('output/url', [
+	'text' => elgg_echo('policy'),
+	'href' => "https://elgg.org/expages/read/Terms/#plugins",
+	'is_trusted' => true,
+]);
 
-	<?php
-		echo elgg_view("input/longtext",array(
-			"name" => "release_notes",
-			"value" => $sticky_values['release_notes'] ? $sticky_values['release_notes'] : $release_notes,
-		));
-	?>
-</div>
+echo elgg_view_field([
+	'#type' => 'longtext',
+	'#label' => elgg_echo('plugins:edit:label:release_notes'),
+	'#help' => elgg_echo('plugins:edit:help:release_notes', [$release_link]),
+	'name' => 'release_notes',
+	'value' => elgg_extract('release_notes', $sticky_values, $release_notes),
+]);
 
-<div class="elgg-input-wrapper">
-	<div class="elgg-col elgg-col-1of2">
-		<label><?php echo elgg_echo('plugins:edit:label:elgg_version'); ?>*</label><br>
-	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:elgg_version'); ?></span><br />
-	<?php
-		echo elgg_view("input/checkboxes",array(
-			"name" => "elgg_version",
-			"default" => false,
-			"value" => $sticky_values['elgg_version'] ? $sticky_values['elgg_version'] : $elgg_version,
+echo elgg_view_field([
+	'#type' => 'fieldset',
+	'align' => 'horizontal',
+	'fields' => [
+		[
+			'#type' => 'checkboxes',
+			'#label' => elgg_echo('plugins:edit:label:elgg_version') . ' *',
+			'#help' => elgg_echo('plugins:edit:help:elgg_version'),
+			'name' => 'elgg_version',
+			'value' => elgg_extract('elgg_version', $sticky_values, $elgg_version),
 			'options' => elgg_get_config('elgg_versions'),
-			'data-release' => $release ? $release->guid : 0
-		));
-	?>
-	</div>
-	<div class="elgg-col elgg-col-1of2">
-		<label><?php echo elgg_echo('plugins:edit:label:recommended'); ?></label><br>
-	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:recommended'); ?></span><br />
-	<?php
-		echo elgg_view('input/checkboxes', array(
-			'name' => 'recommended',
 			'default' => false,
-			'value' => $sticky_values['recommended'] ? $sticky_values['recommended'] : $recommended,
+			'data-release' => $release ? $release->guid : 0
+		],
+		[
+			'#type' => 'checkboxes',
+			'#label' => elgg_echo('plugins:edit:label:recommended'),
+			'#help' => elgg_echo('plugins:edit:help:recommended'),
+			'name' => 'recommended',
+			'value' => elgg_extract('recommended', $sticky_values, $recommended),
 			'options' => elgg_get_config('elgg_versions'),
-		));
-	?>
-	</div>
-	<div class="clearfloat"></div>
-</div>
+			'default' => false,
+		]
+	],
+]);
 
-<div class="elgg-input-wrapper">
-	<label><?php echo elgg_echo('plugins:edit:label:comments'); ?></label><br />
-		<?php
-			echo elgg_view("input/radio",array(
-				"name" => "comments",
-				"value" => $sticky_values['comments'] ? $sticky_values['comments'] : $comments,
-				'options' => array(
-					elgg_echo('plugins:yes') => 'yes',
-					elgg_echo('plugins:no') => 'no',
-				),
-			));
-		?>
-	</label>
-</div>
+echo elgg_view_field([
+	'#type' => 'radio',
+	'#label' => elgg_echo('plugins:edit:label:comments'),
+	'name' => 'comments',
+	'value' => elgg_extract('comments', $sticky_values, $comments),
+	'options' => [
+		elgg_echo('plugins:yes') => 'yes',
+		elgg_echo('plugins:no') => 'no',
+	],
+]);
 
-<div class="elgg-input-wrapper">
-	<label><?php echo elgg_echo('access'); ?></label>
-	<span class="elgg-subtext"><?php echo elgg_echo('plugins:edit:help:access'); ?></span>
-	<?php echo elgg_view('input/access', array(
-		'name' => 'release_access_id',
-		'value' => $sticky_values['release_access_id'] ? $sticky_values['release_access_id'] : $access_id
-	)); ?>
-</div>
+echo elgg_view_field([
+	'#type' => 'access',
+	'#label' => elgg_echo('access'),
+	'#help' => elgg_echo('plugins:edit:help:access'),
+	'name' => 'release_access_id',
+	'value' => elgg_extract('release_access_id', $sticky_values, $access_id),
+	'entity' => $release,
+	'entity_type' => 'object',
+	'entity_subtype' => PluginRelease::SUBTYPE,
+]);
