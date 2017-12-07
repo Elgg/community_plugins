@@ -2,10 +2,12 @@
 
 class PluginRelease extends ElggFile {
 
+	const SUBTYPE = 'plugin_release';
+	
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 
-		$this->attributes['subtype'] = "plugin_release";
+		$this->attributes['subtype'] = self::SUBTYPE;
 	}
 
 	/**
@@ -39,7 +41,7 @@ class PluginRelease extends ElggFile {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param array $recommended - an array of elgg versions this release is recommended for
 	 */
 	public function setRecommended($recommended) {

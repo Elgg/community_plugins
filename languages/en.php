@@ -283,6 +283,7 @@ return array(
 
 	'plugins:none' => "We couldn't find any plugins, themes or language packs at the moment.",
 	'plugins:error:deletefailed' => "Your plugin or theme could not be deleted.",
+	'plugins:error:imagedeletefailed' => "The image for your plugin could not be deleted.",
 	'plugins:error:permissions' => 'There was a permissions error.',
 	'plugins:error:downloadfailed' => "Download failed.",
 	'plugins:error:uploadfailed' => "Sorry; we could not save your plugins, theme or language pack.",
@@ -457,4 +458,5 @@ general project details, visit the edit section of the project page.',
 	'plugins:action:delete_contributor:success' => 'User has been removed from the contributors list',
 	'plugins:action:invalid_access' => 'Unknown or insufficient access to release',
 	'plugins:action:transfer:not_moved' => "Release ID: %s - the file could not be moved on the file system",
+	'plugins:action:delete_project_image' => "Image deleted",
 );

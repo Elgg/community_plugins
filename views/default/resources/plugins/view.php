@@ -3,12 +3,10 @@
  * View a plugin project or release
  */
 
-$project = get_entity(get_input('plugin'));
-if (!$project instanceof PluginProject) {
-	register_error(elgg_echo('plugins:notfound'));
-	forward('plugins/search');
-}
+$project_guid = get_input('plugin');
+elgg_entity_gatekeeper($project_guid, 'object', PluginProject::SUBTYPE);
 
+$project = get_entity($project_guid);
 
 elgg_set_page_owner_guid($project->getOwnerGUID());
 
@@ -25,7 +23,7 @@ $title = $project->title;
 
 $body = elgg_view_layout("one_sidebar", array(
 	'title' => $title,
-	'sidebar' => $sidebar, 
+	'sidebar' => $sidebar,
 	'content' => $content,
 	'entity' => $project,
 ));

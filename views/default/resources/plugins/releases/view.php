@@ -1,16 +1,11 @@
 <?php
-
 /**
  * View a plugin project or release
  */
-$project = get_entity(get_input('plugin'));
-if (!$project instanceof PluginProject) {
-	header('Status: 404 Not Found');
-	$body = elgg_view("plugins/notfound");
-	$title = elgg_echo("plugins:notfound");
-	echo elgg_view_page($title, $body);
-	exit;
-}
+$project_guid = get_input('plugin');
+elgg_entity_gatekeeper($project_guid, 'object', PluginProject::SUBTYPE);
+
+$project = get_entity($project_guid);
 
 $version = get_input('version');
 if ($version) {
@@ -28,7 +23,6 @@ elgg_set_page_owner_guid($project->getOwnerGUID());
 elgg_push_breadcrumb(elgg_echo('plugins'), 'plugins');
 elgg_push_breadcrumb($project->title, $project->getURL());
 elgg_push_breadcrumb($release->version);
-
 
 if ($release->canEdit()) {
 	elgg_register_menu_item('title', array(
@@ -61,7 +55,7 @@ elgg_register_menu_item('title', array(
 $sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
 $content = elgg_view_entity($release, array(
 	'full_view' => TRUE
-		));
+));
 
 $title = $project->title . ' v' . $release->version;
 
@@ -70,8 +64,7 @@ $body = elgg_view_layout("one_sidebar", array(
 	'sidebar' => $sidebar,
 	'content' => $content,
 	'entity' => $project,
-		));
-
+));
 
 echo elgg_view_page($project->title, $body, 'default', [
 	'entity' => $project,

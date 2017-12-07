@@ -1,7 +1,11 @@
 <?php
 
-$release = $vars['entity'];
-$label = $vars['label'];
+$release = elgg_extract('entity', $vars);
+if (!$release instanceof PluginRelease) {
+	return;
+}
+
+$label = elgg_extract('label', $vars);
 
 echo '<div class="plugins_release_links">';
 
@@ -10,23 +14,28 @@ if ($label) {
 }
 
 $time = elgg_view_friendly_time($release->time_created);
-echo elgg_view('output/url', array(
+echo elgg_view('output/url', [
 	'href' => $release->getURL(),
 	'text' => "$release->version ($time)",
-));
+	'is_trusted' => true,
+]);
 
-if ($release->canEdit()) {
-	$delete = elgg_view('output/confirmlink', array(
-		'href' => "/action/plugins/delete_release?release_guid={$release->guid}",
+if ($release->canDelete())
+	$delete = elgg_view('output/url', [
+		'href' => elgg_http_add_url_query_elements('/action/plugins/delete_release', [
+			'release_guid' = => $release->guid,
+		]),
 		'text' => elgg_echo('delete'),
 		'confirm' => elgg_echo("plugins:delete_release:confirm"),
 	));
 	echo " [$delete]";
+}
 
-	$edit = elgg_view('output/url', array(
+if ($release->canEdit()) {
+	$edit = elgg_view('output/url', [
 		'href' => "/plugins/edit/release/{$release->guid}",
 		'text' => elgg_echo('edit'),
-	));
+	]);
 	echo " [$edit]";
 }
 

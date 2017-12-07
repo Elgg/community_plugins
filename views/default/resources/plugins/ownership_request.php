@@ -1,26 +1,26 @@
 <?php
 
-$project = get_entity(get_input('plugin'));
+elgg_gatekeeper();
 
-if (!$project) {
-  register_error(elgg_echo('plugins:action:invalid_project'));
-  forward(REFERER);
-}
+$project_guid = get_input('plugin');
+elgg_entity_gatekeeper($project_guid, 'object', PluginProject::SUBTYPE);
 
-$instructions = elgg_view('output/longtext', array(
+$project = get_entity($project_guid);
+
+$instructions = elgg_view('output/longtext', [
 	'value' => elgg_echo('plugins:project:request_ownership:desc'),
-));
+]);
 
-$form = elgg_view_form('plugins/request_ownership', array(), array('project' => $project));
+$form = elgg_view_form('plugins/request_ownership', [], ['project' => $project]);
 
-$sidebar = elgg_view('plugins/project_sidebar', array('entity' => $project));
+$sidebar = elgg_view('plugins/project_sidebar', ['entity' => $project]);
 
-$title = elgg_echo('plugins:title:request_ownership', array($project->title));
+$title = elgg_echo('plugins:title:request_ownership', [$project->title]);
 
-$body = elgg_view_layout("one_sidebar", array(
+$body = elgg_view_layout("one_sidebar", [
 	'title' => $title,
 	'sidebar' => $sidebar,
 	'content' => $instructions . $form,
-));
+]);
 
 echo elgg_view_page($title, $body);

@@ -4,14 +4,18 @@
  *
  */
 
-$release = $vars['entity'];
+$release = elgg_extract('entity', $vars);
+if (!$release instanceof PluginRelease) {
+	return;
+}
+
 $notes = $release->release_notes;
 
-if ($notes) {
-	echo "<div class=\"elgg-output\">";
-	echo "<h3>" . elgg_echo('plugins:edit:label:release_notes') . ":</h3>";
-	echo elgg_autop($notes);
-	echo "</div>";
+if (!empty($notes)) {
+	echo elgg_format_element('h3', [], elgg_echo('plugins:edit:label:release_notes'));
+	echo elgg_view('output/longtext', [
+		'value' => $notes,
+	]);
 }
 
 if ($release->comments == 'yes') {

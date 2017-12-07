@@ -2,7 +2,7 @@
 
 /**
  * Models the concept of a plugin. Handles revisions with PluginRelease objects.
- * 
+ *
  * @property int $recommended_release_guid GUID of the author-recommended release for this plugin.
  */
 class PluginProject extends ElggObject {
@@ -16,11 +16,12 @@ class PluginProject extends ElggObject {
 	 */
 	private $recommended_release;
 	
+	const SUBTYPE = 'plugin_project';
 	
 	protected function initializeAttributes() {
 		parent::initializeAttributes();
 
-		$this->attributes['subtype'] = "plugin_project";
+		$this->attributes['subtype'] = self::SUBTYPE;
 	}
 
 	/**
@@ -41,7 +42,7 @@ class PluginProject extends ElggObject {
 		return $this->countAnnotations('plugin_digg');
 	}
 	
-	/** @return array */	
+	/** @return array */
 	public function getScreenshots() {
 		return elgg_get_entities_from_relationship(array(
 			'relationship_guid' => $this->getGUID(),
@@ -71,7 +72,7 @@ class PluginProject extends ElggObject {
 	
 	/**
 	 * @param string $version The version number to look for (e.g., '1.3.2')
-	 * @return PluginRelease The release of this plugin that matches the specified version. 
+	 * @return PluginRelease The release of this plugin that matches the specified version.
 	 */
 	public function getReleaseFromVersion($version) {
 		$releases = elgg_get_entities_from_metadata(array(
@@ -157,7 +158,7 @@ class PluginProject extends ElggObject {
 	
 	/**
 	 * Get a list of releases associated with this project
-	 * 
+	 *
 	 * @param array $options
 	 * @return array
 	 */
@@ -281,7 +282,7 @@ class PluginProject extends ElggObject {
 
 	/**
 	 * Get the number of downloads from the database
-	 * 
+	 *
 	 * @return int
 	 */
 	protected function dbGetDownloadCount() {
@@ -293,7 +294,7 @@ class PluginProject extends ElggObject {
 			WHERE guid = $guid
 		";
 		$result = get_data_row($sql);
-		if ($result === false) {
+		if (empty($result)) {
 			return 0;
 		}
 		return (int)$result->downloads;
