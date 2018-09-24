@@ -8,7 +8,7 @@
         "Enhancements"
     ],
     "homepage": "http://www.elgg.org/",
-    "license": "GPL-2.0",
+    "license": "GPL-2.0-only",
     "autoload": {
         "psr-0": {"": "classes/"}
     },
